@@ -1,0 +1,38 @@
+- Créer un projet Eclipse
+- Click droit sur le dossier du projet -> Import...
+- Sélectionner le dossier "libs" (voir les instruction plus bas pour savoir comment ce dossier a été créé)
+- A ce stade, vous devez avoir l'arborescence suivante :
+  MonProjet
+  -> bin
+  -> src
+  -> libs
+    -> native
+    -> slick.jar
+    -> lwjgl.jar
+
+- Click droit sur le dossier du projet, Build Path -> Add external archives puis sélectionner libs/slick.jar.
+- Faire de même pour lwjgl.jar
+- Click droit sur le dossier du projet -> Properties -> Java Build Path -> Libraries
+- Dérouler lwjgl.jar en cliquant sur la flèche à gauche
+- Double-cliquer sur Native library location
+- Cliquer sur "Workspace"
+- Sélectionner le dossier correspondant à votre plateforme dans le dossier "native"
+- Valider toutes les fenêtres ouvertes
+
+==> Vous êtes prêts à créer une application utilisant Slick
+==> Vous pouvez tester que tout est bien configuré en important la classe SimpleGame.java
+
+#########################
+# Créer le dossier libs #
+#########################
+- Créer un dossier libs à la racine du projet.
+- Télécharger le jar : http://slick.cokeandcode.com/downloads/slick.jar et le placer dans le dossier libs.
+- Télécharger le Zip de LWJGL : 
+http://sourceforge.net/projects/java-game-lib/files/Official%20Releases/LWJGL%202.7.1/lwjgl-2.7.1.zip/download
+- Extraire l'archive Zip
+- Copier le dossier "native" ainsi que le jar se trouvant dans le dossier "jar" dans le dossier libs.
+
+
+==== Sans Eclipse ====
+-Djava.library.path=<the directory in which the native libraries are placed>
+

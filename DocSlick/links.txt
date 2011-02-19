@@ -1,0 +1,8 @@
+Getting started : http://slick.cokeandcode.com/wiki/doku.php?id=getting_started_and_setup
+Manual : http://slick.cokeandcode.com/wiki/doku.php?id=user_manual
+Tutorials : http://slick.cokeandcode.com/wiki/doku.php?id=tutorials
+
+Tutoriel Eclipse + Slick : http://www.cs.bsu.edu/homepages/pvg/misc/slick_eclipse_tutorial.php
+Tutoriel plus récent : http://n3wt0n.com/blog/slick-phys2d-lwjgl-and-eclipse/
+
+Tutoriel d'installation de LWJGL : http://ninjacave.com/lwjglwitheclipse
