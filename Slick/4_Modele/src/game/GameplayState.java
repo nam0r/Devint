@@ -34,7 +34,7 @@ public class GameplayState extends BasicGameState {
 			throws SlickException {
 		
 		background = new Entity("img/background.jpg");
-		musique = new Music("snd/requiem.wav");
+		musique = new Music("snd/hope.ogg");
 		son = new Sound("snd/piano.wav");
 		
 	}
@@ -77,10 +77,10 @@ public class GameplayState extends BasicGameState {
 			son.playAt(1, 0, 0);
 		}
 		if(input.isKeyDown(Input.KEY_UP)) {
-			son.playAt(0, 1, 0);
+			son.playAt((float)0.5, (float)1,(float) 0.5);
 		}
 		if(input.isKeyDown(Input.KEY_DOWN)) {
-			son.playAt(0, -1, 0);
+			son.playAt((float)-0.5, (float)-1, (float)-0.5);
 		}
 		
 	}
