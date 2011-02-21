@@ -11,6 +11,7 @@
 <entry path="/usr/lib/jvm/java-6-openjdk/jre/lib/netx.jar"/>
 <entry path="/usr/lib/jvm/java-6-openjdk/jre/lib/plugin.jar"/>
 <entry path="/usr/lib/jvm/java-6-openjdk/jre/lib/rhino.jar"/>
+<entry path="/usr/lib/jvm/java-6-openjdk/jre/lib/modules/jdk.boot.jar"/>
 <entry path="/usr/lib/jvm/java-6-openjdk/jre/classes"/>
 </bootpath>
 <extensionDirs>
