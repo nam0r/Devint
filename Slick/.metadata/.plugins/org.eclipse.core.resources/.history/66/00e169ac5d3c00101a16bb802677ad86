@@ -1,0 +1,17 @@
+import org.newdawn.slick.Image;
+
+
+public class Plane {
+	
+	private Image plane;
+	private float x;
+	private float y;
+	private float scale;
+	
+	public Plane() {
+		this.x = 400;
+		this.y = 300;
+		this.scale = 1.0f;
+	}
+
+}

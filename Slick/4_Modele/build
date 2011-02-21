@@ -1,0 +1,2 @@
+make
+java -cp libs/slick.jar:libs/lwjgl.jar:bin -Djava.library.path=libs/native/linux/ Main

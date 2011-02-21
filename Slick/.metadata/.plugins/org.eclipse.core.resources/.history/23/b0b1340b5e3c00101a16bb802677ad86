@@ -1,0 +1,14 @@
+import org.newdawn.slick.Image;
+
+
+public class Plane extends Image {
+	
+	private final float x = 400;
+	private final float y = 300;
+	private final float scale = 1.0f;
+	
+	public Plane() {
+		super("img/plane.png");
+	}
+
+}

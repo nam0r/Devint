@@ -1,0 +1,67 @@
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+
+public class MyGame extends BasicGame {
+
+	private final String BACKGROUND = "img/land.jpg";
+
+	private Image land;
+	private Plane plane;
+
+	public MyGame() {
+		super("Mon Super Jeu");
+	}
+
+	@Override
+	public void init(GameContainer arg0) throws SlickException {
+		land = new Image(BACKGROUND);
+		plane = new Plane();
+	}
+
+	@Override
+	public void update(GameContainer gc, int delta) throws SlickException {
+		Input input = gc.getInput();
+
+		// Rotate left
+		if (input.isKeyDown(Input.KEY_A)) {
+			plane.rotate(-0.2f * delta);
+		}
+
+		// Rotate right
+		if (input.isKeyDown(Input.KEY_D)) {
+			plane.rotate(0.2f * delta);
+		}
+
+		// Move forward
+		if (input.isKeyDown(Input.KEY_W)) {
+			float hip = 0.4f * delta;
+
+			float rotation = plane.getRotation();
+
+			x += hip * Math.sin(Math.toRadians(rotation));
+			y -= hip * Math.cos(Math.toRadians(rotation));
+		}
+
+		if (input.isKeyDown(Input.KEY_2)) {
+			scale += (scale >= 5.0f) ? 0 : 0.1f;
+			plane.setCenterOfRotation(plane.getWidth() / 2.0f * scale,
+					plane.getHeight() / 2.0f * scale);
+		}
+		if (input.isKeyDown(Input.KEY_1)) {
+			scale -= (scale <= 1.0f) ? 0 : 0.1f;
+			plane.setCenterOfRotation(plane.getWidth() / 2.0f * scale,
+					plane.getHeight() / 2.0f * scale);
+		}
+	}
+
+	@Override
+	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
+		land.draw(0, 0);
+		plane.draw();
+	}
+
+}
