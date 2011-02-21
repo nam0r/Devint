@@ -1,0 +1,12 @@
+import org.newdawn.slick.Image;
+
+
+public class Plane {
+	
+	private Image plane;
+	
+	public Plane() {
+		
+	}
+
+}

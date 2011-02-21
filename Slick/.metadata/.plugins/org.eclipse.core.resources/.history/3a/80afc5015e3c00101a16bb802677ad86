@@ -1,0 +1,18 @@
+import org.newdawn.slick.Image;
+
+
+public class Plane extends Image {
+	
+	private String path;
+	private float x;
+	private float y;
+	private float scale;
+	
+	public Plane() {
+		this.path = "img/plane.png";
+		this.x = 400;
+		this.y = 300;
+		this.scale = 1.0f;
+	}
+
+}

@@ -1,0 +1,105 @@
+package entity;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+
+public class Entity {
+	
+	protected String path;
+	protected Image image;
+	
+	protected float x;
+	protected float y;
+	protected float scale;
+	
+	/* ************ *
+	 * Constructors *
+	 * ************ */
+	
+	public Entity(Image image) {
+		this.image = image;
+		
+		this.x = 0;
+		this.y = 0;
+		
+		this.scale = 1.0f;
+	}
+	
+	public Entity(String path) {
+		
+		this.path = path;
+		
+		try {
+			this.image = new Image(path);
+		} catch (SlickException e) {
+			System.err.println("Couldn't load image");
+		}
+		
+		this.x = 0;
+		this.y = 0;
+		
+		scale = 1.0f;
+	}
+	
+	public Entity(String path, float x, float y) {
+		this(path);
+		this.x = x;
+		this.y = y;
+	}
+	
+	public Entity(String path, float x, float y, float scale) {
+		this(path,x,y);
+		this.scale = scale;
+	}
+	
+	/* **************** *
+	 * Public Functions *
+	 * **************** */
+	public void draw() {
+		image.draw(x, y, scale);
+	}
+	
+	public Entity subEntity(int x, int y, int width, int height) {
+		Entity entity = this.clone();
+		entity.image = entity.image.getSubImage(x, y, width, height);
+		return entity;
+	}
+	
+	public Entity clone() {
+		Entity entity = new Entity(this.path,this.x,this.y, this.scale);
+		entity.image = this.image.copy();
+		return entity;
+	}
+	
+	/* ******* *
+	 * Setters *
+	 * ******* */
+	public void setX(float x) {
+		this.x = x;
+	}
+	
+	public void setY(float y) {
+		this.y = y;
+	}
+	
+	public void setScale(float scale) {
+		this.scale = scale;
+	}
+	
+	/* ********* *
+	 * To String *
+	 * ********* */
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Path : ").append(path);
+		sb.append("X : ").append(x);
+		sb.append("Y : ").append(y);
+		sb.append("Width : ").append(width);
+		sb.append("Height : ").append(height);
+		sb.append("Scale : ").append(scale);
+		return sb.toString();
+	}
+
+}

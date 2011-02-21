@@ -1,0 +1,87 @@
+package game;
+import java.util.ArrayList;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+
+import entity.Entity;
+
+public class GameplayState extends BasicGameState {
+
+	private int stateID;
+	
+	private Entity gameHUD;
+	private Entity transparentGameHUD;
+
+	private PieceFactory pieceFactory;
+	
+	private Pit pit;
+	
+	private int score;
+	
+	private enum States {
+        START, NEW_PIECE, MOVING_PIECE, LINE_DESTRUCTION,
+        PAUSE, HIGHSCORE, GAME_OVER
+    }
+ 
+	private States currentState;
+	
+	public GameplayState(int stateID) {
+		this.stateID = stateID;
+	}
+	
+	@Override
+	public void init(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		 
+		gameHUD = new Entity("img/hudblockgame.jpg");
+		
+		transparentGameHUD = new Entity("img/textures.png",48,15);
+		transparentGameHUD.sub(29, 0, 287, 573);
+		 
+		ArrayList<Entity> blockImages = new ArrayList<Entity>();
+		 
+		for(int i = 0; i < 4; i++) {
+			blockImages.add(new Entity("img/textures.png"));
+			blockImages.get(i).sub(0, i*28, 28, 28);
+		}
+		
+		pieceFactory = new PieceFactory();
+		
+		pit = new Pit(10,20);
+	}
+
+	@Override
+	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
+			throws SlickException {
+		gameHUD.draw();
+		transparentGameHUD.draw();
+	}
+
+	@Override
+	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
+			throws SlickException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getID() {
+		return stateID;
+	}
+	
+	@Override
+    public void enter(GameContainer gc, StateBasedGame sb) throws SlickException
+    {
+        super.enter(gc, sb);
+        
+        pit.makeCleanPit();
+        currentState = States.START;
+ 
+        score = 0;
+    }
+
+}

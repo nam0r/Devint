@@ -1,0 +1,34 @@
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+
+public class Plane {
+	
+	private final String PATH = "img/plane.png";
+	private final float X = 400;
+	private final float Y = 300;
+	private final float SCALE = 1.0f;
+	
+	private Image image;
+	
+	public Plane() {
+		try {
+			this.image = new Image(PATH);
+		} catch (SlickException e) {
+			System.err.println("Couldn't load plane image");
+		}
+	}
+	
+	public void draw() {
+		image.draw(X, Y, SCALE);
+	}
+	
+	public void rotateLeft(int delta) {
+		image.rotate(-0.2f * delta);
+	}
+	
+	public void rotateRight(int delta) {
+		image.rotate(-0.2f * delta);
+	}
+
+}

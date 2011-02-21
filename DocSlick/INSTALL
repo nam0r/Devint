@@ -36,3 +36,13 @@ http://sourceforge.net/projects/java-game-lib/files/Official%20Releases/LWJGL%20
 ==== Sans Eclipse ====
 -Djava.library.path=<the directory in which the native libraries are placed>
 
+==== Pour le support du Ogg ====
+Telecharger : 
+http://slick.cokeandcode.com/demos/jogg-0.0.7.jar
+http://slick.cokeandcode.com/demos/jorbis-0.0.15.jar
+
+Les rajouter dans le dossier libs/ et les ajouter au PATH
+
+Si jamais ça ne fonctionnait toujours pas, rajouter :
+http://slick.cokeandcode.com/demos/ibxm.jar
+mais pour moi ça a fonctionné sans...

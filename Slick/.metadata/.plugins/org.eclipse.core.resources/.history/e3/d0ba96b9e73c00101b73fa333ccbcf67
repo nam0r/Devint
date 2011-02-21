@@ -1,0 +1,11 @@
+import org.newdawn.slick.state.StateBasedGame;
+ 
+public class Tetris extends StateBasedGame {
+
+	public Tetris(String name) {
+		super("Tetris-like");
+		
+		
+	}
+
+}

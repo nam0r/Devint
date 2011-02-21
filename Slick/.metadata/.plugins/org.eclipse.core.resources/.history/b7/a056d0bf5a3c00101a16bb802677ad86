@@ -1,0 +1,11 @@
+import org.newdawn.slick.BasicGame;
+ 
+public class MyGame extends BasicGame {
+ 
+	private final String title = "Mon Super Jeu";
+	
+    public MyGame() {
+    	super(this.title);
+    }
+
+}
