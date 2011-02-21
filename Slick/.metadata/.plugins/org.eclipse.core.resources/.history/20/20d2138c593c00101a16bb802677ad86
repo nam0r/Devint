@@ -1,9 +1,0 @@
-import org.newdawn.slick.Game;
- 
-public class MyGame implements Game {
- 
-    public MyGame() {
-        super("Un super jeu");
-    }
-
-}

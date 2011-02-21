@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <session version="1.0">
-<refactoring comment="Rename Java project &apos;4_TestsSons&apos; to &apos;4_Modele&apos;&#x0A;- Original element: &apos;4_TestsSons&apos;&#x0A;- Renamed element: &apos;4_TestsSons&apos;&#x0A;- Update references to refactored element" description="Rename Java project &apos;4_TestsSons&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=4_TestsSons" name="4_Modele" references="true" stamp="1298310824953" version="1.0"/>
+<refactoring comment="Delete resource &apos;Tank&apos;" deleteContents="false" description="Delete resource &apos;Tank&apos;" element1="/Tank" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1298310094958"/>
 </session>
