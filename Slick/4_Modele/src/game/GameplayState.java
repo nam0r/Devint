@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -17,6 +18,7 @@ public class GameplayState extends BasicGameState {
 	
 	private Entity background;
 	private Music musique;
+	private Sound son;
 	
 	private enum States {
 		START, PAUSE, HIGHSCORE, GAME_OVER
@@ -32,6 +34,8 @@ public class GameplayState extends BasicGameState {
 			throws SlickException {
 		
 		background = new Entity("img/background.jpg");
+		musique = new Music("snd/requiem.wav");
+		son = new Sound("snd/piano.wav");
 		
 	}
 
@@ -66,6 +70,18 @@ public class GameplayState extends BasicGameState {
 		if(input.isKeyDown(Input.KEY_ESCAPE)) {
 			sbg.enterState(MyGame.MAINMENUSTATE);
 		}
+		if(input.isKeyDown(Input.KEY_LEFT)) {
+			son.playAt(-1, 0, 0);
+		}
+		if(input.isKeyDown(Input.KEY_RIGHT)) {
+			son.playAt(1, 0, 0);
+		}
+		if(input.isKeyDown(Input.KEY_UP)) {
+			son.playAt(0, 1, 0);
+		}
+		if(input.isKeyDown(Input.KEY_DOWN)) {
+			son.playAt(0, -1, 0);
+		}
 		
 	}
 
@@ -80,7 +96,6 @@ public class GameplayState extends BasicGameState {
 			throws SlickException {
 		super.enter(gc, sbg);
 
-		musique = new Music("snd/piano.wav");
 		musique.loop();
 		
 		currentState = States.START;

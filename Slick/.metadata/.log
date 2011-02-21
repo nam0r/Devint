@@ -334,3 +334,14 @@ java.util.zip.ZipException: error in opening zip file
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:371)
 	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:331)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.core.resources 2 2 2011-02-21 18:58:45.364
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2011-02-21 18:58:45.365
+!MESSAGE The project description file (.project) for '0_Base' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2011-02-21 18:58:45.365
+!MESSAGE The project description file (.project) for '1_Plane' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2011-02-21 18:58:45.365
+!MESSAGE The project description file (.project) for '1_PlaneUsingEntities' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2011-02-21 18:58:45.365
+!MESSAGE The project description file (.project) for '3_Tetris' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
