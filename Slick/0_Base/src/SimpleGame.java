@@ -20,6 +20,7 @@ public class SimpleGame extends BasicGame {
  
     public void render(GameContainer gc, Graphics g) throws SlickException {
        // Mise à jour de l'affichage
+    	g.drawString("Hello, Slick world!", 0, 100); 
     } 
 
 }

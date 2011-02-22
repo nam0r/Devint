@@ -1,4 +1,8 @@
 .*
 !.gitignore
+!.settings
+!.classpath
+!.project
 bin
 *~
+Slick/Slick
