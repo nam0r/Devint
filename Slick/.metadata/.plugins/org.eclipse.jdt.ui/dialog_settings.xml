@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-<<<<<<< HEAD
-	<item value="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/4_Modele/libs" key="org.eclipse.jdt.ui.lastextjar"/>
-	<section name="OptionalMessageDialog.hide.">
-		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
-	</section>
-=======
 	<item value="560,578" key="UserLibraryLoadSaveDialog.size"/>
-	<item value="/home/namor/Java/Devint/Slick/3_Tetris/libs" key="org.eclipse.jdt.ui.lastextjar"/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
+	<item value="/home/namor/Java/Devint/Slick/HoverCave/lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="true" key="group_libraries"/>
 		<item value="false" key="linkWithEditor"/>
@@ -23,27 +16,7 @@
 	<section name="BuildPathsPropertyPage">
 		<item value="2" key="pageIndex"/>
 	</section>
-<<<<<<< HEAD
-	<section name="RefactoringWizard.preview">
-		<item value="400" key="height"/>
-		<item value="600" key="width"/>
-	</section>
-	<section name="org.eclipse.ltk.ui.refactoring.settings">
-		<item value="*" key="patterns"/>
-		<item value="false" key="updateQualifiedNames"/>
-		<item value="1" key="updateSimilarElementsMatchStrategy"/>
-		<item value="false" key="updateTextualMatches"/>
-		<item value="false" key="updateSimilarElements"/>
-	</section>
-	<section name="org.eclipse.jdt.internal.ui.text.QuickOutline">
-		<item value="false" key="GoIntoTopLevelTypeAction.isChecked"/>
-		<item value="true" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_USE_PERSISTED_SIZE"/>
-		<item value="400" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_WIDTH"/>
-		<item value="348" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_HEIGHT"/>
-		<item value="false" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
-=======
 	<section name="ClasspathContainerSelectionPage">
 		<item value="3" key="index"/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
 	</section>
 </section>

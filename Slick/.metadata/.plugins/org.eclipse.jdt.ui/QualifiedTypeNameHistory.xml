@@ -1,15 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.newdawn.slick.AppGameContainer"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.TrueTypeFont"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Font"/>
-<fullyQualifiedTypeName name="java.awt.Font"/>
-<fullyQualifiedTypeName name="entity.Entity"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
-</qualifiedTypeNameHistroy>
-=======
 <qualifiedTypeNameHistroy/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94

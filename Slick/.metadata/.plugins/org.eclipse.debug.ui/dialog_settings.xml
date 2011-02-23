@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.debug.ui.SELECT_LAUNCH_SHORTCUT_DIALOG">
-<<<<<<< HEAD
-		<item value="253" key="DIALOG_WIDTH"/>
-		<item value="436" key="DIALOG_HEIGHT"/>
-		<item value="1|Sans|10.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-=======
 		<item value="350" key="DIALOG_WIDTH"/>
 		<item value="317" key="DIALOG_Y_ORIGIN"/>
-		<item value="312" key="DIALOG_X_ORIGIN"/>
 		<item value="350" key="DIALOG_HEIGHT"/>
+		<item value="312" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
 	</section>
 </section>

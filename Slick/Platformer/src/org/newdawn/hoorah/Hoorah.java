@@ -54,7 +54,7 @@ public class Hoorah extends StateBasedGame {
 
 	/**
 	 * Entry point to the simple platformer example
-	 * 
+	 * w
 	 * @param argv The arguments given to the program
 	 * @throws SlickException Indicates a failure to initialise resources
 	 */

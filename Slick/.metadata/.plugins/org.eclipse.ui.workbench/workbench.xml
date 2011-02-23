@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<workbench progressCount="20" version="2.0">
-=======
-<workbench progressCount="19" version="2.0">
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
-<window height="773" maximized="true" width="1004" x="256" y="83">
+<window height="777" width="988" x="207" y="43">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -33,143 +29,20 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
-<<<<<<< HEAD
-<part id="2"/>
-<part id="3"/>
-<part id="4"/>
-<part id="5"/>
-<part id="6"/>
-<part id="7"/>
-<part id="8"/>
-<part id="9"/>
-<part id="10"/>
-<part id="11"/>
-<part id="12"/>
-<part id="13"/>
-<part id="14"/>
-<part id="15"/>
-<part id="16"/>
-<part id="17"/>
-<part id="18"/>
-<part id="19"/>
-<part id="20"/>
-<part id="21"/>
-<part id="22"/>
-<part id="23"/>
-=======
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
 </presentation>
 </folder>
 </info>
 </editorArea>
-<<<<<<< HEAD
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/0_Base/src/Main.java" title="Main.java" tooltip="0_Base/src/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/0_Base/src/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="157" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SimpleGame.java" partName="SimpleGame.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/0_Base/src/SimpleGame.java" title="SimpleGame.java" tooltip="0_Base/src/SimpleGame.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/0_Base/src/SimpleGame.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="364" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_Plane/src/Main.java" title="Main.java" tooltip="1_Plane/src/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_Plane/src/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="219" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyGame.java" partName="MyGame.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_Plane/src/MyGame.java" title="MyGame.java" tooltip="1_Plane/src/MyGame.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_Plane/src/MyGame.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="723" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Plane.java" partName="Plane.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_Plane/src/Plane.java" title="Plane.java" tooltip="1_Plane/src/Plane.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_Plane/src/Plane.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="944" selectionTopPixel="405"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tetris.java" partName="Tetris.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/3_Tetris/src/main/Tetris.java" title="Tetris.java" tooltip="3_Tetris/src/main/Tetris.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/3_Tetris/src/main/Tetris.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="747" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainMenuState.java" partName="MainMenuState.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/3_Tetris/src/menu/MainMenuState.java" title="MainMenuState.java" tooltip="3_Tetris/src/menu/MainMenuState.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/3_Tetris/src/menu/MainMenuState.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="463" selectionOffset="2398" selectionTopPixel="1646"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameplayState.java" partName="GameplayState.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/3_Tetris/src/game/GameplayState.java" title="GameplayState.java" tooltip="3_Tetris/src/game/GameplayState.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/3_Tetris/src/game/GameplayState.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5594" selectionTopPixel="3927"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/3_Tetris/src/main/Main.java" title="Main.java" tooltip="3_Tetris/src/main/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/3_Tetris/src/main/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="375" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Plane.java" partName="Plane.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_PlaneUsingEntities/src/Plane.java" title="Plane.java" tooltip="1_PlaneUsingEntities/src/Plane.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_PlaneUsingEntities/src/Plane.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="71" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyGame.java" partName="MyGame.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_PlaneUsingEntities/src/MyGame.java" title="MyGame.java" tooltip="1_PlaneUsingEntities/src/MyGame.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_PlaneUsingEntities/src/MyGame.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="10" selectionOffset="280" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_PlaneUsingEntities/src/Main.java" title="Main.java" tooltip="1_PlaneUsingEntities/src/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_PlaneUsingEntities/src/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="198" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MovingEntity.java" partName="MovingEntity.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_PlaneUsingEntities/src/entity/MovingEntity.java" title="MovingEntity.java" tooltip="1_PlaneUsingEntities/src/entity/MovingEntity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_PlaneUsingEntities/src/entity/MovingEntity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="234" selectionOffset="491" selectionTopPixel="235"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Entity.java" partName="Entity.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/1_PlaneUsingEntities/src/entity/Entity.java" title="Entity.java" tooltip="1_PlaneUsingEntities/src/entity/Entity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/1_PlaneUsingEntities/src/entity/Entity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Entity.java" partName="Entity.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/3_Tetris/src/entity/Entity.java" title="Entity.java" tooltip="3_Tetris/src/entity/Entity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/3_Tetris/src/entity/Entity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="221" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MovingEntity.java" partName="MovingEntity.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/3_Tetris/src/entity/MovingEntity.java" title="MovingEntity.java" tooltip="3_Tetris/src/entity/MovingEntity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/3_Tetris/src/entity/MovingEntity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="588" selectionTopPixel="262"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Highscores.java" partName="Highscores.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/3_Tetris/src/menu/Highscores.java" title="Highscores.java" tooltip="3_Tetris/src/menu/Highscores.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/3_Tetris/src/menu/Highscores.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="436" selectionTopPixel="167"/>
-=======
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AppGameContainer.java" partName="AppGameContainer.java" path="/home/namor/Java/Devint/Slick/Slick/src/org/newdawn/slick/AppGameContainer.java" title="AppGameContainer.java" tooltip="Slick/src/org/newdawn/slick/AppGameContainer.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Slick/src/org/newdawn/slick/AppGameContainer.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1207" selectionTopPixel="170"/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnimationTest.java" partName="AnimationTest.java" path="/home/namor/Java/Devint/Slick/Slick/src/org/newdawn/slick/tests/AnimationTest.java" title="AnimationTest.java" tooltip="Slick/src/org/newdawn/slick/tests/AnimationTest.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Slick/src/org/newdawn/slick/tests/AnimationTest.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1505" selectionTopPixel="494"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameplayState.java" partName="GameplayState.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/4_Modele/src/game/GameplayState.java" title="GameplayState.java" tooltip="4_Modele/src/game/GameplayState.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/4_Modele/src/game/GameplayState.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="869" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/4_Modele/src/main/Main.java" title="Main.java" tooltip="4_Modele/src/main/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/4_Modele/src/main/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="375" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyGame.java" partName="MyGame.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/4_Modele/src/main/MyGame.java" title="MyGame.java" tooltip="4_Modele/src/main/MyGame.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/4_Modele/src/main/MyGame.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="335" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainMenuState.java" partName="MainMenuState.java" path="/home/afnarel/Documents/Cours/S2/Devint/Devint/Slick/4_Modele/src/menu/MainMenuState.java" title="MainMenuState.java" tooltip="4_Modele/src/menu/MainMenuState.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/4_Modele/src/menu/MainMenuState.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3143" selectionTopPixel="1578"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HoverCave.java" partName="HoverCave.java" path="/home/namor/Java/Devint/Slick/HoverCave/src/org/guodman/hoverCave/HoverCave.java" title="HoverCave.java" tooltip="HoverCave/src/org/guodman/hoverCave/HoverCave.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/HoverCave/src/org/guodman/hoverCave/HoverCave.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="152" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
 <view id="org.eclipse.jdt.ui.TypeHierarchy" partName="Hierarchy"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<<<<<<< HEAD
-<expanded>
-<category IMemento.internal.id="Warnings (14 items)"/>
-<category IMemento.internal.id="Warnings"/>
-<category IMemento.internal.id="Errors"/>
-=======
-<expanded>&#x0A;<category IMemento.internal.id="Warnings (100 of 729 items)"/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
+<expanded>&#x0A;<category IMemento.internal.id="Warnings (26 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -298,13 +171,8 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<<<<<<< HEAD
-<info part="org.eclipse.ui.editorss" ratio="0.20363891" ratioLeft="291" ratioRight="1138" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.74882996" ratioLeft="480" ratioRight="161" relationship="4" relative="org.eclipse.ui.editorss">
-=======
 <info part="org.eclipse.ui.editorss" ratio="0.24950495" ratioLeft="252" ratioRight="758" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.8402778" ratioLeft="605" ratioRight="115" relationship="4" relative="org.eclipse.ui.editorss">
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
+<info folder="true" part="bottom" ratio="0.29192546" ratioLeft="188" ratioRight="456" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
@@ -338,168 +206,6 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<<<<<<< HEAD
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_TestsSons/src/game/GameplayState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_TestsSons/src/main/MyGame.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_TestsSons/src/menu/MainMenuState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/3_Tetris/src/menu/MainMenuState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/3_Tetris/src/game/GameplayState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_TestsSons/src/main/Main.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_Modele/src/game/GameplayState.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_Modele/src/main/Main.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_Modele/src/main/MyGame.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/4_Modele/src/menu/MainMenuState.java"/>
-</editors>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="2005" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="1981" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="2003" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="1988" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="2005" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="3">
-<position info="not_deleted" x="2031" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="1998" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="3">
-<position info="not_deleted" x="2297" y="99"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="2878" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="3">
-<position info="not_deleted" x="2398" y="463"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="2878" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="760" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="743" y="12"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="798" y="7"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="1410" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="736" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1013" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="4">
-<position info="not_deleted" x="3965" y="187"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1464" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="4">
-<position info="not_deleted" x="1180" y="0"/>
-</item>
-<item historyLabel="MyGame.java" index="1">
-<position info="not_deleted" x="335" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="636" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="3">
-<position info="not_deleted" x="2398" y="463"/>
-</item>
-<item historyLabel="GameplayState.java" index="4">
-<position info="not_deleted" x="3404" y="501"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1208" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="4">
-<position info="not_deleted" x="4107" y="28"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1627" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="4">
-<position info="not_deleted" x="5594" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1627" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1063" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1037" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1063" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1349" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1350" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="629" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="1679" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="0">
-<position info="not_deleted" x="1467" y="436"/>
-</item>
-<item historyLabel="MainMenuState.java" index="2">
-<position info="not_deleted" x="3143" y="0"/>
-</item>
-<item historyLabel="Main.java" index="5">
-<position info="not_deleted" x="375" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="6">
-<position info="not_deleted" x="1870" y="396"/>
-</item>
-<item historyLabel="Main.java" index="7">
-<position info="not_deleted" x="375" y="0"/>
-</item>
-<item historyLabel="MyGame.java" index="8">
-<position info="not_deleted" x="335" y="0"/>
-</item>
-<item historyLabel="MainMenuState.java" index="9">
-<position info="not_deleted" x="3143" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="6">
-<position info="not_deleted" x="1870" y="396"/>
-</item>
-<item historyLabel="GameplayState.java" index="6">
-<position info="not_deleted" x="910" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="6">
-<position info="not_deleted" x="909" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="6">
-<position info="not_deleted" x="1585" y="0"/>
-</item>
-<item historyLabel="GameplayState.java" index="6">
-<position info="not_deleted" x="1588" y="0"/>
-</item>
-<item active="true" historyLabel="GameplayState.java" index="6">
-<position info="not_deleted" x="1591" y="0"/>
-=======
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/1_PlaneUsingEntities/src/Main.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Slick/src/org/newdawn/slick/muffin/WebstartMuffin.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Slick/src/org/newdawn/slick/tests/ClipTest.java"/>
@@ -510,6 +216,17 @@
 <editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=0_Base/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;java.security(AccessController.class"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Slick/src/org/newdawn/slick/tests/AlphaMapTest.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Slick/src/org/newdawn/slick/tests/AnimationTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/Alien.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/Crate.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/TileSet.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/MapLoader.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/InGameState.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/Hoorah.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/Crate.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/Alien.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Platformer/src/org/newdawn/hoorah/TileSet.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/HoverCave/src/org/guodman/hoverCave/HoverCave.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/5_MapTest/src/main/Main.java"/>
 </editors>
 <item historyLabel="Main.java" index="0">
 <position info="not_deleted" x="0" y="0"/>
@@ -547,9 +264,56 @@
 <item historyLabel="AppGameContainer.java" index="6">
 <position info="not_deleted" x="1207" y="0"/>
 </item>
-<item active="true" historyLabel="AnimationTest.java" index="9">
+<item historyLabel="AnimationTest.java" index="9">
+<position info="not_deleted" x="1505" y="0"/>
+</item>
+<item historyLabel="Alien.java" index="10">
 <position info="not_deleted" x="0" y="0"/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
+</item>
+<item historyLabel="Crate.java" index="11">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Alien.java" index="10">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="AnimationTest.java" index="9">
+<position info="not_deleted" x="1505" y="0"/>
+</item>
+<item historyLabel="Alien.java" index="10">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="TileSet.java" index="12">
+<position info="not_deleted" x="926" y="0"/>
+</item>
+<item historyLabel="MapLoader.java" index="13">
+<position info="not_deleted" x="2299" y="0"/>
+</item>
+<item historyLabel="InGameState.java" index="14">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Hoorah.java" index="15">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Crate.java" index="16">
+<position info="not_deleted" x="530" y="0"/>
+</item>
+<item historyLabel="Hoorah.java" index="15">
+<position info="not_deleted" x="1505" y="0"/>
+</item>
+<item historyLabel="Alien.java" index="17">
+<position info="not_deleted" x="421" y="0"/>
+</item>
+<item historyLabel="TileSet.java" index="18">
+<position info="not_deleted" x="926" y="0"/>
+</item>
+<item historyLabel="HoverCave.java" index="19">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Main.java" index="20">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item active="true" historyLabel="HoverCave.java" index="19">
+<position info="not_deleted" x="243" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -564,30 +328,36 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.intro.impl.presentations.IntroLaunchBar"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
-<<<<<<< HEAD
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainMenuState.java" tooltip="4_TestsSons/src/menu/MainMenuState.java">
-<persistable path="/4_TestsSons/src/menu/MainMenuState.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="5_MapTest/src/main/Main.java">
+<persistable path="/5_MapTest/src/main/Main.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyGame.java" tooltip="4_TestsSons/src/main/MyGame.java">
-<persistable path="/4_TestsSons/src/main/MyGame.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HoverCave.java" tooltip="HoverCave/src/org/guodman/hoverCave/HoverCave.java">
+<persistable path="/HoverCave/src/org/guodman/hoverCave/HoverCave.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="4_TestsSons/src/main/Main.java">
-<persistable path="/4_TestsSons/src/main/Main.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Crate.java" tooltip="Platformer/src/org/newdawn/hoorah/Crate.java">
+<persistable path="/Platformer/src/org/newdawn/hoorah/Crate.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SimpleGame.java" tooltip="4_TestsSons/src/game/SimpleGame.java">
-<persistable path="/4_TestsSons/src/game/SimpleGame.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Hoorah.java" tooltip="Platformer/src/org/newdawn/hoorah/Hoorah.java">
+<persistable path="/Platformer/src/org/newdawn/hoorah/Hoorah.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Pit.java" tooltip="3_Tetris/src/game/Pit.java">
-<persistable path="/3_Tetris/src/game/Pit.java"/>
-=======
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="InGameState.java" tooltip="Platformer/src/org/newdawn/hoorah/InGameState.java">
+<persistable path="/Platformer/src/org/newdawn/hoorah/InGameState.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MapLoader.java" tooltip="Platformer/src/org/newdawn/hoorah/MapLoader.java">
+<persistable path="/Platformer/src/org/newdawn/hoorah/MapLoader.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TileSet.java" tooltip="Platformer/src/org/newdawn/hoorah/TileSet.java">
+<persistable path="/Platformer/src/org/newdawn/hoorah/TileSet.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Alien.java" tooltip="Platformer/src/org/newdawn/hoorah/Alien.java">
+<persistable path="/Platformer/src/org/newdawn/hoorah/Alien.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnimationTest.java" tooltip="Slick/src/org/newdawn/slick/tests/AnimationTest.java">
 <persistable path="/Slick/src/org/newdawn/slick/tests/AnimationTest.java"/>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
 </file>
 <file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="AccessController.class" tooltip="java.security.AccessController">
 <persistable org.eclipse.jdt.ui.ClassFileIdentifier="=0_Base/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;java.security(AccessController.class"/>
@@ -607,32 +377,5 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ClipTest.java" tooltip="Slick/src/org/newdawn/slick/tests/ClipTest.java">
 <persistable path="/Slick/src/org/newdawn/slick/tests/ClipTest.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="WebstartMuffin.java" tooltip="Slick/src/org/newdawn/slick/muffin/WebstartMuffin.java">
-<persistable path="/Slick/src/org/newdawn/slick/muffin/WebstartMuffin.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="1_PlaneUsingEntities/src/Main.java">
-<persistable path="/1_PlaneUsingEntities/src/Main.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="hudblockgame.jpg" tooltip="3_Tetris/img/hudblockgame.jpg">
-<persistable path="/3_Tetris/img/hudblockgame.jpg"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="requiem.mp3" tooltip="3_Tetris/snd/requiem.mp3">
-<persistable path="/3_Tetris/snd/requiem.mp3"/>
-</file>
-<<<<<<< HEAD
-=======
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SimpleGame.java" tooltip="0_Base/src/SimpleGame.java">
-<persistable path="/0_Base/src/SimpleGame.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="0_Base/src/Main.java">
-<persistable path="/0_Base/src/Main.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Pit.java" tooltip="3_Tetris/src/game/Pit.java">
-<persistable path="/3_Tetris/src/game/Pit.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PieceFactory.java" tooltip="3_Tetris/src/game/PieceFactory.java">
-<persistable path="/3_Tetris/src/game/PieceFactory.java"/>
-</file>
->>>>>>> 94fc65f5174baddcbe2d547d6f63306aaaa8bc94
 </mruList>
 </workbench>
