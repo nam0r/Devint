@@ -33,9 +33,9 @@ public class GameplayState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		background = new Entity("img/background.jpg");
-		musique = new Music("snd/requiem.wav");
-		son = new Sound("snd/piano.wav");
+		background = new Entity("../Slick/img/background.jpg");
+		musique = new Music("../Slick/snd/requiem.wav");
+		son = new Sound("../Slick/snd/piano.wav");
 		
 	}
 

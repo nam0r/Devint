@@ -44,17 +44,17 @@ public class MainMenuState extends BasicGameState {
 			throws SlickException {
 		
 		// Background
-		background = new Entity("img/background.jpg");
+		background = new Entity("../Slick/img/background.jpg");
 		
 		// Menus
 		int menuX = 410;
 		int menuY = 160;
 		
-		startGameOption = new MovingEntity("img/menuoptions.png", menuX, menuY,
+		startGameOption = new MovingEntity("../Slick/img/menuoptions.png", menuX, menuY,
 				startGameScale, 1.0f, 1.05f, 0.0001f);
 		startGameOption.sub(0, 0, 377, 71); // Recupere seulement une partie de l'image (crop)
 
-		exitGameOption = new MovingEntity("img/menuoptions.png", menuX,
+		exitGameOption = new MovingEntity("../Slick/img/menuoptions.png", menuX,
 				menuY + 80, exitGameScale, 1.0f, 1.05f, 0.0001f);
 		exitGameOption.sub(0, 71, 377, 71);
 		
@@ -63,7 +63,7 @@ public class MainMenuState extends BasicGameState {
 		ttf = new TrueTypeFont(font, true);
 		
 		// Sound
-		enter = new Sound("snd/enter.wav");
+		enter = new Sound("../Slick/snd/enter.wav");
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class MainMenuState extends BasicGameState {
 			throws SlickException {
 		super.enter(gc, sbg);
 
-		musique = new Music("snd/hope.ogg"); // A revoir
+		musique = new Music("../Slick/snd/hope.ogg"); // A revoir
 		musique.play();
 	}
 	
