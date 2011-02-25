@@ -174,8 +174,7 @@ public class HoverCave extends BasicGameState {
 				dudeSize.width, dudeSize.height);
 		g.drawLine(WALL_RES * 1.5f, (int) dudeHeight, WALL_RES * 1.5f,
 				(int) dudeHeight);
-		g.drawString("Le jeu est terminé, appuyez sur Entrée pour continuer", 250, 150);
-		// displayScores(container, g);
+		if(dead) g.drawString("Le jeu est terminé, appuyez sur Entrée pour continuer", 250, 150);
 	}
 
 
