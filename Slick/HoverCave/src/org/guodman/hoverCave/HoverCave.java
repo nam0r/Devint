@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 import java.util.Vector;
 
 import org.newdawn.slick.AppGameContainer;
@@ -16,11 +17,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class HoverCave extends BasicGame {
 	public static final int WIDTH = 1024;
 	public static final int HEIGHT = 768;
-	public static final int MIN_WIDTH = 50;
+	public static final int MIN_WIDTH = 60 ;
 
 	/**
 	 * @param args
@@ -43,8 +45,11 @@ public class HoverCave extends BasicGame {
 	private float wallOffset = 0;
 	private final int WALL_RES = 20;
 	private boolean dead = false;
-	private double speed = 0.1;
+	private double speed = 0.06;
 	private int distance = 0;
+	private Sound sonG, sonD;
+	private float distSonHaut, distSonBas;
+	private Random r;
 
 	public HoverCave() {
 		super("Hover Cave");
@@ -116,10 +121,13 @@ public class HoverCave extends BasicGame {
 		dudeHeight = HEIGHT / 2;
 		wallOffset = 0;
 		dead = false;
+		r = new Random();
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		sonG = new Sound("../Slick/snd/bip.ogg");
+		sonD = new Sound("../Slick/snd/bip.ogg");
 		reset();
 	}
 
@@ -134,7 +142,7 @@ public class HoverCave extends BasicGame {
 			}
 			// TODO The speed can be adjusted here
 			wallOffset -= (float) delta * speed;
-			speed += (double) delta / 1000000000.0;
+			speed += ((double) delta / 1000000000.0)*2000;
 			if (wallOffset <= -WALL_RES) {
 				wallOffset += WALL_RES;
 				popWall();
@@ -144,9 +152,16 @@ public class HoverCave extends BasicGame {
 			// detect collisions
 			// TODO Improve collision detection to find the edge of the box
 			// against the edge of the cave.
-			if (dudeHeight > lowerWall.get(2) || dudeHeight < upperWall.get(2)) {
+			if (dudeHeight+10 > lowerWall.get(2) || dudeHeight-10 < upperWall.get(2)) {
+				sonG.play(2,1);
 				dead = true;
 				writeScore();
+			}
+			else {
+				distSonHaut = (float)(1.0/((lowerWall.get(2)-dudeHeight)/20+1.0));
+				distSonBas = (float)(1.0/((dudeHeight-upperWall.get(2))/20+1.0));
+				if(distSonBas > 0.1) sonG.playAt(1f, distSonBas/2, -1, 0, 0);
+				if(distSonHaut > 0.1) sonD.playAt(1f, distSonHaut/2, 1, 0, 0);
 			}
 		}
 	}
