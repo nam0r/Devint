@@ -25,7 +25,7 @@ public abstract class Actor extends AbstractEntity {
 	/** True if the actor is currently resting on the ground */
 	private boolean onGround = false;
 	/** The amount of time the actor has been considered to be off the ground */
-	private int offGroundTimer = 0;
+	protected int offGroundTimer = 0;
 	/** True if the actor has jumped and hence are in the air */
 	private boolean jumped = false;
 	/** True if the actor is facing right */
@@ -160,7 +160,7 @@ public abstract class Actor extends AbstractEntity {
 			setVelocity(0, getVelY());
 		}
 		
-		falling = (getVelY() > 10) && (!onGround());
+		falling = (getVelY() > 10);
 		velx = getVelX();
 	}
 	
@@ -175,7 +175,7 @@ public abstract class Actor extends AbstractEntity {
 		boolean on = onGroundImpl(body);
 		if (!on) {
 			offGroundTimer += delta;
-			if (offGroundTimer > 370) {
+			if (offGroundTimer > 430) {
 				onGround = false;
 			}
 		} else {
@@ -211,7 +211,7 @@ public abstract class Actor extends AbstractEntity {
 		} 
 		
 		if (jumped) {
-			if (getVelY() >= 0) {
+			if (getVelY() > 15) {
 				jumped = false;
 			}
 		}
