@@ -239,8 +239,8 @@ public class InGameState extends BasicGameState {
 		// only check controls at set interval. If we don't do this different
 		// frame rates will effect how the controls are interpreted
 		if (totalDelta > controlInterval) {
-			controlInterval -= totalDelta;
-			
+			//controlInterval -= totalDelta;
+			totalDelta -= controlInterval;
 			if (input.isKeyDown(Input.KEY_LEFT)) {
 				player.applyForce(-moveForce, 0);
 			}

@@ -1,13 +1,6 @@
 Projet de jeu pour malvoyants.
 
-Encadrant :
-Cathrine Faron : faron@polytech.unice.fr
-salle 407
+Jeu java 2D utilisant Slick.
 
-url locale :
-www-local/DEVINT
-
-* Installer VocalizeSIVOX ailleurs que dans Program Files
--> dans Mes Documents/DeViNt par exemple
-* Placer swt-win32-3235.dll dans VocalizeSIVOX/bin
-
+Licence : GPL V3 
+http://www.gnu.org/licenses/gpl-3.0.html

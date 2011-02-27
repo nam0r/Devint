@@ -1,0 +1,11 @@
+Encadrant :
+Cathrine Faron : faron@polytech.unice.fr
+salle 407
+
+url locale :
+www-local/DEVINT
+
+* Installer VocalizeSIVOX ailleurs que dans Program Files
+-> dans Mes Documents/DeViNt par exemple
+* Placer swt-win32-3235.dll dans VocalizeSIVOX/bin
+blablabla ...
