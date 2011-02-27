@@ -14,7 +14,7 @@ import net.phys2d.raw.shapes.Polygon;
 
 /**
  * The common bits of all environments. Holds a physics world, allows addition
- * of entities and their phyiscal representation.
+ * of entities and their physical representation.
  * 
  * @author kevin
  */

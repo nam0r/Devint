@@ -160,7 +160,7 @@ public abstract class Actor extends AbstractEntity {
 			setVelocity(0, getVelY());
 		}
 		
-		falling = (getVelY() > 10);
+		falling = (getVelY() > 2);
 		velx = getVelX();
 	}
 	
@@ -211,7 +211,7 @@ public abstract class Actor extends AbstractEntity {
 		} 
 		
 		if (jumped) {
-			if (getVelY() > 15) {
+			if (getVelY() > 2) {
 				jumped = false;
 			}
 		}
@@ -242,7 +242,6 @@ public abstract class Actor extends AbstractEntity {
 		if (world == null) {
 			return false;
 		}
-		
 		// loop through the collision events that have occured in the
 		// world
 		CollisionEvent[] events = world.getContacts(body);
@@ -267,6 +266,20 @@ public abstract class Actor extends AbstractEntity {
 			}
 		}
 		
+		return false;
+	}
+	
+	public boolean hasCollided(){
+		CollisionEvent[] events = world.getContacts(body);
+		
+		for (int i=0;i<events.length;i++) {
+			if (events[i].getBodyB()==body && events[i].getBodyA().getMass()==10) {
+				return true;
+			}
+			else if (events[i].getBodyA()==body && events[i].getBodyB().getMass()==10) {
+				return true;
+			}
+		}
 		return false;
 	}
 }

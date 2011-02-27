@@ -287,7 +287,7 @@ public class InGameState extends BasicGameState {
 		}
 		
 		// TODO régler cet évènement
-		if (input.isKeyPressed(Input.KEY_3)) {
+		if (player.hasCollided()) {
 			game.enterState(Hoorah.HOVERCAVESTATE, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
 	}
