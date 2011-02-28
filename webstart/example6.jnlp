@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp spec="1.0+"
-    codebase="https://github.com/nam0r/Devint/tree/master/webstart/">
+    codebase="https://github.com/nam0r/Devint/raw/master/webstart/">
     <information>
         <title>Example</title>
         <vendor>Nam</vendor>
