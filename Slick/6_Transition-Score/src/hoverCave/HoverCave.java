@@ -139,13 +139,13 @@ public class HoverCave extends BasicGameState {
 				dead = true;
 			}
 			else {
-				if(playMusicTime > 5){
+				if(playMusicTime > 7){
 					playMusicTime = 0;
 					distSonHaut = (float)(1.0/((lowerWall.get(2)-dudeHeight)/10+1.0));
 					distSonBas = (float)(1.0/((dudeHeight-upperWall.get(2))/10+1.0));
 					if(distSonBas > 0.05) sonG.playAt(1f, distSonBas*2.5f, -1, 0, 0);
 					if(distSonHaut > 0.05) sonD.playAt(1f, distSonHaut*2.5f, 1, 0, 0);
-					System.out.println("distSonBas "+(distSonBas*2)+" distSonHaut "+(distSonHaut*2));
+					//System.out.println("distSonBas "+(distSonBas*2)+" distSonHaut "+(distSonHaut*2));
 				}
 				playMusicTime++;
 			}
