@@ -99,7 +99,7 @@ public class InGameState extends BasicGameState {
 		
 		player = new Alien(100,150,1f,24);
 		env.addEntity(player);
-		env.addEntity(new Crate(300,-5000, 60,60,10));
+		env.addEntity(new Crate(800,-5000, 60,60,10));
 		env.addEntity(new Crate(550,40, 46,46,5));
 		env.addEntity(new Crate(555,-10, 46,46,5));
 		env.addEntity(new Crate(545,100, 46,46,5));
