@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+"
+    codebase="https://github.com/nam0r/Devint/tree/master/webstart/">
+    <information>
+        <title>Example</title>
+        <vendor>Nam</vendor>
+        <description kind="short">Example</description>
+        <homepage href="https://github.com/nam0r/Devint" />
+        <offline-allowed />
+        <shortcut online="false">
+            <desktop />
+        </shortcut>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.5+"/>
+        <jar href="example6.jar"/>
+        <jar href="phys2d-060408.jar"/>
+        <jar href="sqlitejdbc-v056.jar"/>
+        <jar href="slick.jar"/>
+        <jar href="lwjgl.jar"/>   
+        <jar href="jogg-0.0.7.jar"/>    
+        <jar href="jorbis-0.0.15.jar"/>      
+        <property name="jnlp.slick.webstart" value="true"/>
+    </resources>  
+    <resources os="Windows">
+        <j2se href="http://java.sun.com/products/autodl/j2se" version="1.4+" max-heap-size="128m"/> 
+        <nativelib href="natives-win32.jar"/>      
+    </resources>  
+    <resources os="Linux">
+        <j2se href="http://java.sun.com/products/autodl/j2se" version="1.4+" max-heap-size="128m"/> 
+        <nativelib href="natives-linux.jar"/>      
+    </resources>
+    <resources os="Mac">
+        <j2se href="http://java.sun.com/products/autodl/j2se" version="1.4+" max-heap-size="128m"/> 
+        <nativelib href="natives-mac.jar"/>  
+    </resources> 
+    <application-desc main-class="main.Main"/>
+</jnlp>
