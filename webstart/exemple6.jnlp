@@ -2,9 +2,9 @@
 <jnlp spec="1.0+"
     codebase="https://github.com/nam0r/Devint/raw/master/webstart/">
     <information>
-        <title>Example</title>
+        <title>Exemple</title>
         <vendor>Nam</vendor>
-        <description kind="short">Example</description>
+        <description kind="short">Exemple</description>
         <homepage href="https://github.com/nam0r/Devint" />
         <offline-allowed />
         <shortcut online="false">
@@ -16,7 +16,7 @@
     </security>
     <resources>
         <j2se version="1.5+"/>
-        <jar href="example6.jar"/>
+        <jar href="exemple6.jar"/>
         <jar href="phys2d-060408.jar"/>
         <jar href="sqlitejdbc-v056.jar"/>
         <jar href="slick.jar"/>
