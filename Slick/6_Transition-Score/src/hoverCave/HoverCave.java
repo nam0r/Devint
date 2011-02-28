@@ -44,6 +44,7 @@ public class HoverCave extends BasicGameState {
 	private int distance;
 	private Sound sonG, sonD;
 	private float distSonHaut, distSonBas;
+	private int playMusicTime;
 
 	public HoverCave(int stateID) {
 		this.stateID = stateID;
@@ -97,6 +98,7 @@ public class HoverCave extends BasicGameState {
 		dudeHeight = container.getHeight() / 2;
 		wallOffset = 0;
 		dead = false;
+		playMusicTime = 0;
 	}
 
 	@Override
@@ -137,10 +139,15 @@ public class HoverCave extends BasicGameState {
 				dead = true;
 			}
 			else {
-				distSonHaut = (float)(1.0/((lowerWall.get(2)-dudeHeight)/20+1.0));
-				distSonBas = (float)(1.0/((dudeHeight-upperWall.get(2))/20+1.0));
-				if(distSonBas > 0.1) sonG.playAt(1f, distSonBas/2, -1, 0, 0);
-				if(distSonHaut > 0.1) sonD.playAt(1f, distSonHaut/2, 1, 0, 0);
+				if(playMusicTime > 5){
+					playMusicTime = 0;
+					distSonHaut = (float)(1.0/((lowerWall.get(2)-dudeHeight)/10+1.0));
+					distSonBas = (float)(1.0/((dudeHeight-upperWall.get(2))/10+1.0));
+					if(distSonBas > 0.05) sonG.playAt(1f, distSonBas*2.5f, -1, 0, 0);
+					if(distSonHaut > 0.05) sonD.playAt(1f, distSonHaut*2.5f, 1, 0, 0);
+					System.out.println("distSonBas "+(distSonBas*2)+" distSonHaut "+(distSonHaut*2));
+				}
+				playMusicTime++;
 			}
 		}
 		else{
