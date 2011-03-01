@@ -160,7 +160,7 @@ public abstract class Actor extends AbstractEntity {
 			setVelocity(0, getVelY());
 		}
 		
-		falling = (getVelY() > 2);
+		falling = (getVelY() > 10);
 		velx = getVelX();
 	}
 	
@@ -211,7 +211,7 @@ public abstract class Actor extends AbstractEntity {
 		} 
 		
 		if (jumped) {
-			if (getVelY() > 2) {
+			if (getVelY() > 10) {
 				jumped = false;
 			}
 		}
