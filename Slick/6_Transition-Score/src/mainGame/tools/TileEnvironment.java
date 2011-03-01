@@ -64,6 +64,7 @@ public class TileEnvironment extends AbstractEnvironment {
 		});
 		
 		calcBounds();
+		
 	}
 	
 	/**
