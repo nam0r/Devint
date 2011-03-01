@@ -184,7 +184,7 @@ public abstract class Actor extends PhysicalEntity {
 			setVelocity(0, getVelY());
 		}
 		
-		falling = (getVelY() > 10) && (!onGround());
+		falling = (getVelY() > 10)/* && (!onGround())*/;
 		velx = getVelX();
 		
 		
@@ -204,7 +204,7 @@ public abstract class Actor extends PhysicalEntity {
 		boolean on = onGroundImpl(body);
 		if (!on) {
 			offGroundTimer += delta;
-			if (offGroundTimer > 150) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
+			if (offGroundTimer > 200) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
 				onGround = false;
 			}
 			waitingTimer = 0;
@@ -247,7 +247,7 @@ public abstract class Actor extends PhysicalEntity {
 		} 
 		
 		if (jumped) {
-			if (getVelY() >= 0) {
+			if (getVelY() >= 10) {
 				jumped = false;
 			}
 		}

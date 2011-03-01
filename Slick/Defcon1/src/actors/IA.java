@@ -20,7 +20,7 @@ public abstract class IA extends Actor {
 	protected Question question;
 	
 	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y, float width, float height) {
-		super(pathToSpriteSheet, x, y, 10f, width, height);
+		super(pathToSpriteSheet, x, y, 100000f, width, height);
 		
 		this.nb_sprites = nb_sprites;
 		walk = new SpriteSheet(image,(int)width,(int)height); // A revoir
@@ -28,7 +28,7 @@ public abstract class IA extends Actor {
 		way = Way.LEFT;
 		walkingTimer = 0;
 		
-		moveForce = 1;
+		moveForce = 500000;
 		
 	}
 	
