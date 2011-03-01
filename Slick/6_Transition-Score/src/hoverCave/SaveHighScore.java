@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import main.Globals;
 import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
@@ -81,7 +82,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 */
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		image.draw(0, 0, 1024, 768);
-		font.drawString(200, 32, "Votre score : " + Hoorah.getScore());
+		font.drawString(200, 32, "Votre score : " + Globals.score);
 		// The name textfield is displayed only if the player has a highscore
 		if(submitting){
 			nameField.render(container, g);
@@ -101,7 +102,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 			writeScore(DEFAULTNAME);
 			submitted = true;
 			// We put it here to make it happen only one time
-			submitting = isHighScore(Hoorah.getScore());
+			submitting = isHighScore(Globals.score);
 		}
 	}
 
@@ -162,7 +163,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 					.getConnection("jdbc:sqlite:scores.db");
 			Statement stat = conn.createStatement();
 			stat.executeUpdate("UPDATE scores SET name='" + name + "', score="
-					+ Hoorah.getScore() + " WHERE id="
+					+ Globals.score + " WHERE id="
 					+ currentScoreID + ";");
 			conn.close();
 		} catch (SQLException e) {
@@ -188,7 +189,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 						.executeUpdate("CREATE TABLE scores (id integer PRIMARY KEY AUTOINCREMENT, name text, score integer);");
 			}
 			stat.executeUpdate("INSERT INTO scores (name, score) values ('"
-					+ name + "', " + Hoorah.getScore() + ");");
+					+ name + "', " + Globals.score + ");");
 			ResultSet r = stat.executeQuery("SELECT * FROM scores ORDER BY id DESC LIMIT 1;");
 			currentScoreID = Integer.parseInt(r.getString("id"));
 			conn.close();
