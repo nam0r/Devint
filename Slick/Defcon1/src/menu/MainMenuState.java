@@ -108,7 +108,7 @@ public class MainMenuState extends BasicGameState {
 			throws SlickException {
 		super.enter(gc, sbg);
 
-		musique = new Music("res/snd/hope.ogg"); // A revoir
+		musique = new Music("../Slick/snd/hope.ogg"); // A revoir
 		musique.play();
 	}
 	

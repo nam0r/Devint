@@ -35,7 +35,7 @@ public class GameplayState extends AbstractGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		
-		musique = new Music("res/snd/requiem.wav");
+		musique = new Music("../Slick/snd/requiem.wav");
 		sonSaut = new Sound("res/snd/over.wav");
 		
 	}
