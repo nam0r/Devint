@@ -2,10 +2,10 @@ package mainGame.tools;
 
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.BodyList;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
-import net.phys2d.raw.shapes.Circle;
 
 import org.newdawn.slick.Graphics;
 
@@ -270,7 +270,15 @@ public abstract class Actor extends AbstractEntity {
 	}
 	
 	public boolean hasCollided(){
+		
 		CollisionEvent[] events = world.getContacts(body);
+		
+		System.out.println(events.length);
+		/*
+		for(int i=0; i<events.length; i++) {
+			System.out.println("Collision entre " + event.getBodyA() + " et " + event.getBodyB());
+		}
+		*/
 		
 		for (int i=0;i<events.length;i++) {
 			if (events[i].getBodyB()==body && events[i].getBodyA().getMass()==10) {
