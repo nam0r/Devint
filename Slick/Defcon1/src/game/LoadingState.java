@@ -49,14 +49,10 @@ public class LoadingState extends BasicGameState {
 		if (nextResource != null) {
 			g.drawString("Chargement : "+nextResource.getDescription(), x, y);
 		}
-		System.out.println(LoadingList.get());
 		int total = LoadingList.get().getTotalResources();
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
-			
-		float bar = loaded / (float) total;
 		g.fillRect(x,y+50,loaded*40,20);
 		g.drawRect(x,y+50,total*40,20);
-		
 	}
 
 	@Override

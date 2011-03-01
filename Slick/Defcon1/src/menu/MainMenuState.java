@@ -34,7 +34,7 @@ public class MainMenuState extends BasicGameState {
 			throws SlickException {
 		
 		// Background
-		background = new Image("res/sky2.jpg");
+		background = new Image("res/img/sky2.jpg");
 		
 		// Menus
 		int menuX = 410;
