@@ -11,6 +11,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.state.StateBasedGame;
 
 import utils.Utils;
@@ -26,6 +27,7 @@ public class GameplayState extends AbstractGameState {
 	
 	private Music musique;
 	private Sound sonSaut;
+	
 
 	public GameplayState(int id) {
 		super(id, "res/cave.png", "res/tiles.xml", "res/testmap.txt", 32, 32);
@@ -35,7 +37,7 @@ public class GameplayState extends AbstractGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		
-		musique = new Music("res/snd/requiem.wav");
+		musique = new Music("../Slick/snd/requiem.wav");
 		sonSaut = new Sound("res/snd/over.wav");
 		
 	}
@@ -44,8 +46,7 @@ public class GameplayState extends AbstractGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		super.render(gc, sbg, g);
 		
-		Utils.drawCenteredString(g,"'My Last Hoorah' - Slick+Phys2D Platformer Example - By Kevin Glass - http://www.cokeandcode.com", gc.getWidth(), 0, Color.black);
-		Utils.drawCenteredString(g,"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart", gc.getWidth(), 580, Color.black);
+		Utils.drawCenteredString(g,"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart", gc.getWidth(), gc.getHeight()-20, Color.black);
 	}
 	
 	@Override

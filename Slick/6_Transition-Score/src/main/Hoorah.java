@@ -21,8 +21,6 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author kevin
  */
 public class Hoorah extends StateBasedGame {
-	/** The global score */
-	private static int score=0;
 	/** The container in which the game is running */
 	private GameContainer container;
 	/** True if vertical sync is turned on */
@@ -38,18 +36,6 @@ public class Hoorah extends StateBasedGame {
 	 */
 	public Hoorah() {
 		super("My Last Hoorah");
-	}
-
-	public static void setScore(int scor){
-		score = scor;
-	}
-	
-	public static void addToScore(int scor){
-		score += scor;
-	}
-	
-	public static int getScore(){
-		return score;
 	}
 	
 	/**

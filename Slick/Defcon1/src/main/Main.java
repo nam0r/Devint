@@ -8,7 +8,7 @@ public class Main {
 		AppGameContainer app;
 		try {
 			app = new AppGameContainer(new Hoorah());
-			app.setDisplayMode(800, 600, false); // Mode fenêtré
+			app.setDisplayMode(1024, 768, false); // Mode fenêtré
 			app.start();
 			
 			// Plus court :

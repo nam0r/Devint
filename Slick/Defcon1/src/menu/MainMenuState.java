@@ -34,7 +34,7 @@ public class MainMenuState extends BasicGameState {
 			throws SlickException {
 		
 		// Background
-		background = new Image("res/img/background.jpg");
+		background = new Image("res/img/sky2.jpg");
 		
 		// Menus
 		int menuX = 410;
@@ -48,6 +48,8 @@ public class MainMenuState extends BasicGameState {
 		
 		// Sound
 		enter = new Sound("res/snd/enter.wav");
+		
+		musique = new Music("../Slick/snd/hope.ogg"); // A revoir
 	}
 
 	@Override
@@ -108,7 +110,6 @@ public class MainMenuState extends BasicGameState {
 			throws SlickException {
 		super.enter(gc, sbg);
 
-		musique = new Music("res/snd/hope.ogg"); // A revoir
 		musique.play();
 	}
 	

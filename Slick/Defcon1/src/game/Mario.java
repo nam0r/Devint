@@ -52,15 +52,15 @@ public class Mario extends Actor {
 			sheet = jump;
 			sx = 0;
 			sy = 0;
-		} else if(waiting()) {
+		} /*else if(waiting()) {
 			sheet = jump;
 			sx = 0;
 			sy = 0;
-		} else if (moving() && onGround()) {
+		} */else if (moving() && onGround()) {
 			sheet = walk;
 			sx = frame % NB_SPRITES_WALK;
 			sy = Y_OFFSET_WALK;
- 		} else if (onGround()) {
+ 		} else if (onGround() || waiting()) {
 			sheet = walk;
 			sx = 0;
 			sy = Y_OFFSET_WALK;

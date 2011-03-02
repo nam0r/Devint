@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+import main.Globals;
 import main.Hoorah;
 
 import org.newdawn.slick.Color;
@@ -20,6 +21,7 @@ import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.BlobbyTransition;
 import org.newdawn.slick.state.transition.CrossStateTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -144,7 +146,7 @@ public class HoverCave extends BasicGameState {
 					distSonHaut = (float)(1.0/((lowerWall.get(2)-dudeHeight)/10+1.0));
 					distSonBas = (float)(1.0/((dudeHeight-upperWall.get(2))/10+1.0));
 					if(distSonBas > 0.05) sonG.playAt(1f, distSonBas*2.5f, -1, 0, 0);
-					if(distSonHaut > 0.05) sonD.playAt(1f, distSonHaut*2.5f, 1, 0, 0);
+					if(distSonHaut > 0.05) sonD.playAt(1f, distSonHaut*2.7f, 1, 0, 0);
 					//System.out.println("distSonBas "+(distSonBas*2)+" distSonHaut "+(distSonHaut*2));
 				}
 				playMusicTime++;
@@ -154,8 +156,8 @@ public class HoverCave extends BasicGameState {
 			Input input = container.getInput();
 			if (input.isKeyPressed(Input.KEY_ENTER)) {
 				//reset();
-				Hoorah.addToScore(distance);
-				game.enterState(Hoorah.SAVEHIGHSCORE, new FadeOutTransition(), new FadeInTransition());
+				Globals.score += distance;
+				game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
 			}
 		}
 
