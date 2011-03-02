@@ -29,5 +29,18 @@ public class Question {
 	public boolean isOk(int indice) {
 		return choices[indice].equals(answer);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(question);
+		sb.append("\n");
+		for(String choice : choices) {
+			sb.append("\t");
+			sb.append(choice);
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
 
 }

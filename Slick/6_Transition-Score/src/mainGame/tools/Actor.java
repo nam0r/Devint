@@ -273,7 +273,6 @@ public abstract class Actor extends AbstractEntity {
 		
 		CollisionEvent[] events = world.getContacts(body);
 		
-		System.out.println(events.length);
 		/*
 		for(int i=0; i<events.length; i++) {
 			System.out.println("Collision entre " + event.getBodyA() + " et " + event.getBodyB());

@@ -1,5 +1,9 @@
 package map;
 
+import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.CollisionListener;
+
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -8,7 +12,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
+import questions.Question;
 import actors.Actor;
+import actors.IA;
 import actors.PhysicalEntity;
 import environment.TileEnvironment;
 
@@ -18,6 +24,8 @@ public class Map {
 	private TileSet set;
 	private MapLoader loader;
 	private TileEnvironment env;
+	
+	private Actor player;
 	
 	/** The view x-axis offset */
 	private float xoffset;
@@ -41,6 +49,9 @@ public class Map {
 		env = loader.load(pathToMap);
 		
 		env.setImageSize(tilesWidth,tilesHeight);
+		
+		// Gestion des collisions
+		manageCollisions();
 	}
 	
 	public Image getBackground() {
@@ -61,6 +72,13 @@ public class Map {
 	
 	public void addEntity(PhysicalEntity entity) {
 		env.addEntity(entity);
+	}
+	
+	public void setMainPlayer(Actor p) {
+		if(player != null)
+			env.removeEntity(player);
+		player = p;
+		env.addEntity(player);
 	}
 	
 	public void render(Graphics g, GameContainer gc) {
@@ -120,6 +138,30 @@ public class Map {
 	
 	public Rectangle getBounds() {
 		return env.getBounds();
+	}
+	
+	private void manageCollisions() {
+		env.getWorld().addListener(new CollisionListener() {
+
+			@Override
+			public void collisionOccured(CollisionEvent event) {
+				
+				Body bodyOther = null;
+				if(event.getBodyA().equals(player.getBody()))
+					bodyOther = event.getBodyB();
+				else if(event.getBodyB().equals(player.getBody()))
+					bodyOther = event.getBodyA();
+				
+				if(bodyOther != null) { // Si la collision implique le player principal
+					PhysicalEntity other = env.getEntityByBody(bodyOther);
+					if(other instanceof IA) {
+						Question question = ((IA)other).getQuestion();
+						System.out.println(question.toString());
+					}
+				}
+			}
+			
+		});
 	}
 
 }

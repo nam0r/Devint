@@ -3,6 +3,7 @@ package environment;
 import java.util.ArrayList;
 
 import net.phys2d.math.Vector2f;
+import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 import actors.PhysicalEntity;
 
@@ -36,6 +37,24 @@ public abstract class Environment implements EnvironmentInterface {
 		
 		entities.add(entity);
 		entity.setWorld(world);
+	}
+	
+	public void removeEntity(PhysicalEntity entity) {
+		world.remove(entity.getBody());
+		entities.remove(entity);
+	}
+	
+	public PhysicalEntity getEntityByBody(Body body) {
+		for(PhysicalEntity entity : entities) {
+			if(entity.getBody().equals(body)) {
+				return entity;
+			}
+		}
+		return null;
+	}
+	
+	public World getWorld() {
+		return this.world;
 	}
 	
 	public void update(int delta) {

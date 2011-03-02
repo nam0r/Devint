@@ -58,10 +58,12 @@ public class TileEnvironment extends AbstractEnvironment {
 		this.width = width;
 		this.height = height;
 		
+		/*
 		world.addListener(new CollisionListener() {
 			public void collisionOccured(CollisionEvent event) {
 			}
 		});
+		*/
 		
 		calcBounds();
 		

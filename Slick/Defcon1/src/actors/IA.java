@@ -30,10 +30,12 @@ public abstract class IA extends Actor {
 		
 		moveForce = 1;
 		
+		question = createQuestion();
+		
 	}
 	
-	protected void setQuestion(Question question) {
-		this.question = createQuestion();
+	public Question getQuestion() {
+		return this.question;
 	}
 	
 	protected abstract Question createQuestion();

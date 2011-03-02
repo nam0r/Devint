@@ -102,7 +102,7 @@ public abstract class AbstractGameState extends BasicGameState {
 		
 		// On crée le joueur et on l'ajoute a la map
 		player = createPlayer();
-		map.addEntity(player);
+		map.setMainPlayer(player);
 		
 		// On crée les objets mobiles et on les ajoute a la map
 		ArrayList<PhysicalEntity> entities = createEntities();
