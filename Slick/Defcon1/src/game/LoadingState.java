@@ -7,9 +7,7 @@ import main.Hoorah;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.BasicGameState;
@@ -22,8 +20,6 @@ public class LoadingState extends BasicGameState {
 	private int stateID;
 	/** The next resource to load */
 	private DeferredResource nextResource;
-	private Music musique;
-	private Sound sonSaut;
 	
 	public LoadingState(int stateID) {
 		this.stateID = stateID;
@@ -37,9 +33,6 @@ public class LoadingState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		LoadingList.setDeferredLoading(true);
-		musique = new Music("../Slick/snd/requiem.wav");
-		sonSaut = new Sound("res/snd/over.wav");
-		
 	}
 
 	@Override
@@ -79,4 +72,3 @@ public class LoadingState extends BasicGameState {
 	}
 	
 }
-

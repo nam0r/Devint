@@ -1,5 +1,6 @@
 package game;
 
+import main.Hoorah;
 import questions.Question;
 import actors.IA;
 
@@ -20,6 +21,11 @@ public class MarioIA extends IA {
 			"142 ans"
 		};
 		return new Question("Quelle est l'age de mon grand père ?", choices, 2, 140);
+	}
+
+	@Override
+	public int stateToGoTo() {
+		return Hoorah.HOVERCAVESTATE;
 	}
 
 }

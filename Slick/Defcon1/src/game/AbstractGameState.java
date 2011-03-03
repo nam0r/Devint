@@ -3,14 +3,21 @@ package game;
 import java.util.ArrayList;
 
 import map.Map;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.CollisionListener;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import actors.Actor;
+import actors.IA;
 import actors.PhysicalEntity;
 
 /**
@@ -37,6 +44,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	/** The interval to check the controls at */
 	private int controlInterval = 50;
 	
+	private int stateToGoTo;
 	
 	public AbstractGameState(int id, String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
 			int tilesWidth, int tilesHeight) {
@@ -89,6 +97,9 @@ public abstract class AbstractGameState extends BasicGameState {
 		
 		// Mettre a jour la map
 		map.update(delta, gc, player);
+		
+		if(stateToGoTo != -1)
+			sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
 	
 	@Override
@@ -96,6 +107,8 @@ public abstract class AbstractGameState extends BasicGameState {
 		super.enter(gc, sbg);
 		
 		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight);
+		// Gestion des collisions
+		manageCollisions();
 		
 		// On initialise la map
 		map.init();
@@ -109,6 +122,8 @@ public abstract class AbstractGameState extends BasicGameState {
 		for(PhysicalEntity pe : entities) {
 			map.addEntity(pe);
 		}
+		
+		stateToGoTo = -1;
 	}
 	
 	@Override
@@ -125,5 +140,48 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void notTimedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void timedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
+	
+	
+	private void manageCollisions() {
+		map.getWorld().addListener(new CollisionListener() {
+
+			@Override
+			public void collisionOccured(CollisionEvent event) {
+				
+				Body bodyOther = null;
+				if(event.getBodyA().equals(player.getBody()))
+					bodyOther = event.getBodyB();
+				else if(event.getBodyB().equals(player.getBody()))
+					bodyOther = event.getBodyA();
+				
+				if(bodyOther != null) { // Si la collision implique le player principal
+					PhysicalEntity other = map.getEntityByBody(bodyOther);
+					if(other instanceof IA) {
+						//game.enterState(Hoorah.HOVERCAVESTATE, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+						//player.setX(player.getX() + 100); // Attention au relief
+						
+						/* Idee : creer un attribut "stateToGoTo" initialise a null.
+						 * Mettre une methode "public State stateToGoTo" dans IA qui renvoie l'etat dans lequel
+						 * on passe apres une collision avec l'IA.
+						 * Ici, faire "this.stateToGoTo = ((IA)other).stateToGoTo();
+						 * 
+						 * Dans update, faire :
+						 * if(this.stateToGoTo != null) {
+						 *     sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+						 * }
+						 * 
+						 * Dans leave(), rajouter "this.stateToGoTo = null;"
+						 */
+						
+						((IA)other).onCollision();
+						stateToGoTo = ((IA)other).stateToGoTo();
+						//Question question = ((IA)other).getQuestion();
+						//System.out.println(question.toString());
+					}
+				}
+			}
+			
+		});
+	}
 
 }

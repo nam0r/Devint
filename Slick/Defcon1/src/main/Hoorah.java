@@ -1,19 +1,14 @@
 package main;
 
-import java.io.IOException;
-
 import game.GameplayState;
 import game.LoadingState;
-import minigame.HoverCave;
 import game.SaveHighScore;
 import menu.MainMenuState;
+import minigame.HoverCave;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.DeferredResource;
-import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Hoorah extends StateBasedGame {
@@ -39,6 +34,14 @@ public class Hoorah extends StateBasedGame {
 		//this.getState(GAMEPLAYSTATE).init(gc, this);
 		
 		this.container = gc;
+		
+		/*
+		try {
+			container.setFullscreen(true);
+		} catch (SlickException e) {
+			System.err.println("Erreur lors de la mise en plein écran.");
+		}
+		*/
 		
 		// True if vertical sync is turned on
 		container.setTargetFrameRate(100);

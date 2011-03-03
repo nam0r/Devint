@@ -8,10 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import main.Globals;
-import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

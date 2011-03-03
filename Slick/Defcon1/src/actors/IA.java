@@ -18,6 +18,7 @@ public abstract class IA extends Actor {
 	private final int WALKING_TIME = 1000; // 1 seconds
 	
 	protected Question question;
+	protected boolean visited;
 	
 	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y, float width, float height) {
 		super(pathToSpriteSheet, x, y, 100000f, width, height);
@@ -31,6 +32,7 @@ public abstract class IA extends Actor {
 		moveForce = 500000;
 		
 		question = createQuestion();
+		visited = false;
 		
 	}
 	
@@ -84,5 +86,14 @@ public abstract class IA extends Actor {
 		else
 			moveRight();
 	}
+	
+	public void onCollision() {
+		if(! visited) {
+			System.out.println(question.toString());
+			visited = true;
+		}
+	}
+	
+	public abstract int stateToGoTo();
 	
 }
