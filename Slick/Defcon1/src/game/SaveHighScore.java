@@ -25,9 +25,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * A test of the the local storage utilities
  * 
- * @author kevin
  */
 public class SaveHighScore extends BasicGameState implements ComponentListener {
 	private int stateID;
@@ -82,14 +80,17 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 */
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		image.draw(0, 0, 1024, 768);
-		font.drawString(200, 32, "Votre score : " + Globals.score);
-		// The name textfield is displayed only if the player has a highscore
-		if(submitting){
-			nameField.render(container, g);
+		if(Globals.score != 0){
+			font.drawString(200, 32, "Votre score : " + Globals.score);
+			// The name textfield is displayed only if the player has a real highscore
+			if(submitting){
+				nameField.render(container, g);
+			}
 		}
-
+		//else{
+		//	font.drawString(200, 32, "Votre score : " + Globals.score);
+		//}
 		displayScores(container, g);
-
 	}
 
 	/**
@@ -99,10 +100,15 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 		if (!submitted) {
-			writeScore(DEFAULTNAME);
 			submitted = true;
 			// We put it here to make it happen only one time
-			submitting = isHighScore(Globals.score);
+			if(Globals.score != 0){
+				writeScore(DEFAULTNAME);
+				submitting = isHighScore(Globals.score);
+			}
+			//If just watching highscores whthout playing
+			else
+				submitting = false;
 		}
 	}
 
