@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import main.Globals;
+import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Font;
@@ -65,8 +66,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		image = new Image("res/img/sky2.jpg");
-		font = new AngelCodeFont("res/hiero.fnt",
-				"res/hiero.png");
+		font = new AngelCodeFont("res/hiero.fnt", "res/hiero.png");
 		submitted = false;
 		currentName = "";
 		nameField = new TextField(container, container.getDefaultFont(), 200, 120, 400, 30, this);
@@ -95,8 +95,15 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer,
 	 *      int)
 	 */
-	public void update(GameContainer container, StateBasedGame game, int delta)
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
+		
+		Input input = gc.getInput();
+		
+		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+			sbg.enterState(Hoorah.MAINMENUSTATE);
+		}
+		
 		if (!submitted) {
 			submitted = true;
 			// We put it here to make it happen only one time
@@ -107,15 +114,6 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 			//If just watching highscores whthout playing
 			else
 				submitting = false;
-		}
-	}
-
-	/**
-	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
-	 */
-	public void keyPressed(int key, char c) {
-		if (key == Input.KEY_ESCAPE) {
-			System.exit(0);
 		}
 	}
 

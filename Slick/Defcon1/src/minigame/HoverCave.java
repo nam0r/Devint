@@ -1,32 +1,19 @@
 package minigame;
 
 import java.awt.Dimension;
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Vector;
 
 import main.Globals;
 import main.Hoorah;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
-import org.newdawn.slick.state.transition.CrossStateTransition;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
-import org.newdawn.slick.state.transition.SelectTransition;
-import org.newdawn.slick.tests.states.TestState2;
 
 public class HoverCave extends BasicGameState {
 	private int stateID;
