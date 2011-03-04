@@ -209,6 +209,10 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	}
 
 	public void displayScores(GameContainer container, Graphics g) {
+		int x = 200;
+		int y = 200;
+		font.drawString(x, y, "High Scores:");
+		
 		File f = new File("scores.db");
 		if (f.exists()) {
 			try {
@@ -218,9 +222,6 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 				Statement stat = conn.createStatement();
 				ResultSet r = stat
 						.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
-				int x = 200;
-				int y = 200;
-				font.drawString(x, y, "High Scores:");
 				x += 30;
 				y += 20;
 				while (r.next()) {

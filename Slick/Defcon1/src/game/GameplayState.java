@@ -140,7 +140,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	protected Actor createPlayer() {
 		//return new Alien();
-		return new Mario();
+		return new Homer();
 	}
 	
 
