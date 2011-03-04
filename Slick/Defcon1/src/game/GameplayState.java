@@ -12,6 +12,8 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Utils;
 import actors.Actor;
@@ -90,7 +92,8 @@ public class GameplayState extends AbstractGameState {
 			map.showBounds();
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Hoorah.MAINMENUSTATE);
+			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
 		}
 		if (input.isKeyPressed(Input.KEY_P)) {
 			if(gc.isPaused()) {

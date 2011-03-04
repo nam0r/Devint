@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import main.Globals;
+import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -21,6 +23,8 @@ import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 /**
  * 
@@ -46,6 +50,8 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	private String currentName;
 	/** Current score database entry */
 	private int currentScoreID;
+	/** current game */
+	private StateBasedGame game;
 
 	/**
 	 * Create a new test for font rendering
@@ -64,6 +70,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 */
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		this.game = game;
 		image = new Image("res/img/sky2.jpg");
 		font = new AngelCodeFont("res/hiero.fnt",
 				"res/hiero.png");
@@ -115,7 +122,8 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 */
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
-			System.exit(0);
+			game.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
 		}
 	}
 
