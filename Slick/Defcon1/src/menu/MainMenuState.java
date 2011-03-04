@@ -115,6 +115,8 @@ public class MainMenuState extends BasicGameState {
 
 		musique.loop();
 		selected = 0;
+		Input input = gc.getInput();
+		input.clearKeyPressedRecord();
 	}
 	
 	// Appelee lors de la sortie de l'etat
