@@ -10,7 +10,7 @@ import actors.IA;
 public class MarioIA extends IA {
 	
 	public MarioIA(int x, int y) {
-		super("res/img/mariowalk.png", 3, x, y, 20, 31);
+		super("res/img/mariomarche1.png", 3, x, y, 40, 62);
 	}
 
 	@Override
