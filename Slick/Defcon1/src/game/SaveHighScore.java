@@ -72,8 +72,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 			throws SlickException {
 		this.game = game;
 		image = new Image("res/img/sky2.jpg");
-		font = new AngelCodeFont("res/hiero.fnt",
-				"res/hiero.png");
+		font = new AngelCodeFont("res/hiero.fnt", "res/hiero.png");
 		submitted = false;
 		currentName = "";
 		nameField = new TextField(container, container.getDefaultFont(), 200, 120, 400, 30, this);
@@ -102,8 +101,15 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer,
 	 *      int)
 	 */
-	public void update(GameContainer container, StateBasedGame game, int delta)
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
+		
+		Input input = gc.getInput();
+		
+		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+			sbg.enterState(Hoorah.MAINMENUSTATE);
+		}
+		
 		if (!submitted) {
 			submitted = true;
 			// We put it here to make it happen only one time
@@ -118,6 +124,8 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	}
 
 	/**
+<<<<<<< HEAD
+=======
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
 	public void keyPressed(int key, char c) {
@@ -128,6 +136,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	}
 
 	/**
+>>>>>>> 2eb761571d4d8872161f10ac21ae19a44539c736
 	 * @see org.newdawn.slick.gui.ComponentListener#componentActivated(org.newdawn.slick.gui.AbstractComponent)
 	 */
 	public void componentActivated(AbstractComponent source) {
