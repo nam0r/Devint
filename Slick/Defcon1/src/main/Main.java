@@ -20,10 +20,6 @@ public class Main {
 			app = new AppGameContainer(new Hoorah());
 			app.setDisplayMode(1024, 768, false); // Mode fenêtré
 			app.start();
-			
-			// Plus court :
-			//AppGameContainer container = new AppGameContainer(new Hoorah(), 800, 600, false);
-			//container.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

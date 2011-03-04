@@ -33,19 +33,24 @@ public class LoadingState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
 		LoadingList.setDeferredLoading(true);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> aa639011c231fffd3c426151ada47ca0a7e4e85a
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g)
 			throws SlickException {
-		int x=200; int y=300;
+		int total = LoadingList.get().getTotalResources();
+		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
+		int x=gc.getWidth()/2-(total*50)/2;
+		int y=gc.getHeight()/2-30;
 		if (nextResource != null) {
 			g.drawString("Chargement : "+nextResource.getDescription(), x, y);
 		}
-		int total = LoadingList.get().getTotalResources();
-		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
-		g.fillRect(x,y+50,loaded*40,20);
-		g.drawRect(x,y+50,total*40,20);
+		g.fillRect(x, y+50, loaded*50, 30);
+		g.drawRect(x, y+50, total*50, 30);
 	}
 
 	@Override
