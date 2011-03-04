@@ -124,8 +124,6 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	}
 
 	/**
-<<<<<<< HEAD
-=======
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
 	public void keyPressed(int key, char c) {
@@ -136,7 +134,6 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	}
 
 	/**
->>>>>>> 2eb761571d4d8872161f10ac21ae19a44539c736
 	 * @see org.newdawn.slick.gui.ComponentListener#componentActivated(org.newdawn.slick.gui.AbstractComponent)
 	 */
 	public void componentActivated(AbstractComponent source) {
