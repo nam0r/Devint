@@ -84,7 +84,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 */
 	public void render(GameContainer container, StateBasedGame game, Graphics g) {
 		image.draw(0, 0, 1024, 768);
-		if(Globals.score != 0){
+		if(Globals.score != 0) {
 			font.drawString(200, 32, "Votre score : " + Globals.score);
 			// The name textfield is displayed only if the player has a real highscore
 			if(submitting){
@@ -101,6 +101,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 * @see org.newdawn.slick.BasicGame#update(org.newdawn.slick.GameContainer,
 	 *      int)
 	 */
+	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		
@@ -122,14 +123,20 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 				submitting = false;
 		}
 	}
+	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		super.enter(gc, sbg);
+		
+		nameField.setFocus(true);
+	}
 
 	/**
 	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
 	 */
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
-			game.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
+			game.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),	new FadeInTransition(Color.black));
 		}
 	}
 
