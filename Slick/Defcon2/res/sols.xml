@@ -1,0 +1,6 @@
+<tiles>
+	<tile id="=" image="res/sol2.png" shape="BLOCK" />
+	<tile id="#" image="res/sol2.png" shape="BLOCK" />
+	<tile id="/" image="res/sol3.png" shape="LEFTSLOPE" />
+	<tile id="\" image="res/sol4.png" shape="RIGHTSLOPE" />
+</tiles>
