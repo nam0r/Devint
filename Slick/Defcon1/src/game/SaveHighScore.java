@@ -11,6 +11,7 @@ import main.Globals;
 import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -22,6 +23,8 @@ import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 /**
  * 
@@ -47,6 +50,8 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	private String currentName;
 	/** Current score database entry */
 	private int currentScoreID;
+	/** current game */
+	private StateBasedGame game;
 
 	/**
 	 * Create a new test for font rendering
@@ -65,6 +70,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 */
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		this.game = game;
 		image = new Image("res/img/sky2.jpg");
 		font = new AngelCodeFont("res/hiero.fnt", "res/hiero.png");
 		submitted = false;
@@ -118,6 +124,19 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+	 * @see org.newdawn.slick.BasicGame#keyPressed(int, char)
+	 */
+	public void keyPressed(int key, char c) {
+		if (key == Input.KEY_ESCAPE) {
+			game.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
+		}
+	}
+
+	/**
+>>>>>>> 2eb761571d4d8872161f10ac21ae19a44539c736
 	 * @see org.newdawn.slick.gui.ComponentListener#componentActivated(org.newdawn.slick.gui.AbstractComponent)
 	 */
 	public void componentActivated(AbstractComponent source) {
@@ -205,6 +224,10 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	}
 
 	public void displayScores(GameContainer container, Graphics g) {
+		int x = 200;
+		int y = 200;
+		font.drawString(x, y, "High Scores:");
+		
 		File f = new File("scores.db");
 		if (f.exists()) {
 			try {
@@ -214,9 +237,6 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 				Statement stat = conn.createStatement();
 				ResultSet r = stat
 						.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
-				int x = 200;
-				int y = 200;
-				font.drawString(x, y, "High Scores:");
 				x += 30;
 				y += 20;
 				while (r.next()) {
