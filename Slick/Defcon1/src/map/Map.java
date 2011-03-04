@@ -1,8 +1,7 @@
 package map;
 
 import net.phys2d.raw.Body;
-import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.CollisionListener;
+import net.phys2d.raw.World;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
@@ -12,9 +11,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
-import questions.Question;
 import actors.Actor;
-import actors.IA;
 import actors.PhysicalEntity;
 import environment.TileEnvironment;
 
@@ -50,8 +47,6 @@ public class Map {
 		
 		env.setImageSize(tilesWidth,tilesHeight);
 		
-		// Gestion des collisions
-		manageCollisions();
 	}
 	
 	public Image getBackground() {
@@ -140,28 +135,12 @@ public class Map {
 		return env.getBounds();
 	}
 	
-	private void manageCollisions() {
-		env.getWorld().addListener(new CollisionListener() {
-
-			@Override
-			public void collisionOccured(CollisionEvent event) {
-				
-				Body bodyOther = null;
-				if(event.getBodyA().equals(player.getBody()))
-					bodyOther = event.getBodyB();
-				else if(event.getBodyB().equals(player.getBody()))
-					bodyOther = event.getBodyA();
-				
-				if(bodyOther != null) { // Si la collision implique le player principal
-					PhysicalEntity other = env.getEntityByBody(bodyOther);
-					if(other instanceof IA) {
-						Question question = ((IA)other).getQuestion();
-						System.out.println(question.toString());
-					}
-				}
-			}
-			
-		});
+	public World getWorld() {
+		return env.getWorld();
+	}
+	
+	public PhysicalEntity getEntityByBody(Body body) {
+		return env.getEntityByBody(body);
 	}
 
 }
