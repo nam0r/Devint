@@ -98,7 +98,8 @@ public class MainMenuState extends BasicGameState {
 			}
 		}
 		else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			gc.exit();
+			sbg.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
 		}
 	}
 

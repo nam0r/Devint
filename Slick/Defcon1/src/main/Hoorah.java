@@ -1,9 +1,10 @@
 package main;
 
 import game.GameplayState;
-import game.LoadingState;
-import game.SaveHighScore;
+import menu.ChoicePersoState;
+import menu.LoadingState;
 import menu.MainMenuState;
+import menu.SaveHighScore;
 import minigame.HoverCave;
 
 import org.newdawn.slick.GameContainer;
@@ -19,10 +20,11 @@ public class Hoorah extends StateBasedGame {
 	
 	// States
 	public static final int LOADINGSTATE = 0;
-	public static final int MAINMENUSTATE = 1;
-	public static final int GAMEPLAYSTATE = 2;
-	public static final int HOVERCAVESTATE = 3;
-	public static final int SAVEHIGHSCORE = 4;
+	public static final int CHOICEPERSOSTATE = 1;
+	public static final int MAINMENUSTATE = 2;
+	public static final int GAMEPLAYSTATE = 3;
+	public static final int HOVERCAVESTATE = 4;
+	public static final int SAVEHIGHSCORE = 5;
 	
 	public Hoorah() {
 		super("My Last Hoorah");
@@ -48,6 +50,7 @@ public class Hoorah extends StateBasedGame {
 		container.setVSync(vsync);
 		
 		this.addState(new LoadingState(LOADINGSTATE));
+		this.addState(new ChoicePersoState(CHOICEPERSOSTATE));
 		this.addState(new MainMenuState(MAINMENUSTATE));
 		this.addState(new GameplayState(GAMEPLAYSTATE));
 		this.addState(new HoverCave(HOVERCAVESTATE));

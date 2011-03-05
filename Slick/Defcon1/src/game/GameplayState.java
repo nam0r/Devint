@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import main.Globals;
 import main.Hoorah;
 
 import org.newdawn.slick.Color;
@@ -141,8 +142,15 @@ public class GameplayState extends AbstractGameState {
 
 	@Override
 	protected Actor createPlayer() {
-		//return new Alien();
+		switch(Globals.playerType){
+		case 0:return new Homer();
+		case 1:return new Homer();
+		case 2:return new Alien();
+		case 3:return new Mario();
+		case 4:return new Homer();
+		}
 		return new Homer();
+		
 	}
 	
 
