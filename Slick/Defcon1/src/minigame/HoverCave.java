@@ -88,6 +88,9 @@ public class HoverCave extends BasicGameState {
 		wallOffset = 0;
 		dead = false;
 		playMusicTime = 0;
+		speed = 0.06;
+		distance = 0;
+		movingUp = false;
 	}
 
 	@Override
@@ -96,9 +99,6 @@ public class HoverCave extends BasicGameState {
 		sonD = new Sound("res/snd/bip.ogg");
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
-		movingUp = false;
-		speed = 0.06;
-		distance = 0;
 		reset();
 	}
 
@@ -128,7 +128,7 @@ public class HoverCave extends BasicGameState {
 				dead = true;
 			}
 			else {
-				if(playMusicTime > 7){
+				if(playMusicTime > 10){
 					playMusicTime = 0;
 					distSonHaut = (float)(1.0/((lowerWall.get(2)-dudeHeight)/10+1.0));
 					distSonBas = (float)(1.0/((dudeHeight-upperWall.get(2))/10+1.0));
@@ -173,12 +173,15 @@ public class HoverCave extends BasicGameState {
 		if(dead) g.drawString("Le jeu est terminé, appuyez sur Entrée pour continuer", 250, 150);
 	}
 
+	@Override
+	public void leave(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		reset();
+	}
 
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_UP) {
 			movingUp = true;
-		} else if (key == Input.KEY_ESCAPE) {
-			System.exit(0);
 		}
 	}
 

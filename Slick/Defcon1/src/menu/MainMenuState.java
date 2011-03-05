@@ -114,7 +114,6 @@ public class MainMenuState extends BasicGameState {
 		super.enter(gc, sbg);
 
 		musique.loop();
-		selected = 0;
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 	}
@@ -124,7 +123,7 @@ public class MainMenuState extends BasicGameState {
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {
 		super.leave(gc, sb);
-
+		selected = 0;
 		musique.stop();
 	}
 

@@ -13,7 +13,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public abstract class Actor extends PhysicalEntity {
 	/** The maximum velocity an actor can jump at - this is used to prevent some odd effects of a penetration based physics engine */
-	private static final int MAX_JUMP_VEL = 50;
+	protected int MAX_JUMP_VEL = 50;
 	
 	private final int WAITING_TIME = 500;
 	
