@@ -46,9 +46,9 @@ public class ChoicePersoState extends BasicGameState {
 				new Image("res/img/link.jpg"), new Image("res/img/alien.jpg"),
 				new Image("res/img/mario.jpg"), new Image("res/img/tux.png") };
 
-		font = new AngelCodeFont("../Slick/testdata/demo2.fnt",
-				"../Slick/testdata/demo2_00.tga");
-		musique = new Music("../Slick/snd/hope.ogg");
+		font = new AngelCodeFont("res/demo2.fnt",
+				"res/demo2_00.tga");
+		//musique = new Music("../Slick/snd/hope.ogg");
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class ChoicePersoState extends BasicGameState {
 			throws SlickException {
 		super.enter(gc, sbg);
 
-		musique.loop();
+		//musique.loop();
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 	}
@@ -132,7 +132,7 @@ public class ChoicePersoState extends BasicGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		selected = 0;
-		musique.stop();
+		//musique.stop();
 	}
 
 }

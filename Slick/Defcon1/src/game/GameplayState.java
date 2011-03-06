@@ -39,7 +39,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
-		musique = new Music("../Slick/snd/requiem.wav");
+		//musique = new Music("../Slick/snd/requiem.wav");
 		sonSaut = new Sound("res/snd/over.wav");
 		restart();
 		
@@ -63,7 +63,7 @@ public class GameplayState extends AbstractGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
 		restart();
-		musique.loop();		
+		//musique.loop();		
 		currentState = States.IN_GAME;
 		// If the "main" previous state was not the game state, then it's probably the menu state
 		if(Globals.returnState != stateID)
@@ -86,7 +86,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb) throws SlickException {
 		super.leave(gc, sb);
-		musique.stop();
+		//musique.stop();
 		//If comming in game again, the player will be moved
 		player.setPosition(player.getX()+100, player.getY()-50);
 	}	

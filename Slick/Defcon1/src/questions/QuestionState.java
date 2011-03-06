@@ -41,8 +41,8 @@ public class QuestionState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		font = new AngelCodeFont("../Slick/testdata/demo2.fnt","../Slick/testdata/demo2_00.tga");
-		musique = new Music("../Slick/snd/hope.ogg");
+		font = new AngelCodeFont("res/demo2.fnt","res/demo2_00.tga");
+		//musique = new Music("../Slick/snd/hope.ogg");
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class QuestionState extends BasicGameState {
 		super.enter(gc, sbg);
 		choices = Globals.question.getChoices();
 		question = Globals.question.getQuestion();
-		musique.loop();
+		//musique.loop();
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 	}
@@ -126,7 +126,7 @@ public class QuestionState extends BasicGameState {
 		choices = new String[0];
 		question = "";
 		selected = 0;
-		musique.stop();
+		//musique.stop();
 	}
 
 }

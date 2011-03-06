@@ -38,9 +38,9 @@ public class MainMenuState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		font = new AngelCodeFont("../Slick/testdata/demo2.fnt","../Slick/testdata/demo2_00.tga");
+		font = new AngelCodeFont("res/demo2.fnt","res/demo2_00.tga");
 		
-		musique = new Music("../Slick/snd/hope.ogg");
+		//musique = new Music("../Slick/snd/hope.ogg");
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class MainMenuState extends BasicGameState {
 		super.enter(gc, sbg);
 		//this state is important so we put it in Globals
 		Globals.returnState = stateID;
-		musique.loop();
+		//musique.loop();
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 	}
@@ -127,7 +127,7 @@ public class MainMenuState extends BasicGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		selected = 0;
-		musique.stop();
+		//musique.stop();
 	}
 
 }
