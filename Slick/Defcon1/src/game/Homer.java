@@ -33,7 +33,7 @@ public class Homer extends Actor {
 		moveForce = 100;
 		jumpForce = 15000;
 		MAX_JUMP_VEL = 50;
-		body.setMaxVelocity(12, 45);
+		body.setMaxVelocity(14, 45);
 		
 	}
 

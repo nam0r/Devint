@@ -8,14 +8,14 @@ import questions.Question;
 
 public abstract class IA extends Actor {
 
-	private SpriteSheet walk;
-	private int nb_sprites;
+	protected SpriteSheet walk;
+	protected int nb_sprites;
 	
 	private enum Way {RIGHT, LEFT};
 	private Way way;
 	
 	private int walkingTimer;
-	private final int WALKING_TIME = 1000; // 1 seconds
+	protected int walkingTime;
 	
 	protected Question question;
 	protected boolean visited;
@@ -33,7 +33,7 @@ public abstract class IA extends Actor {
 		
 		question = createQuestion();
 		visited = false;
-		
+		walkingTime = 1000; //1 sec
 	}
 	
 	public Question getQuestion() {
@@ -76,7 +76,7 @@ public abstract class IA extends Actor {
 		
 		walkingTimer += delta;
 		
-		if(walkingTimer > WALKING_TIME) {
+		if(walkingTimer > walkingTime) {
 			walkingTimer = 0;
 			way = (way == Way.LEFT) ? Way.RIGHT : Way.LEFT; // On change de sens
 		}
@@ -89,7 +89,7 @@ public abstract class IA extends Actor {
 	
 	public void onCollision() {
 		if(! visited) {
-			System.out.println(question.toString());
+			//System.out.println(question.toString());
 			visited = true;
 		}
 	}

@@ -27,7 +27,7 @@ public class Question {
 	}
 	
 	public boolean isOk(int indice) {
-		return choices[indice].equals(answer);
+		return (indice+1) == answer;
 	}
 	
 	@Override

@@ -12,6 +12,9 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import questions.QuestionState;
+
+
 public class Hoorah extends StateBasedGame {
 
 	// Attributes
@@ -25,6 +28,7 @@ public class Hoorah extends StateBasedGame {
 	public static final int GAMEPLAYSTATE = 3;
 	public static final int HOVERCAVESTATE = 4;
 	public static final int SAVEHIGHSCORE = 5;
+	public static final int QUESTIONSTATE = 6;
 	
 	public Hoorah() {
 		super("My Last Hoorah");
@@ -56,6 +60,7 @@ public class Hoorah extends StateBasedGame {
 		this.addState(new HoverCave(HOVERCAVESTATE));
 		this.addState(new SaveHighScore(SAVEHIGHSCORE));
 		this.enterState(LOADINGSTATE);
+		this.addState(new QuestionState(QUESTIONSTATE));
 	}
 	
 	// ===========================

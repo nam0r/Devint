@@ -6,6 +6,7 @@ import java.util.Vector;
 import main.Globals;
 import main.Hoorah;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -14,6 +15,8 @@ import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.BlobbyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class HoverCave extends BasicGameState {
 	private int stateID;
@@ -105,6 +108,7 @@ public class HoverCave extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
+		Input input = container.getInput();
 		if (!dead) {
 			if (movingUp) {
 				dudeHeight -= ((double) delta) / 10.0;
@@ -138,13 +142,18 @@ public class HoverCave extends BasicGameState {
 				}
 				playMusicTime++;
 			}
+			if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+				game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
+						new FadeInTransition(Color.black));
+			}
 		}
 		else{
-			Input input = container.getInput();
-			if (input.isKeyPressed(Input.KEY_ENTER)) {
-				//reset();
-				Globals.score += distance;
-				game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
+			//The score is set
+			Globals.score += distance/1000;
+			if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+				game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
+						new FadeInTransition(Color.black));
+				//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
 			}
 		}
 

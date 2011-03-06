@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.Globals;
 import main.Hoorah;
+import game.AbstractGameState;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -38,16 +39,16 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
-		
 		musique = new Music("../Slick/snd/requiem.wav");
 		sonSaut = new Sound("res/snd/over.wav");
+		restart();
 		
 	}
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		super.render(gc, sbg, g);
-		
+		g.drawString("Votre score : "+Globals.score, 4*gc.getWidth()/5, 40);
 		Utils.drawCenteredString(g,"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart", gc.getWidth(), gc.getHeight()-20, Color.black);
 	}
 	
@@ -61,18 +62,30 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
-
-		musique.loop();
-		
+		restart();
+		musique.loop();		
 		currentState = States.IN_GAME;
+		if(Globals.returnState != stateID)
+			superRestart();
+		//this state is important so we put it in Globals
+		Globals.returnState = stateID;
+		//clear events
+		Input input = gc.getInput();
+	}
+	
+	// Powerful restart, if we have previously been in the menu
+	public void superRestart(){
+		player = createPlayer();
+		restart();
 	}
 	
 	// Appelee lors de la sortie de l'etat
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb) throws SlickException {
 		super.leave(gc, sb);
-
 		musique.stop();
+		//If comming in game again, the player will be moved
+		player.setPosition(player.getX()+100, player.getY()-50);
 	}	
 	
 	@Override
@@ -149,7 +162,7 @@ public class GameplayState extends AbstractGameState {
 		case 3:return new Mario();
 		case 4:return new Homer();
 		}
-		return new Homer();
+		return new Mario();
 		
 	}
 	
@@ -163,6 +176,8 @@ public class GameplayState extends AbstractGameState {
 		entities.add(new Crate(545,100, 46,46,5));
 		
 		entities.add(new MarioIA(400,150));
+		entities.add(new HomerIA(900,150));
+		entities.add(new AlienIA(1300,150));
 		return entities;
 	}
 

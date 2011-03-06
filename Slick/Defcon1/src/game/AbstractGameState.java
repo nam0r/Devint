@@ -34,7 +34,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	private int tilesWidth;
 	private int tilesHeight;
 	
-	private int stateID;
+	protected int stateID;
 	
 	/** The player that is being controlled */
 	protected Actor player;
@@ -64,6 +64,24 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight);
+		// On crée le joueur et on l'ajoute a la map
+		player = createPlayer();
+		restart();
+		// On crée les objets mobiles et on les ajoute a la map
+		ArrayList<PhysicalEntity> entities = createEntities();
+		for(PhysicalEntity pe : entities) {
+			map.addEntity(pe);
+		}
+	}
+	
+	public void restart(){
+		// Gestion des collisions
+		manageCollisions();
+		// On initialise la map
+		map.init();
+		map.setMainPlayer(player);
+		stateToGoTo = -1;
 	}
 	
 	@Override
@@ -106,24 +124,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
 		
-		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight);
-		// Gestion des collisions
-		manageCollisions();
 		
-		// On initialise la map
-		map.init();
-		
-		// On crée le joueur et on l'ajoute a la map
-		player = createPlayer();
-		map.setMainPlayer(player);
-		
-		// On crée les objets mobiles et on les ajoute a la map
-		ArrayList<PhysicalEntity> entities = createEntities();
-		for(PhysicalEntity pe : entities) {
-			map.addEntity(pe);
-		}
-		
-		stateToGoTo = -1;
 	}
 	
 	@Override
@@ -142,7 +143,8 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
 	
 	
-	private void manageCollisions() {
+	protected void manageCollisions() {
+		
 		map.getWorld().addListener(new CollisionListener() {
 
 			@Override

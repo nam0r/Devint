@@ -40,13 +40,13 @@ public class LoadingState extends BasicGameState {
 			throws SlickException {
 		int total = LoadingList.get().getTotalResources();
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
-		int x=gc.getWidth()/2-(total*50)/2;
+		int x=gc.getWidth()/2-(total*20)/2;
 		int y=gc.getHeight()/2-30;
 		if (nextResource != null) {
 			g.drawString("Chargement : "+nextResource.getDescription(), x, y);
 		}
-		g.fillRect(x, y+50, loaded*50, 30);
-		g.drawRect(x, y+50, total*50, 30);
+		g.fillRect(x, y+50, loaded*20, 30);
+		g.drawRect(x, y+50, total*20, 30);
 	}
 
 	@Override
