@@ -48,7 +48,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		super.render(gc, sbg, g);
-		g.drawString("Votre score : "+Globals.score, 4*gc.getWidth()/5, 40);
+		g.drawString("Votre score : "+Globals.score, 4*gc.getWidth()/5, 30);
 		Utils.drawCenteredString(g,"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart", gc.getWidth(), gc.getHeight()-20, Color.black);
 	}
 	
@@ -65,8 +65,9 @@ public class GameplayState extends AbstractGameState {
 		restart();
 		musique.loop();		
 		currentState = States.IN_GAME;
+		// If the "main" previous state was not the game state, then it's probably the menu state
 		if(Globals.returnState != stateID)
-			superRestart();
+			superRestart(gc, sbg);
 		//this state is important so we put it in Globals
 		Globals.returnState = stateID;
 		//clear events
@@ -74,9 +75,11 @@ public class GameplayState extends AbstractGameState {
 	}
 	
 	// Powerful restart, if we have previously been in the menu
-	public void superRestart(){
-		player = createPlayer();
-		restart();
+	public void superRestart(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		//player = createPlayer();
+		//restart();
+		super.init(gc, sbg);
+		Globals.score = 0;
 	}
 	
 	// Appelee lors de la sortie de l'etat
