@@ -69,7 +69,7 @@ public class GameplayState extends AbstractGameState {
 		if(Globals.returnState != stateID)
 			superRestart(gc, sbg);
 		//this state is important so we put it in Globals
-		Globals.returnState = stateID; // TODO A mettre dans le fils ?
+		Globals.returnState = stateID; // TODO A mettre dans le if ?
 		
 		//clear events
 		Input input = gc.getInput(); // TODO Ca sert vraiment ?
