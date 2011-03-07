@@ -19,14 +19,14 @@ public class Homer extends Actor {
 	private final int NB_SPRITES_WALK = 8;
 	
 	public Homer() {
-		super("res/all.png", 100, 150, 2f, 36, 63);
+		super("res/all.png", 100, 150, 2f, 72, 126);
 		
 		//run = getSpriteSheet(0,36,65);
 		//jump = getSpriteSheet(150,50,50);
 		
 		try {
-			Image im = new Image("res/img/homeranim.png");
-			run = new SpriteSheet(im, 36, 65);
+			Image im = new Image("res/img/homeranimation.png");
+			run = new SpriteSheet(im, 72, 130);
 		} catch (SlickException e) {
 			System.err.println("Image Homer walk pas trouvées.");
 		}
