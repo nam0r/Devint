@@ -37,6 +37,7 @@ public class HoverCave extends BasicGameState {
 	private Sound sonG, sonD;
 	private float distSonHaut, distSonBas;
 	private int playMusicTime;
+	private boolean left = false;
 
 	public HoverCave(int stateID) {
 		this.stateID = stateID;
@@ -132,13 +133,21 @@ public class HoverCave extends BasicGameState {
 				dead = true;
 			}
 			else {
-				if(playMusicTime > 10){
+				if(playMusicTime > 8){
 					playMusicTime = 0;
-					distSonHaut = (float)(1.0/((lowerWall.get(2)-dudeHeight)/10+1.0));
-					distSonBas = (float)(1.0/((dudeHeight-upperWall.get(2))/10+1.0));
-					if(distSonBas > 0.05) sonG.playAt(1f, distSonBas*2.5f, -1, 0, 0);
-					if(distSonHaut > 0.05) sonD.playAt(1f, distSonHaut*2.7f, 1, 0, 0);
-					//System.out.println("distSonBas "+(distSonBas*2)+" distSonHaut "+(distSonHaut*2));
+					distSonBas = (float)(1.0/((lowerWall.get(2)-dudeHeight)/50.0));
+					distSonHaut = (float)(1.0/((dudeHeight-upperWall.get(2))/50.0));
+					if(left){
+						if(distSonBas > 0.05) sonD.playAt(1f, distSonBas, 1, 0, 0);
+						if(distSonHaut > 0.05) sonG.playAt(1f, distSonHaut, -1, 0, 0);
+					}
+					else{
+						if(distSonHaut > 0.05) sonG.playAt(1f, distSonHaut, -1, 0, 0);
+						if(distSonBas > 0.05) sonD.playAt(1f, distSonBas, 1, 0, 0);
+					}
+					left = !left;
+					//System.out.println("distSonBas "+(distSonBas)+" distSonHaut "+(distSonHaut));
+					//System.out.println("lowerWall.get(2)-dudeHeight "+ (lowerWall.get(2)-dudeHeight) + "  dudeHeight-upperWall.get(2) " + (dudeHeight-upperWall.get(2)));
 				}
 				playMusicTime++;
 			}
