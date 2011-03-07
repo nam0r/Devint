@@ -10,7 +10,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -20,8 +19,6 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class ChoicePersoState extends BasicGameState {
 
 	private int stateID;
-
-	private Music musique;
 
 	/** The font to write the message with */
 	private Font font;
@@ -48,7 +45,6 @@ public class ChoicePersoState extends BasicGameState {
 
 		font = new AngelCodeFont("res/demo2.fnt",
 				"res/demo2_00.tga");
-		//musique = new Music("../Slick/snd/hope.ogg");
 	}
 
 	@Override
@@ -121,7 +117,6 @@ public class ChoicePersoState extends BasicGameState {
 			throws SlickException {
 		super.enter(gc, sbg);
 
-		//musique.loop();
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 	}
@@ -132,7 +127,6 @@ public class ChoicePersoState extends BasicGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		selected = 0;
-		//musique.stop();
 	}
 
 }

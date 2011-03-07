@@ -1,11 +1,11 @@
 package game;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Renderable;
-
 import main.Globals;
 import main.Hoorah;
+
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
 import questions.Question;
 import actors.IA;
 

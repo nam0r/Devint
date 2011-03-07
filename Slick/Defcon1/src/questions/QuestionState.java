@@ -1,7 +1,6 @@
 package questions;
 
 import main.Globals;
-import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
@@ -9,7 +8,6 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -19,8 +17,6 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class QuestionState extends BasicGameState {
  
 	private int stateID;
-	
-	private Music musique;
 	
 	/** The font to write the message with */
 	private Font font;
@@ -113,7 +109,6 @@ public class QuestionState extends BasicGameState {
 		super.enter(gc, sbg);
 		choices = Globals.question.getChoices();
 		question = Globals.question.getQuestion();
-		//musique.loop();
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 	}
@@ -126,7 +121,6 @@ public class QuestionState extends BasicGameState {
 		choices = new String[0];
 		question = "";
 		selected = 0;
-		//musique.stop();
 	}
 
 }
