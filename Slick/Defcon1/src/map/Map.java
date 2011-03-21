@@ -1,8 +1,12 @@
 package map;
 
+import java.nio.FloatBuffer;
+
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 
+import org.lwjgl.BufferUtils;
+import org.lwjgl.openal.AL10;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -129,6 +133,8 @@ public class Map {
 		if (yoffset > (bounds.getY() + bounds.getHeight()) - gc.getHeight()) {
 			yoffset = (bounds.getY() + bounds.getHeight()) - gc.getHeight();
 		}
+		
+		
 	}
 	
 	public Rectangle getBounds() {

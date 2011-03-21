@@ -6,17 +6,20 @@ import main.Globals;
 import main.Hoorah;
 import game.AbstractGameState;
 
+import org.lwjgl.openal.AL10;
+import org.lwjgl.openal.AL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import sound.AlUtils;
+import sound.Sound2;
 import utils.Utils;
 import actors.Actor;
 import actors.PhysicalEntity;
@@ -29,9 +32,12 @@ public class GameplayState extends AbstractGameState {
 	private States currentState;
 	
 	private Music musique;
-	private Sound sonSaut;
+	private Sound2 sonSaut;
 	
-
+	private Sound2 sound;
+	private int soundIndex;
+	
+	
 	public GameplayState(int id) {
 		super(id, "res/cave.png", "res/tiles.xml", "res/testmap.txt", 32, 32);
 	}
@@ -39,9 +45,15 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
-		musique = new Music("../Slick/snd/requiem.wav");
-		sonSaut = new Sound("res/snd/over.wav");
+		//musique = new Music("../Slick/snd/requiem.wav");
+		sonSaut = new Sound2("res/snd/over.wav");
+		sound = new Sound2("../Slick/snd/piano.wav");
 		restart();
+		//We set Open Al constants about physical
+		AL10.alDopplerFactor(1.0f); // Doppler effect
+		AL10.alDopplerVelocity(1.0f); // Sound speed
+		AL10.alDistanceModel(AL11.AL_EXPONENT_DISTANCE);
+		AL10.alDopplerFactor(200000f);
 		
 	}
 	
@@ -50,6 +62,22 @@ public class GameplayState extends AbstractGameState {
 		super.render(gc, sbg, g);
 		g.drawString("Votre score : "+Globals.score, 4*gc.getWidth()/5, 30);
 		Utils.drawCenteredString(g,"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart", gc.getWidth(), gc.getHeight()-20, Color.black);
+		
+		for(int i=0; i<map.getWorld().getBodies().size(); i++){
+			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof HomerIA) {
+				sonSaut.setSourcePosition((map.getEntityByBody(map.getWorld().getBodies().get(i)).getX()
+						- map.getEntityByBody(map.getWorld().getBodies().get(i)).getWidth() / 2),
+						(map.getEntityByBody(map.getWorld().getBodies().get(i)).getY()
+						- map.getEntityByBody(map.getWorld().getBodies().get(i)).getHeight() / 2),
+				0f, soundIndex);
+			}
+		}
+		//We put the openAl listener's position and velocity
+		AlUtils.setAlListenerPosition(player.getX()-player.getWidth()/2, player.getVelY()-player.getHeight()/2, 0.0f);
+		AlUtils.setAlListenerVelocity(player.getVelX(), -player.getVelY(), 0.0f);
+		//AlUtils.resetAlListener();
+		if (AL10.alGetError() != AL10.AL_NO_ERROR)
+			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 	
 	@Override
@@ -63,16 +91,19 @@ public class GameplayState extends AbstractGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
 		restart();
-		musique.loop();		
+		//musique.loop();		
 		currentState = States.IN_GAME;
 		// If the "main" previous state was not the game state, then it's probably the menu state
 		if(Globals.returnState != stateID)
 			superRestart(gc, sbg);
 		//this state is important so we put it in Globals
-		Globals.returnState = stateID; // TODO A mettre dans le if ?
+		Globals.returnState = stateID;
 		
-		//clear events
-		Input input = gc.getInput(); // TODO Ca sert vraiment ?
+		soundIndex = sound.playAt(1000000f, 0f, 0f);
+		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.2f);
+		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 35f);
+		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 40f);
+		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 	}
 	
 	// Powerful restart, if we have previously been in the menu
@@ -87,9 +118,10 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb) throws SlickException {
 		super.leave(gc, sb);
-		musique.stop();
+		//musique.stop();
 		//If comming in game again, the player will be moved
 		player.setPosition(player.getX()+100, player.getY()-50);
+		//sound.stop();
 	}	
 	
 	@Override
@@ -100,7 +132,7 @@ public class GameplayState extends AbstractGameState {
 		// Gestion des évènements clavier
 		if (input.isKeyPressed(Input.KEY_R)) {
 			try {
-				enter(gc, sbg);
+				superRestart(gc, sbg);
 			} catch (SlickException e) {
 				System.err.println("Erreur lors du relancement du jeu");
 			}
@@ -121,6 +153,8 @@ public class GameplayState extends AbstractGameState {
 				gc.pause();
 			}
 		}
+		
+		//sound.loop();
 		
 		// Est-ce que le personnage bouge ?
 		player.setMoving(false);
@@ -147,7 +181,7 @@ public class GameplayState extends AbstractGameState {
 			if ((input.isKeyPressed(Input.KEY_LCONTROL)) || 
 			   (input.isKeyPressed(Input.KEY_RCONTROL))) {
 				player.jump();
-				sonSaut.play();
+				AL10.alSourcePlay(soundIndex);
 			}
 		}
 		if (!input.isKeyDown(Input.KEY_LCONTROL)) {
@@ -172,7 +206,7 @@ public class GameplayState extends AbstractGameState {
 	
 
 	@Override
-	protected ArrayList<PhysicalEntity> createEntities() {
+	protected ArrayList<PhysicalEntity> createEntities() throws SlickException{
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
 		entities.add(new Crate(300,100, 60,60,10));
 		entities.add(new Crate(550,40, 46,46,5));

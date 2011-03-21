@@ -10,11 +10,13 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import sound.AlUtils;
+import sound.Sound2;
 
 public class HoverCave extends BasicGameState {
 	private int stateID;
@@ -32,10 +34,9 @@ public class HoverCave extends BasicGameState {
 	private boolean dead;
 	private double speed;
 	private int distance;
-	private Sound sonG, sonD;
+	private Sound2 sonG, sonD;
+	private int sonDIndex, sonGIndex;
 	private float distSonHaut, distSonBas;
-	private int playMusicTime;
-	private boolean left = false;
 
 	public HoverCave(int stateID) {
 		this.stateID = stateID;
@@ -89,7 +90,6 @@ public class HoverCave extends BasicGameState {
 		dudeHeight = container.getHeight() / 2;
 		wallOffset = 0;
 		dead = false;
-		playMusicTime = 0;
 		speed = 0.06;
 		distance = 0;
 		movingUp = false;
@@ -97,8 +97,8 @@ public class HoverCave extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		sonG = new Sound("res/snd/bip.ogg");
-		sonD = new Sound("res/snd/bip.ogg");
+		sonG = new Sound2("../Slick/snd/bip6.ogg");
+		sonD = new Sound2("../Slick/snd/bip6.ogg");
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
 		reset();
@@ -116,7 +116,7 @@ public class HoverCave extends BasicGameState {
 			}
 			// TODO The speed can be adjusted here
 			wallOffset -= (float) delta * speed;
-			speed += ((double) delta / 1000000000.0)*2000;
+			speed += ((double) delta / 1000000000.0) * 2000;
 			if (wallOffset <= -WALL_RES) {
 				wallOffset += WALL_RES;
 				popWall();
@@ -126,32 +126,24 @@ public class HoverCave extends BasicGameState {
 			// detect collisions
 			// TODO Improve collision detection to find the edge of the box
 			// against the edge of the cave.
-			if (dudeHeight+SENSITIVITY > lowerWall.get(2) || dudeHeight-SENSITIVITY < upperWall.get(2)) {
-				sonG.play(2,1);
+			if (dudeHeight + SENSITIVITY > lowerWall.get(2)
+					|| dudeHeight - SENSITIVITY < upperWall.get(2)) {
+				//sonG.play(2, 1);
 				dead = true;
-			}
-			else {
-				if(playMusicTime > 8){
-					playMusicTime = 0;
-					distSonBas = (float)(1.0/((lowerWall.get(2)-dudeHeight)/50.0));
-					distSonHaut = (float)(1.0/((dudeHeight-upperWall.get(2))/50.0));
-					if(left){
-						if(distSonBas > 0.05) sonD.playAt(1f, distSonBas, 1, 0, 0);
-						if(distSonHaut > 0.05) sonG.playAt(1f, distSonHaut, -1, 0, 0);
-					}
-					else{
-						if(distSonHaut > 0.05) sonG.playAt(1f, distSonHaut, -1, 0, 0);
-						if(distSonBas > 0.05) sonD.playAt(1f, distSonBas, 1, 0, 0);
-					}
-					left = !left;
-					//System.out.println("distSonBas "+(distSonBas)+" distSonHaut "+(distSonHaut));
-					//System.out.println("lowerWall.get(2)-dudeHeight "+ (lowerWall.get(2)-dudeHeight) + "  dudeHeight-upperWall.get(2) " + (dudeHeight-upperWall.get(2)));
-				}
-				playMusicTime++;
+				sonD.stop();
+				sonG.stop();
+			} else {
+				//Sounds are adjusted here
+				distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));
+				distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
+				sonD.setVolume(distSonBas*2, sonDIndex);
+				sonD.setPitch(distSonBas, sonDIndex);
+				sonG.setVolume(distSonHaut*2, sonGIndex);
+				sonG.setPitch(distSonHaut, sonGIndex);
 			}
 			if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-				game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
-						new FadeInTransition(Color.black));
+				game.enterState(Globals.returnState, new FadeOutTransition(
+						Color.black), new FadeInTransition(Color.black));
 			}
 		}
 		else{
@@ -193,6 +185,19 @@ public class HoverCave extends BasicGameState {
 	public void leave(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		reset();
+		if(sonG.playing() || sonD.playing()){
+			sonD.stop();
+			sonG.stop();
+		}
+	}
+	
+	public void enter(GameContainer gc, StateBasedGame sbg)
+	throws SlickException {
+		//The listener should be at default position
+		AlUtils.resetAlListener();
+		//We play the two sounds since we enter
+		sonDIndex = sonD.loop(1f, 0f, 1f, 0f, 0f);
+		sonGIndex = sonG.loop(1f, 0f, -1f, 0f, 0f);
 	}
 
 	public void keyPressed(int key, char c) {
