@@ -53,7 +53,6 @@ public class GameplayState extends AbstractGameState {
 		AL10.alDopplerFactor(1.0f); // Doppler effect
 		AL10.alDopplerVelocity(1.0f); // Sound speed
 		AL10.alDistanceModel(AL11.AL_EXPONENT_DISTANCE);
-		AL10.alDopplerFactor(200000f);
 		
 	}
 	
