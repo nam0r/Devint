@@ -97,8 +97,8 @@ public class HoverCave extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		sonG = new Sound2("../Slick/snd/bip6.ogg");
-		sonD = new Sound2("../Slick/snd/bip6.ogg");
+		sonG = new Sound2("res/snd/bip6.ogg");
+		sonD = new Sound2("res/snd/bip6.ogg");
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
 		reset();

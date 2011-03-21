@@ -47,7 +47,7 @@ public class GameplayState extends AbstractGameState {
 		super.init(gc, sbg);
 		//musique = new Music("../Slick/snd/requiem.wav");
 		sonSaut = new Sound2("res/snd/over.wav");
-		sound = new Sound2("../Slick/snd/piano.wav");
+		sound = new Sound2("res/snd/piano.wav");
 		restart();
 		//We set Open Al constants about physical
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -64,7 +64,7 @@ public class GameplayState extends AbstractGameState {
 		
 		for(int i=0; i<map.getWorld().getBodies().size(); i++){
 			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof HomerIA) {
-				sonSaut.setSourcePosition((map.getEntityByBody(map.getWorld().getBodies().get(i)).getX()
+				sound.setSourcePosition((map.getEntityByBody(map.getWorld().getBodies().get(i)).getX()
 						- map.getEntityByBody(map.getWorld().getBodies().get(i)).getWidth() / 2),
 						(map.getEntityByBody(map.getWorld().getBodies().get(i)).getY()
 						- map.getEntityByBody(map.getWorld().getBodies().get(i)).getHeight() / 2),
@@ -73,7 +73,7 @@ public class GameplayState extends AbstractGameState {
 		}
 		//We put the openAl listener's position and velocity
 		AlUtils.setAlListenerPosition(player.getX()-player.getWidth()/2, player.getVelY()-player.getHeight()/2, 0.0f);
-		AlUtils.setAlListenerVelocity(player.getVelX(), -player.getVelY(), 0.0f);
+		AlUtils.setAlListenerVelocity(player.getVelX()*5, -player.getVelY(), 0.0f);
 		//AlUtils.resetAlListener();
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
 			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
