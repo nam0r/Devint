@@ -46,6 +46,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	
 	private int stateToGoTo;
 	
+	
 	public AbstractGameState(int id, String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
 			int tilesWidth, int tilesHeight) {
 		this.stateID = id;
@@ -118,12 +119,12 @@ public abstract class AbstractGameState extends BasicGameState {
 		
 		if(stateToGoTo != -1)
 			sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		
 	}
 	
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
-		
 		
 	}
 	
@@ -137,7 +138,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	 * ******************* */
 	
 	protected abstract Actor createPlayer();
-	protected abstract ArrayList<PhysicalEntity> createEntities();
+	protected abstract ArrayList<PhysicalEntity> createEntities() throws SlickException;
 	protected abstract void notTimedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void timedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
