@@ -28,7 +28,7 @@ public class MainMenuState extends MenuState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		musique = new Music("../Slick/snd/hope.ogg");
+		//musique = new Music("../Slick/snd/hope.ogg");
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class MainMenuState extends MenuState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.enter(gc, sbg);
-		musique.loop();
+		//musique.loop();
 		//this state is important so we put it in Globals
 		Globals.returnState = stateID;
 	}
@@ -80,7 +80,7 @@ public class MainMenuState extends MenuState {
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {
 		super.leave(gc, sb);
-		musique.stop();
+		//musique.stop();
 	}
 
 }
