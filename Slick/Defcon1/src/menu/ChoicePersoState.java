@@ -72,8 +72,8 @@ public class ChoicePersoState extends BasicGameState {
 			else {
 				// The small images
 				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1)
-						- images[i].getWidth() / 4, 3 * gc.getHeight() / 4,
-						0.5f);
+						- images[i].getWidth() / 4,
+						3 * gc.getHeight() / 4,	0.5f);
 			}
 		}
 
