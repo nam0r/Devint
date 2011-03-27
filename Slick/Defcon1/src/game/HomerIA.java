@@ -60,6 +60,7 @@ public class HomerIA extends IA {
 		return new Question("Quelle est l'age de mon grand père ?", choices, 2, 140);
 	}
 	
+	@Override
 	public void onCollision() {
 		Globals.question = question;
 	}

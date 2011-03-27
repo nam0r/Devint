@@ -66,12 +66,12 @@ public abstract class MenuState extends BasicGameState {
 		if (input.isKeyPressed(Input.KEY_DOWN)) {
 			selected++;
 			if (selected >= options.length)
-				selected = options.length - 1;
+				selected = 0;
 		}
 		if (input.isKeyPressed(Input.KEY_UP)) {
 			selected--;
 			if (selected < 0)
-				selected = 0;
+				selected = options.length - 1;
 		}
 	}
 
