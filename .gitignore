@@ -6,4 +6,4 @@
 bin
 *~
 *.db
-Slick/FortDevint/ressources/wav
+Slick/FortDevint/ressources/wav/*
