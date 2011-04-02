@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>Manuel d'utilisation et d'installation de Quinzes Questions</title>
+  <meta content="Mosser S&eacute;bastien" name="author">
+</head>
+<body>
+<h1>Le laboratoire VocalyzeSIVOX </h1>
+<p>Ce logiciel a &eacute;t&eacute; d&eacute;velopp&eacute; en grande partie sous la forme de projets de deuxi&egrave;me ann&eacute;e du d&eacute;partement Sciences Informatiques de l'EPU de Nice Sophia Antipolis, sous l'encadrement de H&eacute;l&egrave;ne Collavizza et Jean-Paul Stromboni pour servir les projets DeViNT (D&eacute;ficients Visuels et Nouvelles Technologies) depuis 2004 et jusqu'en 2007. </p>
+<h2>Il y a deux raisons &agrave; sa pr&eacute;sence sur le CD:</h2>
+<ol>
+  <li>Tous les projets DeViNT qui utilisent une synth&egrave;se vocale la trouvent dans un r&eacute;pertoire nomm&eacute; VocalyzeSIVOX dans le r&eacute;pertoire LesLogiciels qui contient tous les projets
+    :
+    <ol>
+      <li> dans VocalyzeSIVOX/bin/SIVOX.jar, toutes les m&eacute;thodes et variables de la synth&egrave;se vocale,
+regroup&eacute;es dans uen API nomm&eacute;e SIVOXDevint.java</li>
+      <li>dans /ressources/donneesMbrola, ils trouvent les voix MBROLA dans fr1/fr1, fr2/fr2, etc ... ainsi que le moteur Mbrola.exe pour Windows (et l'&eacute;quivalent pour Unix) qui est utilis&eacute; par SI_VOX.jar.</li>
+      <li>Les projets doivent toutefois conserver dans le dossier ressources un sous-dossier donneesMbrola qui contient
+        : 
+        <ol>
+          <li>les r&egrave;gles de prononciation dans le sous-dossier rules, cf. par exemple le fichier regles.txt </li>
+          <li>les fichiers de phon&egrave;mes .pho et les fichiers wave .wav cr&eacute;&eacute;s par Mbrola </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>Un utilisateur voyant du CD  pourra exp&eacute;rimenter la synth&egrave;se vocale de textes tap&eacute;s ou lus dans des fichiers textes en ex&eacute;cutant VocalyzeSIVOX comme un autre projet. </li>
+</ol>
+<h2>Utilisation de SI_VOX </h2>
+<p>utiliser l'aide associ&eacute;e &agrave; l'interface de VocalyzeSIVOX </p>
+<h2>Conditions n&eacute;cessaires</h2>
+<p>le logiciel utilise  java JRE 1.6 et sa biblioth&egrave;que SWT pour l'interface<br>
+  <br>
+</p>
+</body>
+</html>

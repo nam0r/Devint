@@ -31,7 +31,7 @@ public class GameplayState extends AbstractGameState {
 	
 
 	public GameplayState(int id) {
-		super(id, "res/blanc.png", "res/sols.xml", "res/testmap.txt", 32, 32);
+		super(id, "res/blanc.png", "res/sols.xml", "res/testmap.txt", 64, 64);
 	}
 
 	@Override
@@ -149,12 +149,12 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	protected ArrayList<PhysicalEntity> createEntities() {
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
-		entities.add(new Crate(300,100, 60,60,10));
-		entities.add(new Crate(550,40, 46,46,5));
-		entities.add(new Crate(555,-10, 46,46,5));
-		entities.add(new Crate(545,100, 46,46,5));
+		entities.add(new Crate(460,100, 100,100,10));
+		entities.add(new Crate(850,40, 70,70,5));
+		entities.add(new Crate(855,-10, 70,70,5));
+		entities.add(new Crate(845,100, 70,70,5));
 		
-		entities.add(new MarioIA(400,150));
+		entities.add(new MarioIA(500,250));
 		return entities;
 	}
 

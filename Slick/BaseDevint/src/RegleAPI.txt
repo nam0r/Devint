@@ -1,0 +1,46 @@
+Pour faciliter l'utilisation des jeux deViNT par les déficients visuels, il est primordial de respecter strictement les consignes suivantes, issues des expériences des années précédentes :
+
+Le menu d'entrée dans votre jeu doit être construit en dérivant la classe MenuInterfaceAbstraite du package menuAPI (voir l'exemple dans jeu/MenuJeu.java).
+
+Vous devez suivre les conventions de raccourci et de commandes clavier suivantes :
+   * pour se déplacer dans les choix : flèches directionnelles, haut et bas, au besoin droite et gauche
+   * pour valider un choix : touche Entrée
+   * pour terminer, ou pour revenir au menu d'accueil, touche  Echap
+   * pour obtenir de l'aide, la touche F1, 
+   * après, vous pouvez utiliser d'autres touches, selon les besoins spécifiques de votre jeu, pensez à utiliser au besoin :
+       *  la touche Espace, par exemple pour récapituler ou répéter les informations courantes
+       *  la touche Ctrl, par exemple pour offrir un joker
+       *  les touches fonctions F2, F3, ... par exemple pour des aides contextuelles,
+   * Si vous avez deux joueurs qui utilisent le clavier, n'oubliez pas que les touches F  et J sont facilement repérables au toucher.
+   * Mieux vaut éviter d'utiliser le pavé numérique, car les ordinateurs portables n'en disposent pas. 
+
+Si vous utilisez le clavier alphanumérique pour entrer un nom ou des commandes, il peut être utile 
+  * de dire à voix haute les touches pressées, 
+  * de permettre de corriger au besoin avant de valider la saisie clavier. 
+  * d'ignorer la casse, d'accepter indifféremment majuscules et minuscules : 'a(ller) N(ord)' ou 'a n'
+
+Vous devez informer l'utilisateur sur l'état et l'évolution du jeu, sans que cela devienne fastidieux pour lui. Vous pouvez utiliser selon le cas des sons pré enregistrés ou la synthèse vocale. 
+Le joueur doit savoir  :
+   * que l'on débute le jeu, que l'on entre dans une nouvelle phase du jeu, que l'on termine le jeu
+   * ce qu'on attend de lui, par exemple quand c'est à lui de jouer
+   * les évènements qui surviennent au cours du jeu, 
+       * ses actions qui sont perçues par l'ordinateur,
+       * les coups des adversaires humains ou logiciels,  
+       * les conséquences sur le déroulement du jeu, tel gagne, perd, tel ramasse le tas, ...
+
+Pour éviter la lourdeur de cette information sur le jeu, l'interface doit être très réactif, et l'utilisateur doit être sûr qu'il le contrôle en permanence :
+   * dés qu'une commande clavier est lancée, le jeu doit pouvoir interrompre la synthèse vocale.
+   * par contre, l'utilisateur doit savoir comment obtenir des informations sur le contexte du jeu.
+   * avant de jouer un nouveau son, il faut s'assurer qu'on a coupé les sons précédents.
+   
+Puisque le jeu s'adresse aux aveugles et aux mal voyants, il faut privilégier l'information sonore mais il faut soigner aussi l'information visuelle (grosseur des caractères, contrastes, choix des couleurs).
+
+C'est un plus de pouvoir jouer aussi bien avec les raccourcis clavier qu'avec les clics souris
+
+Votre jeu doit se comporter correctement quelquesoit la résolution d'écran de l'utilisateur. Pour cela la taille des composants graphiques doit être calculée à l'exécution en fonction de la taille de la fenêtre. Pour connaître les résolutions horizontale et verticale de la fenêtre, utiliser :
+
+     Toolkit.getDefaultToolkit().getScreenSize().width et
+     Toolkit.getDefaultToolkit().getScreenSize().height
+
+
+  

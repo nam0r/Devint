@@ -1,0 +1,9 @@
+Ce répertoire contient un web service développé au département informatique
+de l'EPU Nice Sophia-Antipolis qui permet d'accéder localement à la synthèse vocale
+Acapela.
+
+Ce service uniquement sous windows, à partir d'une machine sur le réseau de l'EPU.
+D'autre part, il faut avoir installé le framework .NET 2.0
+
+Acapela doit être utilisé pour générer des .wav des textes fixes assez courts (menus d'accueil, 
+fichiers son pour signaler qu'on a gagné, fichier d'aide, ...).

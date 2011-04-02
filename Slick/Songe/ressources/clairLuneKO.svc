@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Chant>
+  <Tempo>92</Tempo>
+  <Voix>2</Voix>
+  <Texte>
+    <Syllabe>au</Syllabe>
+    <Syllabe>clair</Syllabe>
+    <Syllabe>de</Syllabe>
+    <Syllabe>la</Syllabe>
+    <Syllabe>lu</Syllabe>
+    <Syllabe>ne</Syllabe>
+    <Syllabe>mon</Syllabe>
+    <Syllabe>na</Syllabe>
+    <Syllabe>mi</Syllabe>
+    <Syllabe>Pier</Syllabe>
+    <Syllabe>rot</Syllabe>
+  </Texte>
+  <Melodie>
+    <Note>DO4nNOI</Note>
+    <Note>DO4nNOI</Note>
+    <Note>DO4nNOI</Note>
+    <Note>RE4nNOI</Note>
+    <Note>MI4nBLA</Note>
+    <Note>RE4nBLA</Note>
+    <Note>SH4nNOI</Note>
+    <Note>DO4nNOI</Note>
+    <Note>MI4nNOI</Note>
+    <Note>RE4nNOI</Note>
+    <Note>RE4nNOI</Note>
+    <Note>DO4nNOI</Note>
+  </Melodie>
+</Chant>
+

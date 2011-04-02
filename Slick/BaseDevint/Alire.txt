@@ -1,0 +1,8 @@
+Ce répertoire est un exemple de la structure que vous devez absolument suivre pour permettre
+la livraison de votre projet DeViNT via le programme d'installation et création de CD des jeux DeViNT.
+Chaque répertoire contient un fichier Alire.txt qui vous explique quels sont les différents éléments.
+
+Vous pouvez laisser libre cours à votre imagination pour le choix du jeu mais pour que les déficients visuels puissent l'utiliser, nous vous demandons de suivre la structure et les règles
+ qui sont explicités dans les différents fichiers des répertoires de "exemple_de_jeu".
+
+Bon travail !

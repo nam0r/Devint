@@ -1,0 +1,9 @@
+instrument_basse/une basse/la voix/une flute de pan/une guitare électrique/une guitare sêche/un piano/un synthétiseur/une trompette/un violon
+instrument_choeurs/la voix/une basse/une flute de pan/une guitare électrique/une guitare sêche/un piano/un synthétiseur/une trompette/un violon
+instrument_flute_pan/une flute de pan/une basse/la voix/une guitare électrique/une guitare sêche/un piano/un synthétiseur/une trompette/un violon
+instrument_guitare_electrique/une guitare électrique/une basse/la voix/une flute de pan/une guitare sêche/un piano/un synthétiseur/une trompette/un violon
+instrument_guitare_seche/une guitare sêche/une basse/la voix/une flute de pan/une guitare électrique/un piano/un synthétiseur/une trompette/un violon
+instrument_piano/un piano/une basse/la voix/une flute de pan/une guitare électrique/une guitare sêche/un synthétiseur/une trompette/un violon
+instrument_synthe/un synthétiseur/une basse/la voix/une flute de pan/une guitare électrique/une guitare sêche/un piano/une trompette/un violon
+instrument_trompette/une trompette/une basse/la voix/une flute de pan/une guitare électrique/une guitare sêche/un piano/un synthétiseur/un violon
+instrument_violon/un violon/une basse/la voix/une flute de pan/une guitare électrique/une guitare sêche/un piano/un synthétiseur/une trompette

@@ -1,0 +1,8 @@
+Répertoire src
+
+- ce répertoire doit contenir uniquement les sources .java arrangés par package ou non (pas de fichiers d'images, ni de sons, ...)
+- il est très important que src ne contienne aucun élément nécessaire à l'exécution du programme
+car le répertoire src est effacé par le script d'installation des jeux  
+- compilation.bat contient la commande pour compiler le programme (gestion du classpath, des packages et de la génération des .class dans le répertoire bin)
+
+Vous pouvez structurer votre programme en packages ou comme vous le souhaitez. La seule contrainte est d'utiliser les conventions d'utilisation des touches données dans regleAPI.txt.

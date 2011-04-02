@@ -1,0 +1,7 @@
+Voici un exemple de la structure que vous devez absolument respecter pour permettre l'intégration de votre projet par le logiciel de création des CD des jeux DeViNT. 
+Il y a quatre répertoires, qui sont nommés : src, bin, ressources et doc. 
+Chacun de ces répertoires contient un fichier Alire.txt qui vous explique quel est son contenu. Les règles d'interface sont données dans le fichier doc/ReglesAPI.txt.
+
+Vous pouvez laisser libre cours à votre imagination pour le choix du jeu, mais pour que les déficients visuels puissent l'utiliser, vous devez suivre toutes ces contraintes de structure et d'interface.
+
+Bon travail !

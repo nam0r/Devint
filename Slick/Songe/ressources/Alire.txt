@@ -1,0 +1,5 @@
+Répertoire ressources
+
+- ce répertoire contient les ressources sons, images, synthèses vocales, textes, dont vous avez besoin
+- vous pouvez l'organiser comme vous le souhaitez en structurant, par exemple avec des sous-répertoires pour le son, les images, les fichiers textes contenant les questions, ... 
+Il contient le répertoire donneesMbrola avec les informations sur la synthèse vocale et le fichier si_vox.conf qui permet de la paramétrer

@@ -1,0 +1,46 @@
+abeille/un insecte hyménoptère/un gallinacé/un mammifère/un poisson/un oiseau
+aigle-royal/un aigle royal/un faucon/une marmotte/un sifflet/un téléphone
+alligator/un reptile/un mammifère/un poisson/un oiseau
+alouette/une alouette/un téléphone/un bruant-chanteur/un faucon/un aigle royal
+alpage/un alpage/des vaches/un téléphone/des chiens/des serpents à sonnette
+ane/un âne/une scie/une porte/un bison/un cheval
+baleine/une baleine/un sonar/un cri/une corne de brume
+bipbipcoyotte/un coyotte/un guépard/un lynx/un chien/un loup/une hyène
+bruant-chanteur/un bruant chanteur/un aigle/une mouette/un bison/un chien
+bruitdeglacon/un glaçon/un baby foot/un verre brisé/un coca
+bruitdeporteexcellent/une porte qui s'ouvre/une porte qui se ferme/un baillement/un alligator
+bruitdeventilateur/un ventilateur/un avion/une tondeuse/la mer/une voiture
+buffle/un buffle/un lion/un alligator/un chat/un guépard
+canard-colvert/un canard colvert/une oie/une poule/un canard huppé/un manchot/un chien
+carillon/un carillon/un triangle/un cimbale/une maracas/une flûte traversière
+cerf/un cerf/un lion/un jaguar/une mercedes/une peugeot/un éléphant
+chantoiseau/un oiseau/un sifflet/un téléphone/une sonette
+chasseautit/une chasse d'eau/un glaçon/de l'eau/la mer
+chatvschien/un chat/un chien/des mammifères/des reptiles/des oiseaux
+chien-grognement/un chien/un loup/un lion/un phoque/un chat/une hyène
+chimpanze/un chimpanzé/un gorille/un bébé/un oiseau/un mammouth/une hyène
+chirac/Jacques Chirac/Lionel Jospin/Edouard Balladur/Nicolas Sarkozy/David Duchovny
+cigales/une cigale/un criquet/un sifflet/une marmotte/le vent
+cloche/une cloche/une église/un prètre/un enfant de coeur/un mariage
+cochon/un cochon/un sanglier/un coussin/une chaise/une souris
+coq/un coq/une poule/un dindon/une oie/un canard
+coucou/un coucou/une horloge/un chien/un pic vert
+coucou_O1/une horloge/un chien/un pic vert/un coucou
+coupsdepistolet/des coups de pistolet/une personne qui frappe à une porte/des coups de marteau/un tambour
+criquet/un criquet/une cigale/un grillon/un sifflet/une marmotte/le vent
+elephant/un barrissement/un rugissement/un hennissement/un orgue/un synthétiseur/un hurlement
+hippopotame/un hippopotame/un éléphant/un rhinocéros/un alligator/un chat/un cochon
+lechantdesmouettes/des mouettes/des aigles/des poissons/des picverts/des chats
+lerugissementdulion/un lion/un cerf/un jaguar/une hyène/un éléphant
+lion/un lion/un cerf/un jaguar/une hyène/un éléphant/un alligator
+lynx/un lynx/une mouette/une marmotte/un ovipare/un gallinacé
+manchot_empereur/un manchot empereur/un barrissement/un hennissement/une mouette/un extra terrestre
+marmotte/une marmotte/un oiseau/un sifflet/un pipo
+mouche/une mouche/une abeille/un bourdon/un frêlon/un moustique
+moustique/un moustique/une mouche/une abeille/un bourdon/un frêlon
+mouton/un mouton/un vache/un buffle/un bison
+panthere/une panthère/un lion/une gazelle/un jaguar/un lynx
+pic-vert/un aigle royal/un faucon/une marmotte/un sifflet/un téléphone
+rhinoceros/un rhinocéros/un hippopotame/un éléphant/un alligator/un chat
+sanglier/un sanglier/un rhinocéros/un hippopotame/un éléphant/un alligator/un chat
+vache/une vache/un mouton/une chèvre/un hippopotame/un alligator

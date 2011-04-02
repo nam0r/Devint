@@ -1,0 +1,11 @@
+Dans le répertoire doc, deux fichiers sont obligatoires :
+
+- infos.txt est lu par le programme d'installation des jeux DeViNT
+* la première ligne est le nom du jeu tel qu'il apparaitra dans le menu de lancement, ce sera aussi le nom du répertoire contenant le jeu sur le CD. Si le nom du jeu contient plusieurs mots, ces mots doivent être séparés par des _, éviter les accents et les espaces, si possible.
+* la deuxième ligne contient une description sommaire du jeu (thème, public et type de 
+handicap visuel), qui apparait dans la fenêtre d'information lors de l'installation du jeu.
+
+- manuel.html contient les informations sur le jeu (les notes d'utilisation, les règles du jeu, comment on utilise le clavier, et le public visé). 
+Ce fichier est utilisé dans le menu d'aide des jeux, et aussi sur le livret joint au CD
+
+Le répertoire doc peut contenir aussi les javadocs et tous les renseignements, documents et suppléments que vous jugerez utiles, règles et schémas à imprimer, cartes de jeu, ...

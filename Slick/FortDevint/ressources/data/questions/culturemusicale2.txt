@@ -1,0 +1,8 @@
+combien de noires dure une blanche ?/deux/une/trois/quatre
+combien de noires dure une ronde ?/quatre/une/trois/deux
+quelle clé n'existe pas ?/la clé de si/la clé de sol/la clé de fa/la clé d'ut
+comment s'appellent les lignes où les notes sont placées/la portée/la grille/les lignes/la partition
+combien de cordes a généralement une guitare ?/6/5/7/3/4
+combien faut il de croches pour faire une blanche ?/2/3/4/6
+le piano est :/un instrument à cordes/un instrument à vent/un instrument de percussion/un instrument électrique/ce n'est pas un instrument
+combien y a-t-il de notes dans la gamme ?/7/8/6/9

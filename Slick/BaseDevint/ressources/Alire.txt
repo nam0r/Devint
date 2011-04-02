@@ -1,0 +1,6 @@
+Répertoire ressources
+
+- ce répertoire contient toutes les ressources dont vous avez besoin
+- vous pouvez l'organiser comme vous le souhaitez en structurant par exemple
+avec des sous-répertoires pour le son, les images, les fichiers textes contenant 
+les questions, ... 

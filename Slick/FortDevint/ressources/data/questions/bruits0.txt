@@ -1,0 +1,30 @@
+abeille/une abeille/un chien/un chat/un oiseau/une clochette
+chien/un chien/un chat/un oiseau/un piano/une clochette
+accident-voiture/un accident de voiture/un sachet/une alouette/un chien
+alarmevoiture/une alarme de voiture/un accident de voiture/un klaxon de voiture/une sirène de police
+alligator/un alligator/un chat/un oiseau/un klaxon/une clochette
+alouette/un oiseau/un chien/un chat/un insecte/un piano
+ane/un âne/un lapin/une cigale/une fourmi/une porte
+cheval/un cheval/un chien/un piano/un lion/une porte
+cigales/une cigale/un chien/un chat/une porte/un violon
+cloche/une cloche/un piano/un animal/un insecte
+criquet/un criquet/un chien/un oiseau/un klaxon
+demarragedevoiture/une voiture/un accident de voiture/un klaxon de voiture/un poids lourd
+dingdong/la sonnette d'entrée/un piano/un téléphone/un sachet/un oiseau
+klaxoncamion/un klaxon/un téléphone/un oiseau/un chat/un poisson
+coq/un coq/un poule/une alouette/un coucou/un lapin
+chimpanze/un singe/un chat/un oiseau/un poisson/un chien/un bébé
+cochon/un cochon/un harmonica/une cornemuse/un bébé/un chat
+loup/un loup/un chien/un chat/un bébé/un instrument de musique
+lion-rugissement/un lion/un chat/un chien/un loup/un baillement
+mouche/une mouche/un moustique/une abeille/un sachet/le vent/un chien/un piano
+moustique/une moustique/un mouche/une abeille/un sachet/le vent/un chien/un piano
+mouton/un mouton/un oiseau/une mouche/un moustique/un accordéon
+orage/un orage/une voiture/un mammifère/un insecte/un poisson
+panthere/une panthère/un chien/un oiseau/un lion/une guitare électrique
+bipbip/un dessin animé/un personne qui court/un animal qui hurle/quelque chose qui tombe
+sirene/une sirène/une voiture/un jeu/une trompette/un animal
+sonnerie/un téléphone/la télévision/un ordinateur/un micro onde/un mixeur
+sonnette/une sonnette/une cloche/un coucou/un carillon
+ressort/un ressort/un clochette/un objet qui tombe/une batterie
+vache/une vache/un ressort/un bisou/un klaxon/un clochette

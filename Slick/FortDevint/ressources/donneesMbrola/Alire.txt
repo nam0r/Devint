@@ -1,0 +1,9 @@
+Répertoire donnees utilisé par la synthèse vocale VocalyzeSIVOX
+
+- vous pouvez modifier le fichier si_vox.conf pour choisir les voix
+(les voix disponibles sont dans le répertoire VocalyzeSIVOX), pour changer l'intonation
+et la vitesse de prononciation
+- vous pouvez modifier les fichiers dans le sous-répertoire rules
+pour ajouter ou modifier des règles de prononciation.
+- le répertoire pho-wav est l'endroit où la synthèse écrit les fichiers .pho et .wav,
+il ne faut pas l'effacer.
