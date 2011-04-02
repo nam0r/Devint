@@ -4,6 +4,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
+import main.Conf;
 import main.Hoorah;
 import questions.Question;
 import actors.IA;
@@ -15,7 +16,7 @@ public class AlienIA extends IA {
 	private SpriteSheet run;
 	
 	public AlienIA(int x, int y) {
-		super("ressources/all.png", 3, x, y, 24, 36);
+		super(Conf.RESS_PATH+"all.png", 3, x, y, 24, 36);
 		body.setMaxVelocity(25, 55);
 		walkingTime = 1200;
 		run = getSpriteSheet(0,50,50);

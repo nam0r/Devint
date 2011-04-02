@@ -3,6 +3,9 @@ package main;
 import actors.Actor;
 import questions.Question;
 
+/**
+ * Global variables of the whole game.
+ */
 
 public class Globals {
 	/** The global score */
@@ -15,6 +18,4 @@ public class Globals {
 	public static Question question;
 	/** Return to state */
 	public static int returnState;
-	//public static LightMap lightMap = null;
-	//public static Entity messageWindow = null;
 }

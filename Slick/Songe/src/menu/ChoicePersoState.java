@@ -1,5 +1,6 @@
 package menu;
 
+import main.Conf;
 import main.Globals;
 import main.Hoorah;
 
@@ -39,12 +40,12 @@ public class ChoicePersoState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		images = new Image[] { new Image("ressources/images/homer.jpg"),
-				new Image("ressources/images/link.jpg"), new Image("ressources/images/alien.jpg"),
-				new Image("ressources/images/mario.jpg"), new Image("ressources/images/tux.png") };
+		images = new Image[] { new Image(Conf.IMG_PATH+"homer.jpg"),
+				new Image(Conf.IMG_PATH+"link.jpg"), new Image(Conf.IMG_PATH+"alien.jpg"),
+				new Image(Conf.IMG_PATH+"mario.jpg"), new Image(Conf.IMG_PATH+"tux.png") };
 
-		font = new AngelCodeFont("ressources/demo2.fnt",
-				"ressources/demo2_00.tga");
+		font = new AngelCodeFont(Conf.RESS_PATH+"demo2.fnt",
+				Conf.RESS_PATH+"demo2_00.tga");
 	}
 
 	@Override

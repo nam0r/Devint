@@ -2,6 +2,8 @@ package map;
 
 import java.util.HashMap;
 
+import main.Conf;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
@@ -34,7 +36,7 @@ public class TileSet {
 			Shape shape;
 			try {
 				shape = TileShapes.getShapeByName(element.getAttribute("shape"));
-				entries.put(id, new Tile(new Image(image), shape));
+				entries.put(id, new Tile(new Image(Conf.RESS_PATH+image), shape));
 			} catch (SlickException e) {
 				System.err.println(e.getMessage());
 			}

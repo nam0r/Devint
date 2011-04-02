@@ -3,6 +3,7 @@ package minigame;
 import java.awt.Dimension;
 import java.util.Vector;
 
+import main.Conf;
 import main.Globals;
 
 import org.newdawn.slick.Color;
@@ -97,8 +98,8 @@ public class HoverCave extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		sonG = new Sound2("ressources/sons/bip6.ogg");
-		sonD = new Sound2("ressources/sons/bip6.ogg");
+		sonG = new Sound2(Conf.SND_PATH+"bip6.ogg");
+		sonD = new Sound2(Conf.SND_PATH+"bip6.ogg");
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
 		reset();

@@ -62,9 +62,13 @@ public class QuestionState extends MenuState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		super.enter(gc, sbg);
 		options = Globals.question.getChoices();
 		question = Globals.question.getQuestion();
+		// TODO cette façon de faire est vraiment nulle ...
+		String tempOpt1 = options[0];
+		options[selected] = question;
+		super.enter(gc, sbg); //It will read the options[selected]
+		options[selected] = tempOpt1;
 	}
 	
 	// Appelee lors de la sortie de l'etat

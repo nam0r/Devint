@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import main.Conf;
 import main.Globals;
 import main.Hoorah;
 import game.AbstractGameState;
@@ -39,15 +40,15 @@ public class GameplayState extends AbstractGameState {
 	
 	
 	public GameplayState(int id) {
-		super(id, "ressources/cave.png", "ressources/tiles.xml", "ressources/testmap.txt", 32, 32);
+		super(id, Conf.RESS_PATH+"cave.png", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"testmap.txt", 32, 32);
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		//musique = new Music("../Slick/snd/requiem.wav");
-		sonSaut = new Sound2("ressources/sons/over.wav");
-		sound = new Sound2("ressources/sons/piano.wav");
+		sonSaut = new Sound2(Conf.SND_PATH+"over.wav");
+		sound = new Sound2(Conf.SND_PATH+"piano.wav");
 		restart();
 		//We set Open Al constants about physical
 		AL10.alDopplerFactor(1.0f); // Doppler effect

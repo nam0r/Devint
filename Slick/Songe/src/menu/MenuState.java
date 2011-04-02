@@ -1,5 +1,7 @@
 package menu;
 
+import main.Conf;
+
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
@@ -11,9 +13,11 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
  
 public abstract class MenuState extends BasicGameState {
- 
+
+	/** The id of the state for state based game */
 	protected int stateID;
-	
+	/** For vocalize SIVOX */
+	protected t2s.SIVOXDevint voix;
 	/** The font to write the message with */
 	protected Font font;
 	/** The menu options */
@@ -23,13 +27,14 @@ public abstract class MenuState extends BasicGameState {
 	
     public MenuState(int stateID) {
     	this.stateID = stateID;
+    	//The voice tool
+    	voix = new t2s.SIVOXDevint();
     }
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		
-		font = new AngelCodeFont("ressources/demo2.fnt","ressources/demo2_00.tga");
+		font = new AngelCodeFont(Conf.RESS_PATH+"demo2.fnt",Conf.RESS_PATH+"demo2_00.tga");
 		
 	}
 
@@ -63,15 +68,19 @@ public abstract class MenuState extends BasicGameState {
 	
 		Input input = gc.getInput();
 		
-		if (input.isKeyPressed(Input.KEY_DOWN)) {
+		if (input.isKeyPressed(Input.KEY_DOWN) || input.isKeyPressed(Input.KEY_RIGHT)) {
 			selected++;
 			if (selected >= options.length)
 				selected = 0;
+			voix.stop();
+			voix.playShortText(options[selected]);
 		}
-		if (input.isKeyPressed(Input.KEY_UP)) {
+		if (input.isKeyPressed(Input.KEY_UP) || input.isKeyPressed(Input.KEY_LEFT)) {
 			selected--;
 			if (selected < 0)
 				selected = options.length - 1;
+			voix.stop();
+			voix.playShortText(options[selected]);
 		}
 	}
 
@@ -87,6 +96,8 @@ public abstract class MenuState extends BasicGameState {
 		super.enter(gc, sbg);
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
+		voix.stop();
+		voix.playShortText(options[selected]);
 	}
 	
 	// Appelee lors de la sortie de l'etat

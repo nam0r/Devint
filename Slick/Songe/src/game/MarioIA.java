@@ -1,5 +1,6 @@
 package game;
 
+import main.Conf;
 import main.Hoorah;
 import questions.Question;
 import actors.IA;
@@ -10,7 +11,7 @@ import actors.IA;
 public class MarioIA extends IA {
 	
 	public MarioIA(int x, int y) {
-		super("ressources/images/mariowalk.png", 3, x, y, 20, 31);
+		super(Conf.IMG_PATH+"mariowalk.png", 3, x, y, 20, 31);
 	}
 
 	@Override
