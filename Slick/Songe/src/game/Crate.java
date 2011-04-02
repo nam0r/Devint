@@ -24,7 +24,7 @@ public class Crate extends PhysicalEntity {
 	 * @throws SlickException Indicates a failure to load the resources
 	 */
 	public Crate(float x, float y, float width, float height, float mass) {
-		super("res/crate.png", x, y, width, height, mass);
+		super("ressources/crate.png", x, y, width, height, mass);
 		
 		body.setFriction(0.1f);
 	}

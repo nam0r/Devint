@@ -39,15 +39,15 @@ public class GameplayState extends AbstractGameState {
 	
 	
 	public GameplayState(int id) {
-		super(id, "res/cave.png", "res/tiles.xml", "res/testmap.txt", 32, 32);
+		super(id, "ressources/cave.png", "ressources/tiles.xml", "ressources/testmap.txt", 32, 32);
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		//musique = new Music("../Slick/snd/requiem.wav");
-		sonSaut = new Sound2("res/snd/over.wav");
-		sound = new Sound2("res/snd/piano.wav");
+		sonSaut = new Sound2("ressources/sons/over.wav");
+		sound = new Sound2("ressources/sons/piano.wav");
 		restart();
 		//We set Open Al constants about physical
 		AL10.alDopplerFactor(1.0f); // Doppler effect

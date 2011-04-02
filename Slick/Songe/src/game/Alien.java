@@ -14,7 +14,7 @@ public class Alien extends Actor {
 	private SpriteSheet jump;
 	
 	public Alien() {
-		super("res/all.png", 100, 150, 1f, 24, 36);
+		super("ressources/all.png", 100, 150, 1f, 24, 36);
 		
 		run = getSpriteSheet(0,50,50);
 		jump = getSpriteSheet(150,50,50);

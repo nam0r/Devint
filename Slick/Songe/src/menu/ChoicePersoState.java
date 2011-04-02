@@ -39,12 +39,12 @@ public class ChoicePersoState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		images = new Image[] { new Image("res/img/homer.jpg"),
-				new Image("res/img/link.jpg"), new Image("res/img/alien.jpg"),
-				new Image("res/img/mario.jpg"), new Image("res/img/tux.png") };
+		images = new Image[] { new Image("ressources/images/homer.jpg"),
+				new Image("ressources/images/link.jpg"), new Image("ressources/images/alien.jpg"),
+				new Image("ressources/images/mario.jpg"), new Image("ressources/images/tux.png") };
 
-		font = new AngelCodeFont("res/demo2.fnt",
-				"res/demo2_00.tga");
+		font = new AngelCodeFont("ressources/demo2.fnt",
+				"ressources/demo2_00.tga");
 	}
 
 	@Override

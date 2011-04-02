@@ -29,7 +29,7 @@ public abstract class MenuState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		font = new AngelCodeFont("res/demo2.fnt","res/demo2_00.tga");
+		font = new AngelCodeFont("ressources/demo2.fnt","ressources/demo2_00.tga");
 		
 	}
 

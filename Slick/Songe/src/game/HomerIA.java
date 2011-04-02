@@ -17,7 +17,7 @@ import actors.IA;
 public class HomerIA extends IA {
 	
 	public HomerIA(int x, int y){
-		super("res/img/homeranim.png", 8, x, y, 36, 65);
+		super("ressources/images/homeranim.png", 8, x, y, 36, 65);
 		body.setMaxVelocity(10, 45);
 		walkingTime = 1500;
 		

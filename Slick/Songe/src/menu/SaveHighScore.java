@@ -71,8 +71,8 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		this.game = game;
-		image = new Image("res/img/sky2.jpg");
-		font = new AngelCodeFont("res/hiero.fnt", "res/hiero.png");
+		image = new Image("ressources/images/sky2.jpg");
+		font = new AngelCodeFont("ressources/hiero.fnt", "ressources/hiero.png");
 		submitted = false;
 		currentName = "";
 		nameField = new TextField(container, container.getDefaultFont(), 200, 120, 400, 30, this);

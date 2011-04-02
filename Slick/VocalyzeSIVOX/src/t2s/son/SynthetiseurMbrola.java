@@ -150,7 +150,6 @@ public class SynthetiseurMbrola  {
 		}
 		catch (Exception e) {
 		    System.out.println("SynthetiseurMbrola: "+mode+" erreur!");
-		    e.printStackTrace();
 		}
     }
 
