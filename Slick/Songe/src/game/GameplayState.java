@@ -105,7 +105,7 @@ public class GameplayState extends AbstractGameState {
 		soundIndex = sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
 		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.5f);
 		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 25f);
-		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 100f);
+		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 200f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 	}
 	
