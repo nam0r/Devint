@@ -45,6 +45,7 @@ public abstract class MenuState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gfx)
 			throws SlickException {
 		gfx.setFont(font);
+		gfx.setLineWidth(20);
 		boolean selectedPassed = false;
 		int suppHeight = 0;
 		for (int i=0;i<options.length;i++) {
