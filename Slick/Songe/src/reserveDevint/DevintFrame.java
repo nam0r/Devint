@@ -1,12 +1,12 @@
 /** 
-Cette classe abstraite est un Frame associé à une instance de voix 
- * SI_VOX et qui implémente KeyListener.
- * Elle peut servir de classe mère à toutes les fenêtres de vos jeux :
- * il suffit de définir la méthode "init" pour initialiser les éléments du Frame
+Cette classe abstraite est un Frame associï¿½ ï¿½ une instance de voix 
+ * SI_VOX et qui implï¿½mente KeyListener.
+ * Elle peut servir de classe mï¿½re ï¿½ toutes les fenï¿½tres de vos jeux :
+ * il suffit de dï¿½finir la mï¿½thode "init" pour initialiser les ï¿½lï¿½ments du Frame
  */
 
 
-package devintAPI;
+package reserveDevint;
 
 import t2s.SIVOXDevint; // pour parler
 
@@ -15,9 +15,9 @@ import java.awt.event.*;
 
 
 /** Classe abstraite avec un Frame, une instance de SI_VOX pour parler et 
- * qui écoute les évènements clavier.
- * Par défaut, un son est lu à l'activation de la fenêtre, 
- * on sort de la fenêtre par ESC et on obtient la règle du jeu par F1, l'aide par F2
+ * qui ï¿½coute les ï¿½vï¿½nements clavier.
+ * Par dï¿½faut, un son est lu ï¿½ l'activation de la fenï¿½tre, 
+ * on sort de la fenï¿½tre par ESC et on obtient la rï¿½gle du jeu par F1, l'aide par F2
  * 
  * @author helene
  *
@@ -27,21 +27,21 @@ public abstract class DevintFrame extends JFrame implements  KeyListener{
 	// la voix pour annoncer les actions
     protected SIVOXDevint voix; 
     
-    // le fichier wav contenant le message d'accueil (lu à l'activation du jeu)
+    // le fichier wav contenant le message d'accueil (lu ï¿½ l'activation du jeu)
     protected String sonAccueil;
 
-    // le fichier wav contenant le but du jeu (activé par F1)
+    // le fichier wav contenant le but du jeu (activï¿½ par F1)
     protected String sonRegle;
 
-    // le fichier wav contenant le message d'aide (activé par F2)
+    // le fichier wav contenant le message d'aide (activï¿½ par F2)
     protected String sonAide;
    
 
     /**
-     * @param title : titre de la fenêtre
+     * @param title : titre de la fenï¿½tre
      * @param sonAccueil : nom du fichier .wav qui contient le message d'accueil 
      * @param sonAide : nom du fichier .wav qui contient le message d'aide
-     * PRECOND : il s'agit de .wav qui se trouvent dans le répertoire "ressources/sons"
+     * PRECOND : il s'agit de .wav qui se trouvent dans le rï¿½pertoire "ressources/sons"
      */
     public DevintFrame(String title, String ac, String ar,String ai) {
     	super(title);
@@ -52,41 +52,41 @@ public abstract class DevintFrame extends JFrame implements  KeyListener{
     	this.setVisible(true);
     	// a le focus
     	this.requestFocus();
-    	// prend toute la taille de la fenêtre
+    	// prend toute la taille de la fenï¿½tre
     	this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // on ferme la fenêtre en cliquant sur la croix 
+        // on ferme la fenï¿½tre en cliquant sur la croix 
     	setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-     	// écoute les évènements clavier
+     	// ï¿½coute les ï¿½vï¿½nements clavier
        	addKeyListener(this);
-       	// méthode init à implémenter, elle construit ce qui est dans le frame
+       	// mï¿½thode init ï¿½ implï¿½menter, elle construit ce qui est dans le frame
        	init();
-       	// toujours annoncer ce que l'on doit faire en entrant dans une fenêtre
+       	// toujours annoncer ce que l'on doit faire en entrant dans une fenï¿½tre
     	voix = new SIVOXDevint();
     	voix.playWav("../ressources/sons/" + sonAccueil);
     }
 
 
-    /** méthode abstraite à implémenter 
-     * pour définir ce qu'il y a dans le Frame
+    /** mï¿½thode abstraite ï¿½ implï¿½menter 
+     * pour dï¿½finir ce qu'il y a dans le Frame
      */
     protected abstract void init();
 
     //////////////////////////////////////////////
-    // Gestion des évènements clavier
+    // Gestion des ï¿½vï¿½nements clavier
     /////////////////////////////////////////////
     
-    // méthodes nécessaires pour l'interface KeyListener
+    // mï¿½thodes nï¿½cessaires pour l'interface KeyListener
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e){}
 
     /** gestion des touches
-     * ESC fait sortir de la fenêtre courante
+     * ESC fait sortir de la fenï¿½tre courante
      * F1 invoque l'aide
-     * Cette méthode peut être surchargée par héritage pour réagir à d'autres touches
+     * Cette mï¿½thode peut ï¿½tre surchargï¿½e par hï¿½ritage pour rï¿½agir ï¿½ d'autres touches
      * (voir un exemple dans la classe Jeu)
      */
     public void keyPressed(KeyEvent e) {
-    	// toujours arrêter la voix courante quand l'utilisateur fait une action
+    	// toujours arrï¿½ter la voix courante quand l'utilisateur fait une action
     	voix.stop();
     	// escape = sortir
     	if (e.getKeyCode()==KeyEvent.VK_ESCAPE){

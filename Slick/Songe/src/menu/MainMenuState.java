@@ -22,7 +22,8 @@ public class MainMenuState extends MenuState {
     	
     	//The menu options
     	options = new String[] {"Jouer","Highscores","Instructions","Exit"};
-    	
+    	//The voice tool
+    	voix = new t2s.SIVOXDevint();
     	
     }
 

@@ -1,16 +1,16 @@
-/** Une classe abstraite à utiliser pour le menu de lancement du jeu
- *  La classe de menu de votre jeu doit hériter de cette classe :
- *    - définir la méthode nomOptions qui renvoie un tableau de String qui corresponds aux 
+/** Une classe abstraite ï¿½ utiliser pour le menu de lancement du jeu
+ *  La classe de menu de votre jeu doit hï¿½riter de cette classe :
+ *    - dï¿½finir la mï¿½thode nomOptions qui renvoie un tableau de String qui corresponds aux 
  *    options possibles de votre menu
- *    - définir la méthode lancerOption(int i) qui associe des actions aux options de votre menu 
- *    - définir les méthodes wavAccueil et wavAide qui désignent le fichier wave à lire pour l'accueil
+ *    - dï¿½finir la mï¿½thode lancerOption(int i) qui associe des actions aux options de votre menu 
+ *    - dï¿½finir les mï¿½thodes wavAccueil et wavAide qui dï¿½signent le fichier wave ï¿½ lire pour l'accueil
  *    et l'aide.
  *    
  *  Ne pas modifier cette classe
  *  @author helene
  */
 
-package devintAPI;
+package reserveDevint;
 
 import t2s.SIVOXDevint; // pour lire les textes et les wav
 
@@ -33,7 +33,7 @@ public abstract class MenuAbstrait
     // les noms des options
     private String[] nomOptions;  
 
-    // les boutons associés aux options
+    // les boutons associï¿½s aux options
     private JButton[] boutonOption;  
 
     // le nombre d'options
@@ -41,48 +41,48 @@ public abstract class MenuAbstrait
     
 
     // attributs des textes et des boutons
-    // à redéfinir dans la classe concrète  si vous le souhaitez
-    // en gardant de forts contrastes et peu de couleurs différentes
+    // ï¿½ redï¿½finir dans la classe concrï¿½te  si vous le souhaitez
+    // en gardant de forts contrastes et peu de couleurs diffï¿½rentes
     protected Font fonteBouton ;
     protected Color couleurBouton;
     protected Color couleurBoutonSelectionne;
     protected Color couleurTexte;
     protected Color couleurTexteSelectionne;
 
-    // les éléments qui parlent et que l'on veut pouvoir interrompre
+    // les ï¿½lï¿½ments qui parlent et que l'on veut pouvoir interrompre
     protected SIVOXDevint voix;
 
-    // l'option courante qui est sélectionnée
+    // l'option courante qui est sï¿½lectionnï¿½e
     private int optionCourante;
 
-    // éléments de placement des composants
+    // ï¿½lï¿½ments de placement des composants
     private GridBagLayout placement; // le layout
     private GridBagConstraints regles; // les regles de placement
 
  
     //-------------------------------------------------
-    // les méthodes abstraites à définir par héritage
+    // les mï¿½thodes abstraites ï¿½ dï¿½finir par hï¿½ritage
 
     /** renvoie le tableau contenant le nom des options
-     * méthode abstraite à définir par héritage
+     * mï¿½thode abstraite ï¿½ dï¿½finir par hï¿½ritage
      */
     protected abstract String[] nomOptions();
 
 
-    // méthodes à définir pour rendre la classe concrète
-    /** lance l'action associée au bouton n°i
-     * méthode abstraite à définir par héritage
+    // mï¿½thodes ï¿½ dï¿½finir pour rendre la classe concrï¿½te
+    /** lance l'action associï¿½e au bouton nï¿½i
+     * mï¿½thode abstraite ï¿½ dï¿½finir par hï¿½ritage
      * PRECOND : i varie entre 0 et le nombre d'options possibles moins 1
      */
     protected abstract void lancerOption(int i);
 
-    /** renvoie le nom du fichier wav à lire pour l'accueil
-     * PRECOND : fichier est le chemin pour accéder au fichier
+    /** renvoie le nom du fichier wav ï¿½ lire pour l'accueil
+     * PRECOND : fichier est le chemin pour accï¿½der au fichier
      */
     protected abstract String wavAccueil();
 
-    /** renvoie le nom du fichier wav à lire pour l'aide
-     * PRECOND : fichier est le chemin pour accéder au fichier
+    /** renvoie le nom du fichier wav ï¿½ lire pour l'aide
+     * PRECOND : fichier est le chemin pour accï¿½der au fichier
      */
     protected abstract String wavAide();
 
@@ -95,7 +95,7 @@ public abstract class MenuAbstrait
     	super(title);
     	nomJeu = title;
     	optionCourante = -1;
-    	nomOptions = nomOptions(); // méthode à rendre concrète par héritage
+    	nomOptions = nomOptions(); // mï¿½thode ï¿½ rendre concrï¿½te par hï¿½ritage
     	nbOption=nomOptions.length;
     	creerAttributs();
     	creerLayout();
@@ -112,31 +112,31 @@ public abstract class MenuAbstrait
 
 
     //-------------------------------------------------------
-    // méthodes utilisées par le constructeur
+    // mï¿½thodes utilisï¿½es par le constructeur
 
 
-   /** créé les attributs (couleurs, fonte, ...)
+   /** crï¿½ï¿½ les attributs (couleurs, fonte, ...)
      */
     protected void creerAttributs() {
     	// la couleur des textes 
     	couleurTexte = Color.WHITE;
     	couleurTexteSelectionne = new Color(10,0,150);
-    	// mise à jour des attributs des boutons
+    	// mise ï¿½ jour des attributs des boutons
     	fonteBouton = new Font("Tahoma",1,56);
     	couleurBouton=couleurTexteSelectionne;
     	couleurBoutonSelectionne=couleurTexte;
     }
 
-    /** créé le layout pour placer les composants
+    /** crï¿½ï¿½ le layout pour placer les composants
      */
     private void creerLayout() {
     	placement = new GridBagLayout();
     	regles = new GridBagConstraints();
     	setLayout(placement);
-    	// par défaut on étire les composants horizontalement et verticalement
+    	// par dï¿½faut on ï¿½tire les composants horizontalement et verticalement
     	regles.fill = GridBagConstraints.BOTH;
-    	// par défaut, tous les composants ont un poids de 1
-    	// on les répartit donc équitablement sur la grille
+    	// par dï¿½faut, tous les composants ont un poids de 1
+    	// on les rï¿½partit donc ï¿½quitablement sur la grille
     	regles.weightx = 1; 
     	regles.weighty = 1;
     	// espaces au bord des composants
@@ -146,11 +146,11 @@ public abstract class MenuAbstrait
     }
 
 
-    /** créé l'entête avec le nom du jeu
+    /** crï¿½ï¿½ l'entï¿½te avec le nom du jeu
      */
     public void creerEntete() {
 
-    	// panel d'entete de la fenêtre
+    	// panel d'entete de la fenï¿½tre
     	JPanel entete=new JPanel();
     	FlowLayout enteteLayout = new FlowLayout();
     	enteteLayout.setAlignment(FlowLayout.CENTER);
@@ -164,17 +164,17 @@ public abstract class MenuAbstrait
     	lb1.setBackground(couleurBoutonSelectionne);
     	entete.add(lb1);
 
-    	// placement de l'entete en 1ère ligne, 1ère colonne
+    	// placement de l'entete en 1ï¿½re ligne, 1ï¿½re colonne
     	regles.gridx=1; regles.gridy=1;
     	placement.setConstraints(entete, regles);
     	add(entete);
     }
 
 
-    /** creer les boutons associés aux noms d'options
+    /** creer les boutons associï¿½s aux noms d'options
      */
     private void creerOption(String[] noms) {
-    	// création des boutons
+    	// crï¿½ation des boutons
     	// panel des boutons
     	JPanel boutons = new JPanel();
     	boutons.setLayout(new GridLayout(nbOption, 1));
@@ -184,22 +184,22 @@ public abstract class MenuAbstrait
     		creerBouton(i,noms[i]);
     		boutons.add(boutonOption[i]);
     	}
-    	// poids relatif de 3 (i.e 3 fois plus grand que l'entête)
+    	// poids relatif de 3 (i.e 3 fois plus grand que l'entï¿½te)
     	regles.weighty=4;
-    	// placement des boutons en 2ème ligne, 1ère colonne
+    	// placement des boutons en 2ï¿½me ligne, 1ï¿½re colonne
     	regles.gridx = 1; regles.gridy = 2;
     	placement.setConstraints(boutons, regles);
     	add(boutons);
     }
 
-    // pour créer un bouton associé à un texte	
+    // pour crï¿½er un bouton associï¿½ ï¿½ un texte	
     private void creerBouton(int i,String texte) {
     	boutonOption[i] = new JButton();
     	boutonOption[i].setText(texte);
     	setPropertiesButton(boutonOption[i]);
     }
 
-    // mettre à jour les propriétés des boutons
+    // mettre ï¿½ jour les propriï¿½tï¿½s des boutons
     protected void setPropertiesButton(JButton b) {
     	b.setFocusable(false);
     	b.setBackground(couleurBouton);
@@ -210,9 +210,9 @@ public abstract class MenuAbstrait
     }
 
     //-------------------------------------------------------
-    // méthodes pour réagir aux évènements clavier
+    // mï¿½thodes pour rï¿½agir aux ï¿½vï¿½nements clavier
 
-    // évènements clavier
+    // ï¿½vï¿½nements clavier
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e){}
 
@@ -226,11 +226,11 @@ public abstract class MenuAbstrait
     	if (e.getKeyCode()==KeyEvent.VK_F1){
     		voix.playWav(wavAide());
     	}
-    	// enter = sélectionner l'option
+    	// enter = sï¿½lectionner l'option
     	if (e.getKeyCode()==KeyEvent.VK_ENTER){
-    		lancerOption(optionCourante);  // méthode à rendre concrète par héritage
+    		lancerOption(optionCourante);  // mï¿½thode ï¿½ rendre concrï¿½te par hï¿½ritage
     	}
-    	// se déplacer dans les options vers le bas
+    	// se dï¿½placer dans les options vers le bas
     	if (e.getKeyCode() == KeyEvent.VK_DOWN){
     		if (optionCourante==-1) {
     			optionCourante = 0;
@@ -242,7 +242,7 @@ public abstract class MenuAbstrait
     			setFocusedButton(optionCourante);
     		}
     	}	 
-    	// se déplacer dans les options vers le haut
+    	// se dï¿½placer dans les options vers le haut
     	if (e.getKeyCode() == KeyEvent.VK_UP){
     		if (optionCourante==-1) {
     			optionCourante = 0;

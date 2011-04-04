@@ -25,6 +25,9 @@ public abstract class MenuState extends BasicGameState {
 	/** The index of the selected option */
 	protected int selected;
 	
+	protected final int CASE_LARGE = 120;
+	protected final int CASE_LARGE_SELECTED = 120;
+	
     public MenuState(int stateID) {
     	this.stateID = stateID;
     	//The voice tool
@@ -42,21 +45,34 @@ public abstract class MenuState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gfx)
 			throws SlickException {
 		gfx.setFont(font);
-		
+		boolean selectedPassed = false;
+		int suppHeight = 0;
 		for (int i=0;i<options.length;i++) {
 			//selected menu
 			if (selected == i) {
-				gfx.setColor(Color.white);
-				gfx.drawRect(gc.getWidth()/4, (gc.getHeight()/3-10)+(i*50), gc.getWidth()/2, 50);
-				gfx.setColor(new Color(20,0,0));
-				gfx.fillRect(gc.getWidth()/4+1, (gc.getHeight()/3-10)+(i*50)+1, gc.getWidth()/2-1, 50-1);
-				gfx.setColor(Color.white);
-				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*50));
+				suppHeight = CASE_LARGE_SELECTED-CASE_LARGE;
+				selectedPassed = true;
+				//rectangle border
+				gfx.setColor(new Color(255, 255, 255));
+				gfx.drawRect(gc.getWidth()/20, (gc.getHeight()/3)+(i*CASE_LARGE), 9*gc.getWidth()/10, CASE_LARGE_SELECTED-1);
+				//rectangle
+				gfx.setColor(new Color(250, 240, 240));
+				gfx.fillRect(gc.getWidth()/20+1, (gc.getHeight()/3)+(i*CASE_LARGE)+1, 9*gc.getWidth()/10-1, CASE_LARGE_SELECTED-2);
+				//text
+				gfx.setColor(Color.black);
+				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*CASE_LARGE)+CASE_LARGE_SELECTED/3);
 			}
 			//not selected menus
 			else{
-				gfx.setColor(new Color(200,200,200));
-				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*50));
+				//rectangle border
+				gfx.setColor(new Color(0, 0, 220));
+				gfx.drawRect(gc.getWidth()/10, (gc.getHeight()/3)+(i*CASE_LARGE)+suppHeight, 4*gc.getWidth()/5, CASE_LARGE);
+				//rectangle
+				gfx.setColor(new Color(0, 0, 200));
+				gfx.fillRect(gc.getWidth()/10+1, (gc.getHeight()/3)+(i*CASE_LARGE)+suppHeight+1, 4*gc.getWidth()/5-1, CASE_LARGE-1);
+				//text
+				gfx.setColor(new Color(220,220,220));
+				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*CASE_LARGE)+CASE_LARGE/3);
 			}
 		}
 		
