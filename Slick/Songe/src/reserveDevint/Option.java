@@ -1,11 +1,10 @@
-package jeu;
+package reserveDevint;
 
 
 import java.awt.Font;
 
 import javax.swing.JTextArea;
 
-import devintAPI.*;
 
 /** Cette classe est un exemple d'interface pour les options
  * 
@@ -17,10 +16,10 @@ public class Option extends DevintFrame{
     }
 
     public void init() {
-    	String text = "Il est très intéressant de fournir un menu pour ";
-    	text += "régler les préférences de l'utilisateur.\n";
-    	text += "En particulier les couleurs, la police et la taille des caractères ";
-    	text+= "devraient pouvoir être réglés par l'utilisateur (voir projet \"casse_brique 2006\")";
+    	String text = "Il est trï¿½s intï¿½ressant de fournir un menu pour ";
+    	text += "rï¿½gler les prï¿½fï¿½rences de l'utilisateur.\n";
+    	text += "En particulier les couleurs, la police et la taille des caractï¿½res ";
+    	text+= "devraient pouvoir ï¿½tre rï¿½glï¿½s par l'utilisateur (voir projet \"casse_brique 2006\")";
     	JTextArea lb1 = new JTextArea (text);
     	lb1.setLineWrap(true);
     	lb1.setEditable(false);

@@ -1,7 +1,7 @@
-package jeu;
+package reserveDevint;
 
 /** classe pour lancer le jeu
- * Elle créé simplement une instance de MenuJeu
+ * Elle crï¿½ï¿½ simplement une instance de MenuJeu
  * 
  * @author helene
  *
@@ -9,7 +9,7 @@ package jeu;
 public class LancementJeu{
 
     public static void main(String args[]){
-        new jeu.MenuJeu("Exemple de jeu");
+        new reserveDevint.MenuJeu("Exemple de jeu");
     }
 
 }
