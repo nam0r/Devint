@@ -20,8 +20,8 @@ public class MainMenuState extends MenuState {
     public MainMenuState(int stateID) {
     	super(stateID);
     	
-    	//The menu options
     	options = new String[] {"Jouer","Highscores","Instructions","Exit"};
+    	title = "Songe";
     	//The voice tool
     	voix = new t2s.SIVOXDevint();
     	

@@ -13,13 +13,10 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
  
 public class QuestionState extends MenuState {
-
-	/** The question */
-	private String question;
 	
     public QuestionState(int stateID) {
     	super(stateID);
-    	question = "";
+    	title = "";
     	options = new String[0];
     }
 
@@ -33,9 +30,6 @@ public class QuestionState extends MenuState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gfx)
 			throws SlickException {
 		super.render(gc, sbg, gfx);
-		// Question
-		gfx.setColor(Color.white);
-		gfx.drawString(question, gc.getWidth()/2 - (font.getWidth(question)/2), gc.getHeight()/4);
 	}
 
 	@Override
@@ -62,11 +56,13 @@ public class QuestionState extends MenuState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		//the choices
 		options = Globals.question.getChoices();
-		question = Globals.question.getQuestion();
+		//the question
+		title = Globals.question.getQuestion();
 		// TODO cette façon de faire est vraiment nulle ...
 		String tempOpt1 = options[0];
-		options[selected] = question;
+		options[selected] = title;
 		super.enter(gc, sbg); //It will read the options[selected]
 		options[selected] = tempOpt1;
 	}
@@ -77,7 +73,7 @@ public class QuestionState extends MenuState {
 			throws SlickException {
 		super.leave(gc, sb);
 		options = new String[0];
-		question = "";
+		title = "";
 	}
 
 }

@@ -48,12 +48,13 @@ public class GameplayState extends AbstractGameState {
 		super.init(gc, sbg);
 		//musique = new Music("../Slick/snd/requiem.wav");
 		sonSaut = new Sound2(Conf.SND_PATH+"over.wav");
-		sound = new Sound2(Conf.SND_PATH+"piano.wav");
+		sound = new Sound2(Conf.SND_PATH+"nuit.wav");
 		restart();
 		//We set Open Al constants about physical
 		AL10.alDopplerFactor(1.0f); // Doppler effect
 		AL10.alDopplerVelocity(1.0f); // Sound speed
 		AL10.alDistanceModel(AL11.AL_EXPONENT_DISTANCE);
+		AL10.alDopplerFactor(50.0f);
 		
 	}
 	
@@ -75,6 +76,7 @@ public class GameplayState extends AbstractGameState {
 		//We put the openAl listener's position and velocity
 		AlUtils.setAlListenerPosition(player.getX()-player.getWidth()/2, player.getVelY()-player.getHeight()/2, 0.0f);
 		AlUtils.setAlListenerVelocity(player.getVelX()*5, -player.getVelY(), 0.0f);
+		//sound.setSourceVelocity(10f, 0f, 0f, soundIndex);
 		//AlUtils.resetAlListener();
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
 			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -99,10 +101,11 @@ public class GameplayState extends AbstractGameState {
 		//this state is important so we put it in Globals
 		Globals.returnState = stateID;
 		
-		soundIndex = sound.playAt(1000000f, 0f, 0f);
-		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.2f);
-		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 35f);
-		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 40f);
+		//AL10.alSourcePlay(soundIndex);
+		soundIndex = sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
+		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.5f);
+		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 25f);
+		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 100f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 	}
 	
@@ -121,7 +124,7 @@ public class GameplayState extends AbstractGameState {
 		//musique.stop();
 		//If comming in game again, the player will be moved
 		player.setPosition(player.getX()+100, player.getY()-50);
-		//sound.stop();
+		sound.stop();
 	}	
 	
 	@Override
@@ -181,7 +184,7 @@ public class GameplayState extends AbstractGameState {
 			if ((input.isKeyPressed(Input.KEY_LCONTROL)) || 
 			   (input.isKeyPressed(Input.KEY_RCONTROL))) {
 				player.jump();
-				AL10.alSourcePlay(soundIndex);
+				sonSaut.play();
 			}
 		}
 		if (!input.isKeyDown(Input.KEY_LCONTROL)) {

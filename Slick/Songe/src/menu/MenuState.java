@@ -20,13 +20,19 @@ public abstract class MenuState extends BasicGameState {
 	protected t2s.SIVOXDevint voix;
 	/** The font to write the message with */
 	protected Font font;
+	/** The title */
+	protected String title;
 	/** The menu options */
 	protected String[] options;
 	/** The index of the selected option */
 	protected int selected;
-	
-	protected final int CASE_LARGE = 120;
-	protected final int CASE_LARGE_SELECTED = 120;
+	/** Indicates how thick the cases are */
+	protected int caseLarge;
+	/** Indicates how thick the selected case is */
+	protected int caseLargeSelected;
+	/** The graphics */
+	protected Graphics gfx;
+
 	
     public MenuState(int stateID) {
     	this.stateID = stateID;
@@ -38,42 +44,52 @@ public abstract class MenuState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		font = new AngelCodeFont(Conf.RESS_PATH+"demo2.fnt",Conf.RESS_PATH+"demo2_00.tga");
-		
+		caseLarge = gc.getHeight()/8;
+		caseLargeSelected = gc.getHeight()/8;
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gfx)
 			throws SlickException {
 		gfx.setFont(font);
-		gfx.setLineWidth(20);
-		boolean selectedPassed = false;
+		this.gfx = gfx;
 		int suppHeight = 0;
+		//title
+		//rectangle border
+		gfx.setColor(new Color(255, 255, 255));
+		gfx.drawRect(gc.getWidth()/10, (gc.getHeight()/10), 4*gc.getWidth()/5, caseLargeSelected-1);
+		//rectangle
+		gfx.setColor(new Color(250, 240, 240));
+		gfx.fillRect(gc.getWidth()/10+1, (gc.getHeight()/10)+1, 4*gc.getWidth()/5-1, caseLargeSelected-2);
+		//text
+		gfx.setColor(Color.black);
+		gfx.drawString(title, gc.getWidth()/2 - (font.getWidth(title)/2), gc.getHeight()/10+caseLargeSelected/3);
+		//menus
 		for (int i=0;i<options.length;i++) {
 			//selected menu
 			if (selected == i) {
-				suppHeight = CASE_LARGE_SELECTED-CASE_LARGE;
-				selectedPassed = true;
+				suppHeight = caseLargeSelected-caseLarge;
 				//rectangle border
 				gfx.setColor(new Color(255, 255, 255));
-				gfx.drawRect(gc.getWidth()/20, (gc.getHeight()/3)+(i*CASE_LARGE), 9*gc.getWidth()/10, CASE_LARGE_SELECTED-1);
+				gfx.drawRect(gc.getWidth()/20, (gc.getHeight()/3)+(i*caseLarge), 9*gc.getWidth()/10, caseLargeSelected-1);
 				//rectangle
 				gfx.setColor(new Color(250, 240, 240));
-				gfx.fillRect(gc.getWidth()/20+1, (gc.getHeight()/3)+(i*CASE_LARGE)+1, 9*gc.getWidth()/10-1, CASE_LARGE_SELECTED-2);
+				gfx.fillRect(gc.getWidth()/20+1, (gc.getHeight()/3)+(i*caseLarge)+1, 9*gc.getWidth()/10-1, caseLargeSelected-2);
 				//text
 				gfx.setColor(Color.black);
-				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*CASE_LARGE)+CASE_LARGE_SELECTED/3);
+				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*caseLarge)+caseLargeSelected/3);
 			}
 			//not selected menus
 			else{
 				//rectangle border
 				gfx.setColor(new Color(0, 0, 220));
-				gfx.drawRect(gc.getWidth()/10, (gc.getHeight()/3)+(i*CASE_LARGE)+suppHeight, 4*gc.getWidth()/5, CASE_LARGE);
+				gfx.drawRect(gc.getWidth()/10, (gc.getHeight()/3)+(i*caseLarge)+suppHeight, 4*gc.getWidth()/5, caseLarge);
 				//rectangle
 				gfx.setColor(new Color(0, 0, 200));
-				gfx.fillRect(gc.getWidth()/10+1, (gc.getHeight()/3)+(i*CASE_LARGE)+suppHeight+1, 4*gc.getWidth()/5-1, CASE_LARGE-1);
+				gfx.fillRect(gc.getWidth()/10+1, (gc.getHeight()/3)+(i*caseLarge)+suppHeight+1, 4*gc.getWidth()/5-1, caseLarge-1);
 				//text
 				gfx.setColor(new Color(220,220,220));
-				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*CASE_LARGE)+CASE_LARGE/3);
+				gfx.drawString(options[i], gc.getWidth()/2 - (font.getWidth(options[i])/2), gc.getHeight()/3+(i*caseLarge)+caseLarge/3);
 			}
 		}
 		
@@ -110,6 +126,8 @@ public abstract class MenuState extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		//useful for the beautiful and fat menu
+		gfx.setLineWidth(20);
 		super.enter(gc, sbg);
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
@@ -123,6 +141,8 @@ public abstract class MenuState extends BasicGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		selected = 0;
+		//because it would cause graphical disaster in other states
+		gfx.setLineWidth(1);
 	}
 
 }
