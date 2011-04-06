@@ -1,5 +1,6 @@
 package questions;
 
+import main.Conf;
 import main.Globals;
 import menu.MenuState;
 
@@ -8,16 +9,16 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
+import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
  
 public class QuestionState extends MenuState {
 	
-    public QuestionState(int stateID) {
+    public QuestionState(int stateID) throws SlickException {
     	super(stateID);
-    	title = "";
-    	options = new String[0];
     }
 
 	@Override
@@ -56,15 +57,25 @@ public class QuestionState extends MenuState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		//This is useful because we load here sounds that we didn't know at the beginning of the game, they are not deferred
+		LoadingList.setDeferredLoading(false);
 		//the choices
 		options = Globals.question.getChoices();
 		//the question
 		title = Globals.question.getQuestion();
-		// TODO cette façon de faire est vraiment nulle ...
-		String tempOpt1 = options[0];
-		options[selected] = title;
+		// TODO il faudra que tout ça soit pris via Globals, lui même généré à partir de la BDD
+		titleVoice = Conf.SND_PATH+"voix/question_grand_pere.wav";
+		optionsVoices = new String[]{Conf.SND_PATH+"voix/14ans.wav", Conf.SND_PATH+"voix/80ans.wav", Conf.SND_PATH+"voix/140ans.wav"};
+		optionsSounds = new Sound[options.length];
+		titleSound = new Sound(titleVoice);
+		for(int i=0; i<options.length; i++){
+    		optionsSounds[i] = new Sound(optionsVoices[i]);
+    	}
 		super.enter(gc, sbg); //It will read the options[selected]
-		options[selected] = tempOpt1;
+	}
+	
+	public void initSounds(){
+		
 	}
 	
 	// Appelee lors de la sortie de l'etat
@@ -74,6 +85,7 @@ public class QuestionState extends MenuState {
 		super.leave(gc, sb);
 		options = new String[0];
 		title = "";
+		LoadingList.setDeferredLoading(true);
 	}
 
 }
