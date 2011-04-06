@@ -46,6 +46,8 @@ public abstract class MenuState extends BasicGameState {
 	protected Sound[] optionsSounds;
 	/** Indicates if the option 1 has been said for the 1st time */
 	protected boolean firstOptionPlayed;
+	/** Input */
+	protected Input input;
 
 	
     public MenuState(int stateID) {
@@ -59,11 +61,14 @@ public abstract class MenuState extends BasicGameState {
     	options = new String[0];
     	optionsVoices = new String[0];
     	optionsSounds = new Sound[0];
+    	
     }
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		input = gc.getInput();
+		input.enableKeyRepeat();
 		font = new AngelCodeFont(Conf.RESS_PATH+"demo2.fnt",Conf.RESS_PATH+"demo2_00.tga");
 		caseLarge = gc.getHeight()/8;
 		caseLargeSelected = gc.getHeight()/8;
@@ -119,8 +124,6 @@ public abstract class MenuState extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-	
-		Input input = gc.getInput();
 		//If the title is finished, we play 1 time the 1st option
 		if(!titleSound.playing() && !firstOptionPlayed){
 			optionsSounds[selected].play();
@@ -176,6 +179,7 @@ public abstract class MenuState extends BasicGameState {
 		//voix.playWav(titleVoice);
 		//voix.playWav(optionsVoices[selected]);
 		titleSound.play();
+		
 	}
 	
 	// Appelee lors de la sortie de l'etat
@@ -186,6 +190,7 @@ public abstract class MenuState extends BasicGameState {
 		selected = 0;
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
+		firstOptionPlayed = false;
 	}
 
 }
