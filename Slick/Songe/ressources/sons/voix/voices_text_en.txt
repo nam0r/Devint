@@ -6,6 +6,12 @@ instructions : "Instructions"
 scores : "Scores"
 quitter : "Quit"
 
+aurore : "Aurore"
+timeo : "Timeo"
+tux : "Tux"
+lamasticot : "Lamasticot"
+title_choiceperso: "Choose the character you will play"
+
 question_grand_pere : "How old is my grandfather ?"
 14ans : "14 years"
 80ans : "80 years"

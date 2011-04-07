@@ -4,23 +4,17 @@ import main.Conf;
 import main.Globals;
 import main.Hoorah;
 
-import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class ChoicePersoState extends MenuState {
-
-	private int stateID;
 
 	/** The menu images */
 	protected Image[] images;
@@ -28,11 +22,10 @@ public class ChoicePersoState extends MenuState {
 	public ChoicePersoState(int stateID) {
 		super(stateID);
 		this.stateID = stateID;
-		options = new String[] { "Homer Simpson", "Alien", "Mario",
-				"Tux" };
-		optionsVoices = new String[] {Conf.SND_VOIX_PATH+"jouer.ogg",Conf.SND_VOIX_PATH+"scores.ogg",Conf.SND_VOIX_PATH+"instructions.ogg",Conf.SND_VOIX_PATH+"quitter.ogg"};
-    	title = "Bienvenue dans l'univers de Songe";
-    	titleVoice = Conf.SND_VOIX_PATH+"bienvenue.ogg";
+		options = new String[] { "Aurore", "Timéo", "Tux", "Lamasticot" };
+		optionsVoices = new String[] {Conf.getVoice("aurore"),Conf.getVoice("timeo"),Conf.getVoice("tux"),Conf.getVoice("lamasticot")};
+    	title = "Choisissez le personnage que vous allez incarner.";
+    	titleVoice = Conf.getVoice("title_choiceperso");
 	}
 
 	@Override
@@ -40,7 +33,7 @@ public class ChoicePersoState extends MenuState {
 			throws SlickException {
 		super.init(gc, sbg);
 		images = new Image[] { new Image(Conf.IMG_PATH+"homer.jpg"), new Image(Conf.IMG_PATH+"alien.jpg"),
-				new Image(Conf.IMG_PATH+"mario.jpg"), new Image(Conf.IMG_PATH+"tux.png") };
+				new Image(Conf.IMG_PATH+"tux.png"), new Image(Conf.IMG_PATH+"mario.jpg") };
 		initSounds();
 	}
 

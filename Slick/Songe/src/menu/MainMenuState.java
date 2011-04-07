@@ -9,7 +9,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -23,9 +22,9 @@ public class MainMenuState extends MenuState {
     	voix = new t2s.SIVOXDevint();
     	
 		options = new String[] {"Jouer","Scores","Instructions","Quitter"};
-    	optionsVoices = new String[] {Conf.SND_VOIX_PATH+"jouer.ogg",Conf.SND_VOIX_PATH+"scores.ogg",Conf.SND_VOIX_PATH+"instructions.ogg",Conf.SND_VOIX_PATH+"quitter.ogg"};
+    	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores"),Conf.getVoice("instructions"),Conf.getVoice("quitter")};
     	title = "Bienvenue dans l'univers de Songe";
-    	titleVoice = Conf.SND_VOIX_PATH+"bienvenue.ogg";
+    	titleVoice = Conf.getVoice("bienvenue");
     }
 
 	@Override

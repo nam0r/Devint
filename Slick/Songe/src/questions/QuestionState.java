@@ -64,18 +64,14 @@ public class QuestionState extends MenuState {
 		//the question
 		title = Globals.question.getQuestion();
 		// TODO il faudra que tout ça soit pris via Globals, lui même généré à partir de la BDD
-		titleVoice = Conf.SND_VOIX_PATH+"question_grand_pere.ogg";
-		optionsVoices = new String[]{Conf.SND_VOIX_PATH+"14ans.ogg", Conf.SND_VOIX_PATH+"80ans.ogg", Conf.SND_VOIX_PATH+"140ans.ogg"};
+		titleVoice = Conf.getVoice("question_grand_pere");
+		optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
 		optionsSounds = new Sound[options.length];
 		titleSound = new Sound(titleVoice);
 		for(int i=0; i<options.length; i++){
     		optionsSounds[i] = new Sound(optionsVoices[i]);
     	}
 		super.enter(gc, sbg); //It will read the options[selected]
-	}
-	
-	public void initSounds(){
-		
 	}
 	
 	// Appelee lors de la sortie de l'etat
