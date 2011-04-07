@@ -8,7 +8,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
@@ -24,9 +23,9 @@ public class MainMenuState extends MenuState {
     	voix = new t2s.SIVOXDevint();
     	
 		options = new String[] {"Jouer","Scores","Instructions","Quitter"};
-    	optionsVoices = new String[] {Conf.SND_PATH+"voix/jouer.wav",Conf.SND_PATH+"voix/scores.wav",Conf.SND_PATH+"voix/instructions.wav",Conf.SND_PATH+"voix/quitter.wav"};
+    	optionsVoices = new String[] {Conf.SND_VOIX_PATH+"jouer.ogg",Conf.SND_VOIX_PATH+"scores.ogg",Conf.SND_VOIX_PATH+"instructions.ogg",Conf.SND_VOIX_PATH+"quitter.ogg"};
     	title = "Bienvenue dans l'univers de Songe";
-    	titleVoice = Conf.SND_PATH+"voix/bienvenue.wav";
+    	titleVoice = Conf.SND_VOIX_PATH+"bienvenue.ogg";
     }
 
 	@Override
@@ -39,7 +38,6 @@ public class MainMenuState extends MenuState {
     	for(int i=0; i<options.length; i++){
     		optionsSounds[i] = new Sound(optionsVoices[i]);
     	}
-		//musique = new Music("../Slick/snd/hope.ogg");
 	}
 
 	@Override
