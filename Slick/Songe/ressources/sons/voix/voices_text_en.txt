@@ -1,0 +1,12 @@
+Files[.ogg] : text
+
+bienvenue : "Wellcome in the universe of Dream !"
+jouer : "Play"
+instructions : "Instructions"
+scores : "Scores"
+quitter : "Quit"
+
+question_grand_pere : "How old is my grandfather ?"
+14ans : "14 years"
+80ans : "80 years"
+140ans : "140 years"

@@ -61,7 +61,15 @@ public abstract class MenuState extends BasicGameState {
     	options = new String[0];
     	optionsVoices = new String[0];
     	optionsSounds = new Sound[0];
-    	
+    	selected = 0;
+    }
+    
+    public void initSounds() throws SlickException{
+    	titleSound = new Sound(titleVoice);
+    	optionsSounds = new Sound[options.length];
+    	for(int i=0; i<options.length; i++){
+    		optionsSounds[i] = new Sound(optionsVoices[i]);
+    	}
     }
 
 	@Override
@@ -191,6 +199,7 @@ public abstract class MenuState extends BasicGameState {
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
 		firstOptionPlayed = false;
+		stopSounds();
 	}
 
 }
