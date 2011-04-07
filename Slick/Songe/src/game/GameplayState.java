@@ -32,7 +32,6 @@ public class GameplayState extends AbstractGameState {
 	}
 	private States currentState;
 	
-	private Music musique;
 	private Sound2 sonSaut;
 	
 	private Sound2 sound;
@@ -46,9 +45,8 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
-		//musique = new Music("../Slick/snd/requiem.wav");
-		sonSaut = new Sound2(Conf.SND_PATH+"over.wav");
-		sound = new Sound2(Conf.SND_PATH+"nuit.wav");
+		sonSaut = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
+		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		restart();
 		//We set Open Al constants about physical
 		AL10.alDopplerFactor(1.0f); // Doppler effect

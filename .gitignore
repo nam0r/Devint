@@ -7,3 +7,5 @@ bin
 *~
 *.db
 Slick/FortDevint/ressources/wav/*
+phrase.pho
+phrase.wav

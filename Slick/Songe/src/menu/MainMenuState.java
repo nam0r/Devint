@@ -1,5 +1,6 @@
 package menu;
 
+import main.Conf;
 import main.Globals;
 import main.Hoorah;
 
@@ -7,31 +8,36 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
  
 public class MainMenuState extends MenuState {
 	
-	private Music musique;
 	
-    public MainMenuState(int stateID) {
+    public MainMenuState(int stateID) throws SlickException {
     	super(stateID);
-    	
-    	options = new String[] {"Jouer","Highscores","Instructions","Exit"};
-    	title = "Songe";
     	//The voice tool
     	voix = new t2s.SIVOXDevint();
     	
+		options = new String[] {"Jouer","Scores","Instructions","Quitter"};
+    	optionsVoices = new String[] {Conf.SND_VOIX_PATH+"jouer.ogg",Conf.SND_VOIX_PATH+"scores.ogg",Conf.SND_VOIX_PATH+"instructions.ogg",Conf.SND_VOIX_PATH+"quitter.ogg"};
+    	title = "Bienvenue dans l'univers de Songe";
+    	titleVoice = Conf.SND_VOIX_PATH+"bienvenue.ogg";
     }
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		//musique = new Music("../Slick/snd/hope.ogg");
+		
+    	titleSound = new Sound(titleVoice);
+    	optionsSounds = new Sound[options.length];
+    	for(int i=0; i<options.length; i++){
+    		optionsSounds[i] = new Sound(optionsVoices[i]);
+    	}
 	}
 
 	@Override
@@ -73,9 +79,9 @@ public class MainMenuState extends MenuState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.enter(gc, sbg);
-		//musique.loop();
 		//this state is important so we put it in Globals
 		Globals.returnState = stateID;
+		
 	}
 	
 	// Appelee lors de la sortie de l'etat
@@ -83,7 +89,6 @@ public class MainMenuState extends MenuState {
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {
 		super.leave(gc, sb);
-		//musique.stop();
 	}
 
 }

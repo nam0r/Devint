@@ -9,8 +9,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import sound.AlUtils;
  
 public abstract class MenuState extends BasicGameState {
 
@@ -20,10 +23,6 @@ public abstract class MenuState extends BasicGameState {
 	protected t2s.SIVOXDevint voix;
 	/** The font to write the message with */
 	protected Font font;
-	/** The title */
-	protected String title;
-	/** The menu options */
-	protected String[] options;
 	/** The index of the selected option */
 	protected int selected;
 	/** Indicates how thick the cases are */
@@ -32,17 +31,44 @@ public abstract class MenuState extends BasicGameState {
 	protected int caseLargeSelected;
 	/** The graphics */
 	protected Graphics gfx;
+	
+	/** The title */
+	protected String title;
+	/** The title voice path */
+	protected String titleVoice;
+	/** The title sound */
+	protected Sound titleSound;
+	/** The menu options */
+	protected String[] options;
+	/** The menu options voices paths */
+	protected String[] optionsVoices;
+	/** The menu options sounds */
+	protected Sound[] optionsSounds;
+	/** Indicates if the option 1 has been said for the 1st time */
+	protected boolean firstOptionPlayed;
+	/** Input */
+	protected Input input;
 
 	
     public MenuState(int stateID) {
     	this.stateID = stateID;
     	//The voice tool
     	voix = new t2s.SIVOXDevint();
+    	firstOptionPlayed = false;
+    	title = "";
+    	titleVoice = "";
+    	//titleSound = new Sound();
+    	options = new String[0];
+    	optionsVoices = new String[0];
+    	optionsSounds = new Sound[0];
+    	
     }
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		input = gc.getInput();
+		input.enableKeyRepeat();
 		font = new AngelCodeFont(Conf.RESS_PATH+"demo2.fnt",Conf.RESS_PATH+"demo2_00.tga");
 		caseLarge = gc.getHeight()/8;
 		caseLargeSelected = gc.getHeight()/8;
@@ -98,25 +124,40 @@ public abstract class MenuState extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-	
-		Input input = gc.getInput();
-		
+		//If the title is finished, we play 1 time the 1st option
+		if(!titleSound.playing() && !firstOptionPlayed){
+			optionsSounds[selected].play();
+			firstOptionPlayed = true;
+		}
 		if (input.isKeyPressed(Input.KEY_DOWN) || input.isKeyPressed(Input.KEY_RIGHT)) {
 			selected++;
 			if (selected >= options.length)
 				selected = 0;
-			voix.stop();
-			voix.playShortText(options[selected]);
+			//voix.stop();
+			//voix.playShortText(options[selected]);
+			//voix.playWav(optionsVoices[selected]);
+			stopSounds();
+			optionsSounds[selected].play();
 		}
 		if (input.isKeyPressed(Input.KEY_UP) || input.isKeyPressed(Input.KEY_LEFT)) {
 			selected--;
 			if (selected < 0)
 				selected = options.length - 1;
-			voix.stop();
-			voix.playShortText(options[selected]);
+			//voix.stop();
+			//voix.playShortText(options[selected]);
+			//voix.playWav(optionsVoices[selected]);
+			stopSounds();
+			optionsSounds[selected].play();
 		}
 	}
-
+	
+	protected void stopSounds(){
+		for(int i=0; i<optionsSounds.length; i++){
+			optionsSounds[i].stop();
+		}
+		titleSound.stop();
+	}
+	
 	@Override
 	public int getID() {
 		return this.stateID;
@@ -131,8 +172,14 @@ public abstract class MenuState extends BasicGameState {
 		super.enter(gc, sbg);
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
-		voix.stop();
-		voix.playShortText(options[selected]);
+		//The listener should be at default position
+		AlUtils.resetAlListener();
+		//voix.stop();
+		//voix.playShortText(title+". "+options[selected]);
+		//voix.playWav(titleVoice);
+		//voix.playWav(optionsVoices[selected]);
+		titleSound.play();
+		
 	}
 	
 	// Appelee lors de la sortie de l'etat
@@ -143,6 +190,7 @@ public abstract class MenuState extends BasicGameState {
 		selected = 0;
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
+		firstOptionPlayed = false;
 	}
 
 }

@@ -56,7 +56,7 @@ public class LoadingState extends BasicGameState {
 			try {
 				nextResource.load();
 				// slow down loading for example purposes
-				try { Thread.sleep(50); } catch (Exception e) {}
+				try { Thread.sleep(1); } catch (Exception e) {}
 			} catch (IOException e) {
 				throw new SlickException("Failed to load: "+nextResource.getDescription(), e);
 			}
