@@ -109,6 +109,7 @@ public abstract class SQLiteDB {
             System.out.println("La requête (" + query + ") a été exécutée avec succès.");
         } catch (SQLException e) {
             System.err.println("Problème lors de l'exécution de la requête (" + query + ").");
+            e.printStackTrace();
         }
 	}
 

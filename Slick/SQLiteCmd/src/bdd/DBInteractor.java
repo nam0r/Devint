@@ -17,13 +17,13 @@ public class DBInteractor extends SQLiteDB {
 		
 		query = "";
 
-		fromFile("scriptBdd.txt");
+		//fromFile("scriptBdd.txt");
 		//fromCmdLine();
 		
 		close();
 	}
 	
-	private void fromCmdLine() {
+	public void fromCmdLine() {
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			try {
@@ -37,7 +37,7 @@ public class DBInteractor extends SQLiteDB {
 		} while(! query.equalsIgnoreCase("close"));
 	}
 	
-	private void fromFile(String filename) {
+	public void fromFile(String filename) {
 		InputStream ips = null;
 		try {
 			ips = new FileInputStream(filename);
