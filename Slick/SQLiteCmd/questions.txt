@@ -1,0 +1,21 @@
+#id: 
+# wording:
+# voice: 
+# scenario: (booleen)
+# choice: texte | position | noeud lié
+
+id: 1
+wording: Quel est l'âge de mon grand père ?
+voice: ageGrandPere.ogg
+scenario: 0
+choice: 40 ans | 1 | 3
+choice: 80 ans | 2 | 5
+choice: 140 ans | 3 | 9
+
+id: 2
+wording: Quel est le résultat de l'opération 3+5 ?
+voice: troisPlusCinq.ogg
+scenario: 1
+choice: 42
+choice: 15
+choice: 8

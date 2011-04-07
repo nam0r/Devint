@@ -1,0 +1,33 @@
+CREATE TABLE noeuds(id_auto integer primary key, id integer, question integer, mini_jeu integer, FOREIGN KEY(question) REFERENCES questions(id), FOREIGN KEY(mini_jeu) REFERENCES minijeux(id))
+CREATE TABLE questions(id integer primary key, scenario integer, fichiervoix text)
+CREATE TABLE choix(id integer primary key, question_id integer, question_position integer, noeud_id integer, FOREIGN KEY(question_id) REFERENCES questions(id))
+CREATE TABLE minijeux(id integer primary key, niv1 integer, niv2 integer, niv3 integer, niv4 integer, FOREIGN KEY(niv1) REFERENCES noeuds(id), FOREIGN KEY(niv2) REFERENCES noeuds(id), FOREIGN KEY(niv3) REFERENCES noeuds(id), FOREIGN KEY(niv4) REFERENCES noeuds(id))
+
+noeuds
+    int id // La "vraie" ID du mini-jeu (qu'on peut définir nous-mêmes, non auto-incrémentée) (PK)
+    int question (peut être null) // Si pas à null, alors arrivé à ce noeud, on posera la question d'ID question
+    int mini-jeu (peut être null) // Si pas à null, alors arrivé à ce noeud, on jouera au mini-jeu d'ID mini_jeu (correspond à l'ID du State du mini-jeu)
+    
+    
+questions
+    int id (PK)
+    boolean scenario
+    string fichierdevoix // L'emplacement du fichier de voix utilisé pour prononcer l'énoncé de la question
+
+choix
+    int id (PK)
+    int question_id // La question à laquelle ce choix est une réponse (FK)
+    int question_position // Position du choix dans le menu proposé à l'utilisateur
+    int noeud_id // Noeud auquel correspondra la suite du scénario si ce choix est fait (on lie à id et non id_auto donc PAS UNE CLE ETRANGERE !!!)
+
+miniJeux
+    id (PK)
+    int niv1 // L'id du noeud où l'on ira si on fait un bon score (FK)
+    int niv2 // L'id du noeud où l'on ira si on fait un score un peu moins bon (FK)
+    int niv3 // L'id du noeud où l'on ira si on fait un score encore moins bon (FK)
+    int niv4 // L'id du noeud où l'on ira si on fait un mauvais score (FK)
+
+
+IDEES :
+- stocker le score obtenu par choix de questions ?
+- stocker le score obtenu par qualité de reussite à un mini-jeu ?
