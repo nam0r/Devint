@@ -43,27 +43,28 @@ public class ChoicePersoState extends MenuState {
 		gfx.setFont(font);
 		this.gfx = gfx;
 		for (int i = 0; i < images.length; i++) {
+			float scale = 1;
 			// selected perso
 			if (selected == i) {
 				// The small image
-				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1)
-						- (images[i].getWidth() / 4 * 1.1f),
-						3 * gc.getHeight() / 4, 0.7f);
+				scale = (float)(gc.getWidth())/1450f;
+				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1) - (images[i].getWidth() * (scale/2)),
+						3 * gc.getHeight() / 4 - (images[i].getHeight() * (scale/4)), scale);
 				// The big image
-				images[i].draw(gc.getWidth() / 2 - images[i].getWidth() / 2, gc
-						.getHeight()
-						/ 3 - images[i].getHeight() / 2, 1f);
+				scale = (float)(gc.getWidth())/1024f;
+				images[i].draw(gc.getWidth() / 2 - images[i].getWidth() * (scale/2), gc.getHeight() / 3 - images[i].getHeight() * (scale/2), scale);
 				gfx.setColor(Color.white);
 				gfx.drawString(options[i], gc.getWidth() / 2
 						- (font.getWidth(options[i]) / 2), gc.getHeight() / 3
-						+ images[i].getHeight() / 2 + 20);
+						+ images[i].getHeight() * (scale/2) + 20);
 			}
 			// not selected persos
 			else {
 				// The small images
-				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1)
-						- images[i].getWidth() / 4,
-						3 * gc.getHeight() / 4,	0.6f);
+				System.out.println(gc.getWidth());
+				scale = (float)(gc.getWidth())/1700f;
+				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1) - images[i].getWidth() * (scale/2),
+						3 * gc.getHeight() / 4 - (images[i].getHeight() * (scale/4)), scale);
 			}
 		}
 
