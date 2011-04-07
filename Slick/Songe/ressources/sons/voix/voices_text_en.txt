@@ -1,0 +1,5 @@
+Files[.ogg] : text
+
+bienvenue : "Wellcome in the universe of Dream !"
+jouer : "Play"
+

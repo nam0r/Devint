@@ -32,12 +32,7 @@ public class MainMenuState extends MenuState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		
-    	titleSound = new Sound(titleVoice);
-    	optionsSounds = new Sound[options.length];
-    	for(int i=0; i<options.length; i++){
-    		optionsSounds[i] = new Sound(optionsVoices[i]);
-    	}
+    	initSounds();
 	}
 
 	@Override

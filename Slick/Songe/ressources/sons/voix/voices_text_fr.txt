@@ -1,0 +1,7 @@
+Files[.ogg] : text
+
+bienvenue : "Bienvenue dans l'univers de Songe !"
+jouer : "Jouer"
+instructions : "Instructions"
+scores : "Scores"
+quitter : "Quitter"

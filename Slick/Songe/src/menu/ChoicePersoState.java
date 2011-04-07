@@ -41,11 +41,7 @@ public class ChoicePersoState extends MenuState {
 		super.init(gc, sbg);
 		images = new Image[] { new Image(Conf.IMG_PATH+"homer.jpg"), new Image(Conf.IMG_PATH+"alien.jpg"),
 				new Image(Conf.IMG_PATH+"mario.jpg"), new Image(Conf.IMG_PATH+"tux.png") };
-		titleSound = new Sound(titleVoice);
-    	optionsSounds = new Sound[options.length];
-    	for(int i=0; i<options.length; i++){
-    		optionsSounds[i] = new Sound(optionsVoices[i]);
-    	}
+		initSounds();
 	}
 
 	@Override
