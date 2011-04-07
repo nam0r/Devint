@@ -53,7 +53,6 @@ public class QuestionState extends MenuState {
 		}
 	}
 	
-	// Appelee lors de l'entree dans l'etat
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -74,7 +73,6 @@ public class QuestionState extends MenuState {
 		super.enter(gc, sbg); //It will read the options[selected]
 	}
 	
-	// Appelee lors de la sortie de l'etat
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {

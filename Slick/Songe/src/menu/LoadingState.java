@@ -2,12 +2,14 @@ package menu;
 
 import java.io.IOException;
 
+import main.Conf;
 import main.Hoorah;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.BasicGameState;
@@ -20,6 +22,17 @@ public class LoadingState extends BasicGameState {
 	private int stateID;
 	/** The next resource to load */
 	private DeferredResource nextResource;
+	/** the scale depending on the resolution of the screen */
+	private float scale;
+	/** The game container */
+	GameContainer gc;
+	/** Loading bar's unit base width */
+	public static final int BAR_WIDTH = 20;
+	/** Loading bar's base height */
+	public static final int BAR_HEIGHT = 50;
+	/** Loading voice */
+	private Sound voice;
+	
 	
 	public LoadingState(int stateID) {
 		this.stateID = stateID;
@@ -32,7 +45,10 @@ public class LoadingState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame game)
 			throws SlickException {
+		voice = new Sound(Conf.getVoice("chargement"));
 		LoadingList.setDeferredLoading(true);
+		this.gc = gc;
+		scale = (float)(gc.getWidth())/1024f;
 	}
 
 	@Override
@@ -40,13 +56,13 @@ public class LoadingState extends BasicGameState {
 			throws SlickException {
 		int total = LoadingList.get().getTotalResources();
 		int loaded = LoadingList.get().getTotalResources() - LoadingList.get().getRemainingResources();
-		int x=gc.getWidth()/2-(total*20)/2;
-		int y=gc.getHeight()/2-30;
+		int x=gc.getWidth()/2-(int)((total*BAR_WIDTH*scale)/2);
+		int y=gc.getHeight()/2-(int)(30*scale);
 		if (nextResource != null) {
 			g.drawString("Chargement : "+nextResource.getDescription(), x, y);
 		}
-		g.fillRect(x, y+50, loaded*20, 30);
-		g.drawRect(x, y+50, total*20, 30);
+		g.fillRect(x, y+50*scale, loaded*BAR_WIDTH*scale, BAR_HEIGHT*scale);
+		g.drawRect(x, y+50*scale, total*BAR_WIDTH*scale, BAR_HEIGHT*scale);
 	}
 
 	@Override
@@ -56,7 +72,7 @@ public class LoadingState extends BasicGameState {
 			try {
 				nextResource.load();
 				// slow down loading for example purposes
-				try { Thread.sleep(1); } catch (Exception e) {}
+				try { Thread.sleep(0);} catch (Exception e) {}
 			} catch (IOException e) {
 				throw new SlickException("Failed to load: "+nextResource.getDescription(), e);
 			}
@@ -69,7 +85,12 @@ public class LoadingState extends BasicGameState {
 		} else {
 			game.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
-
+	}
+	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		voice.play();
 	}
 	
 }

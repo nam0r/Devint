@@ -61,7 +61,6 @@ public class ChoicePersoState extends MenuState {
 			// not selected persos
 			else {
 				// The small images
-				System.out.println(gc.getWidth());
 				scale = (float)(gc.getWidth())/1700f;
 				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1) - images[i].getWidth() * (scale/2),
 						3 * gc.getHeight() / 4 - (images[i].getHeight() * (scale/4)), scale);

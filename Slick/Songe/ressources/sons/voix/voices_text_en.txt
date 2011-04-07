@@ -6,6 +6,7 @@ instructions : "Instructions"
 scores : "Scores"
 quitter : "Quit"
 
+chargement : "Loading"
 aurore : "Aurore"
 timeo : "Timeo"
 tux : "Tux"
