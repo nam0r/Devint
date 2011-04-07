@@ -12,54 +12,54 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-public class ChoicePersoState extends BasicGameState {
+public class ChoicePersoState extends MenuState {
 
 	private int stateID;
 
-	/** The font to write the message with */
-	private Font font;
-	/** The menu options */
-	private String[] options;
 	/** The menu images */
-	private Image[] images;
-	/** The index of the selected option */
-	private int selected;
+	protected Image[] images;
 
 	public ChoicePersoState(int stateID) {
+		super(stateID);
 		this.stateID = stateID;
-		options = new String[] { "Homer Simpson", "Link", "Alien", "Mario",
+		options = new String[] { "Homer Simpson", "Alien", "Mario",
 				"Tux" };
-		selected = 0;
+		optionsVoices = new String[] {Conf.SND_VOIX_PATH+"jouer.ogg",Conf.SND_VOIX_PATH+"scores.ogg",Conf.SND_VOIX_PATH+"instructions.ogg",Conf.SND_VOIX_PATH+"quitter.ogg"};
+    	title = "Bienvenue dans l'univers de Songe";
+    	titleVoice = Conf.SND_VOIX_PATH+"bienvenue.ogg";
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		images = new Image[] { new Image(Conf.IMG_PATH+"homer.jpg"),
-				new Image(Conf.IMG_PATH+"link.jpg"), new Image(Conf.IMG_PATH+"alien.jpg"),
+		super.init(gc, sbg);
+		images = new Image[] { new Image(Conf.IMG_PATH+"homer.jpg"), new Image(Conf.IMG_PATH+"alien.jpg"),
 				new Image(Conf.IMG_PATH+"mario.jpg"), new Image(Conf.IMG_PATH+"tux.png") };
-
-		font = new AngelCodeFont(Conf.RESS_PATH+"demo2.fnt",
-				Conf.RESS_PATH+"demo2_00.tga");
+		titleSound = new Sound(titleVoice);
+    	optionsSounds = new Sound[options.length];
+    	for(int i=0; i<options.length; i++){
+    		optionsSounds[i] = new Sound(optionsVoices[i]);
+    	}
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gfx)
 			throws SlickException {
 		gfx.setFont(font);
-
+		this.gfx = gfx;
 		for (int i = 0; i < images.length; i++) {
 			// selected perso
 			if (selected == i) {
 				// The small image
 				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1)
 						- (images[i].getWidth() / 4 * 1.1f),
-						3 * gc.getHeight() / 4, 0.6f);
+						3 * gc.getHeight() / 4, 0.7f);
 				// The big image
 				images[i].draw(gc.getWidth() / 2 - images[i].getWidth() / 2, gc
 						.getHeight()
@@ -74,7 +74,7 @@ public class ChoicePersoState extends BasicGameState {
 				// The small images
 				images[i].draw(gc.getWidth() / (images.length + 1) * (i + 1)
 						- images[i].getWidth() / 4,
-						3 * gc.getHeight() / 4,	0.5f);
+						3 * gc.getHeight() / 4,	0.6f);
 			}
 		}
 
@@ -83,22 +83,10 @@ public class ChoicePersoState extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
+		super.update(gc, sbg, delta);
 
-		Input input = gc.getInput();
-
-		if (input.isKeyPressed(Input.KEY_DOWN)
-				|| input.isKeyPressed(Input.KEY_RIGHT)) {
-			selected++;
-			if (selected >= options.length)
-				selected = options.length - 1;
-		}
-		if (input.isKeyPressed(Input.KEY_UP)
-				|| input.isKeyPressed(Input.KEY_LEFT)) {
-			selected--;
-			if (selected < 0)
-				selected = 0;
-		}
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
+			//The player chosen
 			Globals.playerType = selected;
 			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
@@ -108,21 +96,11 @@ public class ChoicePersoState extends BasicGameState {
 	}
 
 	@Override
-	public int getID() {
-		return this.stateID;
-	}
-
-	// Appelee lors de l'entree dans l'etat
-	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.enter(gc, sbg);
-
-		Input input = gc.getInput();
-		input.clearKeyPressedRecord();
 	}
 
-	// Appelee lors de la sortie de l'etat
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {

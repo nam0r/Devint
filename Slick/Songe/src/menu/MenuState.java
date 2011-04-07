@@ -61,7 +61,7 @@ public abstract class MenuState extends BasicGameState {
     	options = new String[0];
     	optionsVoices = new String[0];
     	optionsSounds = new Sound[0];
-    	
+    	selected = 0;
     }
 
 	@Override
