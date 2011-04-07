@@ -5,3 +5,8 @@ jouer : "Jouer"
 instructions : "Instructions"
 scores : "Scores"
 quitter : "Quitter"
+
+question_grand_pere : "Quel est l'âge de mon grand-père ?"
+14ans : "14 ans"
+80ans : "80 ans"
+140ans : "140 ans"
