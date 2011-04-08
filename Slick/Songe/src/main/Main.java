@@ -6,15 +6,16 @@ public class Main {
 
 	public static void main(String[] args) {
 		AppGameContainer app;
+		// initial ratio for 4/3 screens
 		int width = 1024;
 		int height = 768;
 		try {
 			app = new AppGameContainer(new Hoorah());
 			float ratio = (float)app.getScreenWidth() / (float)app.getScreenHeight();
 			switch((int)(ratio*100)){
-				case 160: height = 640; break;
+				case 160: width = 1280; height = 800; break; //ratio 16/10
 				case 178: 
-				case 177: height = 576; break;
+				case 177: height = 576; break; //ratio 16/9
 			}
 			//we first try to play in 1024*768 full screen
 			try{
