@@ -18,7 +18,7 @@ public class Main {
 			catch(Exception e){
 				try{
 					app.setDisplayMode(app.getScreenWidth(), app.getScreenHeight(), true);
-					// For test purposes !
+					// à des fins de test, pour ne pas charger en fullscreen en permanence
 					throw new Exception();
 				}
 				//if again fails, we don't play in full screen

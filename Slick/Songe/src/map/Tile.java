@@ -4,7 +4,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
 
 /**
- * Une tuile representee par une image et une forme
+ * A tile represented by an image and a shape
  */
 public class Tile {
 	private Shape shape;

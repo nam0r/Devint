@@ -32,6 +32,7 @@ public abstract class Environment implements EnvironmentInterface {
 	 */
 	public void addEntity(PhysicalEntity entity) {
 		if (entity.getBody() != null) {
+			System.out.println(entity.getBody());
 			world.add(entity.getBody());
 		}
 		

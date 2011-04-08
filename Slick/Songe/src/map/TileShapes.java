@@ -7,7 +7,7 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 
 /**
- * Definit les formes des tuiles.
+ * Defines the tile's shape
  */
 public class TileShapes {
 	
@@ -39,18 +39,16 @@ public class TileShapes {
 	}
 	
 	/**
-	 * Renvoie la forme correspondant au type de tuile passe en parametre
-	 * 
-	 * @param name Le nom de la forme dont on veut obtenir les proprietes
-	 * @return La forme correspondant au type de tuile passe en parametre
-	 * @throws SlickException Si aucune forme ne correspond au nom passe en parametre
+	 * Returns the shape corresponding to the type of tile passed in param
+	 * @param name The name of the shape we want to have
+	 * @return The shape of the tile passed in parameter
+	 * @throws SlickException if there is no shape corresponding to the name in parameter
 	 */
 	public static Shape getShapeByName(String name) throws SlickException {
 		Shape shape = shapes.get(name);
 		if (shape == null) {
 			throw new SlickException("Unrecognised shape: "+name);
 		}
-		
 		return shape;
 	}
 }

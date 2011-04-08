@@ -7,7 +7,10 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.util.ResourceLoader;
 
+import actors.PhysicalEntity;
+
 import environment.TileEnvironment;
+import game.Crate;
 
 /**
  * A loader for a very simple tile based map text format that maps from
@@ -18,18 +21,18 @@ public class MapLoader {
 	private TileSet set;
 	
 	/**
-	 * Cree un nouveau chargeur de map
+	 * Creates  new MapLoader
 	 * 
-	 * @param set Le TileSet dans lequel sont stockees les tuiles disponibles
+	 * @param set The TileSet in which are the available tiles
 	 */
 	public MapLoader(TileSet set) {
 		this.set = set;
 	}
 	
 	/**
-	 * Charge une carte a partir du fichier passe en parametre.
+	 * Loads a map.
 	 * 
-	 * @param ref Le chemin vers la carte a charger
+	 * @param ref The reference to the map to load
 	 * @return The configured environment thats been populated with tiles
 	 */
 	public TileEnvironment load(String ref) {
@@ -62,8 +65,14 @@ public class MapLoader {
 			for (int y=0;y<height;y++) {
 				char c = lines.get(y).charAt(x);
 				Tile tile = set.getTile(c);
-				if (tile != null) {
-					env.setTile(x, y, tile);
+				PhysicalEntity object = set.getObject(c);
+				//we add the tile if exists
+				if (tile != null) env.setTile(x, y, tile);
+				//Or we add the object if exists
+				if (object != null){
+					//necessary because if set directly, the Body class considers that all the same crates have the same id, so it bugs
+					env.addEntity(new Crate(x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
+					System.out.println(x*env.getTileWidth()+" "+y*env.getTileHeight()+" "+object.getWidth()+" "+object.getHeight()+" "+object.getBody().getMass());
 				}
 			}
 		}

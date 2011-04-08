@@ -23,7 +23,7 @@ import org.newdawn.slick.geom.Transform;
 /**
  * An environment based on a tilemap. The tile shapes are combined into more 
  * performant polygons for the purpose of the physical world as part of the 
- * initialisatin.
+ * initialization.
  * 
  * @author kevin
  */
@@ -272,6 +272,14 @@ public class TileEnvironment extends Environment {
 		}
 
 		g.setLineWidth(1);
+	}
+	
+	public int getTileWidth(){
+		return tileWidth;
+	}
+	
+	public int getTileHeight(){
+		return tileHeight;
 	}
 	
 }

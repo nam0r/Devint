@@ -13,7 +13,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -209,10 +208,11 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException{
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
-		entities.add(new Crate(300,100, 60,60,10));
+		//A présent ça se fait dans la map, je laisse ce comment à titre d'ex de valeurs
+		/*entities.add(new Crate(300,100, 60,60,10));
 		entities.add(new Crate(550,40, 46,46,5));
 		entities.add(new Crate(555,-10, 46,46,5));
-		entities.add(new Crate(545,100, 46,46,5));
+		entities.add(new Crate(545,100, 46,46,5));*/
 		
 		entities.add(new MarioIA(400,150));
 		entities.add(new HomerIA(900,150));

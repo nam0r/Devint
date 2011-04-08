@@ -1,6 +1,18 @@
 <tiles>
-	<tile id="=" image="tile1.png" shape="BLOCK" />
-	<tile id="#" image="tile2.png" shape="BLOCK" />
-	<tile id="/" image="tile3.png" shape="LEFTSLOPE" />
-	<tile id="\" image="tile4.png" shape="RIGHTSLOPE" />
+	<tiles>
+		<tile id="=" image="tile1.png" shape="BLOCK" />
+		<tile id="#" image="tile2.png" shape="BLOCK" />
+		<tile id="/" image="tile3.png" shape="LEFTSLOPE" />
+		<tile id="\" image="tile4.png" shape="RIGHTSLOPE" />
+	</tiles>
+	<objects>
+		<object id="a" size="20" mass="1" />
+		<object id="b" size="35" mass="3" />
+		<object id="c" size="46" mass="5" />
+		<object id="d" size="60" mass="10" />
+		<object id="e" size="70" mass="15" />
+		<object id="f" size="80" mass="20" />
+		<object id="g" size="100" mass="30" />
+		<object id="z" size="40" mass="5" />
+	</objects>
 </tiles>
