@@ -83,7 +83,7 @@ public class LoadingState extends BasicGameState {
 		if (LoadingList.get().getRemainingResources() > 0) {
 			nextResource = LoadingList.get().getNext();
 		} else {
-			game.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+			game.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
 	}
 	

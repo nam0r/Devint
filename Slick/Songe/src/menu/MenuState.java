@@ -176,8 +176,8 @@ public abstract class MenuState extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		//useful for the beautiful and fat menu
-		gfx.setLineWidth(20);
 		super.enter(gc, sbg);
+		//gfx.setLineWidth(20);
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 		//The listener should be at default position
