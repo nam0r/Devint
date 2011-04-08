@@ -12,8 +12,28 @@ timeo : "Timeo"
 tux : "Tux"
 lamasticot : "Lamasticot"
 title_choiceperso: "Choose the character you will play"
+descriptionaurore: "Aurore is an agile girl. She can jump high, but she is weaker for moving things."
+descriptiontimeo: "Timéo is a strong boy. He can easily move things, but he jumps less high."
 
+jeuf1: "You moves by pressing LEFT or RIGHT. To jump, press UP or CONTROL. If you are in contact with a character, he or she will ask you a question or will make you play a mini-game. If you have forgotten what you have to do, press F2. If you would like to hear your score, press F3."
+f2aurore: "You play Aurore, an agile girl."
+f2timeo: "You play Timéo, a strong boy."
+jeuf2all: "You have to find the lamasticot. It's a creature which the name is told when you are close to it. If you need help to know how to play, press F1." 
+jeuf3: "Your score is now"
+
+minijeuvaisseauF1:"This is a mini-game : you have a space ship that falls to the down. The ship musn't touch the ground : press UP to go back up. The ship musn't touch the ceiling : don't press UP HAUT if the ship is too close to the ceiling. To start playing, press UP. To repeat again, press F1."
+
+finminijeu:"You have finished the mini-game. You made a score of :"
+
+question:"Question"
 question_grand_pere : "How old is my grandfather ?"
 14ans : "14 years"
 80ans : "80 years"
 140ans : "140 years"
+bonnereponse:"Well done, this is the good answer."
+mauvaisereponse:"Sorry, this is the wrong answer."
+
+
+findujeu:"You have finished the game. Your score is :"
+bonscore:"You did a very well score. Enter your name."
+entendrescore:"If you would like to hear the scores, press F2."

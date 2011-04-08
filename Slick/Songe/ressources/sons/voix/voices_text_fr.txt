@@ -12,8 +12,29 @@ timeo : "Timéo"
 tux : "Tux"
 lamasticot : "Lamasticot"
 title_choiceperso: "Choisis le personnage que tu vas incarner."
+descriptionaurore: "Aurore est une fille agile. Elle peut sauter haut, mais elle est moins forte pour pousser des objets."
+descriptiontimeo: "Timéo est un garçon fort. Il peut facilement pousser des objets, mais il saute moins haut."
 
+jeuf1: "Tu te déplaces avec les touches GAUCHE et DROITE. Pour sauter, appuie sur HAUT ou sur CONTROLE. Si tu touches un personnage, celui-ci te posera une question ou te fera jouer à un mini-jeu. Si tu as oublié ce que tu dois faire, appuie sur F2. Pour connaitre ton score, appuie sur F3."
+f2aurore: "Tu incarnes Aurore, une fille agile."
+f2timeo: "Tu incarnes Timéo, un garçon fort."
+jeuf2all: "Tu dois retrouver le lamasticot. C'est un animal dont on prononce le nom quand on s'en approche. Si tu veux de l'aide pour jouer, appuie sur F1." 
+jeuf3: "Ton score est maintenant de"
+
+minijeuvaisseauF1:"Ceci est un mini-jeu : tu manipules un vaisseau qui tombe vers le bas. Le vaisseau ne doit pas toucher le sol : appuie sur HAUT pour le remonter. Le vaisseau ne doit pas toucher le plafond : n'appuie pas sur HAUT si le plafond est trop près du vaisseau. Pour commencer à jouer, appuie sur HAUT. Pour répéter cette aide, appuie sur F1."
+
+finminijeu:"Tu as terminé le mini-jeu. Tu as fait un score de :"
+
+question:"Question"
 question_grand_pere : "Quel est l'âge de mon grand-père ?"
 14ans : "14 ans"
 80ans : "80 ans"
 140ans : "140 ans"
+
+bonnereponse:"Bien joué, c'est la bonne réponse."
+mauvaisereponse:"Raté, c'est la mauvaise réponse."
+
+
+findujeu:"Tu as réussi le jeu. Ton score est de :"
+bonscore:"Tu as fait un très bon score. Entre ton nom."
+entendrescore:"Pour entendre les scores, appuie sur F2."
