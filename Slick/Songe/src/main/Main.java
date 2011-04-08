@@ -19,11 +19,7 @@ public class Main {
 			//we first try to play in 1024*768 full screen
 			try{
 				app.setDisplayMode(width, height, true);
-<<<<<<< HEAD
 				//throw new Exception();
-=======
-				throw new Exception();
->>>>>>> eb1b764e2c09bf74cca51d66547b4f80218fe1de
 			}
 			//if fails, we play in the native resolution, full screen
 			catch(Exception e){
