@@ -20,23 +20,22 @@ public class Mario extends Actor {
 	private final int NB_SPRITES_WALK = 3;
 	
 	public Mario() {
-		super(Conf.RESS_PATH+"all.png", 100, 150, 1f, 20, 31);
+		super(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 100, 150, 2f, 40, 62);
+		
+		walk = new SpriteSheet(image,40,62);
 		
 		try {
-			Image im = new Image(Conf.IMG_PATH+"mariowalk.png");
-			walk = new SpriteSheet(im,20,31);
-		} catch (SlickException e) {
-			System.err.println("Image mario walk pas trouvées.");
-		}
-		
-		try {
-			Image im = new Image(Conf.IMG_PATH+"mariofall.png");
-			jump = new SpriteSheet(im,28,27);
+			Image im = new Image(Conf.IMG_SPRITES_PATH+"mariofall_big.png");
+			jump = new SpriteSheet(im,56,54);
 		} catch (SlickException e) {
 			System.err.println("Image mario fall pas trouvées.");
 		}
-		//walk = getSpriteSheet(0,50,50);
-		//jump = getSpriteSheet(150,50,50);
+		
+		moveForce = 150;
+		jumpForce = 40000;
+		MAX_JUMP_VEL = 120;
+		body.setMaxVelocity(50, 120);
+		
 	}
 
 	public void render(Graphics g) {

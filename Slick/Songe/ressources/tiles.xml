@@ -6,13 +6,14 @@
 		<tile id="\" image="tile4.png" shape="RIGHTSLOPE" />
 	</tiles>
 	<objects>
-		<object id="a" size="40" mass="2" />
-		<object id="b" size="70" mass="6" />
-		<object id="c" size="90" mass="10" />
-		<object id="d" size="120" mass="20" />
-		<object id="e" size="140" mass="30" />
-		<object id="f" size="160" mass="40" />
-		<object id="g" size="200" mass="60" />
-		<object id="z" size="80" mass="10" />
+		<object id="a" size="40" mass="2" image="crate2.jpg" />
+		<object id="b" size="70" mass="6" image="crate2.jpg" />
+		<object id="c" size="90" mass="10" image="crate2.jpg" />
+		<object id="d" size="120" mass="20" image="crate2.jpg" />
+		<object id="e" size="140" mass="30" image="crate2.jpg" />
+		<object id="f" size="160" mass="40" image="crate2.jpg" />
+		
+		<object id="g" size="90" mass="28" image="crate3.jpg" />
+		<object id="h" size="120" mass="30" image="crate3.jpg" />
 	</objects>
 </tiles>

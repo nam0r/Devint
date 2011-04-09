@@ -20,7 +20,7 @@ public class Homer extends Actor {
 	private final int NB_SPRITES_WALK = 8;
 	
 	public Homer() {
-		super(Conf.IMG_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126);
+		super(Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126);
 		
 		//run = getSpriteSheet(0,36,65);
 		//jump = getSpriteSheet(150,50,50);

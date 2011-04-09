@@ -43,7 +43,7 @@ public class TileSet {
 				Shape shape;
 				try {
 					shape = TileShapes.getShapeByName(element.getAttribute("shape"));
-					tiles.put(id, new Tile(new Image(Conf.IMG_PATH+image), shape));
+					tiles.put(id, new Tile(new Image(Conf.IMG_TILES_PATH+image), shape));
 				} catch (SlickException e) {
 					System.err.println(e.getMessage());
 				}
@@ -58,9 +58,10 @@ public class TileSet {
 				//String image = element.getAttribute("image");
 				int size = Integer.parseInt(element.getAttribute("size"));
 				int mass = Integer.parseInt(element.getAttribute("mass"));
+				String image = element.getAttribute("image");
 
 				//else if(id == 'b') object = new Crate();
-				objects.put(id, new Crate(0, 0, size, size, mass));
+				objects.put(id, new Crate(Conf.IMG_TEXTURES_PATH+image, 0, 0, size, size, mass));
 			}
 		}
 		

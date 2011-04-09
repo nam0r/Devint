@@ -41,7 +41,7 @@ public class GameplayState extends AbstractGameState {
 	
 	
 	public GameplayState(int id) {
-		super(id, Conf.IMG_PATH+"sky2.jpg", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"testmap.txt", Conf.TILE_WIDTH, Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
+		super(id, Conf.IMG_TEXTURES_PATH+"sky2.jpg", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"testmap.txt", Conf.TILE_WIDTH, Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
 	}
 
 	@Override
@@ -198,10 +198,9 @@ public class GameplayState extends AbstractGameState {
 	protected Actor createPlayer() {
 		switch(Globals.playerType){
 		case 0:return new Homer();
-		case 1:return new Homer();
-		case 2:return new Alien();
+		case 1:return new Alien();
+		case 2:return new Homer();
 		case 3:return new Mario();
-		case 4:return new Homer();
 		}
 		return new Mario();
 		
@@ -211,15 +210,10 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException{
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
-		//A présent ça se fait dans la map, je laisse ce comment à titre d'ex de valeurs
-		/*entities.add(new Crate(300,100, 60,60,10));
-		entities.add(new Crate(550,40, 46,46,5));
-		entities.add(new Crate(555,-10, 46,46,5));
-		entities.add(new Crate(545,100, 46,46,5));*/
 		
-		entities.add(new MarioIA(400,150));
-		entities.add(new HomerIA(900,150));
-		entities.add(new AlienIA(1300,150));
+		entities.add(new MarioIA(800,150));
+		entities.add(new HomerIA(1800,150));
+		entities.add(new AlienIA(2600,150));
 		return entities;
 	}
 
