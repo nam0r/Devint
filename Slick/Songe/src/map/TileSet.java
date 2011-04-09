@@ -43,7 +43,7 @@ public class TileSet {
 				Shape shape;
 				try {
 					shape = TileShapes.getShapeByName(element.getAttribute("shape"));
-					tiles.put(id, new Tile(new Image(Conf.RESS_PATH+image), shape));
+					tiles.put(id, new Tile(new Image(Conf.IMG_PATH+image), shape));
 				} catch (SlickException e) {
 					System.err.println(e.getMessage());
 				}

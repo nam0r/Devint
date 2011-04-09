@@ -32,11 +32,17 @@ public class Map {
 	private float xoffset;
 	/** The view y-axis offset */
 	private float yoffset;
+	/** One of the two factors to set the behavior of the background */
+	private float backPar;
+	/** the other one of the two factors to set the behavior of the background */
+	private float backPar2;
 	
 	private boolean showBounds;
 	
 	public Map(String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
-			int tilesWidth, int tilesHeight) {
+			int tilesWidth, int tilesHeight, float backPar, float backPar2) {
+		this.backPar = backPar;
+		this.backPar2 = backPar2;
 		try {
 			background = new Image(pathToBackground);
 		} catch (SlickException e) {
@@ -83,7 +89,6 @@ public class Map {
 	public void render(Graphics g, GameContainer gc) {
 		float width = gc.getWidth();
 		float height = gc.getHeight();
-		float backPar = 3f;
 		float bx = ((-xoffset * backPar) % width) / -width;
 		float by = ((-yoffset * backPar) % height) / -height;
 		
@@ -93,11 +98,11 @@ public class Map {
 		GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2f(bx,by);
 			GL11.glVertex2f(0,0);
-			GL11.glTexCoord2f(bx+3,by);
+			GL11.glTexCoord2f(bx+backPar2,by);
 			GL11.glVertex2f(width,0);
-			GL11.glTexCoord2f(bx+3,by+3);
+			GL11.glTexCoord2f(bx+backPar2,by+backPar2);
 			GL11.glVertex2f(width,height);
-			GL11.glTexCoord2f(bx,by+3);
+			GL11.glTexCoord2f(bx,by+backPar2);
 			GL11.glVertex2f(0,height);
 		GL11.glEnd();
 		

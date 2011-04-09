@@ -51,7 +51,7 @@ public class MainMenuState extends MenuState {
 			switch (selected) {
 			case 0:
 				sbg.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
-						null);
+					new FadeInTransition(Color.black));
 				break;
 			case 1:
 				sbg.enterState(Hoorah.SAVEHIGHSCORE, new FadeOutTransition(Color.black),

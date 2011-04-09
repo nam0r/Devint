@@ -48,6 +48,8 @@ public abstract class MenuState extends BasicGameState {
 	protected boolean firstOptionPlayed;
 	/** Input */
 	protected Input input;
+	/** indicates if lines are already enlarged or not */
+	protected boolean linesLarge;
 
 	
     public MenuState(int stateID) {
@@ -87,6 +89,10 @@ public abstract class MenuState extends BasicGameState {
 			throws SlickException {
 		gfx.setFont(font);
 		this.gfx = gfx;
+		if(!linesLarge){
+			gfx.setLineWidth(20);
+			linesLarge = false;
+		}
 		int suppHeight = 0;
 		//title
 		//rectangle border
@@ -176,8 +182,8 @@ public abstract class MenuState extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		//useful for the beautiful and fat menu
-		super.enter(gc, sbg);
-		//gfx.setLineWidth(20);
+		//super.enter(gc, sbg);
+		linesLarge = false;
 		Input input = gc.getInput();
 		input.clearKeyPressedRecord();
 		//The listener should be at default position

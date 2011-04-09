@@ -25,6 +25,9 @@ import actors.Actor;
 import actors.PhysicalEntity;
 
 public class GameplayState extends AbstractGameState {
+	public static final float BACKPAR = 1f;
+	public static final float BACKPAR2 = 1.5f;
+	
 	
 	private enum States {
 		IN_GAME, PAUSE, HIGHSCORE, GAME_OVER
@@ -38,7 +41,7 @@ public class GameplayState extends AbstractGameState {
 	
 	
 	public GameplayState(int id) {
-		super(id, Conf.RESS_PATH+"cave.png", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"testmap.txt", 32, 32);
+		super(id, Conf.IMG_PATH+"sky2.jpg", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"testmap.txt", Conf.TILE_WIDTH, Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
 	}
 
 	@Override

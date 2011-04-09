@@ -20,22 +20,17 @@ public class Homer extends Actor {
 	private final int NB_SPRITES_WALK = 8;
 	
 	public Homer() {
-		super(Conf.RESS_PATH+"all.png", 100, 150, 4f, 36, 63);
+		super(Conf.IMG_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126);
 		
 		//run = getSpriteSheet(0,36,65);
 		//jump = getSpriteSheet(150,50,50);
 		
-		try {
-			Image im = new Image(Conf.IMG_PATH+"homeranim.png");
-			run = new SpriteSheet(im, 36, 65);
-		} catch (SlickException e) {
-			System.err.println("Image Homer walk pas trouvées.");
-		}
+		run = new SpriteSheet(image, 72, 130);
 		
-		moveForce = 100;
-		jumpForce = 15000;
-		MAX_JUMP_VEL = 50;
-		body.setMaxVelocity(14, 45);
+		moveForce = 300;
+		jumpForce = 50000;
+		MAX_JUMP_VEL = 100;
+		body.setMaxVelocity(28, 90);
 		
 	}
 
@@ -57,7 +52,7 @@ public class Homer extends Actor {
 		} else*/ if (moving() && onGround()) {
 			//int f = (frame % 6) + 1;
 			sheet = run;
-			sx = frame % 8;
+			sx = frame % NB_SPRITES_WALK;
 			sy = 0;
  		} else if (onGround()) {
 			sheet = run;
@@ -75,7 +70,7 @@ public class Homer extends Actor {
 		}
 		
 		//image.drawCentered(getX(), getY()-12);
-		image.draw(getX()-width/2, getY()-height/2, width, height+2);
+		image.draw(getX()-width/2, getY()-height/2, width, height+4);
 	}
 
 }
