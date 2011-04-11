@@ -15,7 +15,7 @@ import actors.PhysicalEntity;
  */
 public abstract class Environment implements EnvironmentInterface {
 	/** The physical world the environment provides to it's entities */
-	protected World world = new World(new Vector2f(0,10), 20); 
+	protected World world = new World(new Vector2f(0,20), 12); 
 
 	/** The entities list */
 	protected ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();

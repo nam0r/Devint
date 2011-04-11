@@ -71,8 +71,7 @@ public class MapLoader {
 				//Or we add the object if exists
 				if (object != null){
 					//necessary because if set directly, the Body class considers that all the same crates have the same id, so it bugs
-					env.addEntity(new Crate(x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
-					System.out.println(x*env.getTileWidth()+" "+y*env.getTileHeight()+" "+object.getWidth()+" "+object.getHeight()+" "+object.getBody().getMass());
+					env.addEntity(new Crate(object.getPath(), x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
 				}
 			}
 		}

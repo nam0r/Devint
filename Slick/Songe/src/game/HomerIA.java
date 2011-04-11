@@ -18,8 +18,9 @@ import actors.IA;
 public class HomerIA extends IA {
 	
 	public HomerIA(int x, int y){
-		super(Conf.IMG_PATH+"homeranim.png", 8, x, y, 36, 65);
-		body.setMaxVelocity(10, 45);
+		super(Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 8, x, y, 72, 130, 10);
+		body.setMaxVelocity(20, 90);
+		moveForce = 300;
 		walkingTime = 1500;
 		
 	}
@@ -46,7 +47,7 @@ public class HomerIA extends IA {
 			image = image.getFlippedCopy(true, false);
 		}
 		
-		image.draw(getX()-width/2, getY()-height/2, width, height+2);
+		image.draw(getX()-width/2, getY()-height/2, width, height+4);
 		
 		
 	}

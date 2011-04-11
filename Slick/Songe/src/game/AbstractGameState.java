@@ -33,6 +33,8 @@ public abstract class AbstractGameState extends BasicGameState {
 	private String pathToMap;
 	private int tilesWidth;
 	private int tilesHeight;
+	private float backPar;
+	private float backPar2;
 	
 	protected int stateID;
 	
@@ -48,13 +50,15 @@ public abstract class AbstractGameState extends BasicGameState {
 	
 	
 	public AbstractGameState(int id, String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
-			int tilesWidth, int tilesHeight) {
+			int tilesWidth, int tilesHeight, float backPar, float backPar2) {
 		this.stateID = id;
 		this.pathToBackground = pathToBackground;
 		this.pathToTilesDefinitions = pathToTilesDefinitions;
 		this.pathToMap = pathToMap;
 		this.tilesWidth = tilesWidth;
 		this.tilesHeight = tilesHeight;
+		this.backPar = backPar;
+		this.backPar2 = backPar2;
 	}
 	
 	@Override
@@ -65,7 +69,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight);
+		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
 		// On crée le joueur et on l'ajoute a la map
 		player = createPlayer();
 		restart();
@@ -88,9 +92,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		
-		map.render(g, gc);
-		
+		map.render(g, gc);	
 	}
 	
 	@Override
@@ -125,7 +127,6 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
-		
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public abstract class Actor extends PhysicalEntity {
 	/** The maximum velocity an actor can jump at - this is used to prevent some odd effects of a penetration based physics engine */
-	protected int MAX_JUMP_VEL = 50;
+	protected int MAX_JUMP_VEL = 100;
 	
 	private final int WAITING_TIME = 500;
 	
@@ -47,8 +47,8 @@ public abstract class Actor extends PhysicalEntity {
 	// the forces applied for different actions. The move force is applied over and
 	// over so is reasonably small. The jump force is a one shot deal and so is reasonably
 	// big
-	protected float moveForce = 100;
-	protected float jumpForce = 20000;
+	protected float moveForce = 200;
+	protected float jumpForce = 40000;
 	
 	
 	/*
@@ -72,7 +72,7 @@ public abstract class Actor extends PhysicalEntity {
 		body.setUserData(this);
 		body.setRestitution(0);
 		body.setFriction(0f);
-		body.setMaxVelocity(20, 50);
+		body.setMaxVelocity(40, 100);
 		body.setRotatable(false);
 		setPosition(x,y);
 	}
@@ -243,7 +243,7 @@ public abstract class Actor extends PhysicalEntity {
 		// handle jumping as opposed to be moving up. This prevents
 		// bounces on edges
 		if ((!jumped) && (getVelY() < 0)) {
-			setVelocity(getVelX(),getVelY() * 0.95f);
+			setVelocity(getVelX(),getVelY() * 0.90f);
 		} 
 		
 		if (jumped) {

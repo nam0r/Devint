@@ -2,6 +2,7 @@ package environment;
 
 import java.util.ArrayList;
 
+import main.Conf;
 import map.Tile;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
@@ -40,9 +41,9 @@ public class TileEnvironment extends Environment {
 	private GeomUtil util = new GeomUtil();
 	
 	/** The width in pixels of each tile */
-	private int tileWidth = 32;
+	private int tileWidth = Conf.TILE_WIDTH;
 	/** The height in pixels of each tile */
-	private int tileHeight = 32;
+	private int tileHeight = Conf.TILE_HEIGHT;
 	/** The bounds of the entire environment */
 	private Rectangle bounds;
 	
