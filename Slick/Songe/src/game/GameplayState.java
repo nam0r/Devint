@@ -25,19 +25,23 @@ import actors.Actor;
 import actors.PhysicalEntity;
 
 public class GameplayState extends AbstractGameState {
+	/** Useful parameters to consider the background more or less far and therefore moving */
 	public static final float BACKPAR = 1f;
 	public static final float BACKPAR2 = 1.7f;
-	private Input input;
 	
-	private enum States {
+	protected Input input;
+	
+	protected enum States {
 		IN_GAME, PAUSE, HIGHSCORE, GAME_OVER
 	}
-	private States currentState;
+	protected States currentState;
 	
-	private Sound2 sonSaut;
+	protected Sound2 sonSaut;
+	protected Sound2 soundWalk;
+	protected int soundWalkIndex;
 	
-	private Sound2 sound;
-	private int soundIndex;
+	protected Sound2 sound;
+	protected int soundIndex;
 	
 	
 	public GameplayState(int id) {
@@ -50,8 +54,9 @@ public class GameplayState extends AbstractGameState {
 		input = gc.getInput();
 		sonSaut = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
+		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs.ogg");
 		restart();
-		//We set Open Al constants about physical
+		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
 		AL10.alDopplerVelocity(1.0f); // Sound speed
 		AL10.alDistanceModel(AL11.AL_EXPONENT_DISTANCE);
@@ -81,6 +86,31 @@ public class GameplayState extends AbstractGameState {
 		//AlUtils.resetAlListener();
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
 			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!! "+AL10.alGetError());
+		
+		// Walking sound management
+		// if the player is moving and not jumping we play the walk sound
+		if (player.moving() && !player.jumping() && !player.falling()) {
+			//if the sound is still playing we let it play
+			if (!soundWalk.playing())
+				soundWalkIndex = soundWalk.loop();
+			//We modulate the sound speed depending on the speed of movement of the character
+			float pitchVel = 0;
+			if(player.facingRight()) {
+				pitchVel = 0.4f + 1/(1/(player.getVelX()/33f));
+				System.out.println(pitchVel+" lol");
+			}
+			else {
+				pitchVel = 0.4f + -1/(1/(player.getVelX()/33f));
+				System.out.println(pitchVel+" lool");
+			}
+			//for security
+			if(pitchVel > 10) pitchVel = 10;
+			if(pitchVel < 0.001) pitchVel = 0.001f;
+			soundWalk.setPitch(pitchVel, soundWalkIndex);
+		} else {
+			//we stop the sound because the character is no more walking
+			if (soundWalk.playing()) soundWalk.stop();
+		}
 	}
 	
 	@Override
@@ -104,7 +134,7 @@ public class GameplayState extends AbstractGameState {
 		soundIndex = sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
 		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.5f);
 		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 25f);
-		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 200f);
+		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 250f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 	}
 	
@@ -129,7 +159,6 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	protected void notTimedEvents(GameContainer gc, StateBasedGame sbg, int delta) {
 		
-		// Gestion des évènements clavier
 		if (input.isKeyPressed(Input.KEY_R)) {
 			try {
 				superRestart(gc, sbg);
@@ -145,22 +174,12 @@ public class GameplayState extends AbstractGameState {
 			currentState = States.GAME_OVER;
 		}
 		if (input.isKeyPressed(Input.KEY_P)) {
-			if(gc.isPaused()) {
-				gc.resume();
-			}
-			else {
-				gc.pause();
-			}
+			currentState = States.PAUSE;
 		}
-		
-		//sound.loop();
 		
 		// Est-ce que le personnage bouge ?
 		player.setMoving(false);
-		if (input.isKeyDown(Input.KEY_LEFT)) {
-			player.setMoving(true);
-		}
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
+		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
 			player.setMoving(true);
 		}
 	}
@@ -199,7 +218,6 @@ public class GameplayState extends AbstractGameState {
 		case 3:return new Mario();
 		}
 		return new Mario();
-		
 	}
 	
 
@@ -219,6 +237,12 @@ public class GameplayState extends AbstractGameState {
 		case IN_GAME:
 			break;
 		case PAUSE:
+			if(gc.isPaused()) {
+				gc.resume();
+			}
+			else {
+				gc.pause();
+			}
 			break;
 		case GAME_OVER:
 			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),

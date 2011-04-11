@@ -3,6 +3,7 @@ package game;
 import main.Conf;
 import main.Globals;
 import main.Hoorah;
+import net.phys2d.math.Vector2f;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -47,9 +48,16 @@ public class HomerIA extends IA {
 			image = image.getFlippedCopy(true, false);
 		}
 		
-		image.draw(getX()-width/2, getY()-height/2, width, height+4);
-		
-		
+		image.draw(getX()-width/2, getY()-height/2, width, height+4);	
+	}
+	
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+		//Makes him jump and fall again and again
+		if(!jumped && onGround){
+			body.addForce(new Vector2f(0, -1000));
+		}
 	}
 	
 	@Override

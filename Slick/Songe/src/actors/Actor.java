@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
+
 /**
  * 
  */
@@ -43,6 +44,8 @@ public abstract class Actor extends PhysicalEntity {
 	protected int frameTimer = 0;
 	/** The interval between animation frame change in milliseconds */
 	protected int frameInterval = 100;
+	/** Indicates if player is really on the ground */
+	protected boolean on;
 	
 	
 	// the forces applied for different actions. The move force is applied over and
@@ -167,6 +170,15 @@ public abstract class Actor extends PhysicalEntity {
 	}
 	
 	/**
+	 * Check if the actor is really on the ground
+	 * 
+	 * @return True if the actor is jumping
+	 */
+	public boolean on() {
+		return on;
+	}
+	
+	/**
 	 * Check if the actor is waiting
 	 * 
 	 * @return True if the actor is waiting
@@ -202,7 +214,7 @@ public abstract class Actor extends PhysicalEntity {
 		// physics engine will cause constant tiny bounces as the 
 		// the body tries to settle - so don't consider the body
 		// to have left the ground until it's done so for some time
-		boolean on = onGroundImpl(body);
+		on = onGroundImpl(body);
 		if (!on) {
 			offGroundTimer += delta;
 			if (offGroundTimer > jumpTime) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
@@ -233,7 +245,7 @@ public abstract class Actor extends PhysicalEntity {
 		// keep velocity constant throughout the updates
 		setVelocity(velx, getVelY());
 		// if we're standing on the ground negate gravity. This stops
-		// some instability in physics 
+		// some instability in physics
 		body.setGravityEffected(!on);
 		
 		// clamp y 

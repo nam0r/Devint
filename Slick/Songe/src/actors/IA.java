@@ -1,5 +1,7 @@
 package actors;
 
+import net.phys2d.math.Vector2f;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
@@ -85,6 +87,7 @@ public abstract class IA extends Actor {
 			moveLeft();
 		else
 			moveRight();
+		
 	}
 	
 	public void onCollision() {
