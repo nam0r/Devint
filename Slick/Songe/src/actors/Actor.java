@@ -15,26 +15,27 @@ public abstract class Actor extends PhysicalEntity {
 	/** The maximum velocity an actor can jump at - this is used to prevent some odd effects of a penetration based physics engine */
 	protected int MAX_JUMP_VEL = 100;
 	
-	private final int WAITING_TIME = 500;
+	protected final int WAITING_TIME = 500;
 	
 	/** True if the actor is currently resting on the ground */
-	private boolean onGround = false;
+	protected boolean onGround = false;
 	/** The amount of time the actor has been considered to be off the ground */
-	private int offGroundTimer = 0;
+	protected int offGroundTimer = 0;
 	/** The amount of time during which the actor hasn't moved */
-	private int waitingTimer = 0;
+	protected int waitingTimer = 0;
 	/** True if the actor has jumped and hence are in the air */
-	private boolean jumped = false;
+	protected boolean jumped = false;
 	/** True if the actor is facing right */
-	private boolean facingRight = true;
+	protected boolean facingRight = true;
 	/** True if the actor is moving - i.e. left or right */
-	private boolean moving = false;
+	protected boolean moving = false;
 	/** True if the actor is in the process of falling down */
-	private boolean falling = false;
+	protected boolean falling = false;
 	
 	/** The x component of the velocity for the current update */
-	private float velx;
-	
+	protected float velx;
+	/** The time the actor should be out of ground to be considered as jumping */
+	protected int jumpTime = 200;
 	
 	/** The current frame of animation */
 	protected int frame;
@@ -204,7 +205,7 @@ public abstract class Actor extends PhysicalEntity {
 		boolean on = onGroundImpl(body);
 		if (!on) {
 			offGroundTimer += delta;
-			if (offGroundTimer > 200) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
+			if (offGroundTimer > jumpTime) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
 				onGround = false;
 			}
 			waitingTimer = 0;
