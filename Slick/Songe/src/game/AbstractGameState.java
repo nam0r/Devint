@@ -92,9 +92,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		
-		map.render(g, gc);
-		
+		map.render(g, gc);	
 	}
 	
 	@Override
@@ -129,7 +127,6 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
-		
 	}
 	
 	@Override

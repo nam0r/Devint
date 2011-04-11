@@ -26,8 +26,8 @@ import actors.PhysicalEntity;
 
 public class GameplayState extends AbstractGameState {
 	public static final float BACKPAR = 1f;
-	public static final float BACKPAR2 = 1.5f;
-	
+	public static final float BACKPAR2 = 1.7f;
+	private Input input;
 	
 	private enum States {
 		IN_GAME, PAUSE, HIGHSCORE, GAME_OVER
@@ -47,6 +47,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
+		input = gc.getInput();
 		sonSaut = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		restart();
@@ -79,13 +80,12 @@ public class GameplayState extends AbstractGameState {
 		//sound.setSourceVelocity(10f, 0f, 0f, soundIndex);
 		//AlUtils.resetAlListener();
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
-			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!! "+AL10.alGetError());
 	}
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		super.update(gc, sbg, delta);
-		
 	}
 	
 	// Appelee lors de l'entree dans l'etat
@@ -93,7 +93,6 @@ public class GameplayState extends AbstractGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
 		restart();
-		//musique.loop();		
 		currentState = States.IN_GAME;
 		// If the "main" previous state was not the game state, then it's probably the menu state
 		if(Globals.returnState != stateID)
@@ -123,14 +122,12 @@ public class GameplayState extends AbstractGameState {
 		super.leave(gc, sb);
 		//musique.stop();
 		//If comming in game again, the player will be moved
-		player.setPosition(player.getX()+100, player.getY()-50);
+		player.setPosition(player.getX()+200, player.getY()-100);
 		sound.stop();
 	}	
 	
 	@Override
 	protected void notTimedEvents(GameContainer gc, StateBasedGame sbg, int delta) {
-		
-		Input input = gc.getInput();
 		
 		// Gestion des évènements clavier
 		if (input.isKeyPressed(Input.KEY_R)) {
@@ -145,8 +142,7 @@ public class GameplayState extends AbstractGameState {
 			map.showBounds();
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
+			currentState = States.GAME_OVER;
 		}
 		if (input.isKeyPressed(Input.KEY_P)) {
 			if(gc.isPaused()) {
@@ -199,7 +195,7 @@ public class GameplayState extends AbstractGameState {
 		switch(Globals.playerType){
 		case 0:return new Homer();
 		case 1:return new Alien();
-		case 2:return new Homer();
+		case 2:return new Tux();
 		case 3:return new Mario();
 		}
 		return new Mario();
@@ -225,7 +221,8 @@ public class GameplayState extends AbstractGameState {
 		case PAUSE:
 			break;
 		case GAME_OVER:
-			sbg.enterState(Hoorah.MAINMENUSTATE);
+			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
 			break;
 		}
 	}

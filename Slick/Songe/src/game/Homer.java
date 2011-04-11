@@ -27,10 +27,10 @@ public class Homer extends Actor {
 		
 		run = new SpriteSheet(image, 72, 130);
 		
-		moveForce = 300;
+		moveForce = 400;
 		jumpForce = 50000;
 		MAX_JUMP_VEL = 100;
-		body.setMaxVelocity(28, 90);
+		body.setMaxVelocity(28, 93);
 		
 	}
 
