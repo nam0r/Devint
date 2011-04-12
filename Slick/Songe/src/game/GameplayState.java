@@ -54,7 +54,7 @@ public class GameplayState extends AbstractGameState {
 		input = gc.getInput();
 		sonSaut = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
-		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs.ogg");
+		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
 		restart();
 		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -85,22 +85,23 @@ public class GameplayState extends AbstractGameState {
 		//sound.setSourceVelocity(10f, 0f, 0f, soundIndex);
 		//AlUtils.resetAlListener();
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
-			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!! "+AL10.alGetError());
+			System.out.println("Erreur d'OpenAL"+AL10.alGetError());
 		
-		// Walking sound management
+		// Begin walking sound management
 		// if the player is moving and not jumping we play the walk sound
 		if (player.moving() && !player.jumping() && !player.falling()) {
 			//if the sound is still playing we let it play
-			if (!soundWalk.playing())
+			if (!soundWalk.playing()){
 				soundWalkIndex = soundWalk.loop();
+			}
 			//We modulate the sound speed depending on the speed of movement of the character
 			float pitchVel = 0;
 			if(player.facingRight()) {
-				pitchVel = 0.4f + 1/(1/(player.getVelX()/33f));
+				pitchVel = 0.4f + 1/(1/(player.getVelX()/32f));
 				System.out.println(pitchVel+" lol");
 			}
 			else {
-				pitchVel = 0.4f + -1/(1/(player.getVelX()/33f));
+				pitchVel = 0.4f + -1/(1/(player.getVelX()/32f));
 				System.out.println(pitchVel+" lool");
 			}
 			//for security
@@ -111,6 +112,7 @@ public class GameplayState extends AbstractGameState {
 			//we stop the sound because the character is no more walking
 			if (soundWalk.playing()) soundWalk.stop();
 		}
+		//End walking sound management
 	}
 	
 	@Override
@@ -154,6 +156,7 @@ public class GameplayState extends AbstractGameState {
 		//If comming in game again, the player will be moved
 		player.setPosition(player.getX()+200, player.getY()-100);
 		sound.stop();
+		soundWalk.stop();
 	}	
 	
 	@Override

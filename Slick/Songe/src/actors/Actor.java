@@ -197,7 +197,7 @@ public abstract class Actor extends PhysicalEntity {
 			setVelocity(0, getVelY());
 		}
 		
-		falling = (getVelY() > 10)/* && (!onGround())*/;
+		falling = (getVelY() > 15)/* && (!onGround())*/;
 		velx = getVelX();
 		
 		
@@ -260,10 +260,12 @@ public abstract class Actor extends PhysicalEntity {
 		} 
 		
 		if (jumped) {
-			if (getVelY() >= 10) {
+			if (getVelY() >= 15) {
 				jumped = false;
 			}
 		}
+		
+		if(faceToWall() && ((getVelX()<3 && facingRight()) || (getVelX()>-3 && !facingRight()))) moving = false;
 	}
 	
 	/**
@@ -291,7 +293,6 @@ public abstract class Actor extends PhysicalEntity {
 		if (world == null) {
 			return false;
 		}
-		
 		// loop through the collision events that have occured in the
 		// world
 		CollisionEvent[] events = world.getContacts(body);
@@ -316,6 +317,32 @@ public abstract class Actor extends PhysicalEntity {
 			}
 		}
 		
+		return false;
+	}
+	
+	/**
+	 * Informs on the fact the user is blocked face to a wall or not
+	 * @return true if the user is blocked
+	 */
+	public boolean faceToWall() {
+		if (world == null) {
+			return false;
+		}
+		// loop through the collision events that have occured in the
+		// world
+		CollisionEvent[] events = world.getContacts(body);
+		
+		for (int i=0;i<events.length;i++) {
+			// if the point of collision was below the centre of the actor
+			// i.e. near the feet
+			if (events[i].getPoint().getY() < getY()+(height/3)) {
+				// check the normal to work out which body we care about
+				// if the right body is involved and a collision has happened
+				// below it then we're on the ground
+				if (events[i].getNormal().getX() < -0 || events[i].getNormal().getX() > 0)
+					return true;
+			}
+		}
 		return false;
 	}
 	
