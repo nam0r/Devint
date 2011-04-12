@@ -97,11 +97,11 @@ public class GameplayState extends AbstractGameState {
 			//We modulate the sound speed depending on the speed of movement of the character
 			float pitchVel = 0;
 			if(player.facingRight()) {
-				pitchVel = 0.4f + 1/(1/(player.getVelX()/32f));
+				pitchVel = 0.5f + 1/(1/(player.getVelX()/35f));
 				System.out.println(pitchVel+" lol");
 			}
 			else {
-				pitchVel = 0.4f + -1/(1/(player.getVelX()/32f));
+				pitchVel = 0.5f + -1/(1/(player.getVelX()/35f));
 				System.out.println(pitchVel+" lool");
 			}
 			//for security
