@@ -6,6 +6,9 @@ Aurore
 Timéo
 « Timéo est un garçon fort. Il peut facilement pousser des objets, mais il saute moins haut. »
 
+Tux
+« Tux est un manchot libre. Il est assez bon pour pousser des objets et pour sauter. »
+
 Début du jeu (ou F2) : 
 
 Aurore
@@ -13,6 +16,9 @@ Aurore
 
 Timéo
 « Tu incarnes Timéo, un garçon fort. »
+
+Tux
+« Tu incarnes Tux, un manchot libre. »
 
 (Après)
 « Tu dois retrouver le lamasticot. C'est un animal dont on prononce le nom quand on s'en approche. Si tu veux de l'aide pour jouer, appuie sur F1. »

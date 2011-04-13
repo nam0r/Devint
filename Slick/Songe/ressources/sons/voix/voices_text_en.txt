@@ -1,6 +1,6 @@
 Files[.ogg] : text
 
-bienvenue : "Wellcome in the universe of Dream !"
+bienvenue : "Welcome in the universe of Songe !"
 jouer : "Play"
 instructions : "Instructions"
 scores : "Scores"
