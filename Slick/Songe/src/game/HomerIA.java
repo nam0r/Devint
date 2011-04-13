@@ -1,16 +1,12 @@
 package game;
 
 import main.Conf;
-import main.Globals;
 import main.Hoorah;
 import net.phys2d.math.Vector2f;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
-import questions.Question;
-import sound.Sound2;
 import actors.IA;
 
 /**
@@ -61,18 +57,8 @@ public class HomerIA extends IA {
 	}
 	
 	@Override
-	protected Question createQuestion() {
-		String[] choices = {
-			"14 ans",
-			"80 ans",
-			"142 ans"
-		};
-		return new Question("Quelle est l'age de mon grand père ?", choices, 2, 140);
-	}
-	
-	@Override
 	public void onCollision() {
-		Globals.question = question;
+		// TODO
 	}
 
 	@Override

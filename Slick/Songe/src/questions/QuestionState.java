@@ -17,6 +17,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  
 public class QuestionState extends MenuState {
 	
+	private Question question;
+	
     public QuestionState(int stateID) throws SlickException {
     	super(stateID);
     }
@@ -41,8 +43,8 @@ public class QuestionState extends MenuState {
 		Input input = gc.getInput();
 		
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			if(Globals.question.isOk(selected))
-				Globals.score += Globals.question.getPoints();
+			if(question.isOk(selected))
+				Globals.score += question.getPoints();
 			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 				
@@ -56,20 +58,33 @@ public class QuestionState extends MenuState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		
+		question = Globals.node.getQuestion();
+		if(question == null) {
+			System.err.println("Il n'y a pas de question a lire !!!");
+		}
+		
 		//This is useful because we load here sounds that we didn't know at the beginning of the game, they are not deferred
 		LoadingList.setDeferredLoading(false);
-		//the choices
-		options = Globals.question.getChoices();
-		//the question
-		title = Globals.question.getQuestion();
-		// TODO il faudra que tout ça soit pris via Globals, lui même généré à partir de la BDD
-		titleVoice = Conf.getVoice("question_grand_pere");
-		optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
+		
+		options = question.getChoicesWordings(); // the choices
+		
+		title = question.getWording(); // the question
+		
+		// Le son a lire pour entendre l'enonce de la question
+		titleVoice = question.getVoice();
+		
+		// Les sons a lire pour entendre les choix possibles pour la question
+		//optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
+		optionsVoices = question.getChoicesVoices();
+		
 		optionsSounds = new Sound[options.length];
 		titleSound = new Sound(titleVoice);
 		for(int i=0; i<options.length; i++){
     		optionsSounds[i] = new Sound(optionsVoices[i]);
     	}
+		// ===============
+		
 		super.enter(gc, sbg); //It will read the options[selected]
 	}
 	

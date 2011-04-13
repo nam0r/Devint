@@ -5,15 +5,15 @@
 # choice: texte | position | noeud lié
 
 id: 1
-wording: Quel est l'âge de mon grand père ?
+wording: Quel est l''âge de mon grand père ?
 voice: ageGrandPere
 scenario: 1
-choice: 40 ans | 40ans | 3
-choice: 80 ans | 80ans | 5
-choice: 140 ans | 140ans | 9
+choice: 40 ans | 40ans | 1
+choice: 80 ans | 80ans | 1
+choice: 140 ans | 140ans | 1
 
 id: 2
-wording: Quel est le résultat de l'opération 3+5 ?
+wording: Quel est le résultat de l''opération 3+5 ?
 voice: troisPlusCinq
 scenario: 0
 choice: 42 | quarantedeux
