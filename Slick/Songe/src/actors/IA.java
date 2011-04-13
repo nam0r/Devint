@@ -1,5 +1,7 @@
 package actors;
 
+import net.phys2d.math.Vector2f;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
@@ -17,8 +19,8 @@ public abstract class IA extends Actor {
 	
 	protected boolean visited;
 	
-	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y, float width, float height) {
-		super(pathToSpriteSheet, x, y, 100000f, width, height);
+	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y, float width, float height, float mass) {
+		super(pathToSpriteSheet, x, y, mass, width, height);
 		
 		this.nb_sprites = nb_sprites;
 		walk = new SpriteSheet(image,(int)width,(int)height); // A revoir
@@ -26,7 +28,7 @@ public abstract class IA extends Actor {
 		way = Way.LEFT;
 		walkingTimer = 0;
 		
-		moveForce = 500000;
+		moveForce = 400;
 		
 		visited = false;
 		walkingTime = 1000; //1 sec
@@ -75,6 +77,7 @@ public abstract class IA extends Actor {
 			moveLeft();
 		else
 			moveRight();
+		
 	}
 	
 	public void onCollision() {

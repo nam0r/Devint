@@ -77,10 +77,11 @@ public class ChoicePersoState extends MenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			//The player chosen
 			Globals.playerType = selected;
-			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(
+			sbg.enterState(Hoorah.GAMEPLAYSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			gc.exit();
+		    sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+                    new FadeInTransition(Color.black));
 		}
 	}
 

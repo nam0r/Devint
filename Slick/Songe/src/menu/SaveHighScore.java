@@ -83,19 +83,19 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer,
 	 *      org.newdawn.slick.Graphics)
 	 */
-	public void render(GameContainer container, StateBasedGame game, Graphics g) {
-		image.draw(0, 0, 1024, 768);
+	public void render(GameContainer gc, StateBasedGame game, Graphics g) {
+		image.draw(0, 0, gc.getWidth(), gc.getHeight());
 		if(Globals.score != 0) {
 			font.drawString(200, 32, "Votre score : " + Globals.score);
 			// The name textfield is displayed only if the player has a real highscore
 			if(submitting){
-				nameField.render(container, g);
+				nameField.render(gc, g);
 			}
 		}
 		//else{
 		//	font.drawString(200, 32, "Votre score : " + Globals.score);
 		//}
-		displayScores(container, g);
+		displayScores(gc, g);
 	}
 
 	/**

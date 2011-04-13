@@ -1,0 +1,50 @@
+Choix du personnage : 
+
+Aurore
+« Aurore est une fille agile. Elle peut sauter haut, mais elle est moins forte pour pousser des objets. »
+
+Timéo
+« Timéo est un garçon fort. Il peut facilement pousser des objets, mais il saute moins haut. »
+
+Début du jeu (ou F2) : 
+
+Aurore
+« Tu incarnes Aurore, une fille agile. »
+
+Timéo
+« Tu incarnes Timéo, un garçon fort. »
+
+(Après)
+« Tu dois retrouver le lamasticot. C'est un animal dont on prononce le nom quand on s'en approche. Si tu veux de l'aide pour jouer, appuie sur F1. »
+
+F1 : 
+« Tu te déplaces avec les touches GAUCHE et DROITE. Pour sauter, appuie sur HAUT ou sur CONTROLE. Si tu touches un personnage, celui-ci te posera une question ou te fera jouer à un mini-jeu. Si tu as oublié ce que tu dois faire, appuie sur F2. Pour connaitre ton score, appuie sur F3. »
+
+F3 : 
+« Ton score est maintenant de » + score
+
+Mini-jeu (ou F1) : 
+« Ceci est un mini-jeu : tu manipules un vaisseau qui tombe vers le bas. Le vaisseau ne doit pas toucher le sol : appuie sur HAUT pour le remonter. Le vaisseau ne doit pas toucher le plafond : n'appuie pas sur HAUT si le plafond est trop près du vaisseau. Pour commencer à jouer, appuie sur HAUT. Pour répéter cette aide, appuie sur F1. »
+
+Fin du mini-jeu : 
+« Tu as terminé le mini-jeu. Tu as fait un score de : » + score du mini-jeu
+
+Question : 
+« Question : » + texte de la question
+
+Bonne réponse : 
+« Bien joué, c'est la bonne réponse. »
+
+Mauvaise réponse : 
+« Raté, c'est la mauvaise réponse. »
+
+Autre (cas scénaristique) : à voir.
+
+Fin du jeu : 
+« Tu as réussi le jeu. Ton score est de : » + score
+
+Si on ajoute notre nom : 
+« Tu as fait un très bon score. Entre ton nom. »
+
+(Après, qu'on ait ajouté le nom ou pas) : 
+« Pour entendre les scores, appuie sur F2. »

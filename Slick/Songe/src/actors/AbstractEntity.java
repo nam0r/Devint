@@ -57,6 +57,10 @@ public abstract class AbstractEntity {
 		this.image = this.image.getSubImage(x, y, width, height);
 	}
 	
+	public String getPath(){
+		return path;
+	}
+	
 	/* ******* *
 	 * Setters *
 	 * ******* */

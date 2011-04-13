@@ -50,8 +50,8 @@ public class MainMenuState extends MenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			switch (selected) {
 			case 0:
-				sbg.enterState(Hoorah.GAMEPLAYSTATE, new FadeOutTransition(Color.black),
-						null);
+				sbg.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
 				break;
 			case 1:
 				sbg.enterState(Hoorah.SAVEHIGHSCORE, new FadeOutTransition(Color.black),
@@ -63,8 +63,7 @@ public class MainMenuState extends MenuState {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
+            gc.exit();
 		}
 	}
 	

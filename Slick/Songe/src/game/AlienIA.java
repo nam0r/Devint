@@ -16,10 +16,11 @@ public class AlienIA extends IA {
 	private SpriteSheet run;
 	
 	public AlienIA(int x, int y) {
-		super(Conf.RESS_PATH+"all.png", 3, x, y, 24, 36);
-		body.setMaxVelocity(25, 55);
+		super(Conf.IMG_SPRITES_PATH+"all_big.png", 3, x, y, 48, 72, 8);
+		body.setMaxVelocity(30, 110);
 		walkingTime = 1200;
-		run = getSpriteSheet(0,50,50);
+		moveForce = 200;
+		run = getSpriteSheet(0,100,101);
 	}
 
 	@Override
@@ -33,8 +34,8 @@ public class AlienIA extends IA {
 		if (moving() && onGround()) {
 			int f = (frame % 6) + 1;
 			sheet = run;
-			sx = f % 3;
-			sy = f / 3;
+			sx = f % nb_sprites;
+			sy = f / nb_sprites;
  		} else if (onGround()) {
 			sheet = run;
 			sx = 0;
@@ -50,7 +51,7 @@ public class AlienIA extends IA {
 		}
 		
 		//image.drawCentered(getX(), getY()-12);
-		image.draw(getX()-24, getY()-28, 50, 50);
+		image.draw(getX()-48, getY()-56, 100, 100);
 	}
 
 	@Override

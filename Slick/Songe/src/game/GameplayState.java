@@ -25,29 +25,38 @@ import actors.Actor;
 import actors.PhysicalEntity;
 
 public class GameplayState extends AbstractGameState {
+	/** Useful parameters to consider the background more or less far and therefore moving */
+	public static final float BACKPAR = 1f;
+	public static final float BACKPAR2 = 1.7f;
 	
-	private enum States {
+	protected Input input;
+	
+	protected enum States {
 		IN_GAME, PAUSE, HIGHSCORE, GAME_OVER
 	}
-	private States currentState;
+	protected States currentState;
 	
-	private Sound2 sonSaut;
+	protected Sound2 sonSaut;
+	protected Sound2 soundWalk;
+	protected int soundWalkIndex;
 	
-	private Sound2 sound;
-	private int soundIndex;
+	protected Sound2 sound;
+	protected int soundIndex;
 	
 	
 	public GameplayState(int id) {
-		super(id, Conf.RESS_PATH+"cave.png", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"testmap.txt", 32, 32);
+		super(id, Conf.IMG_TEXTURES_PATH+"sky2.jpg", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"niveau1.txt", Conf.TILE_WIDTH, Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
+		input = gc.getInput();
 		sonSaut = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
+		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
 		restart();
-		//We set Open Al constants about physical
+		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
 		AL10.alDopplerVelocity(1.0f); // Sound speed
 		AL10.alDistanceModel(AL11.AL_EXPONENT_DISTANCE);
@@ -76,13 +85,39 @@ public class GameplayState extends AbstractGameState {
 		//sound.setSourceVelocity(10f, 0f, 0f, soundIndex);
 		//AlUtils.resetAlListener();
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
-			System.out.println("Errrrrrreur !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Erreur d'OpenAL"+AL10.alGetError());
+		
+		// Begin walking sound management
+		// if the player is moving and not jumping we play the walk sound
+		if (player.moving() && !player.jumping() && !player.falling()) {
+			//if the sound is still playing we let it play
+			if (!soundWalk.playing()){
+				soundWalkIndex = soundWalk.loop();
+			}
+			//We modulate the sound speed depending on the speed of movement of the character
+			float pitchVel = 0;
+			if(player.facingRight()) {
+				pitchVel = 0.5f + 1/(1/(player.getVelX()/35f));
+				System.out.println(pitchVel+" lol");
+			}
+			else {
+				pitchVel = 0.5f + -1/(1/(player.getVelX()/35f));
+				System.out.println(pitchVel+" lool");
+			}
+			//for security
+			if(pitchVel > 10) pitchVel = 10;
+			if(pitchVel < 0.001) pitchVel = 0.001f;
+			soundWalk.setPitch(pitchVel, soundWalkIndex);
+		} else {
+			//we stop the sound because the character is no more walking
+			if (soundWalk.playing()) soundWalk.stop();
+		}
+		//End walking sound management
 	}
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		super.update(gc, sbg, delta);
-		
 	}
 	
 	// Appelee lors de l'entree dans l'etat
@@ -90,7 +125,6 @@ public class GameplayState extends AbstractGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
 		restart();
-		//musique.loop();		
 		currentState = States.IN_GAME;
 		// If the "main" previous state was not the game state, then it's probably the menu state
 		if(Globals.returnState != stateID)
@@ -102,7 +136,7 @@ public class GameplayState extends AbstractGameState {
 		soundIndex = sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
 		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.5f);
 		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 25f);
-		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 200f);
+		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 250f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 	}
 	
@@ -120,16 +154,14 @@ public class GameplayState extends AbstractGameState {
 		super.leave(gc, sb);
 		//musique.stop();
 		//If comming in game again, the player will be moved
-		player.setPosition(player.getX()+100, player.getY()-50);
+		player.setPosition(player.getX()+200, player.getY()-100);
 		sound.stop();
+		soundWalk.stop();
 	}	
 	
 	@Override
 	protected void notTimedEvents(GameContainer gc, StateBasedGame sbg, int delta) {
 		
-		Input input = gc.getInput();
-		
-		// Gestion des évènements clavier
 		if (input.isKeyPressed(Input.KEY_R)) {
 			try {
 				superRestart(gc, sbg);
@@ -142,26 +174,15 @@ public class GameplayState extends AbstractGameState {
 			map.showBounds();
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
+			currentState = States.GAME_OVER;
 		}
 		if (input.isKeyPressed(Input.KEY_P)) {
-			if(gc.isPaused()) {
-				gc.resume();
-			}
-			else {
-				gc.pause();
-			}
+			currentState = States.PAUSE;
 		}
-		
-		//sound.loop();
 		
 		// Est-ce que le personnage bouge ?
 		player.setMoving(false);
-		if (input.isKeyDown(Input.KEY_LEFT)) {
-			player.setMoving(true);
-		}
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
+		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
 			player.setMoving(true);
 		}
 	}
@@ -195,28 +216,21 @@ public class GameplayState extends AbstractGameState {
 	protected Actor createPlayer() {
 		switch(Globals.playerType){
 		case 0:return new Homer();
-		case 1:return new Homer();
-		case 2:return new Alien();
+		case 1:return new Alien();
+		case 2:return new Tux();
 		case 3:return new Mario();
-		case 4:return new Homer();
 		}
 		return new Mario();
-		
 	}
 	
 
 	@Override
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException{
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
-		//A présent ça se fait dans la map, je laisse ce comment à titre d'ex de valeurs
-		/*entities.add(new Crate(300,100, 60,60,10));
-		entities.add(new Crate(550,40, 46,46,5));
-		entities.add(new Crate(555,-10, 46,46,5));
-		entities.add(new Crate(545,100, 46,46,5));*/
 		
-		entities.add(new MarioIA(400,150));
-		entities.add(new HomerIA(900,150));
-		entities.add(new AlienIA(1300,150));
+		entities.add(new MarioIA(800,150));
+		entities.add(new HomerIA(1800,150));
+		entities.add(new AlienIA(2600,150));
 		return entities;
 	}
 
@@ -226,9 +240,16 @@ public class GameplayState extends AbstractGameState {
 		case IN_GAME:
 			break;
 		case PAUSE:
+			if(gc.isPaused()) {
+				gc.resume();
+			}
+			else {
+				gc.pause();
+			}
 			break;
 		case GAME_OVER:
-			sbg.enterState(Hoorah.MAINMENUSTATE);
+			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
 			break;
 		}
 	}

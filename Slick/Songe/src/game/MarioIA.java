@@ -10,7 +10,8 @@ import actors.IA;
 public class MarioIA extends IA {
 	
 	public MarioIA(int x, int y) {
-		super(Conf.IMG_PATH+"mariowalk.png", 3, x, y, 20, 31);
+		super(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, x, y, 40, 62, 12);
+		moveForce = 150;
 	}
 
 	@Override

@@ -18,12 +18,18 @@ public class Alien extends Actor {
 	private SpriteSheet jump;
 	
 	public Alien() {
-		super(Conf.RESS_PATH+"all.png", 100, 150, 1f, 24, 36);
+		super(Conf.IMG_SPRITES_PATH+"all_big.png", 100, 150, 3f, 48, 72);
+
+		run = getSpriteSheet(0,100,101);
+		jump = getSpriteSheet(301,100,100);
 		
-		run = getSpriteSheet(0,50,50);
-		jump = getSpriteSheet(150,50,50);
+		moveForce = 200;
+		jumpForce = 40000;
+		MAX_JUMP_VEL = 100;
+		body.setMaxVelocity(40, 100);
 		
 		Globals.node = new Node(1);
+
 	}
 
 	public void render(Graphics g) {
@@ -61,7 +67,7 @@ public class Alien extends Actor {
 		}
 		
 		//image.drawCentered(getX(), getY()-12);
-		image.draw(getX()-24, getY()-28, 50, 50);
+		image.draw(getX()-48, getY()-57, 100, 100);
 	}
 
 }

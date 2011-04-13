@@ -25,8 +25,8 @@ public class Crate extends PhysicalEntity {
 	 * @param mass The mass of the crate
 	 * @throws SlickException Indicates a failure to load the resources
 	 */
-	public Crate(float x, float y, float width, float height, float mass) {
-		super(Conf.RESS_PATH+"crate.png", x, y, width, height, mass);
+	public Crate(String imagePath, float x, float y, float width, float height, float mass) {
+		super(imagePath, x, y, width, height, mass);
 		
 		body.setFriction(0.1f);
 	}

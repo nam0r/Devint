@@ -23,8 +23,8 @@ public class Hoorah extends StateBasedGame {
 	
 	// States
 	public static final int LOADINGSTATE = 0;
-	public static final int CHOICEPERSOSTATE = 1;
-	public static final int MAINMENUSTATE = 2;
+	public static final int MAINMENUSTATE = 1;
+	public static final int CHOICEPERSOSTATE = 2;
 	public static final int GAMEPLAYSTATE = 3;
 	public static final int HOVERCAVESTATE = 4;
 	public static final int SAVEHIGHSCORE = 5;
@@ -54,8 +54,8 @@ public class Hoorah extends StateBasedGame {
 		container.setVSync(vsync);
 		
 		this.addState(new LoadingState(LOADINGSTATE));
-		this.addState(new ChoicePersoState(CHOICEPERSOSTATE));
 		this.addState(new MainMenuState(MAINMENUSTATE));
+		this.addState(new ChoicePersoState(CHOICEPERSOSTATE));
 		this.addState(new GameplayState(GAMEPLAYSTATE));
 		this.addState(new HoverCave(HOVERCAVESTATE));
 		this.addState(new SaveHighScore(SAVEHIGHSCORE));
