@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
+
 /**
  * 
  */
@@ -15,26 +16,27 @@ public abstract class Actor extends PhysicalEntity {
 	/** The maximum velocity an actor can jump at - this is used to prevent some odd effects of a penetration based physics engine */
 	protected int MAX_JUMP_VEL = 100;
 	
-	private final int WAITING_TIME = 500;
+	protected final int WAITING_TIME = 500;
 	
 	/** True if the actor is currently resting on the ground */
-	private boolean onGround = false;
+	protected boolean onGround = false;
 	/** The amount of time the actor has been considered to be off the ground */
-	private int offGroundTimer = 0;
+	protected int offGroundTimer = 0;
 	/** The amount of time during which the actor hasn't moved */
-	private int waitingTimer = 0;
+	protected int waitingTimer = 0;
 	/** True if the actor has jumped and hence are in the air */
-	private boolean jumped = false;
+	protected boolean jumped = false;
 	/** True if the actor is facing right */
-	private boolean facingRight = true;
+	protected boolean facingRight = true;
 	/** True if the actor is moving - i.e. left or right */
-	private boolean moving = false;
+	protected boolean moving = false;
 	/** True if the actor is in the process of falling down */
-	private boolean falling = false;
+	protected boolean falling = false;
 	
 	/** The x component of the velocity for the current update */
-	private float velx;
-	
+	protected float velx;
+	/** The time the actor should be out of ground to be considered as jumping */
+	protected int jumpTime = 200;
 	
 	/** The current frame of animation */
 	protected int frame;
@@ -42,6 +44,8 @@ public abstract class Actor extends PhysicalEntity {
 	protected int frameTimer = 0;
 	/** The interval between animation frame change in milliseconds */
 	protected int frameInterval = 100;
+	/** Indicates if player is really on the ground */
+	protected boolean on;
 	
 	
 	// the forces applied for different actions. The move force is applied over and
@@ -166,6 +170,15 @@ public abstract class Actor extends PhysicalEntity {
 	}
 	
 	/**
+	 * Check if the actor is really on the ground
+	 * 
+	 * @return True if the actor is jumping
+	 */
+	public boolean on() {
+		return on;
+	}
+	
+	/**
 	 * Check if the actor is waiting
 	 * 
 	 * @return True if the actor is waiting
@@ -184,7 +197,7 @@ public abstract class Actor extends PhysicalEntity {
 			setVelocity(0, getVelY());
 		}
 		
-		falling = (getVelY() > 10)/* && (!onGround())*/;
+		falling = (getVelY() > 15)/* && (!onGround())*/;
 		velx = getVelX();
 		
 		
@@ -201,10 +214,10 @@ public abstract class Actor extends PhysicalEntity {
 		// physics engine will cause constant tiny bounces as the 
 		// the body tries to settle - so don't consider the body
 		// to have left the ground until it's done so for some time
-		boolean on = onGroundImpl(body);
+		on = onGroundImpl(body);
 		if (!on) {
 			offGroundTimer += delta;
-			if (offGroundTimer > 200) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
+			if (offGroundTimer > jumpTime) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
 				onGround = false;
 			}
 			waitingTimer = 0;
@@ -232,7 +245,7 @@ public abstract class Actor extends PhysicalEntity {
 		// keep velocity constant throughout the updates
 		setVelocity(velx, getVelY());
 		// if we're standing on the ground negate gravity. This stops
-		// some instability in physics 
+		// some instability in physics
 		body.setGravityEffected(!on);
 		
 		// clamp y 
@@ -247,10 +260,12 @@ public abstract class Actor extends PhysicalEntity {
 		} 
 		
 		if (jumped) {
-			if (getVelY() >= 10) {
+			if (getVelY() >= 15) {
 				jumped = false;
 			}
 		}
+		
+		if(faceToWall() && ((getVelX()<3 && facingRight()) || (getVelX()>-3 && !facingRight()))) moving = false;
 	}
 	
 	/**
@@ -278,7 +293,6 @@ public abstract class Actor extends PhysicalEntity {
 		if (world == null) {
 			return false;
 		}
-		
 		// loop through the collision events that have occured in the
 		// world
 		CollisionEvent[] events = world.getContacts(body);
@@ -303,6 +317,32 @@ public abstract class Actor extends PhysicalEntity {
 			}
 		}
 		
+		return false;
+	}
+	
+	/**
+	 * Informs on the fact the user is blocked face to a wall or not
+	 * @return true if the user is blocked
+	 */
+	public boolean faceToWall() {
+		if (world == null) {
+			return false;
+		}
+		// loop through the collision events that have occured in the
+		// world
+		CollisionEvent[] events = world.getContacts(body);
+		
+		for (int i=0;i<events.length;i++) {
+			// if the point of collision was below the centre of the actor
+			// i.e. near the feet
+			if (events[i].getPoint().getY() < getY()+(height/3)) {
+				// check the normal to work out which body we care about
+				// if the right body is involved and a collision has happened
+				// below it then we're on the ground
+				if (events[i].getNormal().getX() < -0 || events[i].getNormal().getX() > 0)
+					return true;
+			}
+		}
 		return false;
 	}
 	

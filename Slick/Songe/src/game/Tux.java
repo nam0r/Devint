@@ -34,7 +34,8 @@ public class Tux extends Actor {
 		moveForce = 270;
 		jumpForce = 30000;
 		MAX_JUMP_VEL = 105;
-		body.setMaxVelocity(50, 105);
+		body.setMaxVelocity(40, 105);
+		jumpTime = 200;
 		
 	}
 

@@ -1,6 +1,8 @@
 package game;
 
 import main.Conf;
+import main.Globals;
+import main.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -17,7 +19,7 @@ public class Alien extends Actor {
 	
 	public Alien() {
 		super(Conf.IMG_SPRITES_PATH+"all_big.png", 100, 150, 3f, 48, 72);
-		
+
 		run = getSpriteSheet(0,100,101);
 		jump = getSpriteSheet(301,100,100);
 		
@@ -25,6 +27,9 @@ public class Alien extends Actor {
 		jumpForce = 40000;
 		MAX_JUMP_VEL = 100;
 		body.setMaxVelocity(40, 100);
+		
+		Globals.node = new Node(1);
+
 	}
 
 	public void render(Graphics g) {
