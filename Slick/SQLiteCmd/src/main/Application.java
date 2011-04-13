@@ -18,26 +18,110 @@ public class Application {
 	public Application() {
 		
 		db = new DBInteractor();
-		//db.fromFile("scriptBdd.txt");
+		db.fromFile("scriptBdd.txt");
+		createNodesFromFile();
 		createQuestionsFromFile();
+		createGamesFromFile();
+		db.executeQuery("SELECT * FROM questions");
+		db.close();
+		
+	}
+
+	private void createNodesFromFile() {
+		System.out.println("===> Insertion des noeuds");
+		ArrayList< ArrayList<String[]> > noeuds = createFromFile("nodes.txt");
+		for(ArrayList<String[]> n : noeuds) {
+			
+			String game = "NULL";
+			String question = "NULL";
+			for(int i = 1; i < n.size(); i++) {
+				if(n.get(i)[0].equals("game")) {
+					game = n.get(i)[1];
+				}
+				else if(n.get(i)[0].equals("question")) {
+					question = n.get(i)[1];
+				}
+			}
+			
+			String queryNode = "INSERT INTO noeuds(id, question, mini_jeu) " +
+					"VALUES(" + 
+						n.get(0)[1] + ", " + // id
+						question + ", " + // question
+						game + // mini jeu
+					")";
+			
+			// Insert the question
+			//System.out.println(queryNode);
+			db.executeQuery(queryNode);
+		}
+	}
+	
+	private void createGamesFromFile() {
+		System.out.println("===> Insertion des mini-jeux");
+		ArrayList< ArrayList<String[]> > minijeux = createFromFile("games.txt");
+		for(ArrayList<String[]> g : minijeux) {
+			String queryGame = "INSERT INTO minijeux(id, niv1, niv2, niv3, niv4, score1, score2, score3, score4) " +
+					"VALUES(" + 
+						g.get(0)[1] + ", " + // id
+						g.get(1)[1] + ", " + // niv1
+						g.get(2)[1] + ", " + // niv2
+						g.get(3)[1] + ", " + // niv2
+						g.get(4)[1] + ", " + // niv4
+						
+						g.get(1)[2] + ", " + // score1
+						g.get(2)[2] + ", " + // score2
+						g.get(3)[2] + ", " + // score2
+						g.get(4)[2] + // score4
+					")";
+			
+			// Insert the question
+			//System.out.println(queryGame);
+			db.executeQuery(queryGame);
+		}
 	}
 	
 	private void createQuestionsFromFile() {
+		System.out.println("===> Insertion des questions");
 		ArrayList< ArrayList<String[]> > questions = createFromFile("questions.txt");
 		for(ArrayList<String[]> q : questions) {
-			String query = "INSERT INTO questions(id, enonce, scenario, fichiervoix) " +
-					"VALUES(" + q.get(0)[1] + ", '" + q.get(1)[1] + "', " + q.get(2)[1] + ", '" + q.get(3)[1] + "')";
-			for(int i = 4; i < q.size(); i++) {
+			String queryQuestion = "INSERT INTO questions(id, enonce, fichiervoix, scenario) " +
+					"VALUES(" + 
+						q.get(0)[1] + ", " + // id
+						"'" + q.get(1)[1] + "', " + // enonce
+						"'" + q.get(2)[1] + "', " + // fichiervoix
+						q.get(3)[1] + // scenario
+					")";
+			
+			// Insert the choices
+			System.out.println("     ===> Insertion des choix de la question");
+			int pos = 0;
+			for(int i = 4; i < q.size(); i++) { // For each choice
 				String[] line = q.get(i);
+				String enonce = "", fichiervoix = "", id_noeud = "NULL";
 				if(line[0].equals("choice")) {
-					System.out.println(line[1]);
-					System.out.println(line[2]);
-					if(Integer.valueOf(q.get(3)[1]) == 1) {
-						System.out.println(line[3]);
+					enonce = line[1]; // Text
+					fichiervoix = line[2]; // File
+					if(Integer.valueOf(q.get(3)[1]) == 1) { // If it's a scenario
+						id_noeud = line[3]; // Node
 					}
 				}
+				String queryChoice = "INSERT INTO choix(enonce, fichiervoix, id_question, position, id_noeud) " +
+						"VALUES(" +
+					"'" + enonce + "', " + 
+					"'" + fichiervoix + "', " +
+					q.get(0)[1] + ", " + // id_question
+					pos + ", " +
+					id_noeud +
+				")";
+				//System.out.println(queryChoice);
+				db.executeQuery(queryChoice);
+				
+				pos++;
 			}
-			System.out.println(query);
+			
+			// Insert the question
+			//System.out.println(queryQuestion);
+			db.executeQuery(queryQuestion);
 		}
 	}
 	

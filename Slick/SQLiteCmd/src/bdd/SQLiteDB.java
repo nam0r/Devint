@@ -81,10 +81,12 @@ public abstract class SQLiteDB {
 		ResultSet rs;
 		try {
 			rs = this.statement.executeQuery(query);
-			for(int i=1; i<=rs.getMetaData().getColumnCount(); i++) {
-				System.out.println(rs.getMetaData().getColumnName(i) + ": " + rs.getString(i));
-				//System.out.println(rs.getMetaData().getColumnName(i));
-				//System.out.println(rs.getMetaData().getColumnLabel(i));
+			while(rs.next()) {
+				for(int i=1; i<=rs.getMetaData().getColumnCount(); i++) {
+					System.out.println(rs.getMetaData().getColumnName(i) + ": " + rs.getString(i));
+					//System.out.println(rs.getMetaData().getColumnName(i));
+					//System.out.println(rs.getMetaData().getColumnLabel(i));
+				}
 			}
 			/*
 			while (rs.next()) {

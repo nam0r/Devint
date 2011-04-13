@@ -1,16 +1,20 @@
 package questions;
 
+import main.Conf;
+
 public class Question {
 	
-	private String question;
-	private String[] choices;
-	private int answer;
+	private String wording;
+	private String voice;
+	private boolean scenario;
+	private Choice[] choices;
 	private int points;
 	
-	public Question(String question, String[] choices, int answer, int points) {
-		this.question = question;
+	public Question(String wording, String voice, boolean scenario, Choice[] choices, int points) {
+		this.wording = wording;
+		this.voice = voice;
+		this.scenario = scenario;
 		this.choices = choices;
-		this.answer = answer;
 		this.points = points;
 	}
 	
@@ -18,26 +22,50 @@ public class Question {
 		return this.points;
 	}
 	
-	public String[] getChoices() {
+	public Choice[] getChoices() {
 		return this.choices;
 	}
 	
-	public String getQuestion() {
-		return this.question;
+	public String[] getChoicesWordings() {
+		String[] choicesWordings = new String[choices.length];
+		for(int i = 0; i < choices.length; i++) {
+			choicesWordings[i] = choices[i].getWording();
+		}
+		return choicesWordings;
+	}
+	
+	public String[] getChoicesVoices() {
+		String[] choicesVoices = new String[choices.length];
+		for(int i = 0; i < choices.length; i++) {
+			choicesVoices[i] = Conf.getVoice(choices[i].getVoice());
+		}
+		return choicesVoices;
+	}
+	
+	public String getWording() {
+		return this.wording;
+	}
+	
+	public String getVoice() {
+		return Conf.getVoice(this.voice);
 	}
 	
 	public boolean isOk(int indice) {
-		return (indice+1) == answer;
+		return choices[indice].getIsAnswer();
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(question);
+		sb.append(wording);
 		sb.append("\n");
-		for(String choice : choices) {
+		sb.append(voice);
+		sb.append("\n");
+		sb.append(points);
+		sb.append("\n");
+		for(Choice choice : choices) {
 			sb.append("\t");
-			sb.append(choice);
+			sb.append(choice.getWording());
 			sb.append("\n");
 		}
 		return sb.toString();

@@ -1,6 +1,8 @@
 package game;
 
 import main.Conf;
+import main.Globals;
+import main.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -20,6 +22,8 @@ public class Alien extends Actor {
 		
 		run = getSpriteSheet(0,50,50);
 		jump = getSpriteSheet(150,50,50);
+		
+		Globals.node = new Node(1);
 	}
 
 	public void render(Graphics g) {

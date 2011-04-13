@@ -1,12 +1,12 @@
 package game;
 
+import main.Conf;
+import main.Hoorah;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import main.Conf;
-import main.Hoorah;
-import questions.Question;
 import actors.IA;
 
 /**
@@ -51,17 +51,6 @@ public class AlienIA extends IA {
 		
 		//image.drawCentered(getX(), getY()-12);
 		image.draw(getX()-24, getY()-28, 50, 50);
-	}
-	
-	
-	@Override
-	protected Question createQuestion() {
-		String[] choices = {
-			"14 ans",
-			"80 ans",
-			"142 ans"
-		};
-		return new Question("Quelle est l'age de mon grand père ?", choices, 2, 140);
 	}
 
 	@Override

@@ -178,6 +178,7 @@ public abstract class AbstractGameState extends BasicGameState {
 						
 						((IA)other).onCollision();
 						stateToGoTo = ((IA)other).stateToGoTo();
+						
 						//Question question = ((IA)other).getQuestion();
 						//System.out.println(question.toString());
 					}

@@ -4,8 +4,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import questions.Question;
-
 public abstract class IA extends Actor {
 
 	protected SpriteSheet walk;
@@ -17,7 +15,6 @@ public abstract class IA extends Actor {
 	private int walkingTimer;
 	protected int walkingTime;
 	
-	protected Question question;
 	protected boolean visited;
 	
 	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y, float width, float height) {
@@ -31,16 +28,9 @@ public abstract class IA extends Actor {
 		
 		moveForce = 500000;
 		
-		question = createQuestion();
 		visited = false;
 		walkingTime = 1000; //1 sec
 	}
-	
-	public Question getQuestion() {
-		return this.question;
-	}
-	
-	protected abstract Question createQuestion();
 
 	@Override
 	public void render(Graphics g) {

@@ -1,6 +1,8 @@
 package game;
 
 import main.Conf;
+import main.Globals;
+import main.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -36,6 +38,8 @@ public class Homer extends Actor {
 		jumpForce = 15000;
 		MAX_JUMP_VEL = 50;
 		body.setMaxVelocity(14, 45);
+		
+		Globals.node = new Node(1);
 		
 	}
 

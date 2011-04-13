@@ -14,13 +14,10 @@ public class DBInteractor extends SQLiteDB {
 	
 	public DBInteractor() {
 		super();
-		
-		query = "";
 
 		//fromFile("scriptBdd.txt");
 		//fromCmdLine();
-		
-		close();
+		//close();
 	}
 	
 	public void fromCmdLine() {
@@ -50,7 +47,7 @@ public class DBInteractor extends SQLiteDB {
 				if(query.startsWith("#")) {
 					System.out.println("===>" + query.substring(1));
 				}
-				else if(!query.isEmpty()) {
+				else if(!query.isEmpty() && !query.startsWith("--")) {
 					//System.out.println(query);
 					executeQuery(query);
 					/*

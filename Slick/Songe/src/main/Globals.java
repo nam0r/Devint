@@ -14,8 +14,8 @@ public class Globals {
 	public static int playerType;
 	/** Current player */
 	public static Actor player;
-	/** current question */
-	public static Question question;
 	/** Return to state */
 	public static int returnState;
+	
+	public static Node node;
 }
