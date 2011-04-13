@@ -27,6 +27,7 @@ import actors.PhysicalEntity;
 public class GameplayState extends AbstractGameState {
 	/** Useful parameters to consider the background more or less far and therefore moving */
 	public static final float BACKPAR = 1f;
+	/** Useful parameters to consider the background more or less far and therefore moving */
 	public static final float BACKPAR2 = 1.7f;
 	
 	protected Input input;
@@ -35,26 +36,51 @@ public class GameplayState extends AbstractGameState {
 		IN_GAME, PAUSE, HIGHSCORE, GAME_OVER
 	}
 	protected States currentState;
-	
-	protected Sound2 sonSaut;
+	/** The sound when jumping */
+	protected Sound2 soundJump;
+	/** The sound when walking */
 	protected Sound2 soundWalk;
+	/** The index of the sound when walking */
 	protected int soundWalkIndex;
-	
+	/** The sound when bumping */
+	protected Sound2 soundBump;
+	/** The index of the sound when bumping */
+	protected int soundBumpIndex;
+	/**
+	 * Indicates if the bump sound has been played since the last move and so
+	 * should or not be replayed in the current frame
+	 */
+	protected boolean bumpPlayed;
+	/**
+	 * Contains the x coordinate of the Actor when the bump sound has been
+	 * played, if this changes the sound could again be playable by setting
+	 * bumpPlayed to false
+	 */
+	protected float bumpX;
+	/**
+	 * Indicates if soundWalk has been stopped, is useful because Sound's
+	 * playing() method doesn't always work very well
+	 */
+	protected boolean soundWalkPlaying;
+
 	protected Sound2 sound;
 	protected int soundIndex;
 	
 	
 	public GameplayState(int id) {
 		super(id, Conf.IMG_TEXTURES_PATH+"sky2.jpg", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"niveau1.txt", Conf.TILE_WIDTH, Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
+		bumpPlayed = false;
+		bumpX = 0;
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		input = gc.getInput();
-		sonSaut = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
+		soundJump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
+		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"bump.ogg");
 		restart();
 		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -92,27 +118,62 @@ public class GameplayState extends AbstractGameState {
 		if (player.moving() && !player.jumping() && !player.falling()) {
 			//if the sound is still playing we let it play
 			if (!soundWalk.playing()){
-				soundWalkIndex = soundWalk.loop();
+				soundWalkIndex = soundWalk.play();
+				soundWalkPlaying = true;
 			}
 			//We modulate the sound speed depending on the speed of movement of the character
 			float pitchVel = 0;
 			if(player.facingRight()) {
 				pitchVel = 0.5f + 1/(1/(player.getVelX()/35f));
-				System.out.println(pitchVel+" lol");
+				//System.out.println(pitchVel+" lol");
 			}
 			else {
 				pitchVel = 0.5f + -1/(1/(player.getVelX()/35f));
-				System.out.println(pitchVel+" lool");
+				//System.out.println(pitchVel+" lool");
 			}
 			//for security
 			if(pitchVel > 10) pitchVel = 10;
 			if(pitchVel < 0.001) pitchVel = 0.001f;
 			soundWalk.setPitch(pitchVel, soundWalkIndex);
-		} else {
-			//we stop the sound because the character is no more walking
-			if (soundWalk.playing()) soundWalk.stop();
+		}
+		//we stop the sound because the character is no more walking
+		else{
+			if(soundWalk.playing() && soundWalkPlaying){
+				soundWalk.stop();
+				soundWalkPlaying = false;
+			}
 		}
 		//End walking sound management
+		
+		//Begin bump sound management
+		//we check if the sound should be replayed
+		if (bumpPlayed) {
+			// if the x position has really changed (3 pixels) and the player is
+			// no more facing to wall (useful to avoid problem with pushing
+			// crates), the bump can again be played
+			if (((player.getX() - bumpX) > 3 || (player.getX() - bumpX) < -3)
+					&& !player.isTotallyFacingToWall()) {
+				bumpPlayed = false;
+			}
+		}
+		// If the player is facing to a wall
+		if (player.isFacingToWall()) {
+			// If the sound should be replayed, it will
+			if (!bumpPlayed) {
+				soundBumpIndex = soundBump.playAt(1f, 1f, player.getX()
+						- player.getWidth() / 2, player.getVelY()
+						- player.getHeight() / 2, 0.0f);
+				bumpPlayed = true;
+				bumpX = player.getX();
+				System.out.println("NOOOOOOON");
+			} else {
+				soundBump.setSourcePosition(player.getX() - player.getWidth()
+						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
+						soundBumpIndex);
+			}
+		}
+		//End bump sound management
+		if(soundBump.playing()) System.out.println("play");
 	}
 	
 	@Override
@@ -202,7 +263,7 @@ public class GameplayState extends AbstractGameState {
 			if ((input.isKeyPressed(Input.KEY_LCONTROL)) || 
 			   (input.isKeyPressed(Input.KEY_RCONTROL))) {
 				player.jump();
-				sonSaut.play();
+				soundJump.play();
 			}
 		}
 		if (!input.isKeyDown(Input.KEY_LCONTROL)) {
