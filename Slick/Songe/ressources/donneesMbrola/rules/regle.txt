@@ -323,7 +323,7 @@ V [[ s ]] V -> z					## baiser
 [[ s_ ]]  -> 						## pluriel pas liaison
 [[ s ]] -> s 						## verser sien
 
-T [[ t ]] T -> t e						
+T [[ t ]] T -> t E						
 [[ t' ]] -> t						## t'amène
 [[ t_ ]]  ->			 			## pas de liaison
 [[ t_ ]] (V|h) -> t					## liaison 
@@ -389,7 +389,8 @@ T(s|d) [[ ix_ ]] C ->  i 				## dix parties
 T(s|d) [[ ix_ ]]  ->  i s				## dix ou six
 [[ x ]] -> k s				## lexique lexical lexicaux vox 
 
-[[ ym ]] (C|T) -> e~					## tympan
+T [[ y ]] T -> i g R e k
+[[ ym ]] (C|T) -> e~		## tympan
 [[ yn ]] (C|T) -> e~					## laryngite
 [[ y ]] (C|T) -> i					## polytechnique
 [[ y' ]] -> i						## 

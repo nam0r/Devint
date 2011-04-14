@@ -1,5 +1,4 @@
 ## les exceptions de prononciation
-
 CLASSES
 
 CLASS V [aeiouΰβιθκλξοτφωϋό]			# voyelles

@@ -8,7 +8,6 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-
 import actors.Actor;
 
 /**

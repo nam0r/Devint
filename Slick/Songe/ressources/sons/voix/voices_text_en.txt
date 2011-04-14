@@ -1,6 +1,6 @@
 Files[.ogg] : text
 
-bienvenue : "Wellcome in the universe of Dream !"
+bienvenue : "Welcome in the universe of Songe !"
 jouer : "Play"
 instructions : "Instructions"
 scores : "Scores"
@@ -14,11 +14,15 @@ lamasticot : "Lamasticot"
 title_choiceperso: "Choose the character you will play"
 descriptionaurore: "Aurore is an agile girl. She can jump high, but she is weaker for moving things."
 descriptiontimeo: "Timéo is a strong boy. He can easily move things, but he jumps less high."
+descriptiontux: "Tux est un manchot libre. Il est assez bon pour pousser des objets et pour sauter."
 
 jeuf1: "You move by pressing LEFT or RIGHT. To jump, press UP or CONTROL. If you are in contact with a character, he or she will ask you a question or will make you play a mini-game. If you have forgotten what you have to do, press F2. If you would like to hear your score, press F3."
 f2aurore: "You play Aurore, an agile girl."
 f2timeo: "You play Timéo, a strong boy."
+f2tux: "Tu incarnes Tux, un manchot libre."
 jeuf2all: "You have to find the lamasticot. It's a creature which the name is told when you are close to it. If you need help to know how to play, press F1." 
+
+f2tuxtemporaire: "Tu incarnes Tux, un manchot libre. Tu dois retrouver le lamasticot. C'est un animal dont on prononce le nom quand on s'en approche. Si tu veux de l'aide pour jouer, appuie sur F1."
 jeuf3: "Your score is now"
 
 minijeuvaisseauF1:"This is a mini-game : you have a space ship that falls to the down. The ship musn't touch the ground : press UP to go back up. The ship musn't touch the ceiling : don't press UP HAUT if the ship is too close to the ceiling. To start playing, press UP. To repeat again, press F1."
@@ -32,6 +36,11 @@ question_grand_pere : "How old is my grandfather ?"
 140ans : "140 years"
 bonnereponse:"Well done, this is the good answer."
 mauvaisereponse:"Sorry, this is the wrong answer."
+
+question_banquise : "Où se trouve la banquise ?"
+nord: "Au Pôle Nord"
+centre: "À Paris"
+sud: "Au Pôle Sud"
 
 
 findujeu:"You have finished the game. Your score is :"

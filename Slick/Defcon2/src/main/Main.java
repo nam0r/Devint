@@ -1,6 +1,4 @@
 package main;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.SlickException;
 
 public class Main {
 

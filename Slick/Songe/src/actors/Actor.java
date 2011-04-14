@@ -46,6 +46,12 @@ public abstract class Actor extends PhysicalEntity {
 	protected int frameInterval = 100;
 	/** Indicates if player is really on the ground */
 	protected boolean on;
+	/** indicates if the player faces to a wall to 1/3 of his body */
+	protected boolean faceToWall;
+	/** indicates if the player faces to a wall totally */
+	protected boolean totalFaceToWall;
+	/** indicates if the player has collided with something higher */
+	protected boolean topCollided;
 	
 	
 	// the forces applied for different actions. The move force is applied over and
@@ -214,7 +220,14 @@ public abstract class Actor extends PhysicalEntity {
 		// physics engine will cause constant tiny bounces as the 
 		// the body tries to settle - so don't consider the body
 		// to have left the ground until it's done so for some time
+		
+		// here we do these affectations only one time per frame because calling
+		// the functions is heavy
 		on = onGroundImpl(body);
+		faceToWall = faceToWall(3);
+		totalFaceToWall = faceToWall(1);
+		topCollided = topCollided();
+		
 		if (!on) {
 			offGroundTimer += delta;
 			if (offGroundTimer > jumpTime) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
@@ -265,7 +278,8 @@ public abstract class Actor extends PhysicalEntity {
 			}
 		}
 		
-		if(faceToWall() && ((getVelX()<3 && facingRight()) || (getVelX()>-3 && !facingRight()))) moving = false;
+		if(faceToWall && ((getVelX()<3 && facingRight()) || (getVelX()>-3 && !facingRight()))) moving = false;
+		
 	}
 	
 	/**
@@ -293,12 +307,12 @@ public abstract class Actor extends PhysicalEntity {
 		if (world == null) {
 			return false;
 		}
-		// loop through the collision events that have occured in the
+		// loop through the collision events that have occurred in the
 		// world
 		CollisionEvent[] events = world.getContacts(body);
 		
 		for (int i=0;i<events.length;i++) {
-			// if the point of collision was below the centre of the actor
+			// if the point of collision was below the center of the actor
 			// i.e. near the feet
 			if (events[i].getPoint().getY() > getY()+(height/4)) {
 				// check the normal to work out which body we care about
@@ -319,31 +333,83 @@ public abstract class Actor extends PhysicalEntity {
 		
 		return false;
 	}
-	
+
 	/**
 	 * Informs on the fact the user is blocked face to a wall or not
+	 * 
+	 * @param factor
+	 *            The factor used to define which part of the body of the actor
+	 *            will be taken in account. If factor is 1 it is all the body,
+	 *            if more, the height of the body is divided by the factor
 	 * @return true if the user is blocked
 	 */
-	public boolean faceToWall() {
+	protected boolean faceToWall(int factor) {
 		if (world == null) {
 			return false;
 		}
-		// loop through the collision events that have occured in the
+		// loop through the collision events that have occurred in the
 		// world
 		CollisionEvent[] events = world.getContacts(body);
 		
 		for (int i=0;i<events.length;i++) {
-			// if the point of collision was below the centre of the actor
+			// if the point of collision was below the center of the actor
 			// i.e. near the feet
-			if (events[i].getPoint().getY() < getY()+(height/3)) {
-				// check the normal to work out which body we care about
-				// if the right body is involved and a collision has happened
-				// below it then we're on the ground
-				if (events[i].getNormal().getX() < -0 || events[i].getNormal().getX() > 0)
+			if (events[i].getPoint().getY() < getY()+(height/factor)) {
+				// if the normal force's x component is not null, then the force
+				// is not horizontal and it's probably due to a contact with a
+				// wall or a crate or something
+				if (events[i].getNormal().getX() < -0
+						|| events[i].getNormal().getX() > 0)
 					return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Informs on the fact the user has collided with something higher than him
+	 * on the map, this happens espacially when he is jumping
+	 * 
+	 * @return true if the user is blocked
+	 */
+	protected boolean topCollided() {
+		if (world == null) {
+			return false;
+		}
+		// loop through the collision events that have occurred in the
+		// world
+		CollisionEvent[] events = world.getContacts(body);
+		
+		for (int i=0;i<events.length;i++) {
+			// if the point of collision was over the center of the actor
+			// i.e. near the head
+			if (events[i].getPoint().getY() < getY()+(height/2)) {
+				//
+				if (events[i].getNormal().getY() > 0) {
+					if (events[i].getBodyB() == body) {
+						return true;
+					}
+				}
+				if (events[i].getNormal().getY() < -0) {
+					if (events[i].getBodyA() == body) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isTopCollided(){
+		return topCollided;
+	}
+	
+	public boolean isFacingToWall(){
+		return faceToWall;
+	}
+	
+	public boolean isTotallyFacingToWall(){
+		return totalFaceToWall;
 	}
 	
 	public void moveLeft() {

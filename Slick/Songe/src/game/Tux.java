@@ -1,12 +1,15 @@
 package game;
 
 
+import nodes.Node;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
+import utils.Globals;
 
 import actors.Actor;
 
@@ -21,7 +24,7 @@ public class Tux extends Actor {
 	private final int NB_SPRITES_WALK = 7;
 	
 	public Tux() {
-		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 150, 5f, 65, 95);
+		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
 		
 		jump = new SpriteSheet(image,65,95);
 		
@@ -37,6 +40,8 @@ public class Tux extends Actor {
 		MAX_JUMP_VEL = 105;
 		body.setMaxVelocity(40, 105);
 		jumpTime = 200;
+		
+		Globals.node = new Node(1);
 		
 	}
 

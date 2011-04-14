@@ -51,7 +51,7 @@ public class MainMenuState extends MenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			switch (selected) {
 			case 0:
-				sbg.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
+				sbg.enterState(Hoorah.GAMEPLAYSTATE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 				break;
 			case 1:

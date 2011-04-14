@@ -48,6 +48,12 @@ public class ConfigFile {
     {
     	try {
 			proprietes.load(new FileInputStream(f));
+			proprietes.setProperty("REPERTOIRE_PHO_WAV", System.getProperty("java.io.tmpdir"));
+		    String os = System.getProperty("os.name").toLowerCase();
+		    //linux or unix
+	        if (os.indexOf( "nix") >=0 || os.indexOf( "nux") >=0) {
+	            proprietes.setProperty("REPERTOIRE_PHO_WAV", System.getProperty("java.io.tmpdir") + "/");
+	        }
 		} catch( FileNotFoundException e ) {
 			System.err.println( "fichier " +DEFAULT_FILE +" non trouve" );
 			e.printStackTrace();

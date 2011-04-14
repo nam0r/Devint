@@ -18,7 +18,6 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Globals;
-
 import actors.Actor;
 import actors.IA;
 import actors.PhysicalEntity;
@@ -182,7 +181,7 @@ public abstract class AbstractGameState extends BasicGameState {
 						
 						
 						/*
-						 * ====================================================
+						& * ====================================================
 						((IA)other).onCollision();
 						stateToGoTo = ((IA)other).stateToGoTo();
 						=======================================================
