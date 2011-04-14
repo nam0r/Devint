@@ -9,7 +9,9 @@ import game.AbstractGameState;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
+import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -29,13 +31,16 @@ public class GameplayState extends AbstractGameState {
 	public static final float BACKPAR = 1f;
 	/** Useful parameters to consider the background more or less far and therefore moving */
 	public static final float BACKPAR2 = 1.7f;
-	
+	/** The input */
 	protected Input input;
-	
+	/** Game's states */
 	protected enum States {
 		IN_GAME, PAUSE, HIGHSCORE, GAME_OVER
 	}
+	/** The current state from game's states */
 	protected States currentState;
+	/** For vocalize SIVOX */
+	protected t2s.SIVOXDevint voix;
 	/** The sound when jumping, a long one during the whole jump */
 	protected Sound2 soundJump;
 	/** The sound when jumping, a short one when beginning to jump */
@@ -68,6 +73,8 @@ public class GameplayState extends AbstractGameState {
 	protected boolean soundWalkPlaying;
 	/** Indicates if jump sound is still playing */
 	protected boolean soundJumpPlaying;
+	/** The font we're going to use to render the score */
+	private Font font;
 
 	protected Sound2 sound;
 	protected int soundIndex;
@@ -86,11 +93,13 @@ public class GameplayState extends AbstractGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		input = gc.getInput();
+		voix = new t2s.SIVOXDevint();
 		soundJump = new Sound2(Conf.SND_BIP_PATH+"bip6.ogg");
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"bump.ogg");
+		font = new AngelCodeFont(Conf.RESS_PATH+"hiero.fnt", Conf.RESS_PATH+"hiero.png");
 		restart();
 		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -103,7 +112,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		super.render(gc, sbg, g);
-		g.drawString("Votre score : "+Globals.score, 4*gc.getWidth()/5, 30);
+		font.drawString(4*gc.getWidth()/5, 30, ""+Globals.score);
 		Utils.drawCenteredString(g,"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart", gc.getWidth(), gc.getHeight()-20, Color.black);
 		
 		for(int i=0; i<map.getWorld().getBodies().size(); i++){
@@ -215,9 +224,10 @@ public class GameplayState extends AbstractGameState {
 		if (player.isFacingToWall()) {
 			// If the sound should be replayed, it will
 			if (!bumpWallPlayed) {
-				soundBumpIndex = soundBump.playAt(1f, 1f, player.getX()
+				soundBumpIndex = soundBump.playAt(1.5f, 1f, player.getX()
 						- player.getWidth() / 2, player.getVelY()
 						- player.getHeight() / 2, 0.0f);
+				//AL10.alSourcef(soundBumpIndex, AL10.AL_GAIN , 100f);
 				bumpWallPlayed = true;
 				bumpWallX = player.getX();
 			} else {
@@ -230,7 +240,7 @@ public class GameplayState extends AbstractGameState {
 		else if (player.isTopCollided() && player.jumping()) {
 			// If the sound should be replayed, it will
 			if (!bumpTopPlayed) {
-				soundBumpIndex = soundBump.playAt(1f, 1f, player.getX()
+				soundBumpIndex = soundBump.playAt(1.5f, 1f, player.getX()
 						- player.getWidth() / 2, player.getVelY()
 						- player.getHeight() / 2, 0.0f);
 				bumpTopPlayed = true;
@@ -262,8 +272,8 @@ public class GameplayState extends AbstractGameState {
 		
 		//AL10.alSourcePlay(soundIndex);
 		soundIndex = sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
-		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.5f);
-		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 25f);
+		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.45f);
+		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 35f);
 		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 250f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 	}
@@ -307,7 +317,9 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_P)) {
 			currentState = States.PAUSE;
 		}
-		
+		if (input.isKeyPressed(Input.KEY_F3)) {
+			voix.playShortText("Vous avez "+Globals.score+" points.");
+		}
 		// Est-ce que le personnage bouge ?
 		player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
@@ -327,13 +339,15 @@ public class GameplayState extends AbstractGameState {
 			player.moveRight();
 		}
 		if (player.onGround()) {
-			if ((input.isKeyPressed(Input.KEY_LCONTROL)) || 
-			   (input.isKeyPressed(Input.KEY_RCONTROL))) {
+			if ((input.isKeyPressed(Input.KEY_LCONTROL))
+					|| (input.isKeyPressed(Input.KEY_RCONTROL))
+					|| (input.isKeyPressed(Input.KEY_UP))) {
 				player.jump();
 				//soundJump2.play();
 			}
 		}
-		if (!input.isKeyDown(Input.KEY_LCONTROL)) {
+		//useful to have longer jumps my maintaining CTRL
+		if (!input.isKeyDown(Input.KEY_LCONTROL) && !input.isKeyDown(Input.KEY_UP)) {
 			if (player.jumping()) {
 				player.setVelocity(player.getVelX(), player.getVelY() * 0.95f);
 			}
@@ -357,9 +371,9 @@ public class GameplayState extends AbstractGameState {
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException{
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
 		
-		entities.add(new MarioIA(800,150));
-		entities.add(new HomerIA(1800,150));
-		entities.add(new AlienIA(2600,150));
+		entities.add(new MarioIA(900,350));
+		entities.add(new HomerIA(1800,350));
+		entities.add(new AlienIA(2600,350));
 		return entities;
 	}
 
