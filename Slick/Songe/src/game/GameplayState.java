@@ -352,6 +352,12 @@ public class GameplayState extends AbstractGameState {
 				player.setVelocity(player.getVelX(), player.getVelY() * 0.95f);
 			}
 		}
+        if (input.isKeyPressed(Input.KEY_F1)){
+            // jouer un son : l'aide
+        }
+        if (input.isKeyPressed(Input.KEY_F2)){
+            // jouer un son : « tu es un tux qui doit trouver le lamasticot »
+        }
 	}
 
 	@Override
