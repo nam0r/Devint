@@ -2,8 +2,6 @@ package game;
 
 import java.util.ArrayList;
 
-import main.Conf;
-import main.Globals;
 import main.Hoorah;
 import game.AbstractGameState;
 
@@ -20,6 +18,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import sound.AlUtils;
 import sound.Sound2;
+import utils.Conf;
+import utils.Globals;
 import utils.Utils;
 import actors.Actor;
 import actors.PhysicalEntity;
@@ -98,11 +98,11 @@ public class GameplayState extends AbstractGameState {
 			float pitchVel = 0;
 			if(player.facingRight()) {
 				pitchVel = 0.5f + 1/(1/(player.getVelX()/35f));
-				System.out.println(pitchVel+" lol");
+				//System.out.println(pitchVel+" lol");
 			}
 			else {
 				pitchVel = 0.5f + -1/(1/(player.getVelX()/35f));
-				System.out.println(pitchVel+" lool");
+				//System.out.println(pitchVel+" lool");
 			}
 			//for security
 			if(pitchVel > 10) pitchVel = 10;

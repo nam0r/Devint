@@ -1,7 +1,5 @@
 package menu;
 
-import main.Conf;
-import main.Globals;
 import main.Hoorah;
 
 import org.newdawn.slick.Color;
@@ -13,6 +11,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import utils.Conf;
+import utils.Globals;
 
 public class ChoicePersoState extends MenuState {
 

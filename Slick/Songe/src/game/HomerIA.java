@@ -1,11 +1,12 @@
 package game;
 
-import main.Conf;
 import main.Hoorah;
 import net.phys2d.math.Vector2f;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+
+import utils.Conf;
 
 import actors.IA;
 

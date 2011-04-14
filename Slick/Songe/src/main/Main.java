@@ -25,7 +25,7 @@ public class Main {
 			*/
 			//we first try to play in 1024*768 full screen
 			try{
-				app.setDisplayMode(width, height, true);
+				app.setDisplayMode(width, height, false);
 				
 				//if the native resolution is small, we put the native resolution in fullscreen
 				if(app.getScreenWidth() < 1200) throw new Exception();

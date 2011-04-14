@@ -1,9 +1,10 @@
 package game;
 
-import main.Conf;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+
+import utils.Conf;
 
 import actors.PhysicalEntity;
 

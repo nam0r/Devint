@@ -2,7 +2,6 @@ package menu;
 
 import java.io.IOException;
 
-import main.Conf;
 import main.Hoorah;
 
 import org.newdawn.slick.Color;
@@ -16,6 +15,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import utils.Conf;
 
 public class LoadingState extends BasicGameState {
 	/** the id of the state */

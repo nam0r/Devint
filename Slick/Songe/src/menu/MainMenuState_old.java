@@ -1,6 +1,5 @@
 package menu;
 
-import main.Globals;
 import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
@@ -15,6 +14,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import utils.Globals;
  
 public class MainMenuState_old extends BasicGameState {
  

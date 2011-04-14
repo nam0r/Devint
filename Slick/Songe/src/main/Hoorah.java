@@ -1,6 +1,7 @@
 package main;
 
 import game.GameplayState;
+import game.QuestionState;
 import menu.ChoicePersoState;
 import menu.LoadingState;
 import menu.MainMenuState;
@@ -12,7 +13,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import questions.QuestionState;
 
 
 public class Hoorah extends StateBasedGame {

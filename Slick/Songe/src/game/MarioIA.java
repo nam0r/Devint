@@ -1,6 +1,6 @@
 package game;
 
-import main.Conf;
+import utils.Conf;
 import main.Hoorah;
 import actors.IA;
 

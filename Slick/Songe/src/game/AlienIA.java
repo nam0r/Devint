@@ -1,11 +1,12 @@
 package game;
 
-import main.Conf;
 import main.Hoorah;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
+
+import utils.Conf;
 
 import actors.IA;
 

@@ -2,7 +2,6 @@ package environment;
 
 import java.util.ArrayList;
 
-import main.Conf;
 import map.Tile;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
@@ -20,6 +19,8 @@ import org.newdawn.slick.geom.GeomUtil;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
+
+import utils.Conf;
 
 /**
  * An environment based on a tilemap. The tile shapes are combined into more 

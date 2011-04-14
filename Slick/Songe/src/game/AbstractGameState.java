@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import main.Hoorah;
 import map.Map;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
@@ -15,6 +16,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import utils.Globals;
 
 import actors.Actor;
 import actors.IA;
@@ -177,8 +180,23 @@ public abstract class AbstractGameState extends BasicGameState {
 						 * Dans leave(), rajouter "this.stateToGoTo = null;"
 						 */
 						
+						
+						/*
+						 * ====================================================
 						((IA)other).onCollision();
 						stateToGoTo = ((IA)other).stateToGoTo();
+						=======================================================
+						*/
+						
+						if(Globals.node.getQuestion() == null && Globals.node.getGame() == null) {
+							stateToGoTo = Hoorah.SAVEHIGHSCORE;
+						}
+						if(Globals.node.getQuestion() != null) {
+							stateToGoTo = Hoorah.QUESTIONSTATE;
+						}
+						if(Globals.node.getGame() != null) {
+							stateToGoTo = Globals.node.getGame().getId();
+						}
 						
 						//Question question = ((IA)other).getQuestion();
 						//System.out.println(question.toString());

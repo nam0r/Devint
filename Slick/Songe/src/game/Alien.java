@@ -1,12 +1,13 @@
 package game;
 
-import main.Conf;
-import main.Globals;
-import main.Node;
+import nodes.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
+
+import utils.Conf;
+import utils.Globals;
 
 import actors.Actor;
 

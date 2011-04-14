@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import main.Conf;
-import main.Globals;
 import main.Hoorah;
 
 import org.newdawn.slick.AngelCodeFont;
@@ -26,6 +24,9 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import utils.Conf;
+import utils.Globals;
 
 /**
  * 
@@ -211,8 +212,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 					.getConnection("jdbc:sqlite:scores.db");
 			Statement stat = conn.createStatement();
 			if (newFile) {
-				stat
-						.executeUpdate("CREATE TABLE scores (id integer PRIMARY KEY AUTOINCREMENT, name text, score integer);");
+				stat.executeUpdate("CREATE TABLE scores (id integer PRIMARY KEY AUTOINCREMENT, name text, score integer);");
 			}
 			stat.executeUpdate("INSERT INTO scores (name, score) values ('"
 					+ name + "', " + Globals.score + ");");
@@ -240,8 +240,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 				Connection conn = DriverManager
 						.getConnection("jdbc:sqlite:scores.db");
 				Statement stat = conn.createStatement();
-				ResultSet r = stat
-						.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
+				ResultSet r = stat.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
 				x += 30;
 				y += 20;
 				while (r.next()) {

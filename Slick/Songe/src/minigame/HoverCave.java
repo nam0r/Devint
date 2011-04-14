@@ -3,8 +3,7 @@ package minigame;
 import java.awt.Dimension;
 import java.util.Vector;
 
-import main.Conf;
-import main.Globals;
+import nodes.Node;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -18,6 +17,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import sound.AlUtils;
 import sound.Sound2;
+import utils.Conf;
+import utils.Globals;
 
 public class HoverCave extends BasicGameState {
 	private int stateID;
@@ -147,10 +148,16 @@ public class HoverCave extends BasicGameState {
 						Color.black), new FadeInTransition(Color.black));
 			}
 		}
+		
+		// If we are dead
 		else{
-			//The score is set
-			Globals.score += distance/1000;
 			if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+				
+				//The score is set
+				Globals.score += distance/1000;
+				
+				Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
+				
 				game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 						new FadeInTransition(Color.black));
 				//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());

@@ -4,7 +4,6 @@ import game.Crate;
 
 import java.util.HashMap;
 
-import main.Conf;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -13,6 +12,8 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.util.xml.XMLElement;
 import org.newdawn.slick.util.xml.XMLElementList;
 import org.newdawn.slick.util.xml.XMLParser;
+
+import utils.Conf;
 
 import actors.PhysicalEntity;
 

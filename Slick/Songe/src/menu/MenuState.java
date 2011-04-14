@@ -1,6 +1,5 @@
 package menu;
 
-import main.Conf;
 
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
@@ -14,6 +13,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import sound.AlUtils;
+import utils.Conf;
  
 public abstract class MenuState extends BasicGameState {
 
