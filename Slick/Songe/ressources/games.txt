@@ -1,0 +1,17 @@
+#id: 
+#niv1: id_noeud | score_a_obtenir
+#niv2: id_noeud | score_a_obtenir
+#niv3: id_noeud | score_a_obtenir
+#niv4: id_noeud | score_a_obtenir
+
+id: 4
+niv1: 1 | 5
+niv2: 4 | 10
+niv3: 4 | 20
+niv4: 14 | 100
+
+id: 2
+niv1: 9 | 25
+niv2: 10 | 50
+niv3: 11 | 75
+niv4: 12 | 100

@@ -1,0 +1,21 @@
+-- Syntaxe :
+-- '#' : Commentaire qui sera affiché dans les logs
+-- '--' : Commentaire qui ne sera pas affiché dans les logs
+-- Il peut y avoir des lignes vides
+-- Toutes les autres lignes seront exécutées comme des requêtes
+
+# Suppression des tables si elles existent
+DROP TABLE IF EXISTS noeuds
+DROP TABLE IF EXISTS questions
+DROP TABLE IF EXISTS choix
+DROP TABLE IF EXISTS minijeux
+
+# Creation des tables
+CREATE TABLE noeuds(id integer primary key, question integer, mini_jeu integer, FOREIGN KEY(question) REFERENCES questions(id), FOREIGN KEY(mini_jeu) REFERENCES minijeux(id))
+-- CREATE TABLE noeuds(id integer primary key, question integer, mini_jeu integer)
+CREATE TABLE questions(id integer primary key, enonce text, fichiervoix text, scenario integer, points integer)
+CREATE TABLE choix(id integer primary key, enonce text, fichiervoix text, id_question integer, position integer, id_noeud integer, correct integer, FOREIGN KEY(id_question) REFERENCES questions(id))
+CREATE TABLE minijeux(id integer primary key, niv1 integer, niv2 integer, niv3 integer, niv4 integer, score1 integer, score2 integer, score3 integer, score4 integer, FOREIGN KEY(niv1) REFERENCES noeuds(id), FOREIGN KEY(niv2) REFERENCES noeuds(id), FOREIGN KEY(niv3) REFERENCES noeuds(id), FOREIGN KEY(niv4) REFERENCES noeuds(id))
+
+-- INSERT INTO questions(id, scenario, fichiervoix) VALUES(42, 1, 'voix.ogg')
+-- SELECT * FROM questions
