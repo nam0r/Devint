@@ -59,7 +59,7 @@ public class QuestionState extends MenuState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		question = Globals.node.getQuestion();
+		//question = Globals.node.getQuestion();
 		if(question == null) {
 			System.err.println("Il n'y a pas de question a lire !!!");
 		}

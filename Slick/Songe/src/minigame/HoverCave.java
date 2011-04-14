@@ -22,8 +22,11 @@ import sound.Sound2;
 public class HoverCave extends BasicGameState {
 	private int stateID;
 	
+	/** The miimum width betweed the 2 walls */
 	private final int MIN_WIDTH = 55 ;
+	/** The resolution of the wall */
 	private final int WALL_RES = 20;
+	/** the sensitivity of the object to touch the wall */
 	private final int SENSITIVITY = 10;
 	private GameContainer container;
 	private double dudeHeight;
@@ -38,6 +41,10 @@ public class HoverCave extends BasicGameState {
 	private Sound2 sonG, sonD;
 	private int sonDIndex, sonGIndex;
 	private float distSonHaut, distSonBas;
+	/** The explication sound when entering to this state */
+	private Sound2 enterSound;
+	/** For vocalize SIVOX */
+	protected t2s.SIVOXDevint voix;
 
 	public HoverCave(int stateID) {
 		this.stateID = stateID;
@@ -98,8 +105,10 @@ public class HoverCave extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		sonG = new Sound2(Conf.SND_BIP_PATH+"bip6.ogg");
-		sonD = new Sound2(Conf.SND_BIP_PATH+"bip6.ogg");
+		sonG = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
+		sonD = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
+		enterSound = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
+		voix = new t2s.SIVOXDevint();
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
 		reset();
@@ -109,38 +118,45 @@ public class HoverCave extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 		Input input = container.getInput();
-		if (!dead) {
-			if (movingUp) {
-				dudeHeight -= ((double) delta) / 10.0;
-			} else {
-				dudeHeight += ((double) delta) / 10.0;
-			}
-			// TODO The speed can be adjusted here
-			wallOffset -= (float) delta * speed;
-			speed += ((double) delta / 1000000000.0) * 2000;
-			if (wallOffset <= -WALL_RES) {
-				wallOffset += WALL_RES;
-				popWall();
-				addToWall();
-			}
-			distance += delta;
-			// detect collisions
-			// TODO Improve collision detection to find the edge of the box
-			// against the edge of the cave.
-			if (dudeHeight + SENSITIVITY > lowerWall.get(2)
-					|| dudeHeight - SENSITIVITY < upperWall.get(2)) {
-				//sonG.play(2, 1);
-				dead = true;
-				sonD.stop();
-				sonG.stop();
-			} else {
-				//Sounds are adjusted here
-				distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));
-				distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
-				sonD.setVolume(distSonBas*2, sonDIndex);
-				sonD.setPitch(distSonBas, sonDIndex);
-				sonG.setVolume(distSonHaut*2, sonGIndex);
-				sonG.setPitch(distSonHaut, sonGIndex);
+		//If the beginning explication is finished
+		if(!enterSound.playing()){
+			//if the player is not dead
+			if (!dead) {
+				if (movingUp) {
+					dudeHeight -= ((double) delta) / 10.0;
+				} else {
+					dudeHeight += ((double) delta) / 10.0;
+				}
+				// TODO The speed can be adjusted here
+				wallOffset -= (float) delta * speed;
+				speed += ((double) delta / 1000000000.0) * 2000;
+				if (wallOffset <= -WALL_RES) {
+					wallOffset += WALL_RES;
+					popWall();
+					addToWall();
+				}
+				distance += delta;
+				// detect collisions
+				// TODO Improve collision detection to find the edge of the box
+				// against the edge of the cave.
+				if (dudeHeight + SENSITIVITY > lowerWall.get(2)
+						|| dudeHeight - SENSITIVITY < upperWall.get(2)) {
+					//sonG.play(2, 1);
+					dead = true;
+					sonD.stop();
+					sonG.stop();
+					voix.playText("Le je est terminé, votre score est de "+ distance/1000);
+				} else {
+					//Sounds are adjusted here
+					distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));
+					distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
+					System.out.println(lowerWall.get(2) - dudeHeight + 20 + " lol");
+					System.out.println(dudeHeight - upperWall.get(2) + 20);
+					sonG.setVolume(distSonHaut*2, sonGIndex);
+					sonG.setPitch(distSonHaut*2, sonGIndex);
+					sonD.setVolume(distSonBas*2, sonDIndex);
+					sonD.setPitch(distSonBas*2, sonDIndex);
+				}
 			}
 			if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 				game.enterState(Globals.returnState, new FadeOutTransition(
@@ -155,6 +171,11 @@ public class HoverCave extends BasicGameState {
 						new FadeInTransition(Color.black));
 				//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
 			}
+			/*if(enterSound.playing()){
+				if (input.isKeyPressed(Input.ANY_CONTROLLER)) {
+					enterSound.stop();
+				}
+			}*/
 		}
 
 	}
@@ -199,6 +220,8 @@ public class HoverCave extends BasicGameState {
 		//We play the two sounds since we enter
 		sonDIndex = sonD.loop(1f, 0f, 1f, 0f, 0f);
 		sonGIndex = sonG.loop(1f, 0f, -1f, 0f, 0f);
+		//We play the beginning explication sound
+		enterSound.play();
 	}
 
 	public void keyPressed(int key, char c) {

@@ -2,7 +2,7 @@ package game;
 
 import main.Conf;
 import main.Globals;
-import main.Node;
+//import main.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -38,7 +38,7 @@ public class Mario extends Actor {
 		MAX_JUMP_VEL = 120;
 		body.setMaxVelocity(40, 120);
 		
-		Globals.node = new Node(1);
+		//Globals.node = new Node(1);
 		
 	}
 

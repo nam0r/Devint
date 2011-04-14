@@ -17,5 +17,5 @@ public class Globals {
 	/** Return to state */
 	public static int returnState;
 	
-	public static Node node;
+	//public static Node node;
 }

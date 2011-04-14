@@ -2,7 +2,7 @@ package game;
 
 import main.Conf;
 import main.Globals;
-import main.Node;
+//import main.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -28,7 +28,7 @@ public class Alien extends Actor {
 		MAX_JUMP_VEL = 100;
 		body.setMaxVelocity(40, 100);
 		
-		Globals.node = new Node(1);
+		//Globals.node = new Node(1);
 
 	}
 

@@ -371,7 +371,7 @@ public class GameplayState extends AbstractGameState {
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException{
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
 		
-		entities.add(new MarioIA(900,350));
+		entities.add(new MarioIA(920,350));
 		entities.add(new HomerIA(1800,350));
 		entities.add(new AlienIA(2600,350));
 		return entities;
