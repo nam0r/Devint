@@ -21,7 +21,7 @@ Tux
 « Tu incarnes Tux, un manchot libre. »
 
 (Après)
-« Tu dois retrouver le lamasticot. C'est un animal dont on prononce le nom quand on s'en approche. Si tu veux de l'aide pour jouer, appuie sur F1. »
+« Tu dois retrouver un autre Tux, qui te ressemble. Si tu veux de l'aide pour jouer, appuie sur F1. »
 
 F1 : 
 « Tu te déplaces avec les touches GAUCHE et DROITE. Pour sauter, appuie sur HAUT ou sur CONTROLE. Si tu touches un personnage, celui-ci te posera une question ou te fera jouer à un mini-jeu. Si tu as oublié ce que tu dois faire, appuie sur F2. Pour connaitre ton score, appuie sur F3. »
