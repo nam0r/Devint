@@ -46,6 +46,8 @@ public class HoverCave extends BasicGameState {
 	private Sound2 enterSound;
 	/** For vocalize SIVOX */
 	protected t2s.SIVOXDevint voix;
+	/** Indicates if we begin the game */
+	private boolean playTheGame;
 
 	public HoverCave(int stateID) {
 		this.stateID = stateID;
@@ -102,13 +104,14 @@ public class HoverCave extends BasicGameState {
 		speed = 0.06;
 		distance = 0;
 		movingUp = false;
+		playTheGame = false;
 	}
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		sonG = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
 		sonD = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
-		enterSound = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
+		enterSound = new Sound2(Conf.SND_VOIX_PATH+"minijeuvaisseauF1.ogg");
 		voix = new t2s.SIVOXDevint();
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
@@ -120,7 +123,7 @@ public class HoverCave extends BasicGameState {
 			throws SlickException {
 		Input input = container.getInput();
 		//If the beginning explication is finished
-		if(!enterSound.playing()){
+		if(playTheGame){
 			//if the player is not dead
 			if (!dead) {
 				if (movingUp) {
@@ -158,31 +161,47 @@ public class HoverCave extends BasicGameState {
 					sonD.setVolume(distSonBas*2, sonDIndex);
 					sonD.setPitch(distSonBas*2, sonDIndex);
 				}
+				
+				if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+					game.enterState(Globals.returnState, new FadeOutTransition(
+							Color.black), new FadeInTransition(Color.black));
+				}
 			}
-			if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-				game.enterState(Globals.returnState, new FadeOutTransition(
-						Color.black), new FadeInTransition(Color.black));
+		
+			// If we are dead
+			else{
+				sonD.setVolume(0f, sonDIndex);
+				sonG.setVolume(0f, sonGIndex);
+				
+				if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+					
+					//The score is set
+					Globals.score += distance/1000;
+					
+					Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
+					
+					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
+							new FadeInTransition(Color.black));
+					//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
+				}
+				/*if(enterSound.playing()){
+					if (input.isKeyPressed(Input.ANY_CONTROLLER)) {
+						enterSound.stop();
+					}
+				}*/
+				
 			}
+			
 		}
 		
-		// If we are dead
-		else{
-			if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
-				
-				//The score is set
-				Globals.score += distance/1000;
-				
-				Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
-				
-				game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
-						new FadeInTransition(Color.black));
-				//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
+		
+		else {
+			sonD.setVolume(0f, sonDIndex);
+			sonG.setVolume(0f, sonGIndex);
+			if(input.isKeyPressed(Input.KEY_UP)){
+				playTheGame = true;
+				enterSound.stop();
 			}
-			/*if(enterSound.playing()){
-				if (input.isKeyPressed(Input.ANY_CONTROLLER)) {
-					enterSound.stop();
-				}
-			}*/
 		}
 
 	}

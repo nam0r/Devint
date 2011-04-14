@@ -87,6 +87,10 @@ public abstract class IA extends Actor {
 		}
 	}
 	
+	public boolean isVisited(){
+		return visited;
+	}
+	
 	public abstract int stateToGoTo();
 	
 }

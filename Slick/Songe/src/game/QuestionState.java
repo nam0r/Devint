@@ -15,11 +15,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import utils.Conf;
 import utils.Globals;
  
 public class QuestionState extends MenuState {
 	
 	private Question question;
+	private Sound bonneRep, mauvaiseRep;
 	
     public QuestionState(int stateID) throws SlickException {
     	super(stateID);
@@ -29,6 +31,8 @@ public class QuestionState extends MenuState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
+		bonneRep = new Sound(Conf.SND_VOIX_PATH+"bonne_reponse.ogg");
+		mauvaiseRep = new Sound(Conf.SND_VOIX_PATH+"mauvaise_reponse.ogg");
 	}
 
 	@Override
@@ -50,6 +54,12 @@ public class QuestionState extends MenuState {
 				if(question.getScenario()) {
 					Globals.node = new Node(question.getChoices()[selected].getNodeToGoTo());
 				}
+				bonneRep.play();
+				while(bonneRep.playing());
+			}
+			else{
+				mauvaiseRep.play();
+				while(mauvaiseRep.playing());
 			}
 			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));

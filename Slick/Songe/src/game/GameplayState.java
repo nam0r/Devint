@@ -341,13 +341,14 @@ public class GameplayState extends AbstractGameState {
 		if (player.onGround()) {
 			if ((input.isKeyPressed(Input.KEY_LCONTROL))
 					|| (input.isKeyPressed(Input.KEY_RCONTROL))
-					|| (input.isKeyPressed(Input.KEY_UP))) {
+					|| (input.isKeyPressed(Input.KEY_UP))
+					|| (input.isKeyPressed(Input.KEY_SPACE))) {
 				player.jump();
 				//soundJump2.play();
 			}
 		}
 		//useful to have longer jumps my maintaining CTRL
-		if (!input.isKeyDown(Input.KEY_LCONTROL) && !input.isKeyDown(Input.KEY_UP)) {
+		if (!input.isKeyDown(Input.KEY_LCONTROL) && !input.isKeyDown(Input.KEY_UP) && !input.isKeyPressed(Input.KEY_SPACE)) {
 			if (player.jumping()) {
 				player.setVelocity(player.getVelX(), player.getVelY() * 0.95f);
 			}
@@ -378,8 +379,8 @@ public class GameplayState extends AbstractGameState {
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
 		
 		entities.add(new MarioIA(920,350));
-		entities.add(new HomerIA(1800,350));
-		entities.add(new AlienIA(2600,350));
+		entities.add(new HomerIA(2800,350));
+		entities.add(new AlienIA(3600,350));
 		return entities;
 	}
 
