@@ -179,7 +179,6 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_P)) {
 			currentState = States.PAUSE;
 		}
-		
 		// Est-ce que le personnage bouge ?
 		player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
@@ -200,7 +199,9 @@ public class GameplayState extends AbstractGameState {
 		}
 		if (player.onGround()) {
 			if ((input.isKeyPressed(Input.KEY_LCONTROL)) || 
-			   (input.isKeyPressed(Input.KEY_RCONTROL))) {
+			   (input.isKeyPressed(Input.KEY_RCONTROL)) ||
+			   (input.isKeyPressed(Input.KEY_UP)) ||
+			   (input.isKeyPressed(Input.KEY_SPACE))) {
 				player.jump();
 				sonSaut.play();
 			}
@@ -210,6 +211,15 @@ public class GameplayState extends AbstractGameState {
 				player.setVelocity(player.getVelX(), player.getVelY() * 0.95f);
 			}
 		}
+        if (input.isKeyPressed(Input.KEY_F1)){
+            // jouer un son : l'aide
+        }
+        if (input.isKeyPressed(Input.KEY_F2)){
+            // jouer un son : « tu es un tux qui doit trouver le lamasticot »
+        }
+        if (input.isKeyPressed(Input.KEY_F3)){
+            // jouer un son : « ton score est de »
+        }
 	}
 
 	@Override
