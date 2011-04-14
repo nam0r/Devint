@@ -36,7 +36,7 @@ public class Mario extends Actor {
 		moveForce = 150;
 		jumpForce = 40000;
 		MAX_JUMP_VEL = 120;
-		body.setMaxVelocity(50, 120);
+		body.setMaxVelocity(40, 120);
 		
 		Globals.node = new Node(1);
 		

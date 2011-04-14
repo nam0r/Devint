@@ -85,7 +85,7 @@ public class SIVOXDevint {
 	s.play();
 	sjoue=true;
     }
-    
+	
     /**
      * Pour lire un texte long à voix haute
      * @param text, chaîne à lire à voix haute

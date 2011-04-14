@@ -9,7 +9,9 @@ import game.AbstractGameState;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
+import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -27,34 +29,77 @@ import actors.PhysicalEntity;
 public class GameplayState extends AbstractGameState {
 	/** Useful parameters to consider the background more or less far and therefore moving */
 	public static final float BACKPAR = 1f;
+	/** Useful parameters to consider the background more or less far and therefore moving */
 	public static final float BACKPAR2 = 1.7f;
-	
+	/** The input */
 	protected Input input;
-	
+	/** Game's states */
 	protected enum States {
 		IN_GAME, PAUSE, HIGHSCORE, GAME_OVER
 	}
+	/** The current state from game's states */
 	protected States currentState;
-	
-	protected Sound2 sonSaut;
+	/** For vocalize SIVOX */
+	protected t2s.SIVOXDevint voix;
+	/** The sound when jumping, a long one during the whole jump */
+	protected Sound2 soundJump;
+	/** The sound when jumping, a short one when beginning to jump */
+	protected Sound2 soundJump2;
+	/** The index of the sound when jumping */
+	protected int soundJumpIndex;
+	/** The sound when walking */
 	protected Sound2 soundWalk;
+	/** The index of the sound when walking */
 	protected int soundWalkIndex;
-	
+	/** The sound when bumping */
+	protected Sound2 soundBump;
+	/** The index of the sound when bumping */
+	protected int soundBumpIndex;
+	/**
+	 * Indicates if the bump sound has been played since the last move and so
+	 * should or not be replayed in the current frame
+	 */
+	protected boolean bumpWallPlayed, bumpTopPlayed;
+	/**
+	 * Contains the x and y coordinate of the Actor when the bump sound has been
+	 * played, if this changes the sound could again be playable by setting
+	 * bumpPlayed to false
+	 */
+	protected float bumpWallX, bumpTopX, bumpTopY;
+	/**
+	 * Indicates if soundWalk has been stopped, is useful because Sound's
+	 * playing() method doesn't always work very well
+	 */
+	protected boolean soundWalkPlaying;
+	/** Indicates if jump sound is still playing */
+	protected boolean soundJumpPlaying;
+	/** The font we're going to use to render the score */
+	private Font font;
+
 	protected Sound2 sound;
 	protected int soundIndex;
 	
 	
 	public GameplayState(int id) {
 		super(id, Conf.IMG_TEXTURES_PATH+"sky2.jpg", Conf.RESS_PATH+"tiles.xml", Conf.RESS_PATH+"niveau1.txt", Conf.TILE_WIDTH, Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
+		bumpWallPlayed = false;
+		bumpTopPlayed = false;
+		bumpWallX = 0;
+		bumpTopX=0;
+		bumpTopY=0;
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		input = gc.getInput();
-		sonSaut = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
+		voix = new t2s.SIVOXDevint();
+		soundJump = new Sound2(Conf.SND_BIP_PATH+"bip6.ogg");
+		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
+		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"bump.ogg");
+		font = new AngelCodeFont(Conf.RESS_PATH+"hiero.fnt", Conf.RESS_PATH+"hiero.png");
 		restart();
 		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -67,7 +112,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		super.render(gc, sbg, g);
-		g.drawString("Votre score : "+Globals.score, 4*gc.getWidth()/5, 30);
+		font.drawString(4*gc.getWidth()/5, 30, ""+Globals.score);
 		Utils.drawCenteredString(g,"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart", gc.getWidth(), gc.getHeight()-20, Color.black);
 		
 		for(int i=0; i<map.getWorld().getBodies().size(); i++){
@@ -87,32 +132,125 @@ public class GameplayState extends AbstractGameState {
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
 			System.out.println("Erreur d'OpenAL"+AL10.alGetError());
 		
-		// Begin walking sound management
+		soundWalk();
+		soundBump();
+		soundGround();
+		soundJump();
+		
+	}
+	
+	private void soundWalk(){
 		// if the player is moving and not jumping we play the walk sound
 		if (player.moving() && !player.jumping() && !player.falling()) {
 			//if the sound is still playing we let it play
 			if (!soundWalk.playing()){
-				soundWalkIndex = soundWalk.loop();
+				soundWalkIndex = soundWalk.play();
+				soundWalkPlaying = true;
 			}
 			//We modulate the sound speed depending on the speed of movement of the character
 			float pitchVel = 0;
 			if(player.facingRight()) {
 				pitchVel = 0.5f + 1/(1/(player.getVelX()/35f));
-				System.out.println(pitchVel+" lol");
+				//System.out.println(pitchVel+" lol");
 			}
 			else {
 				pitchVel = 0.5f + -1/(1/(player.getVelX()/35f));
-				System.out.println(pitchVel+" lool");
+				//System.out.println(pitchVel+" lool");
 			}
 			//for security
 			if(pitchVel > 10) pitchVel = 10;
 			if(pitchVel < 0.001) pitchVel = 0.001f;
 			soundWalk.setPitch(pitchVel, soundWalkIndex);
-		} else {
-			//we stop the sound because the character is no more walking
-			if (soundWalk.playing()) soundWalk.stop();
 		}
-		//End walking sound management
+		//we stop the sound because the character is no more walking
+		else{
+			if(soundWalk.playing() && soundWalkPlaying){
+				soundWalk.stop();
+				soundWalkPlaying = false;
+			}
+		}
+	}
+	
+	private void soundJump(){
+		// if the player is jumping or falling we play the jump sound
+		if (player.jumping() || player.falling()) {
+			//if the sound is still playing we let it play
+			if (!soundJump.playing()){
+				soundJumpIndex = soundJump.playAt(1f, 0.5f, player.getX()
+						- player.getWidth() / 2, player.getVelY()
+						- player.getHeight() / 2, 0.0f);
+				soundJumpPlaying = true;
+			}
+			else {
+				soundJump.setSourcePosition(player.getX() - player.getWidth()
+					/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
+					soundJumpIndex);
+			}
+			//We modulate the sound pitch depending on the y speed of movement of the character
+			float pitchVel = 0;
+			pitchVel = 0.1f+player.getVelY()/120f;
+			//System.out.println(pitchVel+" lol");
+			//because the y velocity can be positive or negative depending on falling or jumping
+			if(pitchVel < 0) pitchVel = -pitchVel;
+			//for security
+			if(pitchVel > 10) pitchVel = 10;
+			if(pitchVel < 0.0001) pitchVel = 0.0001f;
+			soundJump.setPitch(pitchVel, soundJumpIndex);
+		}
+		//we stop the sound because the character is no more jumping
+		else{
+			if(soundJump.playing() && soundJumpPlaying){
+				soundJump.stop();
+				soundJumpPlaying = false;
+			}
+		}
+	}
+	
+	private void soundBump(){
+		//we check if the sound should be replayed
+		if (bumpWallPlayed || bumpTopPlayed) {
+			// if the x position has really changed (3 pixels) and the player is
+			// no more facing to wall (useful to avoid problem with pushing
+			// crates), the bump can again be played
+			if (((player.getX() - bumpWallX) > 3 || (player.getX() - bumpWallX) < -3)
+					&& !player.isTotallyFacingToWall()) {
+				bumpWallPlayed = false;
+			}
+			if (((player.getY() - bumpTopY) > 3 || (player.getY() - bumpTopY) < -3 || (player.getX() - bumpTopX) > 3 || (player.getX() - bumpTopX) < -3)) {
+				bumpTopPlayed = false;
+			}
+		}
+		// If the player is facing to a wall
+		if (player.isFacingToWall()) {
+			// If the sound should be replayed, it will
+			if (!bumpWallPlayed) {
+				soundBumpIndex = soundBump.playAt(1.5f, 1f, player.getX()
+						- player.getWidth() / 2, player.getVelY()
+						- player.getHeight() / 2, 0.0f);
+				//AL10.alSourcef(soundBumpIndex, AL10.AL_GAIN , 100f);
+				bumpWallPlayed = true;
+				bumpWallX = player.getX();
+			} else {
+				soundBump.setSourcePosition(player.getX() - player.getWidth()
+						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
+						soundBumpIndex);
+			}
+		}
+		// If the player is knocking his head somewhere when jumping
+		else if (player.isTopCollided() && player.jumping()) {
+			// If the sound should be replayed, it will
+			if (!bumpTopPlayed) {
+				soundBumpIndex = soundBump.playAt(1.5f, 1f, player.getX()
+						- player.getWidth() / 2, player.getVelY()
+						- player.getHeight() / 2, 0.0f);
+				bumpTopPlayed = true;
+				bumpTopX = player.getX(); bumpTopY = player.getY();
+			}
+		}
+	}
+	
+	private void soundGround(){
+		
 	}
 	
 	@Override
@@ -134,8 +272,8 @@ public class GameplayState extends AbstractGameState {
 		
 		//AL10.alSourcePlay(soundIndex);
 		soundIndex = sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
-		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.5f);
-		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 25f);
+		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.45f);
+		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 35f);
 		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 250f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 	}
@@ -179,6 +317,9 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_P)) {
 			currentState = States.PAUSE;
 		}
+		if (input.isKeyPressed(Input.KEY_F3)) {
+			voix.playShortText("Vous avez "+Globals.score+" points.");
+		}
 		// Est-ce que le personnage bouge ?
 		player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
@@ -198,15 +339,15 @@ public class GameplayState extends AbstractGameState {
 			player.moveRight();
 		}
 		if (player.onGround()) {
-			if ((input.isKeyPressed(Input.KEY_LCONTROL)) || 
-			   (input.isKeyPressed(Input.KEY_RCONTROL)) ||
-			   (input.isKeyPressed(Input.KEY_UP)) ||
-			   (input.isKeyPressed(Input.KEY_SPACE))) {
+			if ((input.isKeyPressed(Input.KEY_LCONTROL))
+					|| (input.isKeyPressed(Input.KEY_RCONTROL))
+					|| (input.isKeyPressed(Input.KEY_UP))) {
 				player.jump();
-				sonSaut.play();
+				//soundJump2.play();
 			}
 		}
-		if (!input.isKeyDown(Input.KEY_LCONTROL)) {
+		//useful to have longer jumps my maintaining CTRL
+		if (!input.isKeyDown(Input.KEY_LCONTROL) && !input.isKeyDown(Input.KEY_UP)) {
 			if (player.jumping()) {
 				player.setVelocity(player.getVelX(), player.getVelY() * 0.95f);
 			}
@@ -217,20 +358,18 @@ public class GameplayState extends AbstractGameState {
         if (input.isKeyPressed(Input.KEY_F2)){
             // jouer un son : « tu es un tux qui doit trouver le lamasticot »
         }
-        if (input.isKeyPressed(Input.KEY_F3)){
-            // jouer un son : « ton score est de »
-        }
 	}
 
 	@Override
 	protected Actor createPlayer() {
-		switch(Globals.playerType){
+		/*switch(Globals.playerType){
 		case 0:return new Homer();
 		case 1:return new Alien();
 		case 2:return new Tux();
 		case 3:return new Mario();
 		}
-		return new Mario();
+		return new Mario();*/
+		return new Tux();
 	}
 	
 
@@ -238,9 +377,9 @@ public class GameplayState extends AbstractGameState {
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException{
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
 		
-		entities.add(new MarioIA(800,150));
-		entities.add(new HomerIA(1800,150));
-		entities.add(new AlienIA(2600,150));
+		entities.add(new MarioIA(900,350));
+		entities.add(new HomerIA(1800,350));
+		entities.add(new AlienIA(2600,350));
 		return entities;
 	}
 

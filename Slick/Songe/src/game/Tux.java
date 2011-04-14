@@ -20,7 +20,7 @@ public class Tux extends Actor {
 	private final int NB_SPRITES_WALK = 7;
 	
 	public Tux() {
-		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 150, 5f, 65, 95);
+		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
 		
 		jump = new SpriteSheet(image,65,95);
 		
