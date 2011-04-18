@@ -62,9 +62,4 @@ public class HomerIA extends IA {
 		// TODO
 	}
 
-	@Override
-	public int stateToGoTo() {
-		return Hoorah.QUESTIONSTATE;
-	}
-
 }

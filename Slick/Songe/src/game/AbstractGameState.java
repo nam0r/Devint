@@ -51,8 +51,14 @@ public abstract class AbstractGameState extends BasicGameState {
 	/** The interval to check the controls at */
 	private int controlInterval = 50;
 	
-	private int stateToGoTo;
+	protected int stateToGoTo;
 	
+	/**
+	 * Indicates if the sound indicating that the IA has already been visited
+	 * will be played
+	 */
+	protected boolean alreadyVisitedPlay;
+
 	protected Sound2 alreadyVisited;
 	
 	
@@ -66,6 +72,7 @@ public abstract class AbstractGameState extends BasicGameState {
 		this.tilesHeight = tilesHeight;
 		this.backPar = backPar;
 		this.backPar2 = backPar2;
+		alreadyVisitedPlay = false;
 		
 	}
 	
@@ -78,10 +85,12 @@ public abstract class AbstractGameState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
-		// On crée le joueur et on l'ajoute a la map
+		// The player is created and added to the map
 		player = createPlayer();
 		restart();
-		// On crée les objets mobiles et on les ajoute a la map
+		// We manage collisions (especially for IAs)
+		manageCollisions();
+		// Moving objects are created and added
 		ArrayList<PhysicalEntity> entities = createEntities();
 		for(PhysicalEntity pe : entities) {
 			map.addEntity(pe);
@@ -90,9 +99,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	}
 	
 	public void restart(){
-		// Gestion des collisions
-		manageCollisions();
-		// On initialise la map
+		// We initialize the map
 		map.init();
 		map.setMainPlayer(player);
 		stateToGoTo = -1;
@@ -108,29 +115,34 @@ public abstract class AbstractGameState extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		
-		// Gestion des etats
+		// States management
 		statesManagement(gc, sbg, delta);
 		
 		totalDelta += delta;
 		
-		// Gestion des evenements independants du temps
+		// Events not depending on time
 		notTimedEvents(gc, sbg, delta);
 		
-		// Gestion des evenement clavier a un interval de temps donne.
-		// Si on ne fait pas ca, des frame rates differents affecteront la
-		// maniere dont les evenements sont interpretes.
+		// Events that need to be executed every amount of time and not at each
+		// frame. If they were executed at each frame, the framerate of the game
+		// would affect the gameplay
 		if (totalDelta > controlInterval) {
 			controlInterval -= totalDelta;
 			
 			timedEvents(gc, sbg, delta);
 		}
 		
-		// Mettre a jour la map
+		// Update the map
 		map.update(delta, gc, player);
 		
 		if(stateToGoTo != -1)
 			sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		
+		//the sound to play if an IA has already been visited
+		if(alreadyVisitedPlay){
+			alreadyVisited.play();
+			alreadyVisitedPlay = false;
+		}
 	}
 	
 	@Override
@@ -144,7 +156,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	}
 	
 	/* ******************* *
-	 * Methodes abstraites *
+	 *  Abstract methods   *
 	 * ******************* */
 	
 	protected abstract Actor createPlayer();
@@ -169,9 +181,8 @@ public abstract class AbstractGameState extends BasicGameState {
 				
 				if(bodyOther != null) { // Si la collision implique le player principal
 					PhysicalEntity other = map.getEntityByBody(bodyOther);
+					//If the object is an IA
 					if(other instanceof IA) {
-						//game.enterState(Hoorah.HOVERCAVESTATE, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
-						//player.setX(player.getX() + 100); // Attention au relief
 						
 						/* Idee : creer un attribut "stateToGoTo" initialise a null.
 						 * Mettre une methode "public State stateToGoTo" dans IA qui renvoie l'etat dans lequel
@@ -193,6 +204,7 @@ public abstract class AbstractGameState extends BasicGameState {
 						stateToGoTo = ((IA)other).stateToGoTo();
 						=======================================================
 						*/
+						//if the IA has never been visited
 						if(!((IA)other).isVisited()) {
 							if(Globals.node.getQuestion() == null && Globals.node.getGame() == null) {
 								stateToGoTo = Hoorah.SAVEHIGHSCORE;
@@ -205,8 +217,10 @@ public abstract class AbstractGameState extends BasicGameState {
 							}
 							((IA)other).onCollision();
 						}
+						//if the IA has already been visited
 						else {
-							//alreadyVisited.play();
+							alreadyVisitedPlay = true;
+						//	alreadyVisited.play();
 						}
 						
 						//Question question = ((IA)other).getQuestion();

@@ -47,7 +47,7 @@ public class QuestionState extends MenuState {
 		super.update(gc, sbg, delta);
 		
 		Input input = gc.getInput();
-		
+		//if answered
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			if(question.isOk(selected)) {
 				Globals.score += question.getPoints();
@@ -87,10 +87,10 @@ public class QuestionState extends MenuState {
 		
 		title = question.getWording(); // the question
 		
-		// Le son a lire pour entendre l'enonce de la question
+		// the sound of the question
 		titleVoice = question.getVoice();
 		
-		// Les sons a lire pour entendre les choix possibles pour la question
+		// The sounds to read for the answers to the question
 		//optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
 		optionsVoices = question.getChoicesVoices();
 		

@@ -52,6 +52,9 @@ public class Hoorah extends StateBasedGame {
 		// True if vertical sync is turned on
 		container.setTargetFrameRate(100);
 		container.setVSync(vsync);
+		//To render even if the window is not focused
+		container.setAlwaysRender(true);
+		//container.setVerbose(false);
 		
 		this.addState(new LoadingState(LOADINGSTATE));
 		this.addState(new MainMenuState(MAINMENUSTATE));
@@ -63,7 +66,6 @@ public class Hoorah extends StateBasedGame {
 		this.addState(new QuestionState(QUESTIONSTATE));
 	}
 	
-	// ===========================
 
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);

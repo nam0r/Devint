@@ -100,7 +100,6 @@ public class GameplayState extends AbstractGameState {
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"bump.ogg");
 		font = new AngelCodeFont(Conf.RESS_PATH+"hiero.fnt", Conf.RESS_PATH+"hiero.png");
-		restart();
 		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
 		AL10.alDopplerVelocity(1.0f); // Sound speed
@@ -132,6 +131,7 @@ public class GameplayState extends AbstractGameState {
 		if (AL10.alGetError() != AL10.AL_NO_ERROR)
 			System.out.println("Erreur d'OpenAL"+AL10.alGetError());
 		
+		//Environment sounds
 		soundWalk();
 		soundBump();
 		soundGround();
@@ -145,6 +145,7 @@ public class GameplayState extends AbstractGameState {
 			//if the sound is still playing we let it play
 			if (!soundWalk.playing()){
 				soundWalkIndex = soundWalk.play();
+				System.out.println("walk "+soundWalkIndex);
 				soundWalkPlaying = true;
 			}
 			//We modulate the sound speed depending on the speed of movement of the character
@@ -180,6 +181,7 @@ public class GameplayState extends AbstractGameState {
 						- player.getWidth() / 2, player.getVelY()
 						- player.getHeight() / 2, 0.0f);
 				soundJumpPlaying = true;
+				System.out.println("jump "+soundJumpIndex);
 			}
 			else {
 				soundJump.setSourcePosition(player.getX() - player.getWidth()
@@ -230,6 +232,7 @@ public class GameplayState extends AbstractGameState {
 				//AL10.alSourcef(soundBumpIndex, AL10.AL_GAIN , 100f);
 				bumpWallPlayed = true;
 				bumpWallX = player.getX();
+				System.out.println("bump "+soundBumpIndex);
 			} else {
 				soundBump.setSourcePosition(player.getX() - player.getWidth()
 						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
@@ -258,7 +261,6 @@ public class GameplayState extends AbstractGameState {
 		super.update(gc, sbg, delta);
 	}
 	
-	// Appelee lors de l'entree dans l'etat
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
@@ -276,6 +278,9 @@ public class GameplayState extends AbstractGameState {
 		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 35f);
 		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 250f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
+		/*soundWalkIndex = soundWalk.play(10f,0f);
+		soundJumpIndex = soundJump.play(10f,0f);
+		soundBumpIndex = soundBump.play(10f,0f);*/
 	}
 	
 	// Powerful restart, if we have previously been in the menu
@@ -295,6 +300,7 @@ public class GameplayState extends AbstractGameState {
 		player.setPosition(player.getX()+200, player.getY()-100);
 		sound.stop();
 		soundWalk.stop();
+		soundJump.stop();
 	}	
 	
 	@Override
@@ -325,11 +331,16 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
 			player.setMoving(true);
 		}
+        if (input.isKeyPressed(Input.KEY_F1)){
+            // jouer un son : l'aide
+        }
+        if (input.isKeyPressed(Input.KEY_F2)){
+            // jouer un son : « tu es un tux qui doit trouver le lamasticot »
+        }
 	}
 
 	@Override
 	protected void timedEvents(GameContainer gc, StateBasedGame sbg, int delta) {
-		
 		Input input = gc.getInput();
 		
 		if (input.isKeyDown(Input.KEY_LEFT)) {
@@ -348,17 +359,11 @@ public class GameplayState extends AbstractGameState {
 			}
 		}
 		//useful to have longer jumps my maintaining CTRL
-		if (!input.isKeyDown(Input.KEY_LCONTROL) && !input.isKeyDown(Input.KEY_UP) && !input.isKeyPressed(Input.KEY_SPACE)) {
+		if (!input.isKeyDown(Input.KEY_LCONTROL) && !input.isKeyDown(Input.KEY_UP) && !input.isKeyDown(Input.KEY_SPACE)) {
 			if (player.jumping()) {
 				player.setVelocity(player.getVelX(), player.getVelY() * 0.95f);
 			}
 		}
-        if (input.isKeyPressed(Input.KEY_F1)){
-            // jouer un son : l'aide
-        }
-        if (input.isKeyPressed(Input.KEY_F2)){
-            // jouer un son : « tu es un tux qui doit trouver le lamasticot »
-        }
 	}
 
 	@Override

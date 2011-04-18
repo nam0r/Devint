@@ -55,9 +55,4 @@ public class AlienIA extends IA {
 		image.draw(getX()-48, getY()-56, 100, 100);
 	}
 
-	@Override
-	public int stateToGoTo() {
-		return Hoorah.SAVEHIGHSCORE;
-	}
-
 }

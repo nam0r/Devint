@@ -14,9 +14,4 @@ public class MarioIA extends IA {
 		moveForce = 150;
 	}
 
-	@Override
-	public int stateToGoTo() {
-		return Hoorah.HOVERCAVESTATE;
-	}
-
 }

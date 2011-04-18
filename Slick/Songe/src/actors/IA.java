@@ -80,6 +80,9 @@ public abstract class IA extends Actor {
 		
 	}
 	
+	/**
+	 * Makes additional actions when collision with the player
+	 */
 	public void onCollision() {
 		if(! visited) {
 			//System.out.println(question.toString());
@@ -87,10 +90,14 @@ public abstract class IA extends Actor {
 		}
 	}
 	
+	/**
+	 * Returns if the IA has already been visited by the player
+	 * @return visited if the IA has already been visited
+	 */
 	public boolean isVisited(){
 		return visited;
 	}
 	
-	public abstract int stateToGoTo();
+	//public abstract int stateToGoTo();
 	
 }
