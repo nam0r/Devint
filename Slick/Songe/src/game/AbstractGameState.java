@@ -2,9 +2,6 @@ package game;
 
 import java.util.ArrayList;
 
-import sound.Sound2;
-import utils.Conf;
-import main.Hoorah;
 import map.Map;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
@@ -14,13 +11,11 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import utils.Globals;
 import actors.Actor;
 import actors.IA;
 import actors.PhysicalEntity;
@@ -51,10 +46,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	/** The interval to check the controls at */
 	private int controlInterval = 50;
 	
-	private int stateToGoTo;
-	
-	protected Sound2 alreadyVisited;
-	
+	protected int stateToGoTo;
 	
 	public AbstractGameState(int id, String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
 			int tilesWidth, int tilesHeight, float backPar, float backPar2) {
@@ -86,7 +78,6 @@ public abstract class AbstractGameState extends BasicGameState {
 		for(PhysicalEntity pe : entities) {
 			map.addEntity(pe);
 		}
-		alreadyVisited = new Sound2(Conf.SND_VOIX_PATH+"deja_rencontres.ogg");
 	}
 	
 	public void restart(){
@@ -152,9 +143,10 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void notTimedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void timedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
+	protected abstract void collisions(IA ia);
 	
 	
-	protected void manageCollisions() {
+	private void manageCollisions() {
 		
 		map.getWorld().addListener(new CollisionListener() {
 
@@ -193,21 +185,8 @@ public abstract class AbstractGameState extends BasicGameState {
 						stateToGoTo = ((IA)other).stateToGoTo();
 						=======================================================
 						*/
-						if(!((IA)other).isVisited()) {
-							if(Globals.node.getQuestion() == null && Globals.node.getGame() == null) {
-								stateToGoTo = Hoorah.SAVEHIGHSCORE;
-							}
-							if(Globals.node.getQuestion() != null) {
-								stateToGoTo = Hoorah.QUESTIONSTATE;
-							}
-							if(Globals.node.getGame() != null) {
-								stateToGoTo = Globals.node.getGame().getId();
-							}
-							((IA)other).onCollision();
-						}
-						else {
-							//alreadyVisited.play();
-						}
+						
+						collisions(((IA)other));
 						
 						//Question question = ((IA)other).getQuestion();
 						//System.out.println(question.toString());

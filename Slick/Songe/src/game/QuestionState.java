@@ -80,9 +80,6 @@ public class QuestionState extends MenuState {
 			System.err.println("Il n'y a pas de question a lire !!!");
 		}
 		
-		//This is useful because we load here sounds that we didn't know at the beginning of the game, they are not deferred
-		LoadingList.setDeferredLoading(false);
-		
 		options = question.getChoicesWordings(); // the choices
 		
 		title = question.getWording(); // the question
@@ -94,11 +91,16 @@ public class QuestionState extends MenuState {
 		//optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
 		optionsVoices = question.getChoicesVoices();
 		
+		//This is useful because we load here sounds that we didn't know at the beginning of the game, they are not deferred
+		LoadingList.setDeferredLoading(false);
+		
 		optionsSounds = new Sound[options.length];
 		titleSound = new Sound(titleVoice);
 		for(int i=0; i<options.length; i++){
     		optionsSounds[i] = new Sound(optionsVoices[i]);
     	}
+		
+		LoadingList.setDeferredLoading(true);
 		// ===============
 		
 		super.enter(gc, sbg); //It will read the options[selected]
@@ -110,7 +112,7 @@ public class QuestionState extends MenuState {
 		super.leave(gc, sb);
 		options = new String[0];
 		title = "";
-		LoadingList.setDeferredLoading(true);
+		//LoadingList.setDeferredLoading(true);
 	}
 
 }

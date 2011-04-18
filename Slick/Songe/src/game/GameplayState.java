@@ -3,7 +3,6 @@ package game;
 import java.util.ArrayList;
 
 import main.Hoorah;
-import game.AbstractGameState;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
@@ -24,6 +23,7 @@ import utils.Conf;
 import utils.Globals;
 import utils.Utils;
 import actors.Actor;
+import actors.IA;
 import actors.PhysicalEntity;
 
 public class GameplayState extends AbstractGameState {
@@ -78,6 +78,7 @@ public class GameplayState extends AbstractGameState {
 
 	protected Sound2 sound;
 	protected int soundIndex;
+	protected Sound2 alreadyVisited;
 	
 	
 	public GameplayState(int id) {
@@ -99,6 +100,7 @@ public class GameplayState extends AbstractGameState {
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"bump.ogg");
+		alreadyVisited = new Sound2(Conf.SND_VOIX_PATH+"deja_rencontres.ogg");
 		font = new AngelCodeFont(Conf.RESS_PATH+"hiero.fnt", Conf.RESS_PATH+"hiero.png");
 		restart();
 		//We set Open Al constants about physical world
@@ -401,6 +403,28 @@ public class GameplayState extends AbstractGameState {
 			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 			break;
+		}
+	}
+
+	@Override
+	protected void collisions(IA ia) {
+		if(ia.isVisited()) {
+			if(alreadyVisited.playing())
+				alreadyVisited.stop();
+			alreadyVisited.play();
+		}
+		
+		else {
+			if(Globals.node.getQuestion() == null && Globals.node.getGame() == null) {
+				stateToGoTo = Hoorah.SAVEHIGHSCORE;
+			}
+			if(Globals.node.getQuestion() != null) {
+				stateToGoTo = Hoorah.QUESTIONSTATE;
+			}
+			if(Globals.node.getGame() != null) {
+				stateToGoTo = Globals.node.getGame().getId();
+			}
+			ia.onCollision();
 		}
 	}
 
