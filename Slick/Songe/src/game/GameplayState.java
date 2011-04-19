@@ -133,17 +133,16 @@ public class GameplayState extends AbstractGameState {
 		soundBump();
 		soundGround();
 		soundJump();
-		/*System.out.println("");
+		alreadyVisited.setSourcePosition(player.getX() - player.getWidth()
+				/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
+				false);
+		System.out.println("");
 		for(int i=0; i<20; i++){
 			if(isPlaying(i))
 				System.out.println("111111111");
 			else
 				System.out.println("0");
-			if(i==2){
-				System.out.println("soundWalk "+soundWalk.playing());
-				System.out.println("soundWalkIndex "+soundWalkIndex+" "+isPlaying(soundWalkIndex-1));
-			}
-		}*/
+		}
 	}
 	boolean isPlaying(int index) {
 		int state = AL10.alGetSourcei(SoundStore.get().getSource(index), AL10.AL_SOURCE_STATE);
@@ -433,6 +432,9 @@ public class GameplayState extends AbstractGameState {
 		if(ia.isVisited()) {
 			alreadyVisited.stop();
 			alreadyVisited.play();
+			alreadyVisited.setSourcePosition(player.getX() - player.getWidth()
+					/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
+					false);
 		}
 		
 		else {

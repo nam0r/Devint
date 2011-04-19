@@ -59,8 +59,7 @@ public class Sound2 {
 	 *            if all sources of the buffer should be affected
 	 */
 	public void setVolume(float volume, boolean all) {
-		setSourceFromBuffer();
-		if (buffer == 0 || index == -1)
+		if (!playing())
 			return;
 
 		if (volume < 0) {
@@ -86,8 +85,7 @@ public class Sound2 {
 	 *            if all sources of the buffer should be affected
 	 */
 	public void setPitch(float pitch, boolean all) {
-		setSourceFromBuffer();
-		if (buffer == 0 || index == -1)
+		if (!playing())
 			return;
 		if (pitch < 0)
 			pitch = 0;
@@ -113,8 +111,7 @@ public class Sound2 {
 	 *            if all sources of the buffer should be affected
 	 */
 	public void setSourcePosition(float x, float y, float z, boolean all) {
-		setSourceFromBuffer();
-		if (buffer == 0 || index == -1)
+		if (!playing())
 			return;
 		FloatBuffer sourcePos = (FloatBuffer) BufferUtils.createFloatBuffer(3)
 				.put(new float[] { x, y, z }).rewind();
@@ -139,8 +136,7 @@ public class Sound2 {
 	 *            if all sources of the buffer should be affected
 	 */
 	public void setSourceVelocity(float x, float y, float z, boolean all) {
-		setSourceFromBuffer();
-		if (buffer == 0 || index == -1)
+		if (!playing())
 			return;
 		FloatBuffer sourceVel = (FloatBuffer) BufferUtils.createFloatBuffer(3)
 				.put(new float[] { x, y, z }).rewind();
@@ -322,8 +318,7 @@ public class Sound2 {
 	 * Stop the sound being played
 	 */
 	public void stop() {
-		setSourceFromBuffer();
-		if (buffer == 0 || index == -1)
+		if (!playing())
 			return;
 		// if the source doesn't any more contain the buffer, the sound is
 		// already stopped so we don't need to stop
