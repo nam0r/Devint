@@ -4,13 +4,16 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
+import org.newdawn.slick.openal.SoundStore;
 
 /**
  * Tools to interact with OpenAl
  */
 
 public class AlUtils {
-
+	
+	private static SoundStore store = SoundStore.get();
+	
 	/**
 	 * Put the listener's position, velocity and orientation to default (useful for minigames)
 	 */
@@ -56,4 +59,5 @@ public class AlUtils {
 		AL10.alListener(AL10.AL_ORIENTATION, listenerOri);
 	}
 	
+
 }

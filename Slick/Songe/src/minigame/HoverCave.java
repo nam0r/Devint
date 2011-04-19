@@ -40,7 +40,6 @@ public class HoverCave extends BasicGameState {
 	private double speed;
 	private int distance;
 	private Sound2 sonG, sonD;
-	private int sonDIndex, sonGIndex;
 	private float distSonHaut, distSonBas;
 	/** The explication sound when entering to this state */
 	private Sound2 enterSound;
@@ -156,10 +155,10 @@ public class HoverCave extends BasicGameState {
 					distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
 					//System.out.println(lowerWall.get(2) - dudeHeight + 20 + " lol");
 					//System.out.println(dudeHeight - upperWall.get(2) + 20);
-					sonG.setVolume(distSonHaut*2, sonGIndex);
-					sonG.setPitch(distSonHaut*2, sonGIndex);
-					sonD.setVolume(distSonBas*2, sonDIndex);
-					sonD.setPitch(distSonBas*2, sonDIndex);
+					sonG.setVolume(distSonHaut*2, false);
+					sonG.setPitch(distSonHaut*2, false);
+					sonD.setVolume(distSonBas*2, false);
+					sonD.setPitch(distSonBas*2, false);
 				}
 				
 				if (input.isKeyPressed(Input.KEY_ESCAPE)) {
@@ -170,8 +169,8 @@ public class HoverCave extends BasicGameState {
 		
 			// If we are dead
 			else{
-				sonD.setVolume(0f, sonDIndex);
-				sonG.setVolume(0f, sonGIndex);
+				sonD.setVolume(0f, false);
+				sonG.setVolume(0f, false);
 				
 				if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 					
@@ -196,8 +195,8 @@ public class HoverCave extends BasicGameState {
 		
 		
 		else {
-			sonD.setVolume(0f, sonDIndex);
-			sonG.setVolume(0f, sonGIndex);
+			sonD.setVolume(0f, false);
+			sonG.setVolume(0f, false);
 			if(input.isKeyPressed(Input.KEY_UP)){
 				playTheGame = true;
 				enterSound.stop();
@@ -244,8 +243,8 @@ public class HoverCave extends BasicGameState {
 		//The listener should be at default position
 		AlUtils.resetAlListener();
 		//We play the two sounds since we enter
-		sonDIndex = sonD.loop(1f, 0f, 1f, 0f, 0f);
-		sonGIndex = sonG.loop(1f, 0f, -1f, 0f, 0f);
+		sonD.loop(1f, 0f, 1f, 0f, 0f);
+		sonG.loop(1f, 0f, -1f, 0f, 0f);
 		//We play the beginning explication sound
 		enterSound.play();
 	}

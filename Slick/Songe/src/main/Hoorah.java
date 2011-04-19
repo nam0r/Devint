@@ -11,6 +11,7 @@ import minigame.HoverCave;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.StateBasedGame;
 
 
@@ -62,8 +63,9 @@ public class Hoorah extends StateBasedGame {
 		this.addState(new GameplayState(GAMEPLAYSTATE));
 		this.addState(new HoverCave(HOVERCAVESTATE));
 		this.addState(new SaveHighScore(SAVEHIGHSCORE));
-		this.enterState(LOADINGSTATE);
 		this.addState(new QuestionState(QUESTIONSTATE));
+		
+		this.enterState(LOADINGSTATE);
 	}
 	
 

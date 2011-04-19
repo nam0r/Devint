@@ -3,7 +3,6 @@ package game;
 import java.util.ArrayList;
 
 import main.Hoorah;
-import game.AbstractGameState;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
@@ -14,6 +13,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -24,6 +24,7 @@ import utils.Conf;
 import utils.Globals;
 import utils.Utils;
 import actors.Actor;
+import actors.IA;
 import actors.PhysicalEntity;
 
 public class GameplayState extends AbstractGameState {
@@ -45,16 +46,10 @@ public class GameplayState extends AbstractGameState {
 	protected Sound2 soundJump;
 	/** The sound when jumping, a short one when beginning to jump */
 	protected Sound2 soundJump2;
-	/** The index of the sound when jumping */
-	protected int soundJumpIndex;
 	/** The sound when walking */
 	protected Sound2 soundWalk;
-	/** The index of the sound when walking */
-	protected int soundWalkIndex;
 	/** The sound when bumping */
 	protected Sound2 soundBump;
-	/** The index of the sound when bumping */
-	protected int soundBumpIndex;
 	/**
 	 * Indicates if the bump sound has been played since the last move and so
 	 * should or not be replayed in the current frame
@@ -77,7 +72,8 @@ public class GameplayState extends AbstractGameState {
 	private Font font;
 
 	protected Sound2 sound;
-	protected int soundIndex;
+	/** The sound to indicate an IA has already been visited */
+	protected Sound2 alreadyVisited;
 	
 	
 	public GameplayState(int id) {
@@ -99,6 +95,7 @@ public class GameplayState extends AbstractGameState {
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"bump.ogg");
+		alreadyVisited = new Sound2(Conf.SND_VOIX_PATH+"deja_rencontres.ogg");
 		font = new AngelCodeFont(Conf.RESS_PATH+"hiero.fnt", Conf.RESS_PATH+"hiero.png");
 		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -120,7 +117,7 @@ public class GameplayState extends AbstractGameState {
 						- map.getEntityByBody(map.getWorld().getBodies().get(i)).getWidth() / 2),
 						(map.getEntityByBody(map.getWorld().getBodies().get(i)).getY()
 						- map.getEntityByBody(map.getWorld().getBodies().get(i)).getHeight() / 2),
-				0f, soundIndex);
+				0f, false);
 			}
 		}
 		//We put the openAl listener's position and velocity
@@ -136,7 +133,21 @@ public class GameplayState extends AbstractGameState {
 		soundBump();
 		soundGround();
 		soundJump();
-		
+		/*System.out.println("");
+		for(int i=0; i<20; i++){
+			if(isPlaying(i))
+				System.out.println("111111111");
+			else
+				System.out.println("0");
+			if(i==2){
+				System.out.println("soundWalk "+soundWalk.playing());
+				System.out.println("soundWalkIndex "+soundWalkIndex+" "+isPlaying(soundWalkIndex-1));
+			}
+		}*/
+	}
+	boolean isPlaying(int index) {
+		int state = AL10.alGetSourcei(SoundStore.get().getSource(index), AL10.AL_SOURCE_STATE);
+		return (state == AL10.AL_PLAYING);
 	}
 	
 	private void soundWalk(){
@@ -144,9 +155,9 @@ public class GameplayState extends AbstractGameState {
 		if (player.moving() && !player.jumping() && !player.falling()) {
 			//if the sound is still playing we let it play
 			if (!soundWalk.playing()){
-				soundWalkIndex = soundWalk.play();
-				System.out.println("walk "+soundWalkIndex);
-				soundWalkPlaying = true;
+				soundWalk.loop();
+				testSound();
+				//soundWalkPlaying = true;
 			}
 			//We modulate the sound speed depending on the speed of movement of the character
 			float pitchVel = 0;
@@ -161,14 +172,11 @@ public class GameplayState extends AbstractGameState {
 			//for security
 			if(pitchVel > 10) pitchVel = 10;
 			if(pitchVel < 0.001) pitchVel = 0.001f;
-			soundWalk.setPitch(pitchVel, soundWalkIndex);
+			soundWalk.setPitch(pitchVel, false);
 		}
 		//we stop the sound because the character is no more walking
 		else{
-			if(soundWalk.playing() && soundWalkPlaying){
-				soundWalk.stop();
-				soundWalkPlaying = false;
-			}
+			soundWalk.stop();
 		}
 	}
 	
@@ -177,16 +185,16 @@ public class GameplayState extends AbstractGameState {
 		if (player.jumping() || player.falling()) {
 			//if the sound is still playing we let it play
 			if (!soundJump.playing()){
-				soundJumpIndex = soundJump.playAt(1f, 0.5f, player.getX()
+				soundJump.loop(1f, 0.5f, player.getX()
 						- player.getWidth() / 2, player.getVelY()
 						- player.getHeight() / 2, 0.0f);
 				soundJumpPlaying = true;
-				System.out.println("jump "+soundJumpIndex);
+				testSound();
 			}
 			else {
 				soundJump.setSourcePosition(player.getX() - player.getWidth()
 					/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
-					soundJumpIndex);
+					false);
 			}
 			//We modulate the sound pitch depending on the y speed of movement of the character
 			float pitchVel = 0;
@@ -197,14 +205,11 @@ public class GameplayState extends AbstractGameState {
 			//for security
 			if(pitchVel > 10) pitchVel = 10;
 			if(pitchVel < 0.0001) pitchVel = 0.0001f;
-			soundJump.setPitch(pitchVel, soundJumpIndex);
+			soundJump.setPitch(pitchVel, false);
 		}
 		//we stop the sound because the character is no more jumping
 		else{
-			if(soundJump.playing() && soundJumpPlaying){
-				soundJump.stop();
-				soundJumpPlaying = false;
-			}
+			soundJump.stop();
 		}
 	}
 	
@@ -226,30 +231,46 @@ public class GameplayState extends AbstractGameState {
 		if (player.isFacingToWall()) {
 			// If the sound should be replayed, it will
 			if (!bumpWallPlayed) {
-				soundBumpIndex = soundBump.playAt(1.5f, 1f, player.getX()
+				soundBump.playAt(1.5f, 1f, player.getX()
 						- player.getWidth() / 2, player.getVelY()
 						- player.getHeight() / 2, 0.0f);
 				//AL10.alSourcef(soundBumpIndex, AL10.AL_GAIN , 100f);
 				bumpWallPlayed = true;
 				bumpWallX = player.getX();
-				System.out.println("bump "+soundBumpIndex);
+				testSound();
 			} else {
 				soundBump.setSourcePosition(player.getX() - player.getWidth()
 						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
-						soundBumpIndex);
+						false);
 			}
 		}
 		// If the player is knocking his head somewhere when jumping
 		else if (player.isTopCollided() && player.jumping()) {
 			// If the sound should be replayed, it will
 			if (!bumpTopPlayed) {
-				soundBumpIndex = soundBump.playAt(1.5f, 1f, player.getX()
+				soundBump.playAt(1.5f, 1f, player.getX()
 						- player.getWidth() / 2, player.getVelY()
 						- player.getHeight() / 2, 0.0f);
 				bumpTopPlayed = true;
 				bumpTopX = player.getX(); bumpTopY = player.getY();
+				testSound();
 			}
 		}
+	}
+	
+	public void testSound(){
+		System.out.println("----------------------");
+		System.out.println("jumpI "+soundJump.getIndex()+" jumpB "+soundJump.getBuffer());
+		System.out.println("walkI "+soundWalk.getIndex()+" walkB "+soundWalk.getBuffer());
+		System.out.println("bumpI "+soundBump.getIndex()+" bumpB "+soundBump.getBuffer());
+		System.out.println("soundI "+sound.getIndex() + " soundB "+sound.getBuffer());
+		System.out.println("alreadyVisitedI "+alreadyVisited.getIndex()+" alreadyVisitedI "+alreadyVisited.getBuffer());
+		/*System.out.println("");
+		System.out.println("jumpBuff "+soundJump.getID());
+		System.out.println("walkBuff "+soundWalk.getID());
+		System.out.println("bumpBuff "+soundBump.getID());
+		System.out.println("soundBuff "+sound.getID());
+		System.out.println("alreadyVisitedBuff "+alreadyVisited.getID());*/
 	}
 	
 	private void soundGround(){
@@ -273,10 +294,10 @@ public class GameplayState extends AbstractGameState {
 		Globals.returnState = stateID;
 		
 		//AL10.alSourcePlay(soundIndex);
-		soundIndex = sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
-		AL10.alSourcef(soundIndex, AL10.AL_ROLLOFF_FACTOR, 2.45f);
-		AL10.alSourcef(soundIndex, AL10.AL_REFERENCE_DISTANCE, 35f);
-		AL10.alSourcef(soundIndex, AL10.AL_GAIN , 250f);
+		sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
+		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
+		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
+		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN , 250f);
 		//AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
 		/*soundWalkIndex = soundWalk.play(10f,0f);
 		soundJumpIndex = soundJump.play(10f,0f);
@@ -285,8 +306,6 @@ public class GameplayState extends AbstractGameState {
 	
 	// Powerful restart, if we have previously been in the menu
 	public void superRestart(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		//player = createPlayer();
-		//restart();
 		super.init(gc, sbg);
 		Globals.score = 0;
 	}
@@ -295,7 +314,6 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb) throws SlickException {
 		super.leave(gc, sb);
-		//musique.stop();
 		//If comming in game again, the player will be moved
 		player.setPosition(player.getX()+200, player.getY()-100);
 		sound.stop();
@@ -337,6 +355,7 @@ public class GameplayState extends AbstractGameState {
         if (input.isKeyPressed(Input.KEY_F2)){
             // jouer un son : « tu es un tux qui doit trouver le lamasticot »
         }
+
 	}
 
 	@Override
@@ -406,6 +425,27 @@ public class GameplayState extends AbstractGameState {
 			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 			break;
+		}
+	}
+
+	@Override
+	protected void collisions(IA ia) {
+		if(ia.isVisited()) {
+			alreadyVisited.stop();
+			alreadyVisited.play();
+		}
+		
+		else {
+			if(Globals.node.getQuestion() == null && Globals.node.getGame() == null) {
+				stateToGoTo = Hoorah.SAVEHIGHSCORE;
+			}
+			if(Globals.node.getQuestion() != null) {
+				stateToGoTo = Hoorah.QUESTIONSTATE;
+			}
+			if(Globals.node.getGame() != null) {
+				stateToGoTo = Globals.node.getGame().getId();
+			}
+			ia.onCollision();
 		}
 	}
 

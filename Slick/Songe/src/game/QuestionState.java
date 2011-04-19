@@ -4,6 +4,7 @@ import menu.MenuState;
 import nodes.Node;
 import nodes.Question;
 
+import org.lwjgl.openal.AL10;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,10 +12,12 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.loading.LoadingList;
+import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
  
@@ -22,9 +25,12 @@ public class QuestionState extends MenuState {
 	
 	private Question question;
 	private Sound bonneRep, mauvaiseRep;
+	/** Indicates if the question has been answered */
+	private boolean answered;
 	
     public QuestionState(int stateID) throws SlickException {
     	super(stateID);
+    	answered = false;
     }
 
 	@Override
@@ -55,19 +61,21 @@ public class QuestionState extends MenuState {
 					Globals.node = new Node(question.getChoices()[selected].getNodeToGoTo());
 				}
 				bonneRep.play();
-				while(bonneRep.playing());
+				answered = true;
 			}
 			else{
 				mauvaiseRep.play();
-				while(mauvaiseRep.playing());
-			}
-			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
-				
+				answered = true;
+			}	
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
+		}
+		
+		if (answered && !bonneRep.playing() && !mauvaiseRep.playing()) {
+			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
+				new FadeInTransition(Color.black));
 		}
 	}
 	
@@ -80,9 +88,6 @@ public class QuestionState extends MenuState {
 			System.err.println("Il n'y a pas de question a lire !!!");
 		}
 		
-		//This is useful because we load here sounds that we didn't know at the beginning of the game, they are not deferred
-		LoadingList.setDeferredLoading(false);
-		
 		options = question.getChoicesWordings(); // the choices
 		
 		title = question.getWording(); // the question
@@ -94,11 +99,16 @@ public class QuestionState extends MenuState {
 		//optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
 		optionsVoices = question.getChoicesVoices();
 		
-		optionsSounds = new Sound[options.length];
+		//This is useful because we load here sounds that we didn't know at the beginning of the game, they are not deferred
+		LoadingList.setDeferredLoading(false);
+		
+		optionsSounds = new Sound2[options.length];
 		titleSound = new Sound(titleVoice);
 		for(int i=0; i<options.length; i++){
-    		optionsSounds[i] = new Sound(optionsVoices[i]);
+    		optionsSounds[i] = new Sound2(optionsVoices[i]);
     	}
+		
+		LoadingList.setDeferredLoading(true);
 		// ===============
 		
 		super.enter(gc, sbg); //It will read the options[selected]
@@ -110,7 +120,8 @@ public class QuestionState extends MenuState {
 		super.leave(gc, sb);
 		options = new String[0];
 		title = "";
-		LoadingList.setDeferredLoading(true);
+		answered = false;
+		//LoadingList.setDeferredLoading(true);
 	}
 
 }

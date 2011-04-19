@@ -13,6 +13,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import sound.AlUtils;
+import sound.Sound2;
 import utils.Conf;
  
 public abstract class MenuState extends BasicGameState {
@@ -47,7 +48,7 @@ public abstract class MenuState extends BasicGameState {
 	/** The menu options voices paths */
 	protected String[] optionsVoices;
 	/** The menu options sounds */
-	protected Sound[] optionsSounds;
+	protected Sound2[] optionsSounds;
 	/** Indicates if the option 1 has been said for the 1st time */
 	protected boolean firstOptionPlayed;
 	/** Input */
@@ -66,15 +67,15 @@ public abstract class MenuState extends BasicGameState {
     	//titleSound = new Sound();
     	options = new String[0];
     	optionsVoices = new String[0];
-    	optionsSounds = new Sound[0];
+    	optionsSounds = new Sound2[0];
     	selected = 0;
     }
     
     public void initSounds() throws SlickException{
     	titleSound = new Sound(titleVoice);
-    	optionsSounds = new Sound[options.length];
+    	optionsSounds = new Sound2[options.length];
     	for(int i=0; i<options.length; i++){
-    		optionsSounds[i] = new Sound(optionsVoices[i]);
+    		optionsSounds[i] = new Sound2(optionsVoices[i]);
     	}
     }
 
