@@ -56,10 +56,5 @@ public class HomerIA extends IA {
 			body.addForce(new Vector2f(0, -1000));
 		}
 	}
-	
-	@Override
-	public void onCollision() {
-		// TODO
-	}
 
 }

@@ -85,7 +85,6 @@ public abstract class IA extends Actor {
 	 */
 	public void onCollision() {
 		if(! visited) {
-			//System.out.println(question.toString());
 			visited = true;
 		}
 	}
@@ -97,7 +96,5 @@ public abstract class IA extends Actor {
 	public boolean isVisited(){
 		return visited;
 	}
-	
-	//public abstract int stateToGoTo();
 	
 }

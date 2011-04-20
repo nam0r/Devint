@@ -22,6 +22,8 @@ public class Sound2 {
 	private int buffer;
 	/** The OpenAL source index, changes often */
 	private int index;
+	/** Indicates if the sound has been played once */
+	private boolean played;
 
 	public Sound2(String ref) throws SlickException {
 		SoundStore.get().init();
@@ -44,7 +46,7 @@ public class Sound2 {
 			Log.error(e);
 			throw new SlickException("Failed to load sound: " + ref);
 		}
-
+		played = false;
 		index = -1;
 		// will be 0 if sound differed, the buffer id otherwise
 		buffer = sound.getBufferID();
@@ -295,10 +297,12 @@ public class Sound2 {
 
 	/**
 	 * Affects the buffer, should occur only one time per sound
+	 * Indicates also the 1st time the sound is played
 	 */
 	private void setBuff() {
 		if (buffer == 0)
 			buffer = AL10.alGetSourcei(index, AL10.AL_BUFFER);
+		played = true;
 	}
 
 	/**
@@ -354,5 +358,12 @@ public class Sound2 {
 	public int getBuffer() {
 		return buffer;
 	}
-
+	
+	public boolean playedOnce(){
+		return played;
+	}
+	
+	public void reinitPlayedOnce(){
+		played = false;
+	}
 }

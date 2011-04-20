@@ -49,8 +49,6 @@ public abstract class MenuState extends BasicGameState {
 	protected String[] optionsVoices;
 	/** The menu options sounds */
 	protected Sound2[] optionsSounds;
-	/** Indicates if the option 1 has been said for the 1st time */
-	protected boolean firstOptionPlayed;
 	/** Input */
 	protected Input input;
 	/** indicates if lines are already enlarged or not */
@@ -61,7 +59,6 @@ public abstract class MenuState extends BasicGameState {
     	this.stateID = stateID;
     	//The voice tool
     	voix = new t2s.SIVOXDevint();
-    	firstOptionPlayed = false;
     	title = "";
     	titleVoice = "";
     	//titleSound = new Sound();
@@ -149,38 +146,25 @@ public abstract class MenuState extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		//If the title is finished, we play 1 time the 1st option
-		if(!titleSound.playing() && !firstOptionPlayed){
+		if(!titleSound.playing() && !optionsSounds[selected].playedOnce()){
 			optionsSounds[selected].play();
-			firstOptionPlayed = true;
 		}
 		if (input.isKeyPressed(Input.KEY_DOWN) || input.isKeyPressed(Input.KEY_RIGHT)) {
 			selected++;
 			if (selected >= options.length)
 				selected = 0;
-			//voix.stop();
-			//voix.playShortText(options[selected]);
-			//voix.playWav(optionsVoices[selected]);
-			stopSounds();
+			AlUtils.stopAllSounds();
 			optionsSounds[selected].play();
 		}
 		if (input.isKeyPressed(Input.KEY_UP) || input.isKeyPressed(Input.KEY_LEFT)) {
 			selected--;
 			if (selected < 0)
 				selected = options.length - 1;
-			//voix.stop();
-			//voix.playShortText(options[selected]);
-			//voix.playWav(optionsVoices[selected]);
-			stopSounds();
+			AlUtils.stopAllSounds();
 			optionsSounds[selected].play();
 		}
 	}
 	
-	protected void stopSounds(){
-		for(int i=0; i<optionsSounds.length; i++){
-			optionsSounds[i].stop();
-		}
-		titleSound.stop();
-	}
 	
 	@Override
 	public int getID() {
@@ -214,8 +198,7 @@ public abstract class MenuState extends BasicGameState {
 		selected = 0;
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
-		firstOptionPlayed = false;
-		stopSounds();
+		AlUtils.stopAllSounds();
 	}
 
 }

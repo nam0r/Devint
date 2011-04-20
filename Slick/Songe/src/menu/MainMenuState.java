@@ -51,7 +51,7 @@ public class MainMenuState extends MenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			switch (selected) {
 			case 0:
-				sbg.enterState(Hoorah.GAMEPLAYSTATE, new FadeOutTransition(Color.black),
+				sbg.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 				break;
 			case 1:
@@ -68,7 +68,6 @@ public class MainMenuState extends MenuState {
 		}
 	}
 	
-	// Appelee lors de l'entree dans l'etat
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -78,7 +77,6 @@ public class MainMenuState extends MenuState {
 		
 	}
 	
-	// Appelee lors de la sortie de l'etat
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {

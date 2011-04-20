@@ -59,5 +59,16 @@ public class AlUtils {
 		AL10.alListener(AL10.AL_ORIENTATION, listenerOri);
 	}
 	
+	/**
+	 * Stops all sounds currently playing
+	 */
+	public static void stopAllSounds(){
+		for (int i = 1; i < store.getSourceCount(); i++) {
+			if (AL10.alGetSourcei(i, AL10.AL_SOURCE_STATE) == AL10.AL_PLAYING) {
+				AL10.alSourceStop(i);
+			}
+		}
+	}
+	
 
 }

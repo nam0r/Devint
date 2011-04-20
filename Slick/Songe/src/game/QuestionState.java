@@ -17,6 +17,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import sound.AlUtils;
 import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
@@ -60,10 +61,12 @@ public class QuestionState extends MenuState {
 				if(question.getScenario()) {
 					Globals.node = new Node(question.getChoices()[selected].getNodeToGoTo());
 				}
+				AlUtils.stopAllSounds();
 				bonneRep.play();
 				answered = true;
 			}
 			else{
+				AlUtils.stopAllSounds();
 				mauvaiseRep.play();
 				answered = true;
 			}	
@@ -87,14 +90,10 @@ public class QuestionState extends MenuState {
 		if(question == null) {
 			System.err.println("Il n'y a pas de question a lire !!!");
 		}
-		
 		options = question.getChoicesWordings(); // the choices
-		
 		title = question.getWording(); // the question
-		
 		// the sound of the question
 		titleVoice = question.getVoice();
-		
 		// The sounds to read for the answers to the question
 		//optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
 		optionsVoices = question.getChoicesVoices();
@@ -109,7 +108,6 @@ public class QuestionState extends MenuState {
     	}
 		
 		LoadingList.setDeferredLoading(true);
-		// ===============
 		
 		super.enter(gc, sbg); //It will read the options[selected]
 	}
@@ -118,10 +116,10 @@ public class QuestionState extends MenuState {
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {
 		super.leave(gc, sb);
+		//we clear variables for future questions
 		options = new String[0];
 		title = "";
 		answered = false;
-		//LoadingList.setDeferredLoading(true);
 	}
 
 }

@@ -13,7 +13,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -95,7 +94,7 @@ public class GameplayState extends AbstractGameState {
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH+"wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH+"bump.ogg");
-		alreadyVisited = new Sound2(Conf.SND_VOIX_PATH+"deja_rencontres.ogg");
+		alreadyVisited = new Sound2(Conf.getVoice("deja_rencontres"));
 		font = new AngelCodeFont(Conf.RESS_PATH+"hiero.fnt", Conf.RESS_PATH+"hiero.png");
 		//We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -136,17 +135,6 @@ public class GameplayState extends AbstractGameState {
 		alreadyVisited.setSourcePosition(player.getX() - player.getWidth()
 				/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
 				false);
-		System.out.println("");
-		for(int i=0; i<20; i++){
-			if(isPlaying(i))
-				System.out.println("111111111");
-			else
-				System.out.println("0");
-		}
-	}
-	boolean isPlaying(int index) {
-		int state = AL10.alGetSourcei(SoundStore.get().getSource(index), AL10.AL_SOURCE_STATE);
-		return (state == AL10.AL_PLAYING);
 	}
 	
 	private void soundWalk(){
@@ -155,8 +143,6 @@ public class GameplayState extends AbstractGameState {
 			//if the sound is still playing we let it play
 			if (!soundWalk.playing()){
 				soundWalk.loop();
-				testSound();
-				//soundWalkPlaying = true;
 			}
 			//We modulate the sound speed depending on the speed of movement of the character
 			float pitchVel = 0;
@@ -188,7 +174,6 @@ public class GameplayState extends AbstractGameState {
 						- player.getWidth() / 2, player.getVelY()
 						- player.getHeight() / 2, 0.0f);
 				soundJumpPlaying = true;
-				testSound();
 			}
 			else {
 				soundJump.setSourcePosition(player.getX() - player.getWidth()
@@ -236,7 +221,6 @@ public class GameplayState extends AbstractGameState {
 				//AL10.alSourcef(soundBumpIndex, AL10.AL_GAIN , 100f);
 				bumpWallPlayed = true;
 				bumpWallX = player.getX();
-				testSound();
 			} else {
 				soundBump.setSourcePosition(player.getX() - player.getWidth()
 						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
@@ -252,25 +236,10 @@ public class GameplayState extends AbstractGameState {
 						- player.getHeight() / 2, 0.0f);
 				bumpTopPlayed = true;
 				bumpTopX = player.getX(); bumpTopY = player.getY();
-				testSound();
 			}
 		}
 	}
 	
-	public void testSound(){
-		System.out.println("----------------------");
-		System.out.println("jumpI "+soundJump.getIndex()+" jumpB "+soundJump.getBuffer());
-		System.out.println("walkI "+soundWalk.getIndex()+" walkB "+soundWalk.getBuffer());
-		System.out.println("bumpI "+soundBump.getIndex()+" bumpB "+soundBump.getBuffer());
-		System.out.println("soundI "+sound.getIndex() + " soundB "+sound.getBuffer());
-		System.out.println("alreadyVisitedI "+alreadyVisited.getIndex()+" alreadyVisitedI "+alreadyVisited.getBuffer());
-		/*System.out.println("");
-		System.out.println("jumpBuff "+soundJump.getID());
-		System.out.println("walkBuff "+soundWalk.getID());
-		System.out.println("bumpBuff "+soundBump.getID());
-		System.out.println("soundBuff "+sound.getID());
-		System.out.println("alreadyVisitedBuff "+alreadyVisited.getID());*/
-	}
 	
 	private void soundGround(){
 		
@@ -303,13 +272,17 @@ public class GameplayState extends AbstractGameState {
 		soundBumpIndex = soundBump.play(10f,0f);*/
 	}
 	
-	// Powerful restart, if we have previously been in the menu
+	/**
+	 *  Powerful restart, if we have previously been in the menu
+	 * @param gc GameContainer
+	 * @param sbg StateBasedGame
+	 * @throws SlickException
+	 */
 	public void superRestart(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		Globals.score = 0;
 	}
 	
-	// Appelee lors de la sortie de l'etat
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb) throws SlickException {
 		super.leave(gc, sb);
@@ -343,7 +316,7 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_F3)) {
 			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
-		// Est-ce que le personnage bouge ?
+		// determines if the character moves
 		player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
 			player.setMoving(true);
