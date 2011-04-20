@@ -19,7 +19,7 @@ public class Main {
 			float ratio = (float)app.getScreenWidth() / (float)app.getScreenHeight();
 			switch((int)(ratio*100)){
 				case 160: width = 1280; height = 800; break; //ratio 16/10
-				case 178: 
+				case 178: height = 576; break;
 				case 177: height = 576; break; //ratio 16/9
 			}
 			

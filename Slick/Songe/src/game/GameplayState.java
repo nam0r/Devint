@@ -40,7 +40,7 @@ public class GameplayState extends AbstractGameState {
 	/** The current state from game's states */
 	protected States currentState;
 	/** For vocalize SIVOX */
-	protected t2s.SIVOXDevint voix;
+	//protected t2s.SIVOXDevint voix;
 	/** The sound when jumping, a long one during the whole jump */
 	protected Sound2 soundJump;
 	/** The sound when jumping, a short one when beginning to jump */
@@ -88,7 +88,7 @@ public class GameplayState extends AbstractGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
 		input = gc.getInput();
-		voix = new t2s.SIVOXDevint();
+		//voix = new t2s.SIVOXDevint();
 		soundJump = new Sound2(Conf.SND_BIP_PATH+"bip6.ogg");
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH+"saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH+"nuit.ogg");
@@ -314,7 +314,7 @@ public class GameplayState extends AbstractGameState {
 			currentState = States.PAUSE;
 		}
 		if (input.isKeyPressed(Input.KEY_F3)) {
-			voix.playShortText("Vous avez "+Globals.score+" points.");
+			//voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
 		// determines if the character moves
 		player.setMoving(false);

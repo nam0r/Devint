@@ -8,6 +8,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.newdawn.slick.util.ResourceLoader;
+
+import utils.Conf;
+
 public class BDDCreator {
 
 	private BufferedReader reader;
@@ -16,7 +20,7 @@ public class BDDCreator {
 	public BDDCreator() {
 		
 		db = new DBInteractor();
-		db.fromFile("../ressources/scriptBdd.txt");
+		db.fromFile(Conf.RESS_PATH+"scriptBdd.txt");
 		createNodesFromFile();
 		createQuestionsFromFile();
 		createGamesFromFile();
@@ -27,7 +31,7 @@ public class BDDCreator {
 
 	private void createNodesFromFile() {
 		System.out.println("===> Insertion des noeuds");
-		ArrayList< ArrayList<String[]> > noeuds = createFromFile("../ressources/nodes.txt");
+		ArrayList< ArrayList<String[]> > noeuds = createFromFile(Conf.RESS_PATH+"nodes.txt");
 		for(ArrayList<String[]> n : noeuds) {
 			
 			String game = "NULL";
@@ -56,7 +60,7 @@ public class BDDCreator {
 	
 	private void createGamesFromFile() {
 		System.out.println("===> Insertion des mini-jeux");
-		ArrayList< ArrayList<String[]> > minijeux = createFromFile("../ressources/games.txt");
+		ArrayList< ArrayList<String[]> > minijeux = createFromFile(Conf.RESS_PATH+"games.txt");
 		for(ArrayList<String[]> g : minijeux) {
 			String queryGame = "INSERT INTO minijeux(id, niv1, niv2, niv3, niv4, score1, score2, score3, score4) " +
 					"VALUES(" + 
@@ -80,7 +84,7 @@ public class BDDCreator {
 	
 	private void createQuestionsFromFile() {
 		System.out.println("===> Insertion des questions");
-		ArrayList< ArrayList<String[]> > questions = createFromFile("../ressources/questions.txt");
+		ArrayList< ArrayList<String[]> > questions = createFromFile(Conf.RESS_PATH+"questions.txt");
 		for(ArrayList<String[]> q : questions) {
 			String queryQuestion = "INSERT INTO questions(id, enonce, fichiervoix, scenario, points) " +
 					"VALUES(" + 
@@ -132,13 +136,13 @@ public class BDDCreator {
 		ArrayList<String[]> al = new ArrayList<String[]>();
 		
 		String data;
-		InputStream ips = null;
+		/*InputStream ips = null;
 		try {
 			ips = new FileInputStream(filename);
 		} catch (FileNotFoundException e1) {
 			System.err.println("Erreur lors de l'ouverture du fichier " + filename + " : File not found");
-		}
-		reader = new BufferedReader(new InputStreamReader(ips));
+		}*/
+		reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(filename)));
 		try {
 			// Creation des questions :
 			//   - une HashMap par question

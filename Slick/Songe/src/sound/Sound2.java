@@ -158,8 +158,8 @@ public class Sound2 {
 	private ArrayList<Integer> getSourcesFromBuffer() {
 		ArrayList<Integer> sources = new ArrayList<Integer>();
 		for (int i = 1; i < SoundStore.get().getSourceCount(); i++) {
-			if (AL10.alGetSourcei(i, AL10.AL_BUFFER) == buffer)
-				sources.add(i);
+			if (AL10.alGetSourcei(SoundStore.get().getSource(i), AL10.AL_BUFFER) == buffer)
+				sources.add(SoundStore.get().getSource(i));
 		}
 		return sources;
 	}
@@ -171,8 +171,8 @@ public class Sound2 {
 	 */
 	private void setSourceFromBuffer() {
 		for (int i = 1; i < SoundStore.get().getSourceCount(); i++) {
-			if (AL10.alGetSourcei(i, AL10.AL_BUFFER) == buffer) {
-				index = i;
+			if (AL10.alGetSourcei(SoundStore.get().getSource(i), AL10.AL_BUFFER) == buffer) {
+				index = SoundStore.get().getSource(i);
 				return;
 			}
 		}

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.newdawn.slick.util.ResourceLoader;
+
 import bdd.SQLiteDB;
 
 public class DBInteractor extends SQLiteDB {
@@ -37,13 +39,13 @@ public class DBInteractor extends SQLiteDB {
 	}
 	
 	public void fromFile(String filename) {
-		InputStream ips = null;
+		/*InputStream ips = null;
 		try {
 			ips = new FileInputStream(filename);
 		} catch (FileNotFoundException e1) {
 			System.err.println("Erreur lors de l'ouverture du fichier " + filename + " : File not found");
-		}
-		reader = new BufferedReader(new InputStreamReader(ips));
+		}*/
+		reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(filename)));
 		try {
 			while ((query = reader.readLine()) != null){
 				if(query.startsWith("#")) {

@@ -20,7 +20,7 @@ public class MainMenuState extends MenuState {
     public MainMenuState(int stateID) throws SlickException {
     	super(stateID);
     	//The voice tool
-    	voix = new t2s.SIVOXDevint();
+    	//voix = new t2s.SIVOXDevint();
     	
 		options = new String[] {"Jouer","Scores","Instructions","Quitter"};
     	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores"),Conf.getVoice("instructions"),Conf.getVoice("quitter")};

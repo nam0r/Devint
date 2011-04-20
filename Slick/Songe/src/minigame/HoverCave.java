@@ -44,7 +44,7 @@ public class HoverCave extends BasicGameState {
 	/** The explication sound when entering to this state */
 	private Sound2 enterSound;
 	/** For vocalize SIVOX */
-	protected t2s.SIVOXDevint voix;
+	//protected t2s.SIVOXDevint voix;
 	/** Indicates if we begin the game */
 	private boolean playTheGame;
 
@@ -111,7 +111,7 @@ public class HoverCave extends BasicGameState {
 		sonG = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
 		sonD = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
 		enterSound = new Sound2(Conf.SND_VOIX_PATH+"minijeuvaisseauF1.ogg");
-		voix = new t2s.SIVOXDevint();
+		//voix = new t2s.SIVOXDevint();
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
 		reset();
@@ -148,7 +148,7 @@ public class HoverCave extends BasicGameState {
 					dead = true;
 					sonD.stop();
 					sonG.stop();
-					voix.playText("Le je est terminé, votre score est de "+ distance/1000);
+					//voix.playText("Le je est terminé, votre score est de "+ distance/1000);
 				} else {
 					//Sounds are adjusted here
 					distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));

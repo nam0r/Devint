@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import utils.Conf;
+
 public class SQLiteDB {
 
 	protected Connection connection;

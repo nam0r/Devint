@@ -21,7 +21,7 @@ public abstract class MenuState extends BasicGameState {
 	/** The id of the state for state based game */
 	protected int stateID;
 	/** For vocalize SIVOX */
-	protected t2s.SIVOXDevint voix;
+	//protected t2s.SIVOXDevint voix;
 	/** The font to write the message with */
 	protected Font font;
 	/** The index of the selected option */
@@ -58,7 +58,7 @@ public abstract class MenuState extends BasicGameState {
     public MenuState(int stateID) {
     	this.stateID = stateID;
     	//The voice tool
-    	voix = new t2s.SIVOXDevint();
+    	//voix = new t2s.SIVOXDevint();
     	title = "";
     	titleVoice = "";
     	//titleSound = new Sound();
