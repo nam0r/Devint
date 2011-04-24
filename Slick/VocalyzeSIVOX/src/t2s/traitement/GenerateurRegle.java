@@ -26,6 +26,8 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
+import org.newdawn.slick.util.ResourceLoader;
+
 import t2s.exception.AnalyseException;
 import t2s.util.ConfigFile;
 /** Un generateur de Regles, ecrites au format PERL dans un fichier texte.
@@ -43,15 +45,15 @@ public class GenerateurRegle {
     public GenerateurRegle(String path)
     {
     	try {
-    		FileInputStream fos = new FileInputStream(path);
-    		br = new BufferedReader(new InputStreamReader(fos,ConfigFile.rechercher("ENCODAGE_FICHIER")));
+    		//FileInputStream fos = new FileInputStream(path);
+    		br = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(path),ConfigFile.rechercher("ENCODAGE_FICHIER")));
     		ensembles = new Hashtable();
     		noLigne = 0;
     		vide = false;
     		initEnsembles();
-    	} catch (FileNotFoundException e) {
+    	} /*catch (FileNotFoundException e) {
     		System.out.println("SI_VOX WARNING [GenerateurRegle] :  Erreur lors du chargement du fichier de regles");
-    	} catch (AnalyseException e) {
+    	} */catch (AnalyseException e) {
     		System.out.println("SI_VOX WARNING [GenerateurRegle] : Une erreur d'analyse est survenue !");
     		System.out.println(e);
     	} catch (UnsupportedEncodingException e) {
@@ -343,7 +345,7 @@ public class GenerateurRegle {
     	for (int i = 0; i < s.length();i++)
     	{
     		char c = s.charAt(i);
-    		if (c != '\'' && c !='_' && c != '~' && c != 'æ')
+    		if (c != '\'' && c !='_' && c != '~' && c != 'ï¿½')
     			if (!Character.isLowerCase(c)) 
     				return false;
     	}

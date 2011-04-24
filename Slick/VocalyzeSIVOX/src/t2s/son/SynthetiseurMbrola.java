@@ -129,10 +129,10 @@ public class SynthetiseurMbrola  {
 		if (voix.equals(VOIX6)) FR = ConfigFile.rechercher("FR6");
 		if (voix.equals(VOIX7)) FR = ConfigFile.rechercher("FR7");
 		//chaine de caractere contenant la commande mbrola
-		String cmd = exe + " -t " + RAPIDITE + " " +" -f " + FR + " " + " -v " + VOLUME + " "
-		    +  voix + " " + pathFichier + fichier + ".pho "  
-		    + pathFichier + fichier + ".wav";
-		//System.out.println(cmd);
+		String cmd = '"'+exe+'"' + " -t " + RAPIDITE + " " +" -f " + FR + " " + " -v " + VOLUME + " "
+		    +  '"'+voix+'"' + " " + '"'+pathFichier + fichier + ".pho"+'"'+ " " 
+		    + '"'+pathFichier + fichier + ".wav"+'"';
+		System.out.println(cmd);
 		try {
 		    //long start = System.currentTimeMillis();
 		    Process proc = r.exec(cmd);
@@ -144,7 +144,9 @@ public class SynthetiseurMbrola  {
 		    		proc.exitValue();
 		    		finished=true;
 		    	} catch (IllegalThreadStateException e) {
-		    		//pas encore termine
+		    		//System.out.println("Erreur lors de la préparation du son");
+		    		//e.printStackTrace();
+		    		//OSEF de cette exception
 		    	}
 		    }
 		}

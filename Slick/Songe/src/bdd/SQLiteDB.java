@@ -1,5 +1,6 @@
 package bdd;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -31,7 +32,7 @@ public class SQLiteDB {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			this.connection = DriverManager
-					.getConnection("jdbc:sqlite:" + db_name + ".db3"); // jdbc:sqlite:sample.db
+					.getConnection("jdbc:sqlite:" + Conf.HOME+File.separator+db_name + ".db3"); // jdbc:sqlite:sample.db
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (SQLException e) {

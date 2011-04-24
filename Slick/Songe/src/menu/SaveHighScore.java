@@ -156,7 +156,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection conn = DriverManager
-					.getConnection("jdbc:sqlite:scores.db");
+					.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
 			Statement stat = conn.createStatement();
 			ResultSet r = stat
 			.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
@@ -187,7 +187,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection conn = DriverManager
-					.getConnection("jdbc:sqlite:scores.db");
+					.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
 			Statement stat = conn.createStatement();
 			stat.executeUpdate("UPDATE scores SET name='" + name + "', score="
 					+ Globals.score + " WHERE id="
@@ -209,7 +209,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 			boolean newFile = !f.exists();
 			Class.forName("org.sqlite.JDBC");
 			Connection conn = DriverManager
-					.getConnection("jdbc:sqlite:scores.db");
+					.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
 			Statement stat = conn.createStatement();
 			if (newFile) {
 				stat.executeUpdate("CREATE TABLE scores (id integer PRIMARY KEY AUTOINCREMENT, name text, score integer);");
@@ -238,7 +238,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 			try {
 				Class.forName("org.sqlite.JDBC");
 				Connection conn = DriverManager
-						.getConnection("jdbc:sqlite:scores.db");
+						.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
 				Statement stat = conn.createStatement();
 				ResultSet r = stat.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
 				x += 30;

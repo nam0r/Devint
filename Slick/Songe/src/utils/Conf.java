@@ -1,5 +1,7 @@
 package utils;
 
+import java.io.File;
+
 /**
  *This class is useful for easy configuration of the game
  */
@@ -18,15 +20,25 @@ public class Conf {
 	public static final String SND_ENVIRONEMENT_PATH = RESS_PATH+"sons/environement/";
 	public static final String SND_BIP_PATH = RESS_PATH+"sons/bip/";
 	public static final String SND_VOIX_PATH = RESS_PATH+"sons/voix/julie/";
+	
+	/** The game path (for database and so) */
+	public static final File HOME = new File(new File(System.getProperty("user.home")), "Songe");
+	/** The name of the scenario database file */
+	public static final String SCENARIO_DB = "data2.db3";
+	/** The name of the score database file */
+	public static final String SCORE_DB = "scores.db";
+	
 	//Constants
 	public static final int TILE_HEIGHT = 64;
 	public static final int TILE_WIDTH = 64;
 	
-    /** 
-     * Get the whole adress of a voice file with just its name
-     * @param name the name of the voice file
-     * @return the adress of the voice file
-     */
+	/**
+	 * Get the whole adress of a voice file with just its name
+	 * 
+	 * @param name
+	 *            the name of the voice file
+	 * @return the adress of the voice file
+	 */
     public static String getVoice(String name){
     	return Conf.SND_VOIX_PATH+name+".ogg";
     }

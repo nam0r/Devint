@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 
 import main.Hoorah;
+import nodes.Node;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
@@ -48,7 +49,7 @@ public class GameplayState extends AbstractGameState {
 	/** The current state from game's states */
 	protected States currentState;
 	/** For vocalize SIVOX */
-	// protected t2s.SIVOXDevint voix;
+	protected t2s.SIVOXDevint voix;
 	/** The sound when jumping, a long one during the whole jump */
 	protected Sound2 soundJump;
 	/** The sound when jumping, a short one when beginning to jump */
@@ -81,7 +82,9 @@ public class GameplayState extends AbstractGameState {
 	protected Sound2 sound;
 	/** The sound to indicate an IA has already been visited */
 	protected Sound2 alreadyVisited;
-
+	/** Indicates if things to do once have been done */
+	protected boolean onceOnEnter;
+	
 	public GameplayState(int id) {
 		super(id, Conf.IMG_TEXTURES_PATH + "sky2.jpg", Conf.RESS_PATH
 				+ "tiles.xml", Conf.RESS_PATH + "niveau1.txt", Conf.TILE_WIDTH,
@@ -91,6 +94,7 @@ public class GameplayState extends AbstractGameState {
 		bumpWallX = 0;
 		bumpTopX = 0;
 		bumpTopY = 0;
+		onceOnEnter = false;
 	}
 
 	@Override
@@ -98,7 +102,6 @@ public class GameplayState extends AbstractGameState {
 			throws SlickException {
 		super.init(gc, sbg);
 		input = gc.getInput();
-		// voix = new t2s.SIVOXDevint();
 		soundJump = new Sound2(Conf.SND_BIP_PATH + "bip6.ogg");
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH + "saut.ogg");
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH + "nuit.ogg");
@@ -299,10 +302,12 @@ public class GameplayState extends AbstractGameState {
 		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
 		// AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
-		/*
-		 * soundWalkIndex = soundWalk.play(10f,0f); soundJumpIndex =
-		 * soundJump.play(10f,0f); soundBumpIndex = soundBump.play(10f,0f);
-		 */
+		//things to do once at the beginning but that can't be done in the init() method
+		if(!onceOnEnter){
+			Globals.node = new Node(1);
+			voix = new t2s.SIVOXDevint();
+			onceOnEnter = true;
+		}
 	}
 
 	/**
@@ -324,11 +329,9 @@ public class GameplayState extends AbstractGameState {
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {
 		super.leave(gc, sb);
-		// If comming in game again, the player will be moved
+		// If coming in game again, the player will be moved
 		player.setPosition(player.getX() + 200, player.getY() - 100);
-		sound.stop();
-		soundWalk.stop();
-		soundJump.stop();
+		AlUtils.stopAllSounds();
 	}
 
 	@Override
@@ -353,7 +356,7 @@ public class GameplayState extends AbstractGameState {
 			currentState = States.PAUSE;
 		}
 		if (input.isKeyPressed(Input.KEY_F3)) {
-			// voix.playShortText("Vous avez "+Globals.score+" points.");
+			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
 		// determines if the character moves
 		player.setMoving(false);

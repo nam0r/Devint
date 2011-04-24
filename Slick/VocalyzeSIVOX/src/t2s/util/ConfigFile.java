@@ -25,18 +25,20 @@ package t2s.util;
 import java.io.*;
 import java.util.Properties;
 
+import org.newdawn.slick.util.ResourceLoader;
+
 /** Une classe pour utiliser un fichier de configuration aisement.
  * <p><b>Remarque</b> : Le fichier de configuration utilise la syntaxe suivante (pas d'espace !) : </p>
  * <p><center><code> MOT_CLE=VALEUR</code></center></p>
  */
 
 public class ConfigFile {
-
+	
     // Constantes
-    private static final String DEFAULT_FILE = "../ressources/si_vox_ihm.conf";
+    private static String DEFAULT_FILE;
 
     // Variables privees : 
-    private File f = new File(DEFAULT_FILE);
+    private File f;
     
     /**
      * l'instance encapsulant toutes les donnees de configuration 
@@ -47,19 +49,53 @@ public class ConfigFile {
     private ConfigFile()
     {
     	try {
-			proprietes.load(new FileInputStream(f));
+    		//if under jnlp
+    		if(System.getProperty("javawebstart.version") != null)
+    			DEFAULT_FILE = System.getProperty("user.home")+"/Songe/ressources/si_vox_ihm.conf";
+    		//if under CD devint
+    		else
+    			DEFAULT_FILE = "../ressources/si_vox_ihm.conf";
+    		f = new File(DEFAULT_FILE);
+			proprietes.load(ResourceLoader.getResourceAsStream(DEFAULT_FILE));
 			proprietes.setProperty("REPERTOIRE_PHO_WAV", System.getProperty("java.io.tmpdir"));
+			System.out.println("temp : "+System.getProperty("java.io.tmpdir"));
 		    String os = System.getProperty("os.name").toLowerCase();
 		    //linux or unix
 	        if (os.indexOf( "nix") >=0 || os.indexOf( "nux") >=0) {
 	            proprietes.setProperty("REPERTOIRE_PHO_WAV", System.getProperty("java.io.tmpdir") + "/");
 	        }
+	        setVarsIfInJNLP();
 		} catch( FileNotFoundException e ) {
 			System.err.println( "fichier " +DEFAULT_FILE +" non trouve" );
 			e.printStackTrace();
 		} catch( IOException e ) {
 			e.printStackTrace();
 		}
+    }
+    
+    /**
+     * Sets properties if under JNLP
+     */
+    private void setVarsIfInJNLP(){
+    	if (System.getProperty("javawebstart.version") != null) {
+    		proprietes.setProperty("EXE_LINUX", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/LinuxMbrolaExe/mbrola-linux-i386");
+    		proprietes.setProperty("EXE_WINDOWS", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/WindowsMbrolaExe/mbrola.exe");
+    		proprietes.setProperty("EXE_MAC", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/MacMbrolaExe/MacMbrola");
+    		proprietes.setProperty("REPERTOIRE_PHO_WAV", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/pho_wav/");
+    		proprietes.setProperty("PREPOSITIONS", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/rules/preposition.txt");
+    		proprietes.setProperty("REGLES", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/rules/regle.txt");
+    		proprietes.setProperty("EXCEPTIONS", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/rules/exception.txt");
+    		proprietes.setProperty("ACCRONYMES", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/rules/accronymes.txt");
+    		proprietes.setProperty("IMG_PATH", System.getProperty("user.home")+"/Songe/ressources/img/");
+    		proprietes.setProperty("AIDE_PATH", System.getProperty("user.home")+"/Songe/ressources/aide/");
+    		proprietes.setProperty("VOIX_1", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/fr1/fr1");
+    		proprietes.setProperty("VOIX_2", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/fr2/fr2");
+    		proprietes.setProperty("VOIX_3", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/fr3/fr3");
+    		proprietes.setProperty("VOIX_4", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/fr4/fr4");
+    		proprietes.setProperty("VOIX_5", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/fr5/fr5");
+    		proprietes.setProperty("VOIX_6", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/fr6/fr6");
+    		proprietes.setProperty("VOIX_7", System.getProperty("user.home")+"/Songe/ressources/donneesMbrola/Mbrola/fr7/fr7");
+    	}
     }
 
     // Pour effectuer une recherche
