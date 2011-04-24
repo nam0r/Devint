@@ -205,7 +205,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	// This must be executed only one time
 	public void writeScore(String name) {
 		try {
-			File f = new File("scores.db");
+			File f = new File(Conf.HOME+File.separator+Conf.SCORE_DB);
 			boolean newFile = !f.exists();
 			Class.forName("org.sqlite.JDBC");
 			Connection conn = DriverManager
@@ -233,7 +233,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 		int y = 200;
 		font.drawString(x, y, "High Scores:");
 		
-		File f = new File("scores.db");
+		File f = new File(Conf.HOME+File.separator+Conf.SCORE_DB);
 		if (f.exists()) {
 			try {
 				Class.forName("org.sqlite.JDBC");
