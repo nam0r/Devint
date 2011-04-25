@@ -30,7 +30,7 @@ public class LoadingState extends BasicGameState {
 	/** The game container */
 	GameContainer gc;
 	/** Loading bar's unit base width */
-	public static final int BAR_WIDTH = 15;
+	public static final int BAR_WIDTH = 10;
 	/** Loading bar's base height */
 	public static final int BAR_HEIGHT = 50;
 	/** Loading voice */

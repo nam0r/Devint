@@ -19,10 +19,8 @@ public class MainMenuState extends MenuState {
 	
     public MainMenuState(int stateID) throws SlickException {
     	super(stateID);
-    	//The voice tool
-    	//voix = new t2s.SIVOXDevint();
     	
-		options = new String[] {"Jouer","Scores","Instructions","Quitter"};
+		options = new String[] {"Jouer","Scores","Minijeux","Quitter"};
     	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores"),Conf.getVoice("instructions"),Conf.getVoice("quitter")};
     	title = "Bienvenue dans l'univers de Songe";
     	titleVoice = Conf.getVoice("bienvenue");
@@ -56,6 +54,10 @@ public class MainMenuState extends MenuState {
 				break;
 			case 1:
 				sbg.enterState(Hoorah.SAVEHIGHSCORE, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
+				break;
+			case 2:
+				sbg.enterState(Hoorah.CHOICEMINIGAMESTATE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 				break;
 			case 3:

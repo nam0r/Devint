@@ -13,15 +13,14 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Conf;
-import utils.Globals;
 
-public class ChoicePersoState extends ChoiceMenuState {
+public class ChoiceMiniGameState extends ChoiceMenuState {
 
-	public ChoicePersoState(int stateID) {
+	public ChoiceMiniGameState(int stateID) {
 		super(stateID);
-		options = new String[] { "Aurore", "Timéo", "Tux", "Lamasticot" };
-		optionsVoices = new String[] {Conf.getVoice("aurore"),Conf.getVoice("timeo"),Conf.getVoice("tux"),Conf.getVoice("lamasticot")};
-    	title = "Choisissez le personnage que vous allez incarner.";
+		options = new String[] { "HoverCave"};
+		optionsVoices = new String[] {Conf.getVoice("aurore")};
+    	title = "Choisissez le minijeu auquel vous voulez jouer.";
     	titleVoice = Conf.getVoice("title_choiceperso");
 	}
 
@@ -29,8 +28,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		images = new Image[] { new Image(Conf.IMG_PATH+"interrogation.png"), new Image(Conf.IMG_PATH+"interrogation.png"),
-				new Image(Conf.IMG_PATH+"tux.png"), new Image(Conf.IMG_PATH+"interrogation.png") };
+		images = new Image[] { new Image(Conf.IMG_PATH+"interrogation.png")};
 		initSounds();
 	}
 
@@ -46,10 +44,13 @@ public class ChoicePersoState extends ChoiceMenuState {
 		super.update(gc, sbg, delta);
 
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			//The player chosen
-			Globals.playerType = selected;
-			sbg.enterState(Hoorah.GAMEPLAYSTATE, new FadeOutTransition(
-					Color.black), new FadeInTransition(Color.black));
+			switch (selected) {
+			case 0:
+				sbg.enterState(Hoorah.HOVERCAVESTATE, new FadeOutTransition(
+						Color.black), new FadeInTransition(Color.black));
+				break;
+			}
+			
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 		    sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
                     new FadeInTransition(Color.black));

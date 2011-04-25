@@ -3,6 +3,7 @@ package minigame;
 import java.awt.Dimension;
 import java.util.Vector;
 
+import main.Hoorah;
 import nodes.Node;
 
 import org.newdawn.slick.Color;
@@ -26,7 +27,7 @@ public class HoverCave extends BasicGameState {
 	/** The miimum width betweed the 2 walls */
 	private final int MIN_WIDTH = 55 ;
 	/** The resolution of the wall */
-	private final int WALL_RES = 20;
+	private final int WALL_RES = 30;
 	/** the sensitivity of the object to touch the wall */
 	private final int SENSITIVITY = 10;
 	private GameContainer container;
@@ -44,7 +45,7 @@ public class HoverCave extends BasicGameState {
 	/** The explication sound when entering to this state */
 	private Sound2 enterSound;
 	/** For vocalize SIVOX */
-	//protected t2s.SIVOXDevint voix;
+	protected t2s.SIVOXDevint voix;
 	/** Indicates if we begin the game */
 	private boolean playTheGame;
 
@@ -174,11 +175,14 @@ public class HoverCave extends BasicGameState {
 				
 				if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 					
-					//The score is set
-					Globals.score += distance/1000;
-					
-					Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
-					
+					// if we are in main game
+					if(Globals.returnState != Hoorah.MAINMENUSTATE){
+						//The score is set
+						Globals.score += distance/1000;
+						//The next node is set
+						Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
+					}
+						
 					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 							new FadeInTransition(Color.black));
 					//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
@@ -213,14 +217,22 @@ public class HoverCave extends BasicGameState {
 		g.drawString(
 				"Speed: " + ((double) ((int) (speed * 10000.0))) / 10000.0, 10,
 				40);
+		//the walls
+		//upper wall
 		for (int i = 0; i < upperWall.size() - 1; i++) {
-			g.drawLine(i * WALL_RES + wallOffset, upperWall.get(i), (i + 1)
-					* WALL_RES + wallOffset, upperWall.get(i + 1));
+			for(int j=0; j<5; j++){
+				g.drawLine(i * WALL_RES + wallOffset, upperWall.get(i) - j, (i + 1)
+					* WALL_RES + wallOffset, upperWall.get(i + 1) - j);
+			}
 		}
+		//lower wall
 		for (int i = 0; i < lowerWall.size() - 1; i++) {
-			g.drawLine(i * WALL_RES + wallOffset, lowerWall.get(i), (i + 1)
-					* WALL_RES + wallOffset, lowerWall.get(i + 1));
+			for(int j=0; j<5; j++){
+				g.drawLine(i * WALL_RES + wallOffset, lowerWall.get(i) + j, (i + 1)
+					* WALL_RES + wallOffset, lowerWall.get(i + 1) + j);
+			}
 		}
+		//The object
 		g.drawRect(WALL_RES, (int) dudeHeight - dudeSize.height / 2,
 				dudeSize.width, dudeSize.height);
 		g.drawLine(WALL_RES * 1.5f, (int) dudeHeight, WALL_RES * 1.5f,

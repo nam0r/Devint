@@ -2,6 +2,7 @@ package main;
 
 import game.GameplayState;
 import game.QuestionState;
+import menu.ChoiceMiniGameState;
 import menu.ChoicePersoState;
 import menu.LoadingState;
 import menu.MainMenuState;
@@ -11,7 +12,6 @@ import minigame.HoverCave;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.StateBasedGame;
 
 
@@ -30,6 +30,7 @@ public class Hoorah extends StateBasedGame {
 	public static final int HOVERCAVESTATE = 4;
 	public static final int SAVEHIGHSCORE = 5;
 	public static final int QUESTIONSTATE = 6;
+	public static final int CHOICEMINIGAMESTATE = 7;
 	
 	public Hoorah() {
 		super("My Last Hoorah");
@@ -37,8 +38,6 @@ public class Hoorah extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		//this.getState(MAINMENUSTATE).init(gc, this);
-		//this.getState(GAMEPLAYSTATE).init(gc, this);
 		
 		this.container = gc;
 		
@@ -60,6 +59,7 @@ public class Hoorah extends StateBasedGame {
 		this.addState(new LoadingState(LOADINGSTATE));
 		this.addState(new MainMenuState(MAINMENUSTATE));
 		this.addState(new ChoicePersoState(CHOICEPERSOSTATE));
+		this.addState(new ChoiceMiniGameState(CHOICEMINIGAMESTATE));
 		this.addState(new GameplayState(GAMEPLAYSTATE));
 		this.addState(new HoverCave(HOVERCAVESTATE));
 		this.addState(new SaveHighScore(SAVEHIGHSCORE));

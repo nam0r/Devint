@@ -1,7 +1,6 @@
 package utils;
 
 import nodes.Node;
-import nodes.Question;
 import actors.Actor;
 
 /**
@@ -17,6 +16,6 @@ public class Globals {
 	public static Actor player;
 	/** Return to state */
 	public static int returnState;
-	
+	/** The current scenario Node */ 
 	public static Node node;
 }
