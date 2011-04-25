@@ -301,13 +301,6 @@ public class GameplayState extends AbstractGameState {
 		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
-		// AL10.alSourcef(soundIndex, AL10.AL_MAX_DISTANCE, 50f);
-		//things to do once at the beginning but that can't be done in the init() method
-		if(!onceOnEnter){
-			Globals.node = new Node(1);
-			voix = new t2s.SIVOXDevint();
-			onceOnEnter = true;
-		}
 	}
 
 	/**
@@ -323,6 +316,8 @@ public class GameplayState extends AbstractGameState {
 			throws SlickException {
 		super.init(gc, sbg);
 		Globals.score = 0;
+		Globals.node = new Node(1);
+		voix = new t2s.SIVOXDevint();
 	}
 
 	@Override

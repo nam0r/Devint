@@ -129,10 +129,18 @@ public class SynthetiseurMbrola  {
 		if (voix.equals(VOIX6)) FR = ConfigFile.rechercher("FR6");
 		if (voix.equals(VOIX7)) FR = ConfigFile.rechercher("FR7");
 		//chaine de caractere contenant la commande mbrola
-		String cmd = '"'+exe+'"' + " -t " + RAPIDITE + " " +" -f " + FR + " " + " -v " + VOLUME + " "
+		String cmd = "";
+		if(System.getProperties().getProperty("os.name").contains("Windows")){
+			cmd = '"'+exe+'"' + " -t " + RAPIDITE + " " +" -f " + FR + " " + " -v " + VOLUME + " "
 		    +  '"'+voix+'"' + " " + '"'+pathFichier + fichier + ".pho"+'"'+ " " 
 		    + '"'+pathFichier + fichier + ".wav"+'"';
-		System.out.println(cmd);
+		}
+		else{
+			cmd = exe+" -t " + RAPIDITE + " " +" -f " + FR + " " + " -v " + VOLUME + " "
+			+ voix + " " + pathFichier + fichier + ".pho "
+			+ pathFichier + fichier + ".wav";
+		}
+		//System.out.println(cmd);
 		try {
 		    //long start = System.currentTimeMillis();
 		    Process proc = r.exec(cmd);
