@@ -79,6 +79,10 @@ public class Sound2 {
 			}
 		}
 	}
+	
+	public void setVolume(float volume){
+		setVolume(volume, 0);
+	}
 
 	/**
 	 * Set the pitch of the sound as a factor of the global pitch setting
@@ -106,6 +110,10 @@ public class Sound2 {
 				i++;
 			}
 		}
+	}
+	
+	public void setPitch(float pitch){
+		setPitch(pitch, 0);
 	}
 
 	/**
@@ -136,6 +144,10 @@ public class Sound2 {
 			}
 		}
 	}
+	
+	public void setSourcePosition(float x, float y, float z) {
+		setSourcePosition(x, y, z, 0);
+	}
 
 	/**
 	 * Set the velocity of the source
@@ -164,6 +176,10 @@ public class Sound2 {
 				i++;
 			}
 		}
+	}
+	
+	public void setSourceVelocity(float x, float y, float z) {
+		setSourceVelocity(x, y, z, 0);
 	}
 
 	/**
