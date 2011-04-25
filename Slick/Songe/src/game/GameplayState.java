@@ -135,7 +135,7 @@ public class GameplayState extends AbstractGameState {
 						.getWidth() / 2), (map.getEntityByBody(
 						map.getWorld().getBodies().get(i)).getY() - map
 						.getEntityByBody(map.getWorld().getBodies().get(i))
-						.getHeight() / 2), 0f, false);
+						.getHeight() / 2), 0f, 0);
 			}
 		}
 		// We put the openAl listener's position and velocity
@@ -154,7 +154,7 @@ public class GameplayState extends AbstractGameState {
 		soundGround();
 		soundJump();
 		alreadyVisited.setSourcePosition(player.getX() - player.getWidth() / 2,
-				player.getVelY() - player.getHeight() / 2, 0.0f, false);
+				player.getVelY() - player.getHeight() / 2, 0.0f, 0);
 	}
 
 	private void soundWalk() {
@@ -179,7 +179,7 @@ public class GameplayState extends AbstractGameState {
 				pitchVel = 10;
 			if (pitchVel < 0.001)
 				pitchVel = 0.001f;
-			soundWalk.setPitch(pitchVel, false);
+			soundWalk.setPitch(pitchVel, 0);
 		}
 		// we stop the sound because the character is no more walking
 		else {
@@ -198,7 +198,7 @@ public class GameplayState extends AbstractGameState {
 			} else {
 				soundJump.setSourcePosition(player.getX() - player.getWidth()
 						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f,
-						false);
+						0);
 			}
 			// We modulate the sound pitch depending on the y speed of movement
 			// of the character
@@ -214,7 +214,7 @@ public class GameplayState extends AbstractGameState {
 				pitchVel = 10;
 			if (pitchVel < 0.0001)
 				pitchVel = 0.0001f;
-			soundJump.setPitch(pitchVel, false);
+			soundJump.setPitch(pitchVel, 0);
 		}
 		// we stop the sound because the character is no more jumping
 		else {
@@ -257,7 +257,7 @@ public class GameplayState extends AbstractGameState {
 			} else {
 				soundBump.setSourcePosition(player.getX() - player.getWidth()
 						/ 2 + decal, player.getVelY() - player.getHeight() / 2,
-						0.0f, false);
+						0.0f, 0);
 			}
 		}
 		// If the player is knocking his head somewhere when jumping
@@ -444,7 +444,7 @@ public class GameplayState extends AbstractGameState {
 			alreadyVisited
 					.setSourcePosition(player.getX() - player.getWidth() / 2,
 							player.getVelY() - player.getHeight() / 2, 0.0f,
-							false);
+							0);
 		}
 
 		else {

@@ -57,10 +57,10 @@ public class Sound2 {
 	 * 
 	 * @param volume
 	 *            The volume to play sound at. 0 - infinity
-	 * @param all
-	 *            if all sources of the buffer should be affected
+	 * @param which
+	 *            which source occurrence of the sound
 	 */
-	public void setVolume(float volume, boolean all) {
+	public void setVolume(float volume, int which) {
 		if (!playing())
 			return;
 
@@ -68,11 +68,15 @@ public class Sound2 {
 			volume = 0;
 		}
 		this.volume = volume;
-		if (!all)
+		if (which == 0)
 			AL10.alSourcef(index, AL10.AL_GAIN, volume);
 		else {
-			for (int source : getSourcesFromBuffer())
-				AL10.alSourcef(source, AL10.AL_GAIN, volume);
+			int i=0;
+			for (int source : getSourcesFromBuffer()){
+				if(i == which)
+					AL10.alSourcef(source, AL10.AL_GAIN, volume);
+				i++;
+			}
 		}
 	}
 
@@ -83,20 +87,24 @@ public class Sound2 {
 	 *            The pitch to play sound at. 0 - infinity
 	 * @param buf
 	 *            if the buffer should be used instead of the source
-	 * @param all
-	 *            if all sources of the buffer should be affected
+	 * @param which
+	 *            which source occurrence of the sound
 	 */
-	public void setPitch(float pitch, boolean all) {
+	public void setPitch(float pitch, int which) {
 		if (!playing())
 			return;
 		if (pitch < 0)
 			pitch = 0;
 		this.pitch = pitch;
-		if (!all)
+		if (which == 0)
 			AL10.alSourcef(index, AL10.AL_PITCH, pitch);
 		else {
-			for (int source : getSourcesFromBuffer())
-				AL10.alSourcef(source, AL10.AL_PITCH, pitch);
+			int i=0;
+			for (int source : getSourcesFromBuffer()){
+				if(i == which)
+					AL10.alSourcef(source, AL10.AL_PITCH, pitch);
+				i++;
+			}
 		}
 	}
 
@@ -109,19 +117,23 @@ public class Sound2 {
 	 *            The y position of the source
 	 * @param z
 	 *            The z position of the source
-	 * @param all
-	 *            if all sources of the buffer should be affected
+	 * @param which
+	 *            which source occurrence of the sound
 	 */
-	public void setSourcePosition(float x, float y, float z, boolean all) {
+	public void setSourcePosition(float x, float y, float z, int which) {
 		if (!playing())
 			return;
 		FloatBuffer sourcePos = (FloatBuffer) BufferUtils.createFloatBuffer(3)
 				.put(new float[] { x, y, z }).rewind();
-		if (!all)
+		if (which == 0)
 			AL10.alSource(index, AL10.AL_POSITION, sourcePos);
 		else {
-			for (int source : getSourcesFromBuffer())
-				AL10.alSource(source, AL10.AL_POSITION, sourcePos);
+			int i=0;
+			for (int source : getSourcesFromBuffer()){
+				if(i == which)
+					AL10.alSource(source, AL10.AL_POSITION, sourcePos);
+				i++;
+			}
 		}
 	}
 
@@ -134,19 +146,23 @@ public class Sound2 {
 	 *            The y velocity of the source
 	 * @param z
 	 *            The z velocity of the source
-	 * @param all
-	 *            if all sources of the buffer should be affected
+	 * @param which
+	 *            which source occurrence of the sound
 	 */
-	public void setSourceVelocity(float x, float y, float z, boolean all) {
+	public void setSourceVelocity(float x, float y, float z, int which) {
 		if (!playing())
 			return;
 		FloatBuffer sourceVel = (FloatBuffer) BufferUtils.createFloatBuffer(3)
 				.put(new float[] { x, y, z }).rewind();
-		if (!all)
+		if (which == 0)
 			AL10.alSource(index, AL10.AL_VELOCITY, sourceVel);
 		else {
-			for (int source : getSourcesFromBuffer())
-				AL10.alSource(source, AL10.AL_VELOCITY, sourceVel);
+			int i=0;
+			for (int source : getSourcesFromBuffer()){
+				if(i == which)
+					AL10.alSource(source, AL10.AL_VELOCITY, sourceVel);
+				i++;
+			}
 		}
 	}
 
@@ -320,15 +336,39 @@ public class Sound2 {
 
 	/**
 	 * Stop the sound being played
+	 * 
+	 * @param which
+	 *            which source occurrence of the sound
 	 */
-	public void stop() {
+	public void stop(int which) {
 		if (!playing())
 			return;
-		// if the source doesn't any more contain the buffer, the sound is
-		// already stopped so we don't need to stop
-		if (AL10.alGetSourcei(index, AL10.AL_BUFFER) != buffer)
-			return;
-		sound.stop();
+		// if it's the first occurrence of that buffer in the sources store
+		if (which == 0){
+			// if the source doesn't any more contain the buffer, the sound is
+			// already stopped so we don't need to stop
+			if (AL10.alGetSourcei(index, AL10.AL_BUFFER) != buffer)
+				return;
+			AL10.alSourceStop(index);
+		}
+		//if it's another occurrence
+		else {
+			int i=0;
+			for (int source : getSourcesFromBuffer()){
+				//once we have got the source
+				if(i == which){
+					//we check if that source is still playing, otherwise do nothing
+					if (AL10.alGetSourcei(source, AL10.AL_BUFFER) != buffer)
+						return;
+					AL10.alSourceStop(source);
+				}
+				i++;
+			}
+		}
+	}
+	
+	public void stop(){
+		stop(0);
 	}
 
 	/**

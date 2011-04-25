@@ -6,6 +6,8 @@ import java.util.Vector;
 import main.Hoorah;
 import nodes.Node;
 
+import org.lwjgl.openal.AL10;
+import org.lwjgl.openal.AL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -42,7 +44,7 @@ public class HoverCave extends BasicGameState {
 	private int distance;
 	private Sound2 sonG, sonD;
 	private float distSonHaut, distSonBas;
-	/** The explication sound when entering to this state */
+	/** The explanation sound when entering to this state */
 	private Sound2 enterSound;
 	/** For vocalize SIVOX */
 	protected t2s.SIVOXDevint voix;
@@ -147,31 +149,14 @@ public class HoverCave extends BasicGameState {
 						|| dudeHeight - SENSITIVITY < upperWall.get(2)) {
 					//sonG.play(2, 1);
 					dead = true;
-					sonD.stop();
-					sonG.stop();
 					//voix.playText("Le je est terminé, votre score est de "+ distance/1000);
-				} else {
-					//Sounds are adjusted here
-					distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));
-					distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
-					//System.out.println(lowerWall.get(2) - dudeHeight + 20 + " lol");
-					//System.out.println(dudeHeight - upperWall.get(2) + 20);
-					sonG.setVolume(distSonHaut*2, false);
-					sonG.setPitch(distSonHaut*2, false);
-					sonD.setVolume(distSonBas*2, false);
-					sonD.setPitch(distSonBas*2, false);
-				}
-				
-				if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-					game.enterState(Globals.returnState, new FadeOutTransition(
-							Color.black), new FadeInTransition(Color.black));
 				}
 			}
 		
 			// If we are dead
 			else{
-				sonD.setVolume(0f, false);
-				sonG.setVolume(0f, false);
+				sonD.stop(1);
+				sonG.stop();
 				
 				if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 					
@@ -186,25 +171,23 @@ public class HoverCave extends BasicGameState {
 					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 							new FadeInTransition(Color.black));
 					//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
-				}
-				/*if(enterSound.playing()){
-					if (input.isKeyPressed(Input.ANY_CONTROLLER)) {
-						enterSound.stop();
-					}
-				}*/
-				
+				}	
 			}
-			
 		}
-		
-		
+		//if not yet started to play
 		else {
-			sonD.setVolume(0f, false);
-			sonG.setVolume(0f, false);
+			sonG.setVolume(0f, 0);
+			sonD.setVolume(0f, 1);
 			if(input.isKeyPressed(Input.KEY_UP)){
 				playTheGame = true;
+				sonG.setVolume(180f, 0);
+				sonD.setVolume(180f, 1);
 				enterSound.stop();
 			}
+		}
+		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+			game.enterState(Globals.returnState, new FadeOutTransition(
+					Color.black), new FadeInTransition(Color.black));
 		}
 
 	}
@@ -233,31 +216,46 @@ public class HoverCave extends BasicGameState {
 			}
 		}
 		//The object
-		g.drawRect(WALL_RES, (int) dudeHeight - dudeSize.height / 2,
+		g.fillRect(WALL_RES, (int) dudeHeight - dudeSize.height / 2,
 				dudeSize.width, dudeSize.height);
-		g.drawLine(WALL_RES * 1.5f, (int) dudeHeight, WALL_RES * 1.5f,
-				(int) dudeHeight);
-		if(dead) g.drawString("Le jeu est terminé, appuyez sur Entrée pour continuer", 250, 150);
+		
+		//if(dead) g.drawString("Le jeu est terminé, appuyez sur Entrée pour continuer", 250, 150);
+		
+		//Sounds
+		AlUtils.setAlListenerPosition((float)(WALL_RES + dudeSize.width/2), (float)dudeHeight, 0f);
+		enterSound.setSourcePosition((float)(WALL_RES + dudeSize.width/2), (float)dudeHeight, 0f, 0);
+		sonG.setSourcePosition((float)(WALL_RES + dudeSize.width/2), upperWall.get(2), 0f, 0);
+		sonD.setSourcePosition((float)(WALL_RES + dudeSize.width/2), lowerWall.get(2), 0f, 1);
+		/*distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));
+		distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
+		sonG.setVolume(distSonHaut*2, false);
+		sonG.setPitch(distSonHaut*2, false);
+		sonD.setVolume(distSonBas*2, false);
+		sonD.setPitch(distSonBas*2, false);*/
 	}
 
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		reset();
-		if(sonG.playing() || sonD.playing()){
-			sonD.stop();
-			sonG.stop();
-		}
+		AlUtils.stopAllSounds();
+		AlUtils.resetAlListener();
 	}
 	
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
-		//The listener should be at default position
+		//The listener is reset
 		AlUtils.resetAlListener();
+		//the orientation is changed
+		AlUtils.setAlListenerOrientation(0.0f, 0.0f, -1.0f,  -1.0f, 0.0f, 0.0f);
+		//we set sound context
+		AL10.alDistanceModel(AL11.AL_EXPONENT_DISTANCE);
 		//We play the two sounds since we enter
-		sonD.loop(1f, 0f, 1f, 0f, 0f);
-		sonG.loop(1f, 0f, -1f, 0f, 0f);
-		//We play the beginning explication sound
+		sonG.loop(1f, 1f, 0f, 0f, 0f);
+		sonD.loop(1f, 1f, 0f, 0f, 0f);
+		AL10.alSourcef(sonG.getIndex(), AL10.AL_ROLLOFF_FACTOR, 1.45f);
+		AL10.alSourcef(sonD.getIndex(), AL10.AL_ROLLOFF_FACTOR,1.45f);
+		//We play the beginning explanation sound
 		enterSound.play();
 	}
 
