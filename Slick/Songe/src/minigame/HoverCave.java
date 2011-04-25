@@ -124,7 +124,7 @@ public class HoverCave extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 		Input input = container.getInput();
-		//If the beginning explication is finished
+		//If the beginning explanation is finished
 		if(playTheGame){
 			//if the player is not dead
 			if (!dead) {
@@ -228,10 +228,8 @@ public class HoverCave extends BasicGameState {
 		sonD.setSourcePosition((float)(WALL_RES + dudeSize.width/2), lowerWall.get(2), 0f, 1);
 		/*distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));
 		distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
-		sonG.setVolume(distSonHaut*2, false);
-		sonG.setPitch(distSonHaut*2, false);
-		sonD.setVolume(distSonBas*2, false);
-		sonD.setPitch(distSonBas*2, false);*/
+		sonG.setPitch(distSonHaut);
+		sonD.setPitch(distSonBas, 1);*/
 	}
 
 	@Override
