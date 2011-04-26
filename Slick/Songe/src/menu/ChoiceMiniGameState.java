@@ -19,9 +19,9 @@ public class ChoiceMiniGameState extends ChoiceMenuState {
 	public ChoiceMiniGameState(int stateID) {
 		super(stateID);
 		options = new String[] { "HoverCave"};
-		optionsVoices = new String[] {Conf.getVoice("aurore")};
-    	title = "Choisissez le minijeu auquel vous voulez jouer.";
-    	titleVoice = Conf.getVoice("title_choiceperso");
+		optionsVoices = new String[] {Conf.getVoice("hovercave")};
+    	title = "Choisis le minijeu auquel tu veux jouer.";
+    	titleVoice = Conf.getVoice("title_choiceminigame");
 	}
 
 	@Override

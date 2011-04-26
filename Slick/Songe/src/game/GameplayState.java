@@ -300,6 +300,8 @@ public class GameplayState extends AbstractGameState {
 		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
+		
+		AL10.alDopplerFactor(50.0f);
 	}
 
 	/**

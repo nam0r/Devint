@@ -21,7 +21,7 @@ public class MainMenuState extends MenuState {
     	super(stateID);
     	
 		options = new String[] {"Jouer","Scores","Minijeux","Quitter"};
-    	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores"),Conf.getVoice("instructions"),Conf.getVoice("quitter")};
+    	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores"),Conf.getVoice("minijeux"),Conf.getVoice("quitter")};
     	title = "Bienvenue dans l'univers de Songe";
     	titleVoice = Conf.getVoice("bienvenue");
     }

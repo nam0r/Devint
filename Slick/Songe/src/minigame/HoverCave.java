@@ -50,6 +50,10 @@ public class HoverCave extends BasicGameState {
 	protected t2s.SIVOXDevint voix;
 	/** Indicates if we begin the game */
 	private boolean playTheGame;
+	/** The actual upper wall exact height (just over the player) */
+	private int actualUpperWall;
+	/** The actual lower wall exact height (just under the player) */
+	private int actualLowerWall;
 
 	public HoverCave(int stateID) {
 		this.stateID = stateID;
@@ -107,6 +111,8 @@ public class HoverCave extends BasicGameState {
 		distance = 0;
 		movingUp = false;
 		playTheGame = false;
+		actualUpperWall = 0;
+		actualLowerWall = 0;
 	}
 
 	@Override
@@ -133,6 +139,10 @@ public class HoverCave extends BasicGameState {
 				} else {
 					dudeHeight += ((double) delta) / 10.0;
 				}
+				float coeff = wallOffset/WALL_RES;
+				actualUpperWall = (int)(upperWall.get(1) + coeff * (upperWall.get(1) - upperWall.get(2)));
+				actualLowerWall = (int)(lowerWall.get(1) + coeff * (lowerWall.get(1) - lowerWall.get(2)));
+
 				// TODO The speed can be adjusted here
 				wallOffset -= (float) delta * speed;
 				speed += ((double) delta / 1000000000.0) * 2000;
@@ -180,8 +190,10 @@ public class HoverCave extends BasicGameState {
 			sonD.setVolume(0f, 1);
 			if(input.isKeyPressed(Input.KEY_UP)){
 				playTheGame = true;
-				sonG.setVolume(180f, 0);
-				sonD.setVolume(180f, 1);
+				sonG.setVolume(600f, 0);
+				sonD.setVolume(600f, 1);
+				//sonG.setPitch(0.8f, 0);
+				//sonD.setPitch(0.8f, 1);
 				enterSound.stop();
 			}
 		}
@@ -223,13 +235,20 @@ public class HoverCave extends BasicGameState {
 		
 		//Sounds
 		AlUtils.setAlListenerPosition((float)(WALL_RES + dudeSize.width/2), (float)dudeHeight, 0f);
+		if (movingUp)
+			AlUtils.setAlListenerVelocity((float)(WALL_RES + dudeSize.width/2), -20, 0f);
+		else 
+			AlUtils.setAlListenerVelocity((float)(WALL_RES + dudeSize.width/2), 20, 0f);
 		enterSound.setSourcePosition((float)(WALL_RES + dudeSize.width/2), (float)dudeHeight, 0f, 0);
-		sonG.setSourcePosition((float)(WALL_RES + dudeSize.width/2), upperWall.get(2), 0f, 0);
-		sonD.setSourcePosition((float)(WALL_RES + dudeSize.width/2), lowerWall.get(2), 0f, 1);
-		/*distSonBas = (float) (1.0 / ((lowerWall.get(2) - dudeHeight + 20) / 50.0));
-		distSonHaut = (float) (1.0 / ((dudeHeight - upperWall.get(2) + 20) / 50.0));
+		sonG.setSourcePosition((float)(WALL_RES + dudeSize.width/2), actualUpperWall, 0f, 0);
+		sonD.setSourcePosition((float)(WALL_RES + dudeSize.width/2), actualLowerWall, 0f, 1);
+		sonG.setSourceVelocity((float)(WALL_RES + dudeSize.width/2), upperWall.get(2)-upperWall.get(1), 0f, 0);
+		sonD.setSourceVelocity((float)(WALL_RES + dudeSize.width/2), lowerWall.get(1)-lowerWall.get(2), 0f, 1);
+
+		distSonBas = (float) (1.0 / ((actualLowerWall - dudeHeight) / 50.0));
+		distSonHaut = (float) (1.0 / ((dudeHeight - actualUpperWall) / 50.0));
 		sonG.setPitch(distSonHaut);
-		sonD.setPitch(distSonBas, 1);*/
+		sonD.setPitch(distSonBas, 1);
 	}
 
 	@Override
@@ -248,11 +267,12 @@ public class HoverCave extends BasicGameState {
 		AlUtils.setAlListenerOrientation(0.0f, 0.0f, -1.0f,  -1.0f, 0.0f, 0.0f);
 		//we set sound context
 		AL10.alDistanceModel(AL11.AL_EXPONENT_DISTANCE);
+		AL10.alDopplerFactor(0.8f);
 		//We play the two sounds since we enter
 		sonG.loop(1f, 1f, 0f, 0f, 0f);
 		sonD.loop(1f, 1f, 0f, 0f, 0f);
-		AL10.alSourcef(sonG.getIndex(), AL10.AL_ROLLOFF_FACTOR, 1.45f);
-		AL10.alSourcef(sonD.getIndex(), AL10.AL_ROLLOFF_FACTOR,1.45f);
+		AL10.alSourcef(sonG.getIndex(), AL10.AL_ROLLOFF_FACTOR, 1.5f);
+		AL10.alSourcef(sonD.getIndex(), AL10.AL_ROLLOFF_FACTOR,1.5f);
 		//We play the beginning explanation sound
 		enterSound.play();
 	}
