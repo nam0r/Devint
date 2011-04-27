@@ -1,6 +1,6 @@
 package menu;
 
-import main.Hoorah;
+import main.Songe;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -46,13 +46,13 @@ public class ChoiceMiniGameState extends ChoiceMenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			switch (selected) {
 			case 0:
-				sbg.enterState(Hoorah.HOVERCAVESTATE, new FadeOutTransition(
+				sbg.enterState(Songe.HOVERCAVESTATE, new FadeOutTransition(
 						Color.black), new FadeInTransition(Color.black));
 				break;
 			}
 			
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-		    sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+		    sbg.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(Color.black),
                     new FadeInTransition(Color.black));
 		}
 	}

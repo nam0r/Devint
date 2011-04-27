@@ -1,6 +1,6 @@
 package game;
 
-import main.Hoorah;
+import main.Songe;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

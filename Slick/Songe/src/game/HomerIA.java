@@ -1,6 +1,6 @@
 package game;
 
-import main.Hoorah;
+import main.Songe;
 import net.phys2d.math.Vector2f;
 
 import org.newdawn.slick.Graphics;

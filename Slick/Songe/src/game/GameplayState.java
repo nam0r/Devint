@@ -2,7 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
-import main.Hoorah;
+import main.Songe;
 import nodes.Node;
 
 import org.lwjgl.openal.AL10;
@@ -431,7 +431,7 @@ public class GameplayState extends AbstractGameState {
 			}
 			break;
 		case GAME_OVER:
-			sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(
+			sbg.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 			break;
 		}
@@ -450,10 +450,10 @@ public class GameplayState extends AbstractGameState {
 		else {
 			if (Globals.node.getQuestion() == null
 					&& Globals.node.getGame() == null) {
-				stateToGoTo = Hoorah.SAVEHIGHSCORE;
+				stateToGoTo = Songe.SAVEHIGHSCORE;
 			}
 			if (Globals.node.getQuestion() != null) {
-				stateToGoTo = Hoorah.QUESTIONSTATE;
+				stateToGoTo = Songe.QUESTIONSTATE;
 			}
 			if (Globals.node.getGame() != null) {
 				stateToGoTo = Globals.node.getGame().getId();

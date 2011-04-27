@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import main.Hoorah;
+import main.Songe;
 
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Color;
@@ -110,7 +110,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 		Input input = gc.getInput();
 		
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			sbg.enterState(Hoorah.MAINMENUSTATE);
+			sbg.enterState(Songe.MAINMENUSTATE);
 		}
 		
 		if (!submitted) {
@@ -138,7 +138,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	 */
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
-			game.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),	new FadeInTransition(Color.black));
+			game.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(Color.black),	new FadeInTransition(Color.black));
 		}
 	}
 

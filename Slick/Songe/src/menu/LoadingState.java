@@ -3,7 +3,7 @@ package menu;
 import java.io.File;
 import java.io.IOException;
 
-import main.Hoorah;
+import main.Songe;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -96,7 +96,7 @@ public class LoadingState extends BasicGameState {
 		if (LoadingList.get().getRemainingResources() > 0) {
 			nextResource = LoadingList.get().getNext();
 		} else {
-			game.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(
+			game.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		}
 		// we load resources at the home path of the user if not already
