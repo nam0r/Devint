@@ -2,8 +2,6 @@ package main;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import bddcreate.BDDCreator;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -14,7 +12,7 @@ public class Main {
 		int width = 1024;
 		int height = 768;
 		try {
-			app = new AppGameContainer(new Hoorah());
+			app = new AppGameContainer(new Songe());
 			
 			float ratio = (float)app.getScreenWidth() / (float)app.getScreenHeight();
 			switch((int)(ratio*100)){

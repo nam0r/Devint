@@ -3,7 +3,7 @@ package minigame;
 import java.awt.Dimension;
 import java.util.Vector;
 
-import main.Hoorah;
+import main.Songe;
 import nodes.Node;
 
 import org.lwjgl.openal.AL10;
@@ -171,7 +171,7 @@ public class HoverCave extends BasicGameState {
 				if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 					
 					// if we are in main game
-					if(Globals.returnState != Hoorah.MAINMENUSTATE){
+					if(Globals.returnState != Songe.MAINMENUSTATE){
 						//The score is set
 						Globals.score += distance/1000;
 						//The next node is set

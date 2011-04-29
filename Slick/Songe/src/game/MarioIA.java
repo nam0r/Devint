@@ -1,7 +1,7 @@
 package game;
 
 import utils.Conf;
-import main.Hoorah;
+import main.Songe;
 import actors.IA;
 
 /**

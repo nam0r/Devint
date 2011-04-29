@@ -1,6 +1,6 @@
 package menu;
 
-import main.Hoorah;
+import main.Songe;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -49,15 +49,15 @@ public class MainMenuState extends MenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			switch (selected) {
 			case 0:
-				sbg.enterState(Hoorah.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
+				sbg.enterState(Songe.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 				break;
 			case 1:
-				sbg.enterState(Hoorah.SAVEHIGHSCORE, new FadeOutTransition(Color.black),
+				sbg.enterState(Songe.SAVEHIGHSCORE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 				break;
 			case 2:
-				sbg.enterState(Hoorah.CHOICEMINIGAMESTATE, new FadeOutTransition(Color.black),
+				sbg.enterState(Songe.CHOICEMINIGAMESTATE, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 				break;
 			case 3:

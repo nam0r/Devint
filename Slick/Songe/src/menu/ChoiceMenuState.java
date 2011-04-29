@@ -1,6 +1,6 @@
 package menu;
 
-import main.Hoorah;
+import main.Songe;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

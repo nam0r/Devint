@@ -1,6 +1,6 @@
 package menu;
 
-import main.Hoorah;
+import main.Songe;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -48,10 +48,10 @@ public class ChoicePersoState extends ChoiceMenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			//The player chosen
 			Globals.playerType = selected;
-			sbg.enterState(Hoorah.GAMEPLAYSTATE, new FadeOutTransition(
+			sbg.enterState(Songe.GAMEPLAYSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-		    sbg.enterState(Hoorah.MAINMENUSTATE, new FadeOutTransition(Color.black),
+		    sbg.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(Color.black),
                     new FadeInTransition(Color.black));
 		}
 	}
