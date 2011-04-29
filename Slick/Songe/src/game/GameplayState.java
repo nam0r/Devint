@@ -27,6 +27,10 @@ import actors.Actor;
 import actors.IA;
 import actors.PhysicalEntity;
 
+/**
+ * This class manages the main game
+ */
+
 public class GameplayState extends AbstractGameState {
 	/**
 	 * Useful parameters to consider the background more or less far and
@@ -440,11 +444,15 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	protected void collisions(IA ia) {
 		if (ia.isVisited()) {
-			alreadyVisited.stop();
-			alreadyVisited.play();
-			alreadyVisited
-					.setSourcePosition(player.getX() - player.getWidth() / 2,
-							player.getVelY() - player.getHeight() / 2, 0.0f);
+			//if we have been far enough since the last time we encountered that IA
+			if(ia.hasBeenFar()){
+				alreadyVisited.stop();
+				alreadyVisited.play();
+				alreadyVisited
+						.setSourcePosition(player.getX() - player.getWidth() / 2,
+								player.getVelY() - player.getHeight() / 2, 0.0f);
+				ia.setHasBeenFar(false);
+			}
 		}
 
 		else {

@@ -8,6 +8,7 @@ import menu.LoadingState;
 import menu.MainMenuState;
 import menu.SaveHighScore;
 import minigame.HoverCave;
+import utils.Globals;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -40,6 +41,8 @@ public class Hoorah extends StateBasedGame {
 	public void initStatesList(GameContainer gc) throws SlickException {
 		
 		this.container = gc;
+		Globals.gcHeight = gc.getHeight();
+		Globals.gcWidth = gc.getWidth();
 		
 		/*
 		try {

@@ -10,7 +10,7 @@ import java.io.File;
 public class Conf {
 	
 	// ressources paths
-	public static final String RESS_PATH = "ressources/";
+	public static final String RESS_PATH = "../ressources/";
 	public static final String IMG_PATH = RESS_PATH+"images/";
 	public static final String IMG_SPRITES_PATH = RESS_PATH+"images/sprites/";
 	public static final String IMG_TEXTURES_PATH = RESS_PATH+"images/textures/";
@@ -31,6 +31,7 @@ public class Conf {
 	//Constants
 	public static final int TILE_HEIGHT = 64;
 	public static final int TILE_WIDTH = 64;
+	
 	
 	/**
 	 * Get the whole adress of a voice file with just its name

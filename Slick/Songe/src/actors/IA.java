@@ -1,10 +1,10 @@
 package actors;
 
-import net.phys2d.math.Vector2f;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
+
+import utils.Globals;
 
 public abstract class IA extends Actor {
 
@@ -18,6 +18,8 @@ public abstract class IA extends Actor {
 	protected int walkingTime;
 	
 	protected boolean visited;
+	/** indicates if the IA has been far */
+	protected boolean hasBeenFar;
 	
 	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y, float width, float height, float mass) {
 		super(pathToSpriteSheet, x, y, mass, width, height);
@@ -32,6 +34,7 @@ public abstract class IA extends Actor {
 		
 		visited = false;
 		walkingTime = 1000; //1 sec
+		hasBeenFar = true;
 	}
 
 	@Override
@@ -73,11 +76,17 @@ public abstract class IA extends Actor {
 			way = (way == Way.LEFT) ? Way.RIGHT : Way.LEFT; // On change de sens
 		}
 		
-		if(way == Way.LEFT)
+		if (way == Way.LEFT)
 			moveLeft();
 		else
 			moveRight();
 		
+		// if is no more on the screen, then the IA is "far" from the main
+		// character
+		if (getX() < Globals.xoffset || getX() > (Globals.xoffset + Globals.gcWidth)
+				|| getY() < Globals.yoffset || getY() > (Globals.yoffset + Globals.gcHeight)) {
+			hasBeenFar = true;
+		}
 	}
 	
 	/**
@@ -95,6 +104,22 @@ public abstract class IA extends Actor {
 	 */
 	public boolean isVisited(){
 		return visited;
+	}
+	
+	/**
+	 * Returns if the character has been far enough from an already visited IA
+	 * @return if the ia has been far from the character
+	 */
+	public boolean hasBeenFar(){
+		return hasBeenFar;
+	}
+	
+	/**
+	 * Sets the hasBeenFar variable
+	 * @param hasBeenFar if the IA has been far enough from the player
+	 */
+	public void setHasBeenFar(boolean hasBeenFar){
+		this.hasBeenFar = hasBeenFar;
 	}
 	
 }

@@ -15,6 +15,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
+import utils.Globals;
+
 import actors.Actor;
 import actors.PhysicalEntity;
 import environment.TileEnvironment;
@@ -139,7 +141,8 @@ public class Map {
 			yoffset = (bounds.getY() + bounds.getHeight()) - gc.getHeight();
 		}
 		
-		
+		Globals.xoffset = xoffset;
+		Globals.yoffset = yoffset;
 	}
 	
 	public Rectangle getBounds() {
@@ -152,6 +155,14 @@ public class Map {
 	
 	public PhysicalEntity getEntityByBody(Body body) {
 		return env.getEntityByBody(body);
+	}
+	
+	public float getScreenXOffset(){
+		return xoffset;
+	}
+	
+	public float getScreenYOffset(){
+		return yoffset;
 	}
 
 }

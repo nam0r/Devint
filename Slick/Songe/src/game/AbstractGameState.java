@@ -16,13 +16,14 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import utils.Globals;
+
 import actors.Actor;
 import actors.IA;
 import actors.PhysicalEntity;
 
 /**
- * Cette classe abstraite gere l'organisation generale d'un etat du jeu
- * (en particulier les timers).
+ * Abstract class that manages the main game
  */
 public abstract class AbstractGameState extends BasicGameState {
 	
@@ -73,6 +74,7 @@ public abstract class AbstractGameState extends BasicGameState {
 		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
 		// The player is created and added to the map
 		player = createPlayer();
+		Globals.player = player;
 		restart();
 		// We manage collisions (especially for IAs)
 		manageCollisions();

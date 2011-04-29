@@ -18,4 +18,12 @@ public class Globals {
 	public static int returnState;
 	/** The current scenario Node */ 
 	public static Node node;
+	/** the gc height */
+	public static int gcHeight;
+	/** the gc width */
+	public static int gcWidth;
+	/** the real time x screen offset */
+	public static float xoffset;
+	/** the real time x screen offset */
+	public static float yoffset;
 }
