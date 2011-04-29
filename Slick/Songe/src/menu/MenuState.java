@@ -7,8 +7,8 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -20,8 +20,6 @@ public abstract class MenuState extends BasicGameState {
 
 	/** The id of the state for state based game */
 	protected int stateID;
-	/** For vocalize SIVOX */
-	//protected t2s.SIVOXDevint voix;
 	/** The font to write the message with */
 	protected Font font;
 	/** The index of the selected option */
@@ -42,7 +40,7 @@ public abstract class MenuState extends BasicGameState {
 	/** The title voice path */
 	protected String titleVoice;
 	/** The title sound */
-	protected Sound titleSound;
+	protected Sound2 titleSound;
 	/** The menu options */
 	protected String[] options;
 	/** The menu options voices paths */
@@ -53,12 +51,14 @@ public abstract class MenuState extends BasicGameState {
 	protected Input input;
 	/** indicates if lines are already enlarged or not */
 	protected boolean linesLarge;
+	/** Indicates if the question has been answered */
+	protected boolean answered;
+	/** The menu music */
+	protected Music music;
 
 	
     public MenuState(int stateID) {
     	this.stateID = stateID;
-    	//The voice tool
-    	//voix = new t2s.SIVOXDevint();
     	title = "";
     	titleVoice = "";
     	//titleSound = new Sound();
@@ -66,10 +66,11 @@ public abstract class MenuState extends BasicGameState {
     	optionsVoices = new String[0];
     	optionsSounds = new Sound2[0];
     	selected = 0;
+    	answered = false;
     }
     
     public void initSounds() throws SlickException{
-    	titleSound = new Sound(titleVoice);
+    	titleSound = new Sound2(titleVoice);
     	optionsSounds = new Sound2[options.length];
     	for(int i=0; i<options.length; i++){
     		optionsSounds[i] = new Sound2(optionsVoices[i]);
@@ -145,10 +146,6 @@ public abstract class MenuState extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-		//If the title is finished, we play 1 time the 1st option
-		if(!titleSound.playing() && !optionsSounds[selected].playedOnce()){
-			optionsSounds[selected].play();
-		}
 		if (input.isKeyPressed(Input.KEY_DOWN) || input.isKeyPressed(Input.KEY_RIGHT)) {
 			selected++;
 			if (selected >= options.length)
@@ -163,6 +160,10 @@ public abstract class MenuState extends BasicGameState {
 			AlUtils.stopAllSounds();
 			optionsSounds[selected].play();
 		}
+		//If the title is finished, we play 1 time the 1st option
+		if(!titleSound.playing() && !optionsSounds[selected].playedOnce() && !answered){
+			optionsSounds[selected].play();
+		}
 	}
 	
 	
@@ -171,7 +172,6 @@ public abstract class MenuState extends BasicGameState {
 		return this.stateID;
 	}
 	
-	// Appelee lors de l'entree dans l'etat
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -182,20 +182,17 @@ public abstract class MenuState extends BasicGameState {
 		input.clearKeyPressedRecord();
 		//The listener should be at default position
 		AlUtils.resetAlListener();
-		//voix.stop();
-		//voix.playShortText(title+". "+options[selected]);
-		//voix.playWav(titleVoice);
-		//voix.playWav(optionsVoices[selected]);
+		//we play the title sound
 		titleSound.play();
 		
 	}
 	
-	// Appelee lors de la sortie de l'etat
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {
 		super.leave(gc, sb);
 		selected = 0;
+		answered = false;
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
 		AlUtils.stopAllSounds();

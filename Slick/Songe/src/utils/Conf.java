@@ -20,6 +20,7 @@ public class Conf {
 	public static final String SND_ENVIRONEMENT_PATH = RESS_PATH+"sons/environement/";
 	public static final String SND_BIP_PATH = RESS_PATH+"sons/bip/";
 	public static final String SND_VOIX_PATH = RESS_PATH+"sons/voix/julie/";
+	public static final String SND_MUSIC_PATH = RESS_PATH+"sons/musiques/";
 	
 	/** The game path (for database and so) */
 	public static final File HOME = new File(new File(System.getProperty("user.home")), "Songe");

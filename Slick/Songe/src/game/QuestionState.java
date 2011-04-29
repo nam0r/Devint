@@ -4,7 +4,6 @@ import menu.MenuState;
 import nodes.Node;
 import nodes.Question;
 
-import org.lwjgl.openal.AL10;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,7 +11,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.loading.LoadingList;
-import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -102,7 +100,7 @@ public class QuestionState extends MenuState {
 		LoadingList.setDeferredLoading(false);
 		
 		optionsSounds = new Sound2[options.length];
-		titleSound = new Sound(titleVoice);
+		titleSound = new Sound2(titleVoice);
 		for(int i=0; i<options.length; i++){
     		optionsSounds[i] = new Sound2(optionsVoices[i]);
     	}
