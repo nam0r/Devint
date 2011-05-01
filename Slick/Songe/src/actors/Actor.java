@@ -230,7 +230,7 @@ public abstract class Actor extends PhysicalEntity {
 		
 		if (!on) {
 			offGroundTimer += delta;
-			if (offGroundTimer > jumpTime) { // j'ai remplace le 500. Voir commentaire plus haut pour probleme.
+			if (offGroundTimer > jumpTime) {
 				onGround = false;
 			}
 			waitingTimer = 0;
@@ -421,7 +421,9 @@ public abstract class Actor extends PhysicalEntity {
 	}
 	
 	public void jump() {
-		applyForce(0, -jumpForce);
+		if (onGround()) {
+			applyForce(0, -jumpForce);
+		}
 	}
 	
 }

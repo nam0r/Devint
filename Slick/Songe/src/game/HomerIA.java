@@ -1,13 +1,11 @@
 package game;
 
-import main.Songe;
 import net.phys2d.math.Vector2f;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import utils.Conf;
-
 import actors.IA;
 
 /**

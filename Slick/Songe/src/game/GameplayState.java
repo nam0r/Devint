@@ -322,6 +322,7 @@ public class GameplayState extends AbstractGameState {
 		super.init(gc, sbg);
 		Globals.score = 0;
 		Globals.node = new Node(1);
+
 		voix = new t2s.SIVOXDevint();
 	}
 
@@ -356,6 +357,7 @@ public class GameplayState extends AbstractGameState {
 			currentState = States.PAUSE;
 		}
 		if (input.isKeyPressed(Input.KEY_F3)) {
+			voix.stop();
 			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
 		// determines if the character moves
@@ -382,14 +384,12 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyDown(Input.KEY_RIGHT)) {
 			player.moveRight();
 		}
-		if (player.onGround()) {
-			if ((input.isKeyPressed(Input.KEY_LCONTROL))
+		if ((input.isKeyPressed(Input.KEY_LCONTROL))
 					|| (input.isKeyPressed(Input.KEY_RCONTROL))
 					|| (input.isKeyPressed(Input.KEY_UP))
 					|| (input.isKeyPressed(Input.KEY_SPACE))) {
 				player.jump();
 				// soundJump2.play();
-			}
 		}
 		// useful to have longer jumps my maintaining CTRL
 		if (!input.isKeyDown(Input.KEY_LCONTROL)
@@ -403,11 +403,17 @@ public class GameplayState extends AbstractGameState {
 
 	@Override
 	protected Actor createPlayer() {
-		/*
-		 * switch(Globals.playerType){ case 0:return new Homer(); case 1:return
-		 * new Alien(); case 2:return new Tux(); case 3:return new Mario(); }
-		 * return new Mario();
-		 */
+		switch (Globals.playerType) {
+		case 0:
+			return new Tux();
+		case 1:
+			return new Alien();
+		case 2:
+			return new Tux();
+		case 3:
+			return new Lamasticot();
+		}
+
 		return new Tux();
 	}
 

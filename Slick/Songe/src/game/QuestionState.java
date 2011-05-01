@@ -8,6 +8,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.loading.LoadingList;
@@ -38,6 +39,7 @@ public class QuestionState extends MenuState {
 		super.init(gc, sbg);
 		bonneRep = new Sound(Conf.SND_VOIX_PATH+"bonne_reponse.ogg");
 		mauvaiseRep = new Sound(Conf.SND_VOIX_PATH+"mauvaise_reponse.ogg");
+		music = new Music(Conf.SND_MUSIC_PATH + "untitled.ogg");
 	}
 
 	@Override
@@ -78,6 +80,16 @@ public class QuestionState extends MenuState {
 			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 				new FadeInTransition(Color.black));
 		}
+		
+		//we set the music volume, depending if voices are playing or not
+		if(!AlUtils.anySoundPlaying()){
+			if(music.getVolume() < 0.8)
+				music.setVolume(music.getVolume()+0.015f);
+			else
+				music.setVolume(0.8f);
+		}
+		else
+			music.setVolume(0.08f);
 	}
 	
 	@Override
@@ -106,7 +118,7 @@ public class QuestionState extends MenuState {
     	}
 		
 		LoadingList.setDeferredLoading(true);
-		
+		music.loop();
 		super.enter(gc, sbg); //It will read the options[selected]
 	}
 	
@@ -118,6 +130,7 @@ public class QuestionState extends MenuState {
 		options = new String[0];
 		title = "";
 		answered = false;
+		music.stop();
 	}
 
 }
