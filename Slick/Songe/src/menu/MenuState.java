@@ -82,7 +82,7 @@ public abstract class MenuState extends BasicGameState {
 			throws SlickException {
 		input = gc.getInput();
 		input.enableKeyRepeat();
-		font = new AngelCodeFont(Conf.RESS_PATH+"demo2.fnt",Conf.RESS_PATH+"demo2_00.tga");
+		font = new AngelCodeFont(Conf.RESS_PATH+"46.fnt",Conf.RESS_PATH+"46_0.tga");
 		width = gc.getWidth();
 		height = gc.getHeight();
 		caseLarge = height/7;

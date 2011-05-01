@@ -1,6 +1,7 @@
 package minigame;
 
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.Vector;
 
 import main.Songe;
@@ -13,6 +14,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.particles.ConfigurableEmitter;
+import org.newdawn.slick.particles.ParticleIO;
+import org.newdawn.slick.particles.ParticleSystem;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -26,14 +30,17 @@ import utils.Globals;
 public class HoverCave extends BasicGameState {
 	private int stateID;
 	
-	/** The miimum width betweed the 2 walls */
-	private final int MIN_WIDTH = 55 ;
+	/** The minimum width between the 2 walls */
+	private final int MIN_WIDTH = 60 ;
 	/** The resolution of the wall */
 	private final int WALL_RES = 30;
 	/** the sensitivity of the object to touch the wall */
-	private final int SENSITIVITY = 10;
+	private final int SENSITIVITY = 15;
 	private GameContainer container;
-	private double dudeHeight;
+	/** The object's y position */
+	private float dudeHeight;
+	/** The object's x position */
+	private float dudeWidth;
 	private Dimension dudeSize;
 	private boolean movingUp;
 	private Vector<Integer> upperWall;
@@ -54,6 +61,14 @@ public class HoverCave extends BasicGameState {
 	private int actualUpperWall;
 	/** The actual lower wall exact height (just under the player) */
 	private int actualLowerWall;
+	/** The smoke trail particle system */
+	private ParticleSystem trail;
+	/** The explosion particle system */
+	private ParticleSystem explosion;
+	/** The space x translation */
+	private float spX;
+	/** The current wall number */
+	private int currentWallNo;
 
 	public HoverCave(int stateID) {
 		this.stateID = stateID;
@@ -96,7 +111,7 @@ public class HoverCave extends BasicGameState {
 		lowerWall.add(nextLower);
 	}
 
-	public void reset() {
+	public void reset() throws SlickException {
 		upperWall = new Vector<Integer>();
 		lowerWall = new Vector<Integer>();
 		upperWall.add(0);
@@ -105,6 +120,8 @@ public class HoverCave extends BasicGameState {
 			addToWall();
 		}
 		dudeHeight = container.getHeight() / 2;
+		currentWallNo = 10;
+		dudeWidth = WALL_RES*(currentWallNo-1) + dudeSize.width/2;
 		wallOffset = 0;
 		dead = false;
 		speed = 0.06;
@@ -113,6 +130,14 @@ public class HoverCave extends BasicGameState {
 		playTheGame = false;
 		actualUpperWall = 0;
 		actualLowerWall = 0;
+		spX = 0;
+		try {
+			explosion = ParticleIO.loadConfiguredSystem(Conf.RESS_PATH+"explosion.xml");
+			trail = ParticleIO.loadConfiguredSystem(Conf.RESS_PATH+"smoketrail.xml");
+			
+		} catch (IOException e) {
+			throw new SlickException("Failed to load particle systems", e);
+		}
 	}
 
 	@Override
@@ -120,7 +145,6 @@ public class HoverCave extends BasicGameState {
 		sonG = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
 		sonD = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
 		enterSound = new Sound2(Conf.SND_VOIX_PATH+"minijeuvaisseauF1.ogg");
-		//voix = new t2s.SIVOXDevint();
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
 		reset();
@@ -139,9 +163,9 @@ public class HoverCave extends BasicGameState {
 				} else {
 					dudeHeight += ((double) delta) / 10.0;
 				}
-				float coeff = wallOffset/WALL_RES;
-				actualUpperWall = (int)(upperWall.get(1) + coeff * (upperWall.get(1) - upperWall.get(2)));
-				actualLowerWall = (int)(lowerWall.get(1) + coeff * (lowerWall.get(1) - lowerWall.get(2)));
+				float coeff = (wallOffset-dudeSize.width/2)/WALL_RES;
+				actualUpperWall = (int)(upperWall.get(currentWallNo-1) - coeff * (upperWall.get(currentWallNo) - upperWall.get(currentWallNo-1)));
+				actualLowerWall = (int)(lowerWall.get(currentWallNo-1) - coeff * (lowerWall.get(currentWallNo) - lowerWall.get(currentWallNo-1)));
 
 				// TODO The speed can be adjusted here
 				wallOffset -= (float) delta * speed;
@@ -155,12 +179,15 @@ public class HoverCave extends BasicGameState {
 				// detect collisions
 				// TODO Improve collision detection to find the edge of the box
 				// against the edge of the cave.
-				if (dudeHeight + SENSITIVITY > lowerWall.get(2)
-						|| dudeHeight - SENSITIVITY < upperWall.get(2)) {
-					//sonG.play(2, 1);
+				if ((dudeHeight + SENSITIVITY) > actualLowerWall
+						|| (dudeHeight - SENSITIVITY) < actualUpperWall) {
 					dead = true;
 					//voix.playText("Le je est terminé, votre score est de "+ distance/1000);
 				}
+				//the start explosion
+				explosion.update(delta*2);
+				//the smoke trail
+				trail.update(delta);
 			}
 		
 			// If we are dead
@@ -180,8 +207,7 @@ public class HoverCave extends BasicGameState {
 						
 					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 							new FadeInTransition(Color.black));
-					//game.enterState(Hoorah.SAVEHIGHSCORE, null, new BlobbyTransition());
-				}	
+				}
 			}
 		}
 		//if not yet started to play
@@ -201,7 +227,7 @@ public class HoverCave extends BasicGameState {
 			game.enterState(Globals.returnState, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		}
-
+		spX -= delta * 4.0f * speed;
 	}
 
 	@Override
@@ -212,38 +238,50 @@ public class HoverCave extends BasicGameState {
 		g.drawString(
 				"Speed: " + ((double) ((int) (speed * 10000.0))) / 10000.0, 10,
 				40);
+		
+		//all the graphics below will be affected by the translation
+		g.translate(spX, 0);
+		
+		//The smoke
+		((ConfigurableEmitter) trail.getEmitter(0)).setPosition(dudeWidth - dudeSize.width/2 - spX, dudeHeight);
+		trail.render();
+		//the death explosion
+		((ConfigurableEmitter) explosion.getEmitter(0)).setPosition(dudeWidth - dudeSize.width/2 - spX, dudeHeight);
+		((ConfigurableEmitter) explosion.getEmitter(1)).setPosition(dudeWidth - dudeSize.width/2 - spX, dudeHeight);
+		explosion.render();
+		
 		//the walls
 		//upper wall
 		for (int i = 0; i < upperWall.size() - 1; i++) {
 			for(int j=0; j<5; j++){
-				g.drawLine(i * WALL_RES + wallOffset, upperWall.get(i) - j, (i + 1)
-					* WALL_RES + wallOffset, upperWall.get(i + 1) - j);
+				g.drawLine(i * WALL_RES + wallOffset - spX, upperWall.get(i) - j, (i + 1)
+					* WALL_RES + wallOffset - spX, upperWall.get(i + 1) - j);
 			}
 		}
 		//lower wall
 		for (int i = 0; i < lowerWall.size() - 1; i++) {
 			for(int j=0; j<5; j++){
-				g.drawLine(i * WALL_RES + wallOffset, lowerWall.get(i) + j, (i + 1)
-					* WALL_RES + wallOffset, lowerWall.get(i + 1) + j);
+				g.drawLine(i * WALL_RES + wallOffset - spX, lowerWall.get(i) + j, (i + 1)
+					* WALL_RES + wallOffset - spX, lowerWall.get(i + 1) + j);
 			}
 		}
 		//The object
-		g.fillRect(WALL_RES, (int) dudeHeight - dudeSize.height / 2,
+		g.fillRect(dudeWidth - dudeSize.width/2 - spX, (int) dudeHeight - dudeSize.height / 2,
 				dudeSize.width, dudeSize.height);
 		
 		//if(dead) g.drawString("Le jeu est terminé, appuyez sur Entrée pour continuer", 250, 150);
 		
 		//Sounds
-		AlUtils.setAlListenerPosition((float)(WALL_RES + dudeSize.width/2), (float)dudeHeight, 0f);
+		AlUtils.setAlListenerPosition((float)(WALL_RES + dudeSize.width/2), dudeHeight, 0f);
 		if (movingUp)
 			AlUtils.setAlListenerVelocity((float)(WALL_RES + dudeSize.width/2), -20, 0f);
 		else 
 			AlUtils.setAlListenerVelocity((float)(WALL_RES + dudeSize.width/2), 20, 0f);
-		enterSound.setSourcePosition((float)(WALL_RES + dudeSize.width/2), (float)dudeHeight, 0f, 0);
+		enterSound.setSourcePosition((float)(WALL_RES + dudeSize.width/2), dudeHeight, 0f, 0);
 		sonG.setSourcePosition((float)(WALL_RES + dudeSize.width/2), actualUpperWall, 0f, 0);
 		sonD.setSourcePosition((float)(WALL_RES + dudeSize.width/2), actualLowerWall, 0f, 1);
-		sonG.setSourceVelocity((float)(WALL_RES + dudeSize.width/2), upperWall.get(2)-upperWall.get(1), 0f, 0);
-		sonD.setSourceVelocity((float)(WALL_RES + dudeSize.width/2), lowerWall.get(1)-lowerWall.get(2), 0f, 1);
+		sonG.setSourceVelocity((float)(WALL_RES + dudeSize.width/2), upperWall.get(currentWallNo-1)-upperWall.get(currentWallNo), 0f, 0);
+		sonD.setSourceVelocity((float)(WALL_RES + dudeSize.width/2), lowerWall.get(currentWallNo)-lowerWall.get(currentWallNo-1), 0f, 1);
 
 		distSonBas = (float) (1.0 / ((actualLowerWall - dudeHeight) / 50.0));
 		distSonHaut = (float) (1.0 / ((dudeHeight - actualUpperWall) / 50.0));
