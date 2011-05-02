@@ -1,5 +1,8 @@
 package menu;
 
+import game.Alien;
+import game.Lamasticot;
+import game.Tux;
 import main.Songe;
 
 import org.newdawn.slick.Color;
@@ -11,6 +14,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import actors.Actor;
 
 import utils.Conf;
 import utils.Globals;
@@ -46,13 +51,32 @@ public class ChoicePersoState extends ChoiceMenuState {
 		super.update(gc, sbg, delta);
 
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			//The player chosen
-			Globals.playerType = selected;
+			// The player is created
+			Globals.player = createPlayer();
 			sbg.enterState(Songe.GAMEPLAYSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 		    sbg.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(Color.black),
                     new FadeInTransition(Color.black));
+		}
+	}
+	
+	/**
+	 * Create the player object
+	 * @return the player itself
+	 */
+	protected Actor createPlayer() {
+		switch (selected) {
+		case 0:
+			return new Tux();
+		case 1:
+			return new Alien();
+		case 2:
+			return new Tux();
+		case 3:
+			return new Lamasticot();
+		default:
+			return new Tux();
 		}
 	}
 

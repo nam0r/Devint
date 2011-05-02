@@ -25,12 +25,10 @@ public class QuestionState extends MenuState {
 	
 	private Question question;
 	private Sound bonneRep, mauvaiseRep;
-	/** Indicates if the question has been answered */
-	private boolean answered;
 	
     public QuestionState(int stateID) throws SlickException {
     	super(stateID);
-    	answered = false;
+    	chosen = false;
     }
 
 	@Override
@@ -54,29 +52,30 @@ public class QuestionState extends MenuState {
 		super.update(gc, sbg, delta);
 		
 		Input input = gc.getInput();
-		//if answered
-		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			if(question.isOk(selected)) {
-				Globals.score += question.getPoints();
-				if(question.getScenario()) {
-					Globals.node = new Node(question.getChoices()[selected].getNodeToGoTo());
+		if (!chosen) {
+			if (input.isKeyPressed(Input.KEY_ENTER)) {
+				if (question.isOk(selected)) {
+					Globals.score += question.getPoints();
+					if (question.getScenario()) {
+						Globals.node = new Node(question.getChoices()[selected]
+								.getNodeToGoTo());
+					}
+					AlUtils.stopAllSounds();
+					bonneRep.play();
+					chosen = true;
+				} else {
+					AlUtils.stopAllSounds();
+					mauvaiseRep.play();
+					chosen = true;
 				}
-				AlUtils.stopAllSounds();
-				bonneRep.play();
-				answered = true;
 			}
-			else{
-				AlUtils.stopAllSounds();
-				mauvaiseRep.play();
-				answered = true;
-			}	
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 					new FadeInTransition(Color.black));
 		}
 		
-		if (answered && !bonneRep.playing() && !mauvaiseRep.playing()) {
+		if (chosen && !bonneRep.playing() && !mauvaiseRep.playing()) {
 			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 				new FadeInTransition(Color.black));
 		}
@@ -129,7 +128,7 @@ public class QuestionState extends MenuState {
 		//we clear variables for future questions
 		options = new String[0];
 		title = "";
-		answered = false;
+		chosen = false;
 		music.stop();
 	}
 

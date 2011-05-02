@@ -51,8 +51,8 @@ public abstract class MenuState extends BasicGameState {
 	protected Input input;
 	/** indicates if lines are already enlarged or not */
 	protected boolean linesLarge;
-	/** Indicates if the question has been answered */
-	protected boolean answered;
+	/** Indicates if the menu has been chosen */
+	protected boolean chosen;
 	/** The menu music */
 	protected Music music;
 
@@ -66,7 +66,7 @@ public abstract class MenuState extends BasicGameState {
     	optionsVoices = new String[0];
     	optionsSounds = new Sound2[0];
     	selected = 0;
-    	answered = false;
+    	chosen = false;
     }
     
     public void initSounds() throws SlickException{
@@ -161,7 +161,7 @@ public abstract class MenuState extends BasicGameState {
 			optionsSounds[selected].play();
 		}
 		//If the title is finished, we play 1 time the 1st option
-		if(!titleSound.playing() && !optionsSounds[selected].playedOnce() && !answered){
+		if(!titleSound.playing() && !optionsSounds[selected].playedOnce() && !chosen){
 			optionsSounds[selected].play();
 		}
 	}
@@ -192,7 +192,7 @@ public abstract class MenuState extends BasicGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		selected = 0;
-		answered = false;
+		chosen = false;
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
 		AlUtils.stopAllSounds();

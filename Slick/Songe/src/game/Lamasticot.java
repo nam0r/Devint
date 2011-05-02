@@ -1,8 +1,6 @@
 package game;
 
 
-import net.phys2d.math.Vector2f;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -78,6 +76,7 @@ public class Lamasticot extends Actor {
 			sheet = jump;
 			sx = frame % NB_SPRITES_JUMP;
 			sy = 0;
+			jumpTimer += 1;
 		}
 		 /*else if(waiting()) {
 			sheet = jump;
@@ -115,9 +114,9 @@ public class Lamasticot extends Actor {
 		super.update(delta);
 		
 		if(beginJumpTimer){
-			jumpTimer += delta;
+			//jumpTimer += delta;
 		}
-		if (jumpTimer > 500) {
+		if (jumpTimer > 4) {
 			beginJumpTimer = false;
 			applyForce(0, -jumpForce);
 			jumpTimer = 0;

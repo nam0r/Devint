@@ -47,25 +47,29 @@ public class MainMenuState extends MenuState {
 		super.update(gc, sbg, delta);
 		
 		Input input = gc.getInput();
-		
-		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			answered = true;
-			switch (selected) {
-			case 0:
-				sbg.enterState(Songe.CHOICEPERSOSTATE, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
-				break;
-			case 1:
-				sbg.enterState(Songe.SAVEHIGHSCORE, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
-				break;
-			case 2:
-				sbg.enterState(Songe.CHOICEMINIGAMESTATE, new FadeOutTransition(Color.black),
-					new FadeInTransition(Color.black));
-				break;
-			case 3:
-				gc.exit();
-				break;
+
+		if (!chosen) {
+			if (input.isKeyPressed(Input.KEY_ENTER)) {
+				chosen = true;
+				switch (selected) {
+				case 0:
+					sbg.enterState(Songe.CHOICEPERSOSTATE,
+							new FadeOutTransition(Color.black),
+							new FadeInTransition(Color.black));
+					break;
+				case 1:
+					sbg.enterState(Songe.SAVEHIGHSCORE, new FadeOutTransition(
+							Color.black), new FadeInTransition(Color.black));
+					break;
+				case 2:
+					sbg.enterState(Songe.CHOICEMINIGAMESTATE,
+							new FadeOutTransition(Color.black),
+							new FadeInTransition(Color.black));
+					break;
+				case 3:
+					gc.exit();
+					break;
+				}
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {

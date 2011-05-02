@@ -23,7 +23,6 @@ import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
 import utils.Utils;
-import actors.Actor;
 import actors.IA;
 import actors.PhysicalEntity;
 
@@ -143,9 +142,9 @@ public class GameplayState extends AbstractGameState {
 			}
 		}
 		// We put the openAl listener's position and velocity
-		AlUtils.setAlListenerPosition(player.getX() - player.getWidth() / 2,
-				player.getVelY() - player.getHeight() / 2, 0.0f);
-		AlUtils.setAlListenerVelocity(player.getVelX() * 5, -player.getVelY(),
+		AlUtils.setAlListenerPosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+		AlUtils.setAlListenerVelocity(Globals.player.getVelX() * 5, -Globals.player.getVelY(),
 				0.0f);
 		// sound.setSourceVelocity(10f, 0f, 0f, soundIndex);
 		// AlUtils.resetAlListener();
@@ -157,13 +156,13 @@ public class GameplayState extends AbstractGameState {
 		soundBump();
 		soundGround();
 		soundJump();
-		alreadyVisited.setSourcePosition(player.getX() - player.getWidth() / 2,
-				player.getVelY() - player.getHeight() / 2, 0.0f);
+		alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 	}
 
 	private void soundWalk() {
 		// if the player is moving and not jumping we play the walk sound
-		if (player.moving() && !player.jumping() && !player.falling()) {
+		if (Globals.player.moving() && !Globals.player.jumping() && !Globals.player.falling()) {
 			// if the sound is still playing we let it play
 			if (!soundWalk.playing()) {
 				soundWalk.loop();
@@ -171,11 +170,11 @@ public class GameplayState extends AbstractGameState {
 			// We modulate the sound speed depending on the speed of movement of
 			// the character
 			float pitchVel = 0;
-			if (player.facingRight()) {
-				pitchVel = 0.5f + 1 / (1 / (player.getVelX() / 35f));
+			if (Globals.player.facingRight()) {
+				pitchVel = 0.5f + 1 / (1 / (Globals.player.getVelX() / 35f));
 				// System.out.println(pitchVel+" lol");
 			} else {
-				pitchVel = 0.5f + -1 / (1 / (player.getVelX() / 35f));
+				pitchVel = 0.5f + -1 / (1 / (Globals.player.getVelX() / 35f));
 				// System.out.println(pitchVel+" lool");
 			}
 			// for security
@@ -193,20 +192,20 @@ public class GameplayState extends AbstractGameState {
 
 	private void soundJump() {
 		// if the player is jumping or falling we play the jump sound
-		if (player.jumping() || player.falling()) {
+		if (Globals.player.jumping() || Globals.player.falling()) {
 			// if the sound is still playing we let it play
 			if (!soundJump.playing()) {
-				soundJump.loop(1f, 0.5f, player.getX() - player.getWidth() / 2,
-						player.getVelY() - player.getHeight() / 2, 0.0f);
+				soundJump.loop(1f, 0.5f, Globals.player.getX() - Globals.player.getWidth() / 2,
+						Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 				soundJumpPlaying = true;
 			} else {
-				soundJump.setSourcePosition(player.getX() - player.getWidth()
-						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f);
+				soundJump.setSourcePosition(Globals.player.getX() - Globals.player.getWidth()
+						/ 2, Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 			}
 			// We modulate the sound pitch depending on the y speed of movement
 			// of the character
 			float pitchVel = 0;
-			pitchVel = 0.1f + player.getVelY() / 120f;
+			pitchVel = 0.1f + Globals.player.getVelY() / 120f;
 			// System.out.println(pitchVel+" lol");
 			// because the y velocity can be positive or negative depending on
 			// falling or jumping
@@ -231,47 +230,47 @@ public class GameplayState extends AbstractGameState {
 			// if the x position has really changed (3 pixels) and the player is
 			// no more facing to wall (useful to avoid problem with pushing
 			// crates), the bump can again be played
-			if (((player.getX() - bumpWallX) > 3 || (player.getX() - bumpWallX) < -3)
-					&& !player.isTotallyFacingToWall()) {
+			if (((Globals.player.getX() - bumpWallX) > 3 || (Globals.player.getX() - bumpWallX) < -3)
+					&& !Globals.player.isTotallyFacingToWall()) {
 				bumpWallPlayed = false;
 			}
-			if (((player.getY() - bumpTopY) > 3
-					|| (player.getY() - bumpTopY) < -3
-					|| (player.getX() - bumpTopX) > 3 || (player.getX() - bumpTopX) < -3)) {
+			if (((Globals.player.getY() - bumpTopY) > 3
+					|| (Globals.player.getY() - bumpTopY) < -3
+					|| (Globals.player.getX() - bumpTopX) > 3 || (Globals.player.getX() - bumpTopX) < -3)) {
 				bumpTopPlayed = false;
 			}
 		}
 		// If the player is facing to a wall
-		if (player.isFacingToWall()) {
+		if (Globals.player.isFacingToWall()) {
 			// to have the sound from the right or the left depending on the
 			// position of the wall and the player
 			int decal = 0;
-			if (player.facingRight())
+			if (Globals.player.facingRight())
 				decal = 1;
 			else
 				decal = -1;
 			// If the sound should be replayed, it will
 			if (!bumpWallPlayed) {
-				soundBump.playAt(1.5f, 5f, player.getX() - player.getWidth()
-						/ 2 + decal, player.getVelY() - player.getHeight() / 2,
+				soundBump.playAt(1.5f, 5f, Globals.player.getX() - Globals.player.getWidth()
+						/ 2 + decal, Globals.player.getVelY() - Globals.player.getHeight() / 2,
 						0.0f);
 				bumpWallPlayed = true;
-				bumpWallX = player.getX();
+				bumpWallX = Globals.player.getX();
 			} else {
-				soundBump.setSourcePosition(player.getX() - player.getWidth()
-						/ 2 + decal, player.getVelY() - player.getHeight() / 2,
+				soundBump.setSourcePosition(Globals.player.getX() - Globals.player.getWidth()
+						/ 2 + decal, Globals.player.getVelY() - Globals.player.getHeight() / 2,
 						0.0f);
 			}
 		}
 		// If the player is knocking his head somewhere when jumping
-		else if (player.isTopCollided() && player.jumping()) {
+		else if (Globals.player.isTopCollided() && Globals.player.jumping()) {
 			// If the sound should be replayed, it will
 			if (!bumpTopPlayed) {
-				soundBump.playAt(1.5f, 1f, player.getX() - player.getWidth()
-						/ 2, player.getVelY() - player.getHeight() / 2, 0.0f);
+				soundBump.playAt(1.5f, 1f, Globals.player.getX() - Globals.player.getWidth()
+						/ 2, Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 				bumpTopPlayed = true;
-				bumpTopX = player.getX();
-				bumpTopY = player.getY();
+				bumpTopX = Globals.player.getX();
+				bumpTopY = Globals.player.getY();
 			}
 		}
 	}
@@ -322,7 +321,7 @@ public class GameplayState extends AbstractGameState {
 		super.init(gc, sbg);
 		Globals.score = 0;
 		Globals.node = new Node(1);
-
+		map.setMainPlayer(Globals.player);
 		voix = new t2s.SIVOXDevint();
 	}
 
@@ -331,7 +330,7 @@ public class GameplayState extends AbstractGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		// If coming in game again, the player will be moved
-		player.setPosition(player.getX() + 200, player.getY() - 100);
+		Globals.player.setPosition(Globals.player.getX() + 200, Globals.player.getY() - 100);
 		AlUtils.stopAllSounds();
 	}
 
@@ -360,10 +359,14 @@ public class GameplayState extends AbstractGameState {
 			voix.stop();
 			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
+
+		if (input.isKeyPressed(Input.KEY_F4)) {
+			map.setMainPlayer(Globals.player);
+		}
 		// determines if the character moves
-		player.setMoving(false);
+		Globals.player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
-			player.setMoving(true);
+			Globals.player.setMoving(true);
 		}
 		if (input.isKeyPressed(Input.KEY_F1)) {
 			// jouer un son : l'aide
@@ -371,7 +374,6 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_F2)) {
 			// jouer un son : « tu es un tux qui doit trouver le lamasticot »
 		}
-
 	}
 
 	@Override
@@ -379,42 +381,26 @@ public class GameplayState extends AbstractGameState {
 		Input input = gc.getInput();
 
 		if (input.isKeyDown(Input.KEY_LEFT)) {
-			player.moveLeft();
+			Globals.player.moveLeft();
 		}
 		if (input.isKeyDown(Input.KEY_RIGHT)) {
-			player.moveRight();
+			Globals.player.moveRight();
 		}
 		if ((input.isKeyPressed(Input.KEY_LCONTROL))
 					|| (input.isKeyPressed(Input.KEY_RCONTROL))
 					|| (input.isKeyPressed(Input.KEY_UP))
 					|| (input.isKeyPressed(Input.KEY_SPACE))) {
-				player.jump();
+				Globals.player.jump();
 				// soundJump2.play();
 		}
 		// useful to have longer jumps my maintaining CTRL
 		if (!input.isKeyDown(Input.KEY_LCONTROL)
 				&& !input.isKeyDown(Input.KEY_UP)
 				&& !input.isKeyDown(Input.KEY_SPACE)) {
-			if (player.jumping()) {
-				player.setVelocity(player.getVelX(), player.getVelY() * 0.95f);
+			if (Globals.player.jumping()) {
+				Globals.player.setVelocity(Globals.player.getVelX(), Globals.player.getVelY() * 0.95f);
 			}
 		}
-	}
-
-	@Override
-	protected Actor createPlayer() {
-		switch (Globals.playerType) {
-		case 0:
-			return new Tux();
-		case 1:
-			return new Alien();
-		case 2:
-			return new Tux();
-		case 3:
-			return new Lamasticot();
-		}
-
-		return new Tux();
 	}
 
 	@Override
@@ -455,8 +441,8 @@ public class GameplayState extends AbstractGameState {
 				alreadyVisited.stop();
 				alreadyVisited.play();
 				alreadyVisited
-						.setSourcePosition(player.getX() - player.getWidth() / 2,
-								player.getVelY() - player.getHeight() / 2, 0.0f);
+						.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+								Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 				ia.setHasBeenFar(false);
 			}
 		}

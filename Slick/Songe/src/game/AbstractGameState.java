@@ -17,8 +17,6 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Globals;
-
-import actors.Actor;
 import actors.IA;
 import actors.PhysicalEntity;
 
@@ -38,9 +36,6 @@ public abstract class AbstractGameState extends BasicGameState {
 	private float backPar2;
 	
 	protected int stateID;
-	
-	/** The player that is being controlled */
-	protected Actor player;
 	
 	/** The amount of time passed since last control check */
 	private int totalDelta;
@@ -72,10 +67,9 @@ public abstract class AbstractGameState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
-		// The player is created and added to the map
-		player = createPlayer();
-		Globals.player = player;
 		restart();
+		// We initialize the map
+		map.init();
 		// We manage collisions (especially for IAs)
 		manageCollisions();
 		// Moving objects are created and added
@@ -86,9 +80,6 @@ public abstract class AbstractGameState extends BasicGameState {
 	}
 	
 	public void restart(){
-		// We initialize the map
-		map.init();
-		map.setMainPlayer(player);
 		stateToGoTo = -1;
 	}
 	
@@ -120,7 +111,7 @@ public abstract class AbstractGameState extends BasicGameState {
 		}
 		
 		// Update the map
-		map.update(delta, gc, player);
+		map.update(delta, gc, Globals.player);
 		
 		if(stateToGoTo != -1)
 			sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
@@ -130,6 +121,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)	throws SlickException {
 		super.enter(gc, sbg);
+		map.setMainPlayer(Globals.player);
 	}
 	
 	@Override
@@ -141,7 +133,6 @@ public abstract class AbstractGameState extends BasicGameState {
 	 *  Abstract methods   *
 	 * ******************* */
 	
-	protected abstract Actor createPlayer();
 	protected abstract ArrayList<PhysicalEntity> createEntities() throws SlickException;
 	protected abstract void notTimedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void timedEvents(GameContainer gc, StateBasedGame sbg, int delta);
@@ -157,9 +148,9 @@ public abstract class AbstractGameState extends BasicGameState {
 			public void collisionOccured(CollisionEvent event) {
 				
 				Body bodyOther = null;
-				if(event.getBodyA().equals(player.getBody()))
+				if(event.getBodyA().equals(Globals.player.getBody()))
 					bodyOther = event.getBodyB();
-				else if(event.getBodyB().equals(player.getBody()))
+				else if(event.getBodyB().equals(Globals.player.getBody()))
 					bodyOther = event.getBodyA();
 				
 				if(bodyOther != null) { // Si la collision implique le player principal

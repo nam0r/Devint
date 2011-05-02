@@ -1,12 +1,8 @@
 package map;
 
-import java.nio.FloatBuffer;
-
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.AL10;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -16,7 +12,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
 import utils.Globals;
-
 import actors.Actor;
 import actors.PhysicalEntity;
 import environment.TileEnvironment;
