@@ -20,31 +20,39 @@ public class Lamasticot extends Actor {
 	
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 7;
+	private final int NB_SPRITES_JUMP = 6;
+	/** jump beginning offset */
+	private int jumpTimer;
+	/** Indicates if a jump has been initiated */
+	private boolean beginJumpTimer;
 	
-	private static final int walkingTime = 1000;
+	/*private static final int walkingTime = 1000;
 	private int walkingTimer;
-	private boolean moveUp;
+	private boolean moveUp;*/
 	
 	public Lamasticot() {
-		super(Conf.IMG_SPRITES_PATH+"lama.png", 200, 600, 10f, 125, 93);
+		super(Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92);
 		
-		//jump = new SpriteSheet(image,130,93);
+		jump = new SpriteSheet(image,125,92);
 		
 		try {
 			Image im = new Image(Conf.IMG_SPRITES_PATH+"lama.png");
-			walk = new SpriteSheet(im,125,93);
+			walk = new SpriteSheet(im,125,92);
 		} catch (SlickException e) {
 			System.err.println("Image sprites de Tux pas trouvées.");
 		}
 		
 		moveForce = 700;
 		jumpForce = 70000;
-		MAX_JUMP_VEL = 105;
-		body.setMaxVelocity(35, 105);
+		MAX_JUMP_VEL = 125;
+		body.setMaxVelocity(35, 125);
 		jumpTime = 200;
 		
-		walkingTimer = 200;
-		moveUp = false;
+		jumpTimer = 0;
+		beginJumpTimer = false;
+		
+		/*walkingTimer = 200;
+		moveUp = false;*/
 		
 		//Globals.node = new Node(1);
 		
@@ -53,21 +61,25 @@ public class Lamasticot extends Actor {
 	public void render(Graphics g) {
 		// work out which animation we're showing based 
 		// on the state of the actor
-		SpriteSheet sheet = walk;
+		SpriteSheet sheet = jump;
 		int sx = 0;
 		int sy = 0;
 		
 		if (jumping()) {
-			sheet = walk;
-			sx = frame % NB_SPRITES_WALK;
+			sheet = jump;
 			sx = 0;
 			sy = 0;
 		} else if (falling()) {
-			sheet = walk;
-			sx = frame % NB_SPRITES_WALK;
+			sheet = jump;
 			sx = 0;
 			sy = 0;
-		} /*else if(waiting()) {
+		}
+		else if(beginJumpTimer){
+			sheet = jump;
+			sx = frame % NB_SPRITES_JUMP;
+			sy = 0;
+		}
+		 /*else if(waiting()) {
 			sheet = jump;
 			sx = 0;
 			sy = 0;
@@ -82,15 +94,34 @@ public class Lamasticot extends Actor {
 		}
 		
 		// get the appropriate sprite 
-		Image image = sheet.getSprite(sx,sy);
+		Image theImage = sheet.getSprite(sx,sy);
 	
 		// if we're facing the other direction, flip the sprite over
 		if (!facingRight()) {
-			image = image.getFlippedCopy(true, false);
+			theImage = theImage.getFlippedCopy(true, false);
 		}
 		
 		//image.drawCentered(getX(), getY()-12);
-		image.draw(getX()-width/2, getY()-height/2, width, height);
+		theImage.draw(getX()-width/2, getY()-height/2, width, height);
+	}
+	
+	@Override
+	public void jump() {
+		beginJumpTimer = true;
+	}
+	
+	@Override
+	public void update(int delta){
+		super.update(delta);
+		
+		if(beginJumpTimer){
+			jumpTimer += delta;
+		}
+		if (jumpTimer > 500) {
+			beginJumpTimer = false;
+			applyForce(0, -jumpForce);
+			jumpTimer = 0;
+		}
 	}
 	
 	/*@Override
