@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import main.Songe;
 import nodes.Node;
@@ -83,8 +84,6 @@ public class GameplayState extends AbstractGameState {
 	private Font font;
 
 	protected Sound2 sound;
-	/** The sound to indicate an IA has already been visited */
-	protected Sound2 alreadyVisited;
 	/** Indicates if things to do once have been done */
 	protected boolean onceOnEnter;
 	
@@ -110,7 +109,7 @@ public class GameplayState extends AbstractGameState {
 		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH + "nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH + "bump.ogg");
-		alreadyVisited = new Sound2(Conf.getVoice("deja_rencontres"));
+		
 		font = new AngelCodeFont(Conf.RESS_PATH + "hiero.fnt", Conf.RESS_PATH
 				+ "hiero.png");
 		// We set Open Al constants about physical world
@@ -156,8 +155,7 @@ public class GameplayState extends AbstractGameState {
 		soundBump();
 		soundGround();
 		soundJump();
-		alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+		
 	}
 
 	private void soundWalk() {
@@ -289,12 +287,27 @@ public class GameplayState extends AbstractGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.enter(gc, sbg);
-		restart();
 		currentState = States.IN_GAME;
+		
 		// If the "main" previous state was not the game state, then it's
 		// probably the menu state
-		if (Globals.returnState != stateID)
-			superRestart(gc, sbg);
+		if (Globals.returnState != stateID) {
+			
+			Globals.stateToGoTo.clear();
+			Globals.nodes.clear();
+			
+			createMap();
+			
+			Node nodeStart = new Node(1);
+			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
+			map.addEntity(Globals.getEntityFromString("mario", nodeStart));
+			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
+			
+			Globals.score = 0;
+			map.setMainPlayer(Globals.player);
+			Globals.player.reinitPosition();
+			voix = new t2s.SIVOXDevint();
+		}
 		// this state is important so we put it in Globals
 		Globals.returnState = stateID;
 
@@ -305,24 +318,6 @@ public class GameplayState extends AbstractGameState {
 		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
 		
 		AL10.alDopplerFactor(50.0f);
-	}
-
-	/**
-	 * Powerful restart, if we have previously been in the menu
-	 * 
-	 * @param gc
-	 *            GameContainer
-	 * @param sbg
-	 *            StateBasedGame
-	 * @throws SlickException
-	 */
-	public void superRestart(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
-		super.init(gc, sbg);
-		Globals.score = 0;
-		Globals.node = new Node(1);
-		map.setMainPlayer(Globals.player);
-		voix = new t2s.SIVOXDevint();
 	}
 
 	@Override
@@ -340,7 +335,8 @@ public class GameplayState extends AbstractGameState {
 
 		if (input.isKeyPressed(Input.KEY_R)) {
 			try {
-				superRestart(gc, sbg);
+				Globals.returnState = -1;
+				enter(gc, sbg);
 			} catch (SlickException e) {
 				System.err.println("Erreur lors du relancement du jeu");
 			}
@@ -361,7 +357,7 @@ public class GameplayState extends AbstractGameState {
 		}
 
 		if (input.isKeyPressed(Input.KEY_F4)) {
-			map.setMainPlayer(Globals.player);
+			map.addEntity(new HomerIA(100,100,new Node(1)));
 		}
 		// determines if the character moves
 		Globals.player.setMoving(false);
@@ -407,9 +403,11 @@ public class GameplayState extends AbstractGameState {
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException {
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
 
-		entities.add(new MarioIA(920, 350));
-		entities.add(new HomerIA(2800, 350));
-		entities.add(new AlienIA(3600, 350));
+		entities.add(new AlienIA(920, 350, new Node(1)));
+		entities.add(new HomerIA(2800, 350, new Node(1)));
+		entities.add(new AlienIA(3600, 350, new Node(1)));
+		
+		
 		return entities;
 	}
 
@@ -435,31 +433,9 @@ public class GameplayState extends AbstractGameState {
 
 	@Override
 	protected void collisions(IA ia) {
-		if (ia.isVisited()) {
-			//if we have been far enough since the last time we encountered that IA
-			if(ia.hasBeenFar()){
-				alreadyVisited.stop();
-				alreadyVisited.play();
-				alreadyVisited
-						.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-								Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
-				ia.setHasBeenFar(false);
-			}
-		}
+		//System.out.println("Collision avec " + ia);
 
-		else {
-			if (Globals.node.getQuestion() == null
-					&& Globals.node.getGame() == null) {
-				stateToGoTo = Songe.SAVEHIGHSCORE;
-			}
-			if (Globals.node.getQuestion() != null) {
-				stateToGoTo = Songe.QUESTIONSTATE;
-			}
-			if (Globals.node.getGame() != null) {
-				stateToGoTo = Globals.node.getGame().getId();
-			}
-			ia.onCollision();
-		}
+		ia.onCollision();
 	}
 
 }

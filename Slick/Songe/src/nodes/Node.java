@@ -12,8 +12,10 @@ public class Node {
 	
 	private Question question = null;
 	private MiniJeu game = null;
+	private int id;
 	
 	public Node(int id) {
+		this.id = id;
 		bdd = new SQLiteDB("data2");
 		
 		HashMap<String,String> node = bdd.selectSingle("SELECT * FROM noeuds WHERE id=" + id);
@@ -79,5 +81,8 @@ public class Node {
 	public MiniJeu getGame() {
 		return game;
 	}
-
+	
+	public boolean equals(Node noeud){
+		return this.id == noeud.id;
+	}
 }

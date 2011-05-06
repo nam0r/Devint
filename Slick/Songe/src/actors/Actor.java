@@ -426,4 +426,9 @@ public abstract class Actor extends PhysicalEntity {
 		}
 	}
 	
+	public void reinitPosition(){
+		body.setPosition(xInital,yInitial);
+		facingRight = true;
+	}
+	
 }

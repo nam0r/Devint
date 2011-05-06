@@ -1,125 +1,199 @@
 package actors;
 
+import main.Songe;
+import nodes.Node;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.loading.LoadingList;
 
+import sound.Sound2;
+import utils.Conf;
 import utils.Globals;
 
 public abstract class IA extends Actor {
 
 	protected SpriteSheet walk;
 	protected int nb_sprites;
-	
-	private enum Way {RIGHT, LEFT};
+
+	private enum Way {
+		RIGHT, LEFT
+	};
+
 	private Way way;
-	
+
 	private int walkingTimer;
 	protected int walkingTime;
-	
+
 	protected boolean visited;
 	/** indicates if the IA has been far */
 	protected boolean hasBeenFar;
-	
-	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y, float width, float height, float mass) {
+
+	protected Node node;
+	/** The sound to indicate an IA has already been visited */
+	protected Sound2 alreadyVisited;
+
+	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y,
+			float width, float height, float mass, Node node) {
 		super(pathToSpriteSheet, x, y, mass, width, height);
 		
-		this.nb_sprites = nb_sprites;
-		walk = new SpriteSheet(image,(int)width,(int)height); // A revoir
+		this.node = node;
 		
+		this.nb_sprites = nb_sprites;
+		walk = new SpriteSheet(image, (int) width, (int) height); // A revoir
+
 		way = Way.LEFT;
 		walkingTimer = 0;
-		
+
 		moveForce = 400;
-		
+
 		visited = false;
-		walkingTime = 1000; //1 sec
+		walkingTime = 1000; // 1 sec
 		hasBeenFar = true;
+		LoadingList.setDeferredLoading(false);
+		try {
+			alreadyVisited = new Sound2(Conf.getVoice("deja_rencontres"));
+		} catch (SlickException e) {
+			System.out.println("le son de alreadyvisited n'a pas pu être trouvé.");
+		}
+		LoadingList.setDeferredLoading(true);
+		
 	}
 
 	@Override
 	public void render(Graphics g) {
-		
+
 		int sx = 0;
 		int sy = 0;
-		
+
 		if (moving() && onGround()) {
 			sx = frame % nb_sprites;
 			sy = 0;
- 		} else if (onGround()) {
+		} else if (onGround()) {
 			sx = 0;
 			sy = 0;
 		}
-		
-		// get the appropriate sprite 
-		Image image = walk.getSprite(sx,sy);
-		
+
+		// get the appropriate sprite
+		Image image = walk.getSprite(sx, sy);
+
 		// if we're facing the other direction, flip the sprite over
 		if (facingRight()) {
 			image = image.getFlippedCopy(true, false);
 		}
-		
-		image.draw(getX()-width/2, getY()-height/2, width, height);
-		
+
+		image.draw(getX() - width / 2, getY() - height / 2, width, height);
+		alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 	}
-	
+
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		
+
 		setMoving(true);
-		
+
 		walkingTimer += delta;
-		
-		if(walkingTimer > walkingTime) {
+
+		if (walkingTimer > walkingTime) {
 			walkingTimer = 0;
 			way = (way == Way.LEFT) ? Way.RIGHT : Way.LEFT; // On change de sens
 		}
-		
+
 		if (way == Way.LEFT)
 			moveLeft();
 		else
 			moveRight();
-		
+
 		// if is no more on the screen, then the IA is "far" from the main
 		// character
-		if (getX() < Globals.xoffset || getX() > (Globals.xoffset + Globals.gcWidth)
-				|| getY() < Globals.yoffset || getY() > (Globals.yoffset + Globals.gcHeight)) {
+		if (getX() < Globals.xoffset
+				|| getX() > (Globals.xoffset + Globals.gcWidth)
+				|| getY() < Globals.yoffset
+				|| getY() > (Globals.yoffset + Globals.gcHeight)) {
 			hasBeenFar = true;
 		}
 	}
-	
+
 	/**
 	 * Makes additional actions when collision with the player
 	 */
 	public void onCollision() {
-		if(! visited) {
-			visited = true;
+		//si ia visitée
+		if(visited){
+			if(hasBeenFar()){
+				alreadyVisited.stop();
+				alreadyVisited.play();
+				alreadyVisited
+						.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+								Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+				setHasBeenFar(false);
+			}
+		}
+		//si noeud de l'ia même que le noeud courant (donc ia valide)
+		if(Globals.node.equals(this.node)) {
+			if (Globals.node.getQuestion() == null && Globals.node.getGame() == null) {
+				Globals.stateToGoTo.offer(Songe.SAVEHIGHSCORE);
+			}
+			
+			if (Globals.node.getQuestion() != null) {
+				Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
+			}
+			
+			if (Globals.node.getGame() != null) {
+				Globals.stateToGoTo.offer(Globals.node.getGame().getId());
+			}
+			//si ia non visitée
+			if(!visited) {
+				visited = true;
+			}
+			
+		}
+		//si ia invalide à ce moment
+		else {
+			if(hasBeenFar()){
+				// TODO Play sound: "Tu dois aller voir 'l'autre' avant..."
+				System.out.println("Totototototototototo");
+				/*
+				alreadyVisited.stop();
+				alreadyVisited.play();
+				alreadyVisited
+						.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+								Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+				*/
+				setHasBeenFar(false);
+			}
 		}
 	}
-	
+
 	/**
 	 * Returns if the IA has already been visited by the player
+	 * 
 	 * @return visited if the IA has already been visited
 	 */
-	public boolean isVisited(){
+	public boolean isVisited() {
 		return visited;
 	}
-	
+
 	/**
 	 * Returns if the character has been far enough from an already visited IA
+	 * 
 	 * @return if the ia has been far from the character
 	 */
-	public boolean hasBeenFar(){
+	public boolean hasBeenFar() {
 		return hasBeenFar;
 	}
-	
+
 	/**
 	 * Sets the hasBeenFar variable
-	 * @param hasBeenFar if the IA has been far enough from the player
+	 * 
+	 * @param hasBeenFar
+	 *            if the IA has been far enough from the player
 	 */
-	public void setHasBeenFar(boolean hasBeenFar){
+	public void setHasBeenFar(boolean hasBeenFar) {
 		this.hasBeenFar = hasBeenFar;
 	}
-	
+
 }

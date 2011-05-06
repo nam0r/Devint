@@ -1,12 +1,15 @@
 package game;
 
 
+import nodes.Node;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
+import utils.Globals;
 import actors.Actor;
 
 /**
@@ -52,7 +55,7 @@ public class Lamasticot extends Actor {
 		/*walkingTimer = 200;
 		moveUp = false;*/
 		
-		//Globals.node = new Node(1);
+		Globals.node = new Node(1);
 		
 	}
 

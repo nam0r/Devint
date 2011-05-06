@@ -16,13 +16,16 @@ public abstract class PhysicalEntity extends AbstractMovingEntity implements Phy
 	/** Le monde auquel appartient l'entite **/
 	protected World world;
 	
+	protected float xInital, yInitial;
+	
 	/* ************ *
 	 * Constructors *
 	 * ************ */
 	
 	public PhysicalEntity(String path, float x, float y, float width, float height, float mass) {
 		super(path);
-	
+		this.xInital = x;
+		this.yInitial = y;
 		this.width = width;
 		this.height = height;
 		
@@ -53,6 +56,7 @@ public abstract class PhysicalEntity extends AbstractMovingEntity implements Phy
 	public void setPosition(float x, float y) {
 		body.setPosition(x,y);
 	}
+
 	
 	public void setBody(Body body, float x, float y) {
 		this.body = body;

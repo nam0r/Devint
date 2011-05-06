@@ -1,6 +1,7 @@
 package game;
 
 import net.phys2d.math.Vector2f;
+import nodes.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -13,8 +14,8 @@ import actors.IA;
  */
 public class HomerIA extends IA {
 	
-	public HomerIA(int x, int y){
-		super(Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 8, x, y, 72, 130, 10);
+	public HomerIA(int x, int y, Node node){
+		super(Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 8, x, y, 72, 130, 10, node);
 		body.setMaxVelocity(20, 90);
 		moveForce = 300;
 		walkingTime = 1500;
@@ -53,6 +54,10 @@ public class HomerIA extends IA {
 		if(!jumped && onGround){
 			body.addForce(new Vector2f(0, -1000));
 		}
+	}
+	
+	public String toString() {
+		return "Homer";
 	}
 
 }

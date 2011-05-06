@@ -16,4 +16,7 @@
 		<object id="g" size="90" mass="28" image="crate3.jpg" />
 		<object id="h" size="120" mass="30" image="crate3.jpg" />
 	</objects>
+	<nodes>
+		<node id="N" />
+	</nodes>
 </tiles>

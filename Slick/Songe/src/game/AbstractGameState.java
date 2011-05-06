@@ -1,11 +1,13 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import map.Map;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
+import nodes.Node;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -42,7 +44,6 @@ public abstract class AbstractGameState extends BasicGameState {
 	/** The interval to check the controls at */
 	private int controlInterval = 50;
 	
-	protected int stateToGoTo;
 	
 	
 	public AbstractGameState(int id, String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
@@ -66,21 +67,26 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
-		restart();
-		// We initialize the map
-		map.init();
-		// We manage collisions (especially for IAs)
-		manageCollisions();
+	
+		createMap();
 		// Moving objects are created and added
+		/*
 		ArrayList<PhysicalEntity> entities = createEntities();
 		for(PhysicalEntity pe : entities) {
 			map.addEntity(pe);
 		}
+		*/
 	}
 	
-	public void restart(){
-		stateToGoTo = -1;
+	protected void createMap() {
+		
+		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
+		// We initialize the map
+		map.init();
+		
+		// We manage collisions (especially for IAs)
+		manageCollisions();
+		
 	}
 	
 	@Override
@@ -113,8 +119,8 @@ public abstract class AbstractGameState extends BasicGameState {
 		// Update the map
 		map.update(delta, gc, Globals.player);
 		
-		if(stateToGoTo != -1)
-			sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		if(Globals.stateToGoTo.peek() != null)
+			sbg.enterState(Globals.stateToGoTo.poll(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 
 	}
 	
