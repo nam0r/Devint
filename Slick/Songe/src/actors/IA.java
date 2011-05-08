@@ -131,6 +131,7 @@ public abstract class IA extends Actor {
 								Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 				setHasBeenFar(false);
 			}
+			return;
 		}
 		//si noeud de l'ia même que le noeud courant (donc ia valide)
 		if(Globals.node.equals(this.node)) {
@@ -146,10 +147,10 @@ public abstract class IA extends Actor {
 				Globals.stateToGoTo.offer(Globals.node.getGame().getId());
 			}
 			//si ia non visitée
-			if(!visited) {
+			/*if(!visited) {
 				visited = true;
 			}
-			
+			*/
 		}
 		//si ia invalide à ce moment
 		else {
@@ -176,7 +177,15 @@ public abstract class IA extends Actor {
 	public boolean isVisited() {
 		return visited;
 	}
+	
+	public void setVisited(boolean visited){
+		this.visited = visited;
+	}
 
+	public Node getNode(){
+		return node;
+	}
+	
 	/**
 	 * Returns if the character has been far enough from an already visited IA
 	 * 

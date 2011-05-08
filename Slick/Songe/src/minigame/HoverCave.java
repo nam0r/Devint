@@ -132,8 +132,8 @@ public class HoverCave extends BasicGameState {
 		actualLowerWall = 0;
 		spX = 0;
 		try {
-			explosion = ParticleIO.loadConfiguredSystem(Conf.RESS_PATH+"explosion.xml");
-			trail = ParticleIO.loadConfiguredSystem(Conf.RESS_PATH+"smoketrail.xml");
+			explosion = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"explosion.xml");
+			trail = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"smoketrail.xml");
 			
 		} catch (IOException e) {
 			throw new SlickException("Failed to load particle systems", e);
@@ -202,7 +202,7 @@ public class HoverCave extends BasicGameState {
 						//The score is set
 						Globals.score += distance/1000;
 						//The next node is set
-						Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
+						Globals.node = new Node(Globals.node.getGame().getLevelFromScore(distance/1000));
 					}
 						
 					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),

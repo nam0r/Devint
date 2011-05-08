@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import main.Songe;
 import nodes.Node;
@@ -300,8 +299,6 @@ public class GameplayState extends AbstractGameState {
 			
 			Node nodeStart = new Node(1);
 			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
-			map.addEntity(Globals.getEntityFromString("mario", nodeStart));
-			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
 			
 			Globals.score = 0;
 			map.setMainPlayer(Globals.player);
@@ -434,8 +431,22 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	protected void collisions(IA ia) {
 		//System.out.println("Collision avec " + ia);
-
+		
 		ia.onCollision();
+		if(!ia.isVisited() && Globals.node.equals(ia.getNode())){
+			map.addEntity(Globals.getEntityFromString("mario", new Node(3)));
+			ia.setVisited(true);
+		}
+	}
+	
+	@Override
+	protected void collisions(Emitter entity){
+		entity.onCollision();
+		//spirit type objects disappear when touched
+		if(entity.getType().equals("spirit")){
+			map.removeEntity(entity);
+			map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
+		}
 	}
 
 }

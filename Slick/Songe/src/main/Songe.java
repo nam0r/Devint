@@ -4,6 +4,7 @@ import game.GameplayState;
 import game.QuestionState;
 import menu.ChoiceMiniGameState;
 import menu.ChoicePersoState;
+import menu.InitialMenuState;
 import menu.LoadingState;
 import menu.MainMenuState;
 import menu.SaveHighScore;
@@ -32,9 +33,10 @@ public class Songe extends StateBasedGame {
 	public static final int SAVEHIGHSCORE = 5;
 	public static final int QUESTIONSTATE = 6;
 	public static final int CHOICEMINIGAMESTATE = 7;
+	public static final int INITIALMENUSTATE = 8;
 	
 	public Songe() {
-		super("My Last Hoorah");
+		super("Songe");
 	}
 
 	@Override
@@ -67,6 +69,7 @@ public class Songe extends StateBasedGame {
 		this.addState(new HoverCave(HOVERCAVESTATE));
 		this.addState(new SaveHighScore(SAVEHIGHSCORE));
 		this.addState(new QuestionState(QUESTIONSTATE));
+		this.addState(new InitialMenuState(INITIALMENUSTATE));
 		
 		this.enterState(LOADINGSTATE);
 	}

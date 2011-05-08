@@ -41,7 +41,7 @@ public class Tux extends Actor {
 		body.setMaxVelocity(40, 105);
 		jumpTime = 200;
 		
-		//Globals.node = new Node(1);
+		Globals.node = new Node(1);
 		
 	}
 

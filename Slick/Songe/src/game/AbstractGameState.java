@@ -144,6 +144,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void timedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void collisions(IA ia);
+	protected abstract void collisions(Emitter entity);
 	
 	
 	private void manageCollisions() {
@@ -188,6 +189,10 @@ public abstract class AbstractGameState extends BasicGameState {
 						collisions(((IA)other));
 						
 						//Question question = ((IA)other).getQuestion();
+					}
+					//If the object is a physical entity
+					else if(other instanceof Emitter) {
+						collisions(((Emitter)other));
 					}
 				}
 			}
