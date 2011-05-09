@@ -3,6 +3,7 @@ package actors;
 import main.Songe;
 import nodes.Node;
 
+import org.lwjgl.openal.AL10;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -34,6 +35,8 @@ public abstract class IA extends Actor {
 	protected Node node;
 	/** The sound to indicate an IA has already been visited */
 	protected Sound2 alreadyVisited;
+	/** A permanent sound from the IA */
+	protected Sound2 sound;
 
 	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y,
 			float width, float height, float mass, Node node) {
@@ -55,10 +58,23 @@ public abstract class IA extends Actor {
 		LoadingList.setDeferredLoading(false);
 		try {
 			alreadyVisited = new Sound2(Conf.getVoice("deja_rencontres"));
+			sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH + "nuit.ogg");
 		} catch (SlickException e) {
 			System.out.println("le son de alreadyvisited n'a pas pu être trouvé.");
 		}
 		LoadingList.setDeferredLoading(true);
+		
+		
+	}
+	public void enter(){
+		sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
+		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
+		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
+		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
+		System.out.println("iaaaaaaaaaaaaa");
+	}
+	
+	public void leave(){
 		
 	}
 
@@ -85,8 +101,15 @@ public abstract class IA extends Actor {
 		}
 
 		image.draw(getX() - width / 2, getY() - height / 2, width, height);
+		permanentSound();
+	}
+	
+	public void permanentSound(){
 		alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
 				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+		
+		sound.setSourcePosition(getX() - getWidth() / 2, getY() - getHeight() / 2, 0f);
+		sound.setSourceVelocity(getVelX(), getVelY(), 0f);
 	}
 
 	@Override

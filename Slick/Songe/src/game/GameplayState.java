@@ -82,7 +82,6 @@ public class GameplayState extends AbstractGameState {
 	/** The font we're going to use to render the score */
 	private Font font;
 
-	protected Sound2 sound;
 	/** Indicates if things to do once have been done */
 	protected boolean onceOnEnter;
 	
@@ -105,7 +104,6 @@ public class GameplayState extends AbstractGameState {
 		input = gc.getInput();
 		soundJump = new Sound2(Conf.SND_BIP_PATH + "bip6.ogg");
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH + "saut.ogg");
-		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH + "nuit.ogg");
 		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH + "bump.ogg");
 		
@@ -128,7 +126,7 @@ public class GameplayState extends AbstractGameState {
 				"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart",
 				gc.getWidth(), gc.getHeight() - 20, Color.black);
 
-		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+		/*for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
 			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof HomerIA) {
 				sound.setSourcePosition((map.getEntityByBody(
 						map.getWorld().getBodies().get(i)).getX() - map
@@ -138,7 +136,7 @@ public class GameplayState extends AbstractGameState {
 						.getEntityByBody(map.getWorld().getBodies().get(i))
 						.getHeight() / 2), 0f);
 			}
-		}
+		}*/
 		// We put the openAl listener's position and velocity
 		AlUtils.setAlListenerPosition(Globals.player.getX() - Globals.player.getWidth() / 2,
 				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
@@ -307,14 +305,14 @@ public class GameplayState extends AbstractGameState {
 		}
 		// this state is important so we put it in Globals
 		Globals.returnState = stateID;
-
-		// AL10.alSourcePlay(soundIndex);
-		sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
-		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
-		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
-		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
 		
-		AL10.alDopplerFactor(50.0f);
+		AL10.alDopplerFactor(1.0f);
+		//we execute enter methods for all the IA
+		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof IA) {
+				((IA) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
+			}
+		}
 	}
 
 	@Override
