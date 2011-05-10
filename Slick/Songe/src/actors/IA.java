@@ -15,29 +15,42 @@ import utils.Conf;
 import utils.Globals;
 
 public abstract class IA extends Actor {
-
+	/** the walk spritesheet */
 	protected SpriteSheet walk;
+	/** the amount of images in the walking sprite */
 	protected int nb_sprites;
-
-	private enum Way {
+	/** the enum way */
+	protected enum Way {
 		RIGHT, LEFT
 	};
-
-	private Way way;
-
-	private int walkingTimer;
+	/**the way of the IA */
+	protected Way way;
+	/** the walking timer */
+	protected int walkingTimer;
+	/** the walking total time */
 	protected int walkingTime;
-
+	/** indicates if the IA is visited */
 	protected boolean visited;
 	/** indicates if the IA has been far */
 	protected boolean hasBeenFar;
-
+	/** the actual node of the IA */
 	protected Node node;
 	/** The sound to indicate an IA has already been visited */
 	protected Sound2 alreadyVisited;
 	/** A permanent sound from the IA */
 	protected Sound2 sound;
 
+	/**
+	 * An IA in the game
+	 * @param pathToSpriteSheet the path to walking spritesheet
+	 * @param nb_sprites the number of images in that sprite
+	 * @param x the x initial position
+	 * @param y the y initial position
+	 * @param width the width of the shape
+	 * @param height the height of the shape
+	 * @param mass the mass of the IA
+	 * @param node the node of the IA
+	 */
 	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y,
 			float width, float height, float mass, Node node) {
 		super(pathToSpriteSheet, x, y, mass, width, height);
@@ -66,6 +79,11 @@ public abstract class IA extends Actor {
 		
 		
 	}
+	
+	/**
+	 * Executed when entering in the world
+	 * Manages the sound of the IA
+	 */
 	public void enter(){
 		sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
@@ -74,6 +92,9 @@ public abstract class IA extends Actor {
 		System.out.println("iaaaaaaaaaaaaa");
 	}
 	
+	/**
+	 * Executed when leaving the game state
+	 */
 	public void leave(){
 		
 	}
@@ -104,6 +125,9 @@ public abstract class IA extends Actor {
 		permanentSound();
 	}
 	
+	/**
+	 * Sets the position and the speed of the sound source of the IA
+	 */
 	public void permanentSound(){
 		alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
 				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);

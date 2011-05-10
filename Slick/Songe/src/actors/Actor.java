@@ -400,6 +400,7 @@ public abstract class Actor extends PhysicalEntity {
 		return false;
 	}
 	
+	
 	public boolean isTopCollided(){
 		return topCollided;
 	}

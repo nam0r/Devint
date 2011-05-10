@@ -35,7 +35,7 @@ public class HoverCave extends BasicGameState {
 	/** The resolution of the wall */
 	private final int WALL_RES = 30;
 	/** the sensitivity of the object to touch the wall */
-	private final int SENSITIVITY = 15;
+	private final int SENSITIVITY = 10;
 	private GameContainer container;
 	/** The object's y position */
 	private float dudeHeight;

@@ -354,6 +354,9 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_F4)) {
 			map.addEntity(new HomerIA(100,100,new Node(1)));
 		}
+		if (input.isKeyPressed(Input.KEY_F5)) {
+			map.addEntity(new Enemy(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 100, 100, 40, 62, 2));
+		}
 		// determines if the character moves
 		Globals.player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
@@ -426,6 +429,8 @@ public class GameplayState extends AbstractGameState {
 		}
 	}
 
+	/***************** Collision management ********************/
+	
 	@Override
 	protected void collisions(IA ia) {
 		//System.out.println("Collision avec " + ia);
@@ -445,6 +450,13 @@ public class GameplayState extends AbstractGameState {
 			map.removeEntity(entity);
 			map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
 		}
+	}
+	
+	@Override
+	protected void collisions(Enemy enemy){
+		enemy.onCollision();
+		
+		
 	}
 
 }

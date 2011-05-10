@@ -1,13 +1,11 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import map.Map;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
-import nodes.Node;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -145,6 +143,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void collisions(IA ia);
 	protected abstract void collisions(Emitter entity);
+	protected abstract void collisions(Enemy enemy);
 	
 	
 	private void manageCollisions() {
@@ -193,6 +192,24 @@ public abstract class AbstractGameState extends BasicGameState {
 					//If the object is a physical entity
 					else if(other instanceof Emitter) {
 						collisions(((Emitter)other));
+					}
+					//If the object is an enemy
+					else if(other instanceof Enemy) {
+						collisions(((Enemy)other));
+						//if the enemy is under the feet of the player
+						if ((event.getPoint().getY() < (other.getY()
+								+ (other.getHeight() / 3)))
+								&& (event.getPoint().getY() > (Globals.player.getY()
+										+ (Globals.player.getHeight() / 3)))
+								&& (event.getPoint().getX() < (other.getX() - 1))
+								&& (event.getPoint().getX() > (other.getX()
+										- (other.getWidth()) - 1))) {
+							map.removeEntity(other);
+						}
+						//if the enemy is not killed, the player is hurt
+						else{
+							System.out.println("hutr !");
+						}
 					}
 				}
 			}
