@@ -26,6 +26,11 @@ public class Lamasticot extends Actor {
 	private int jumpTimer;
 	/** Indicates if a jump has been initiated */
 	private boolean beginJumpTimer;
+	/** the step rate constant for the step sound */
+	private final float STEPRATE = 90f;
+	/** the path to the walking sound */
+	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "crawl.ogg";
+	
 	
 	/*private static final int walkingTime = 1000;
 	private int walkingTimer;
@@ -124,6 +129,14 @@ public class Lamasticot extends Actor {
 			applyForce(0, -jumpForce);
 			jumpTimer = 0;
 		}
+	}
+	
+	public float stepRate(){
+		return STEPRATE;
+	}
+	
+	public String getSoundWalk(){
+		return SOUND_WALK_PATH;
 	}
 	
 	/*@Override

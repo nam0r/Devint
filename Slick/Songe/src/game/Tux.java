@@ -22,6 +22,10 @@ public class Tux extends Actor {
 	
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 7;
+	/** the step rate constant for the step sound */
+	private final float STEPRATE = 35f;
+	/** the path to the walking sound */
+	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg";
 	
 	public Tux() {
 		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
@@ -84,6 +88,14 @@ public class Tux extends Actor {
 		
 		//image.drawCentered(getX(), getY()-12);
 		image.draw(getX()-width/2, getY()-height/2, width, height);
+	}
+	
+	public float stepRate(){
+		return STEPRATE;
+	}
+	
+	public String getSoundWalk(){
+		return SOUND_WALK_PATH;
 	}
 
 }

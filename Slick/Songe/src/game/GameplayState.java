@@ -14,6 +14,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -104,7 +105,6 @@ public class GameplayState extends AbstractGameState {
 		input = gc.getInput();
 		soundJump = new Sound2(Conf.SND_BIP_PATH + "bip6.ogg");
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH + "saut.ogg");
-		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH + "bump.ogg");
 		
 		font = new AngelCodeFont(Conf.RESS_PATH + "hiero.fnt", Conf.RESS_PATH
@@ -148,7 +148,8 @@ public class GameplayState extends AbstractGameState {
 			System.out.println("Erreur d'OpenAL" + AL10.alGetError());
 
 		// Environment sounds
-		soundWalk();
+		if(soundWalk != null)
+			soundWalk();
 		soundBump();
 		soundGround();
 		soundJump();
@@ -166,10 +167,10 @@ public class GameplayState extends AbstractGameState {
 			// the character
 			float pitchVel = 0;
 			if (Globals.player.facingRight()) {
-				pitchVel = 0.5f + 1 / (1 / (Globals.player.getVelX() / 35f));
+				pitchVel = 0.5f + 1 / (1 / (Globals.player.getVelX() / Globals.player.stepRate()));
 				// System.out.println(pitchVel+" lol");
 			} else {
-				pitchVel = 0.5f + -1 / (1 / (Globals.player.getVelX() / 35f));
+				pitchVel = 0.5f + -1 / (1 / (Globals.player.getVelX() / Globals.player.stepRate()));
 				// System.out.println(pitchVel+" lool");
 			}
 			// for security
@@ -302,6 +303,10 @@ public class GameplayState extends AbstractGameState {
 			map.setMainPlayer(Globals.player);
 			Globals.player.reinitPosition();
 			voix = new t2s.SIVOXDevint();
+			
+			LoadingList.setDeferredLoading(false);
+			soundWalk = new Sound2(Globals.player.getSoundWalk());
+			LoadingList.setDeferredLoading(true);
 		}
 		// this state is important so we put it in Globals
 		Globals.returnState = stateID;
