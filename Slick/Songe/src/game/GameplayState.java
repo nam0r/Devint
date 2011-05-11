@@ -442,7 +442,7 @@ public class GameplayState extends AbstractGameState {
 		
 		ia.onCollision();
 		if(!ia.isVisited() && Globals.node.equals(ia.getNode())){
-			map.addEntity(Globals.getEntityFromString("mario", new Node(3)));
+			map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
 			ia.setVisited(true);
 		}
 	}
