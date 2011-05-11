@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 
 import main.Songe;
+import nodes.Node;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
@@ -295,35 +296,24 @@ public class GameplayState extends AbstractGameState {
 			
 			createMap();
 			
-<<<<<<< HEAD
-=======
-			Node nodeStart = new Node(1);
-			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
+			LoadingList.setDeferredLoading(false);
+			soundWalk = new Sound2(Globals.player.getSoundWalk());
+			LoadingList.setDeferredLoading(true);
 			
->>>>>>> 80d31e95873ee39146148ae8d91e04450b71d325
 			Globals.score = 0;
 			map.setMainPlayer(Globals.player);
 			Globals.player.reinitPosition();
 			voix = new t2s.SIVOXDevint();
 			
-<<<<<<< HEAD
 			Globals.nodeHasChanged = true;
 			
-			/*
-			map.addEntity(Globals.getEntityFromString("homer", Globals.node));
-			map.addEntity(Globals.getEntityFromString("mario", Globals.node));
-			map.addEntity(Globals.getEntityFromString("homer", Globals.node));
-			*/
 		}
 		
 		if(Globals.nodeHasChanged) {
-			map.addEntity(Globals.getEntityFromCurrentNode());
+			//map.addEntity(Globals.getEntityFromCurrentNode());
+			Node nodeStart = new Node(1);
+			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
 			Globals.nodeHasChanged = false;
-=======
-			LoadingList.setDeferredLoading(false);
-			soundWalk = new Sound2(Globals.player.getSoundWalk());
-			LoadingList.setDeferredLoading(true);
->>>>>>> 80d31e95873ee39146148ae8d91e04450b71d325
 		}
 		
 		// this state is important so we put it in Globals
@@ -373,9 +363,6 @@ public class GameplayState extends AbstractGameState {
 			voix.stop();
 			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
-<<<<<<< HEAD
-		
-=======
 
 		if (input.isKeyPressed(Input.KEY_F4)) {
 			map.addEntity(new HomerIA(100,100,new Node(1)));
@@ -383,7 +370,6 @@ public class GameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_F5)) {
 			map.addEntity(new Enemy(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 100, 100, 40, 62, 2));
 		}
->>>>>>> 80d31e95873ee39146148ae8d91e04450b71d325
 		// determines if the character moves
 		Globals.player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {

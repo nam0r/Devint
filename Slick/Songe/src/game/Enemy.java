@@ -1,5 +1,7 @@
 package game;
 
+import nodes.Node;
+
 import org.lwjgl.openal.AL10;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -41,7 +43,7 @@ public class Enemy extends Actor {
 	 */
 	public Enemy(String pathToSpriteSheet, int nb_sprites, float x, float y,
 			float width, float height, float mass) {
-		super(pathToSpriteSheet, x, y, mass, width, height);
+		super(pathToSpriteSheet, x, y, mass, width, height, new Node(0));
 		
 		this.nb_sprites = nb_sprites;
 		walk = new SpriteSheet(image, (int) width, (int) height); // A revoir
