@@ -13,6 +13,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -81,7 +82,6 @@ public class GameplayState extends AbstractGameState {
 	/** The font we're going to use to render the score */
 	private Font font;
 
-	protected Sound2 sound;
 	/** Indicates if things to do once have been done */
 	protected boolean onceOnEnter;
 	
@@ -104,8 +104,6 @@ public class GameplayState extends AbstractGameState {
 		input = gc.getInput();
 		soundJump = new Sound2(Conf.SND_BIP_PATH + "bip6.ogg");
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH + "saut.ogg");
-		sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH + "nuit.ogg");
-		soundWalk = new Sound2(Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH + "bump.ogg");
 		
 		font = new AngelCodeFont(Conf.RESS_PATH + "hiero.fnt", Conf.RESS_PATH
@@ -127,7 +125,7 @@ public class GameplayState extends AbstractGameState {
 				"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart",
 				gc.getWidth(), gc.getHeight() - 20, Color.black);
 
-		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+		/*for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
 			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof HomerIA) {
 				sound.setSourcePosition((map.getEntityByBody(
 						map.getWorld().getBodies().get(i)).getX() - map
@@ -137,7 +135,7 @@ public class GameplayState extends AbstractGameState {
 						.getEntityByBody(map.getWorld().getBodies().get(i))
 						.getHeight() / 2), 0f);
 			}
-		}
+		}*/
 		// We put the openAl listener's position and velocity
 		AlUtils.setAlListenerPosition(Globals.player.getX() - Globals.player.getWidth() / 2,
 				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
@@ -149,7 +147,8 @@ public class GameplayState extends AbstractGameState {
 			System.out.println("Erreur d'OpenAL" + AL10.alGetError());
 
 		// Environment sounds
-		soundWalk();
+		if(soundWalk != null)
+			soundWalk();
 		soundBump();
 		soundGround();
 		soundJump();
@@ -167,10 +166,10 @@ public class GameplayState extends AbstractGameState {
 			// the character
 			float pitchVel = 0;
 			if (Globals.player.facingRight()) {
-				pitchVel = 0.5f + 1 / (1 / (Globals.player.getVelX() / 35f));
+				pitchVel = 0.5f + 1 / (1 / (Globals.player.getVelX() / Globals.player.stepRate()));
 				// System.out.println(pitchVel+" lol");
 			} else {
-				pitchVel = 0.5f + -1 / (1 / (Globals.player.getVelX() / 35f));
+				pitchVel = 0.5f + -1 / (1 / (Globals.player.getVelX() / Globals.player.stepRate()));
 				// System.out.println(pitchVel+" lool");
 			}
 			// for security
@@ -296,11 +295,18 @@ public class GameplayState extends AbstractGameState {
 			
 			createMap();
 			
+<<<<<<< HEAD
+=======
+			Node nodeStart = new Node(1);
+			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
+			
+>>>>>>> 80d31e95873ee39146148ae8d91e04450b71d325
 			Globals.score = 0;
 			map.setMainPlayer(Globals.player);
 			Globals.player.reinitPosition();
 			voix = new t2s.SIVOXDevint();
 			
+<<<<<<< HEAD
 			Globals.nodeHasChanged = true;
 			
 			/*
@@ -313,18 +319,23 @@ public class GameplayState extends AbstractGameState {
 		if(Globals.nodeHasChanged) {
 			map.addEntity(Globals.getEntityFromCurrentNode());
 			Globals.nodeHasChanged = false;
+=======
+			LoadingList.setDeferredLoading(false);
+			soundWalk = new Sound2(Globals.player.getSoundWalk());
+			LoadingList.setDeferredLoading(true);
+>>>>>>> 80d31e95873ee39146148ae8d91e04450b71d325
 		}
 		
 		// this state is important so we put it in Globals
 		Globals.returnState = stateID;
-
-		// AL10.alSourcePlay(soundIndex);
-		sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
-		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
-		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
-		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
 		
-		AL10.alDopplerFactor(50.0f);
+		AL10.alDopplerFactor(1.0f);
+		//we execute enter methods for all the IA
+		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof IA) {
+				((IA) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
+			}
+		}
 	}
 
 	@Override
@@ -362,7 +373,17 @@ public class GameplayState extends AbstractGameState {
 			voix.stop();
 			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
+<<<<<<< HEAD
 		
+=======
+
+		if (input.isKeyPressed(Input.KEY_F4)) {
+			map.addEntity(new HomerIA(100,100,new Node(1)));
+		}
+		if (input.isKeyPressed(Input.KEY_F5)) {
+			map.addEntity(new Enemy(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 100, 100, 40, 62, 2));
+		}
+>>>>>>> 80d31e95873ee39146148ae8d91e04450b71d325
 		// determines if the character moves
 		Globals.player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
@@ -438,11 +459,34 @@ public class GameplayState extends AbstractGameState {
 		}
 	}
 
+	/***************** Collision management ********************/
+	
 	@Override
 	protected void collisions(IA ia) {
 		//System.out.println("Collision avec " + ia);
-
+		
 		ia.onCollision();
+		if(!ia.isVisited() && Globals.node.equals(ia.getNode())){
+			map.addEntity(Globals.getEntityFromString("mario", new Node(3)));
+			ia.setVisited(true);
+		}
+	}
+	
+	@Override
+	protected void collisions(Emitter entity){
+		entity.onCollision();
+		//spirit type objects disappear when touched
+		if(entity.getType().equals("spirit")){
+			map.removeEntity(entity);
+			map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
+		}
+	}
+	
+	@Override
+	protected void collisions(Enemy enemy){
+		enemy.onCollision();
+		
+		
 	}
 
 }

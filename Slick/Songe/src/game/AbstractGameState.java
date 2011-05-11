@@ -142,8 +142,12 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void timedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void collisions(IA ia);
+	protected abstract void collisions(Emitter entity);
+	protected abstract void collisions(Enemy enemy);
 	
-	
+	/**
+	 * Manage collisions with other entities
+	 */
 	private void manageCollisions() {
 		
 		map.getWorld().addListener(new CollisionListener() {
@@ -161,31 +165,29 @@ public abstract class AbstractGameState extends BasicGameState {
 					PhysicalEntity other = map.getEntityByBody(bodyOther);
 					//If the object is an IA
 					if(other instanceof IA) {
-						
-						/* Idee : creer un attribut "stateToGoTo" initialise a null.
-						 * Mettre une methode "public State stateToGoTo" dans IA qui renvoie l'etat dans lequel
-						 * on passe apres une collision avec l'IA.
-						 * Ici, faire "this.stateToGoTo = ((IA)other).stateToGoTo();
-						 * 
-						 * Dans update, faire :
-						 * if(this.stateToGoTo != null) {
-						 *     sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
-						 * }
-						 * 
-						 * Dans leave(), rajouter "this.stateToGoTo = null;"
-						 */
-						
-						
-						/*
-						& * ====================================================
-						((IA)other).onCollision();
-						stateToGoTo = ((IA)other).stateToGoTo();
-						=======================================================
-						*/
-						
 						collisions(((IA)other));
-						
-						//Question question = ((IA)other).getQuestion();
+					}
+					//If the object is a physical entity
+					else if(other instanceof Emitter) {
+						collisions(((Emitter)other));
+					}
+					//If the object is an enemy
+					else if(other instanceof Enemy) {
+						collisions(((Enemy)other));
+						//if the enemy is under the feet of the player, it dies
+						if ((event.getPoint().getY() < (other.getY()
+								+ (other.getHeight() / 3)))
+								&& (event.getPoint().getY() > (Globals.player.getY()
+										+ (Globals.player.getHeight() / 3)))
+								&& (event.getPoint().getX() < (other.getX() - 1))
+								&& (event.getPoint().getX() > (other.getX()
+										- (other.getWidth()) - 1))) {
+							map.removeEntity(other);
+						}
+						//if the enemy is not killed, the player is hurt
+						else{
+							System.out.println("You've been hurt !");
+						}
 					}
 				}
 			}

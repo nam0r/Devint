@@ -96,7 +96,7 @@ public class LoadingState extends BasicGameState {
 		if (LoadingList.get().getRemainingResources() > 0) {
 			nextResource = LoadingList.get().getNext();
 		} else {
-			game.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(
+			game.enterState(Songe.INITIALMENUSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		}
 		// we load resources at the home path of the user if not already

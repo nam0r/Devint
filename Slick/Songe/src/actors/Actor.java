@@ -9,6 +9,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
+import utils.Conf;
+
 
 /**
  * 
@@ -405,6 +407,7 @@ public abstract class Actor extends PhysicalEntity {
 		return false;
 	}
 	
+	
 	public boolean isTopCollided(){
 		return topCollided;
 	}
@@ -434,6 +437,18 @@ public abstract class Actor extends PhysicalEntity {
 	public void reinitPosition(){
 		body.setPosition(xInital,yInitial);
 		facingRight = true;
+	}
+	
+	/** the step rate function */
+	//public abstract float stepRate();
+	//public abstract String getSoundWalk();
+	
+	public float stepRate(){
+		return 35f;
+	}
+	
+	public String getSoundWalk(){
+		return Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg";
 	}
 	
 }

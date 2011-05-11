@@ -4,6 +4,7 @@ import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.DynamicShape;
 
 /**
  * Rassemble les proprietes communes a toutes les entites
@@ -18,10 +19,15 @@ public abstract class PhysicalEntity extends AbstractMovingEntity implements Phy
 	
 	protected float xInital, yInitial;
 	
-	/* ************ *
-	 * Constructors *
-	 * ************ */
-	
+	/**
+	 * Builds a Physical Entity
+	 * @param path the image path
+	 * @param x the x position
+	 * @param y the y position
+	 * @param width the shape width
+	 * @param height the shape height
+	 * @param mass the mass
+	 */
 	public PhysicalEntity(String path, float x, float y, float width, float height, float mass) {
 		super(path);
 		this.xInital = x;
@@ -32,7 +38,25 @@ public abstract class PhysicalEntity extends AbstractMovingEntity implements Phy
 		Body b = new Body(new Box(width, height), mass);
 		setBody(b,x,y);
 	}
-
+	/**
+	 * Builds a Physical Entity
+	 * @param path the main image path
+	 * @param x the x position
+	 * @param y the y position
+	 * @param mass the body mass
+	 * @param shape the body shape
+	 */
+	public PhysicalEntity(String path, float x, float y, float mass, DynamicShape shape) {
+		super(path);
+		this.xInital = x;
+		this.yInitial = y;
+		this.width = shape.getBounds().getWidth();
+		this.height = shape.getBounds().getHeight();
+		
+		Body b = new Body(shape, mass);
+		setBody(b,x,y);
+	}
+	
 	/* ******* *
 	 * Setters *
 	 * ******* */

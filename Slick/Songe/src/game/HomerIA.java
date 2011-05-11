@@ -44,7 +44,8 @@ public class HomerIA extends IA {
 			image = image.getFlippedCopy(true, false);
 		}
 		
-		image.draw(getX()-width/2, getY()-height/2, width, height+4);	
+		image.draw(getX()-width/2, getY()-height/2, width, height+4);
+		permanentSound();
 	}
 	
 	@Override

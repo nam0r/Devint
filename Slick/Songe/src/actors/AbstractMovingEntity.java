@@ -16,6 +16,10 @@ public abstract class AbstractMovingEntity extends AbstractEntity {
 		initScales();
 	}
 	
+	public AbstractMovingEntity() {
+		initScales();
+	}
+	
 	private void initScales() {
 		this.minScale = 1.0f;
 		this.maxScale = 5.0f;

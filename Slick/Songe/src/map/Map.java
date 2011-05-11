@@ -76,6 +76,10 @@ public class Map {
 		env.addEntity(entity);
 	}
 	
+	public void removeEntity(PhysicalEntity entity) {
+		env.removeEntity(entity);
+	}
+	
 	public void setMainPlayer(Actor p) {
 		if(player != null)
 			env.removeEntity(player);
