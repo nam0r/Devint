@@ -17,8 +17,8 @@ public class Alien extends Actor {
 	private SpriteSheet run;
 	private SpriteSheet jump;
 	
-	public Alien() {
-		super(Conf.IMG_SPRITES_PATH+"all_big.png", 100, 150, 3f, 48, 72);
+	public Alien(Node n) {
+		super(Conf.IMG_SPRITES_PATH+"all_big.png", 100, 150, 3f, 48, 72, n);
 
 		run = getSpriteSheet(0,100,101);
 		jump = getSpriteSheet(301,100,100);
@@ -28,7 +28,7 @@ public class Alien extends Actor {
 		MAX_JUMP_VEL = 100;
 		body.setMaxVelocity(40, 100);
 		
-		Globals.node = new Node(1);
+		Globals.node = node;
 
 	}
 

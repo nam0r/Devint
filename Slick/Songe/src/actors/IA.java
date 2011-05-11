@@ -33,8 +33,6 @@ public abstract class IA extends Actor {
 	protected boolean visited;
 	/** indicates if the IA has been far */
 	protected boolean hasBeenFar;
-	/** the actual node of the IA */
-	protected Node node;
 	/** The sound to indicate an IA has already been visited */
 	protected Sound2 alreadyVisited;
 	/** A permanent sound from the IA */
@@ -52,10 +50,8 @@ public abstract class IA extends Actor {
 	 * @param node the node of the IA
 	 */
 	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y,
-			float width, float height, float mass, Node node) {
-		super(pathToSpriteSheet, x, y, mass, width, height);
-		
-		this.node = node;
+			float width, float height, float mass, Node node) { // Node a remonter dans Actor
+		super(pathToSpriteSheet, x, y, mass, width, height, node);
 		
 		this.nb_sprites = nb_sprites;
 		walk = new SpriteSheet(image, (int) width, (int) height); // A revoir

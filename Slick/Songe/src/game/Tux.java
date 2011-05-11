@@ -10,7 +10,6 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-
 import actors.Actor;
 
 /**
@@ -27,8 +26,8 @@ public class Tux extends Actor {
 	/** the path to the walking sound */
 	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg";
 	
-	public Tux() {
-		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
+	public Tux(Node n) {
+		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95, n);
 		
 		jump = new SpriteSheet(image,65,95);
 		
@@ -45,8 +44,7 @@ public class Tux extends Actor {
 		body.setMaxVelocity(40, 105);
 		jumpTime = 200;
 		
-		Globals.node = new Node(1);
-		
+		Globals.node = node;
 	}
 
 	public void render(Graphics g) {
