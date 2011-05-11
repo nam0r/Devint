@@ -79,10 +79,6 @@ public class MapLoader {
 				if(nodeDimension != null){
 					nodeDimension.setSize(x*env.getTileWidth(), y*env.getTileHeight());
 					Globals.nodes.offer(nodeDimension);
-					System.out.println("[[[[[]]]]]");
-					for(Dimension d : Globals.nodes) {
-						System.out.println(nodeDimension);
-					}
 				}
 			}
 		}

@@ -203,6 +203,7 @@ public class HoverCave extends BasicGameState {
 						Globals.score += distance/1000;
 						//The next node is set
 						Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
+						Globals.nodeHasChanged = true;
 					}
 						
 					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),

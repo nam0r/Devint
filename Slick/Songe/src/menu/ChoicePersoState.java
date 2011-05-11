@@ -4,6 +4,7 @@ import game.Alien;
 import game.Lamasticot;
 import game.Tux;
 import main.Songe;
+import nodes.Node;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -15,10 +16,9 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import actors.Actor;
-
 import utils.Conf;
 import utils.Globals;
+import actors.Actor;
 
 public class ChoicePersoState extends ChoiceMenuState {
 
@@ -68,15 +68,15 @@ public class ChoicePersoState extends ChoiceMenuState {
 	protected Actor createPlayer() {
 		switch (selected) {
 		case 0:
-			return new Tux();
+			return new Tux(new Node(1));
 		case 1:
-			return new Alien();
+			return new Alien(new Node(1));
 		case 2:
-			return new Tux();
+			return new Tux(new Node(1));
 		case 3:
-			return new Lamasticot();
+			return new Lamasticot(new Node(1));
 		default:
-			return new Tux();
+			return new Tux(new Node(1));
 		}
 	}
 

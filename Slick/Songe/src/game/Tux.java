@@ -10,7 +10,6 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-
 import actors.Actor;
 
 /**
@@ -23,8 +22,8 @@ public class Tux extends Actor {
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 7;
 	
-	public Tux() {
-		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
+	public Tux(Node n) {
+		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95, n);
 		
 		jump = new SpriteSheet(image,65,95);
 		
@@ -41,7 +40,7 @@ public class Tux extends Actor {
 		body.setMaxVelocity(40, 105);
 		jumpTime = 200;
 		
-		//Globals.node = new Node(1);
+		Globals.node = node;
 		
 	}
 

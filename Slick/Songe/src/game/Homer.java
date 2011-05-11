@@ -20,8 +20,8 @@ public class Homer extends Actor {
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 8;
 	
-	public Homer() {
-		super(Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126);
+	public Homer(Node n) {
+		super(Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126, n);
 		
 		//run = getSpriteSheet(0,36,65);
 		//jump = getSpriteSheet(150,50,50);
@@ -33,7 +33,7 @@ public class Homer extends Actor {
 		MAX_JUMP_VEL = 100;
 		body.setMaxVelocity(28, 93);
 		
-		Globals.node = new Node(1);
+		Globals.node = node;
 		
 	}
 

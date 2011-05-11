@@ -1,6 +1,5 @@
 package nodes;
 
-import java.util.HashMap;
 
 public class MiniJeu {
 	private int id;

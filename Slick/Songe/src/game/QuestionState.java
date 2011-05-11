@@ -57,16 +57,17 @@ public class QuestionState extends MenuState {
 				if (question.isOk(selected)) {
 					Globals.score += question.getPoints();
 					if (question.getScenario()) {
-						Globals.node = new Node(question.getChoices()[selected]
-								.getNodeToGoTo());
+						// TODO A bouger dans le if (input.isKeyPressed(Input.KEY_ENTER)) ?
+						Globals.node = new Node(question.getChoices()[selected].getNodeToGoTo());
+						Globals.nodeHasChanged = true;
 					}
 					AlUtils.stopAllSounds();
 					bonneRep.play();
-					chosen = true;
+					chosen = true; // TODO Duplicat
 				} else {
 					AlUtils.stopAllSounds();
 					mauvaiseRep.play();
-					chosen = true;
+					chosen = true; // TODO Duplicat
 				}
 			}
 		}

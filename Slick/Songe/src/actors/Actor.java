@@ -3,6 +3,7 @@ package actors;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
+import nodes.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -61,6 +62,8 @@ public abstract class Actor extends PhysicalEntity {
 	protected float jumpForce = 40000;
 	
 	
+	protected Node node;
+	
 	/*
 	 * ATTENTION : la largeur et la hauteur passés en parametres sont les dimensions
 	 * de la boite dans lequel est contenu le corps du personnage (utilisee pour les collisions).
@@ -76,7 +79,7 @@ public abstract class Actor extends PhysicalEntity {
 	 * @param mass The mass of the actor's physics body
 	 * @param size The size of the actor's collision bounds
 	 */
-	public Actor(String pathToSpriteSheet, float x, float y, float mass, float width, float height) {
+	public Actor(String pathToSpriteSheet, float x, float y, float mass, float width, float height, Node node) {
 		super(pathToSpriteSheet, x, y, width, height, mass);
 		
 		body.setUserData(this);
@@ -85,6 +88,8 @@ public abstract class Actor extends PhysicalEntity {
 		body.setMaxVelocity(40, 100);
 		body.setRotatable(false);
 		setPosition(x,y);
+		
+		this.node = node;
 	}
 	
 	protected SpriteSheet getSpriteSheet(int y, int tw, int th) {

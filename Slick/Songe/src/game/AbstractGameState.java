@@ -1,13 +1,11 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import map.Map;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
-import nodes.Node;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;

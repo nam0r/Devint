@@ -1,10 +1,8 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import main.Songe;
-import nodes.Node;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
@@ -298,16 +296,25 @@ public class GameplayState extends AbstractGameState {
 			
 			createMap();
 			
-			Node nodeStart = new Node(1);
-			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
-			map.addEntity(Globals.getEntityFromString("mario", nodeStart));
-			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
-			
 			Globals.score = 0;
 			map.setMainPlayer(Globals.player);
 			Globals.player.reinitPosition();
 			voix = new t2s.SIVOXDevint();
+			
+			Globals.nodeHasChanged = true;
+			
+			/*
+			map.addEntity(Globals.getEntityFromString("homer", Globals.node));
+			map.addEntity(Globals.getEntityFromString("mario", Globals.node));
+			map.addEntity(Globals.getEntityFromString("homer", Globals.node));
+			*/
 		}
+		
+		if(Globals.nodeHasChanged) {
+			map.addEntity(Globals.getEntityFromCurrentNode());
+			Globals.nodeHasChanged = false;
+		}
+		
 		// this state is important so we put it in Globals
 		Globals.returnState = stateID;
 
@@ -355,10 +362,7 @@ public class GameplayState extends AbstractGameState {
 			voix.stop();
 			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
-
-		if (input.isKeyPressed(Input.KEY_F4)) {
-			map.addEntity(new HomerIA(100,100,new Node(1)));
-		}
+		
 		// determines if the character moves
 		Globals.player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
@@ -401,6 +405,7 @@ public class GameplayState extends AbstractGameState {
 
 	@Override
 	protected ArrayList<PhysicalEntity> createEntities() throws SlickException {
+		/*
 		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
 
 		entities.add(new AlienIA(920, 350, new Node(1)));
@@ -409,6 +414,8 @@ public class GameplayState extends AbstractGameState {
 		
 		
 		return entities;
+		*/
+		return null;
 	}
 
 	@Override

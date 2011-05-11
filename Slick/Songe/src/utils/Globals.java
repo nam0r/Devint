@@ -27,6 +27,9 @@ public class Globals {
 	public static int returnState;
 	/** The current scenario Node */ 
 	public static Node node;
+	/** Tells whether the current node has changed */
+	public static boolean nodeHasChanged;
+	
 	/** the gc height */
 	public static int gcHeight;
 	/** the gc width */
@@ -40,22 +43,20 @@ public class Globals {
 	/** The list of the nodes */
 	public static LinkedList<Dimension> nodes = new LinkedList<Dimension>();
 	
-	public static PhysicalEntity getEntityFromString(String entityID, Node n) {
+	public static PhysicalEntity getEntityFromCurrentNode() {
+		String entityID = Globals.node.getEntityToDisplay();
+		
 		PhysicalEntity entity = null;
-		System.out.println("================");
-		for(Dimension d : nodes) {
-			System.out.println(d);
-		}
-		System.out.println("================");
+		
 		Dimension d = nodes.poll();
 		if(entityID.equals("homer")) {
-			entity = new HomerIA((int)d.getWidth(), (int)d.getHeight(), n);
+			entity = new HomerIA((int)d.getWidth(), (int)d.getHeight(), Globals.node);
 		}
 		else if(entityID.equals("mario")) {
-			entity = new MarioIA((int)d.getWidth(), (int)d.getHeight(), n);
+			entity = new MarioIA((int)d.getWidth(), (int)d.getHeight(), Globals.node);
 		}
 		else if(entityID.equals("alien")) {
-			entity = new AlienIA((int)d.getWidth(), (int)d.getHeight(), n);
+			entity = new AlienIA((int)d.getWidth(), (int)d.getHeight(), Globals.node);
 		}
 		else if(entityID.equals("crate")) {
 			entity = new Crate(Conf.IMG_TEXTURES_PATH+"crate3.jpg", (int)d.getWidth(), (int)d.getHeight(), 40, 40, 500);

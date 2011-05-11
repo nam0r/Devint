@@ -31,8 +31,8 @@ public class Lamasticot extends Actor {
 	private int walkingTimer;
 	private boolean moveUp;*/
 	
-	public Lamasticot() {
-		super(Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92);
+	public Lamasticot(Node n) {
+		super(Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92, n);
 		
 		jump = new SpriteSheet(image,125,92);
 		
@@ -55,7 +55,7 @@ public class Lamasticot extends Actor {
 		/*walkingTimer = 200;
 		moveUp = false;*/
 		
-		Globals.node = new Node(1);
+		Globals.node = node;
 		
 	}
 

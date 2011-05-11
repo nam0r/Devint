@@ -3,13 +3,13 @@ package nodes;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import bdd.SQLiteDB;
 
 public class Node {
 	
 	private SQLiteDB bdd;
 	
+	private String entityToDisplay;
 	private Question question = null;
 	private MiniJeu game = null;
 	private int id;
@@ -19,6 +19,9 @@ public class Node {
 		bdd = new SQLiteDB("data2");
 		
 		HashMap<String,String> node = bdd.selectSingle("SELECT * FROM noeuds WHERE id=" + id);
+		
+		// Add the physical entity to which the node is associated
+		this.entityToDisplay = "homer";
 		
 		// Add the question if there is one
 		if(node.get("question") != null && !node.get("question").equals("null")) {
@@ -80,6 +83,10 @@ public class Node {
 	
 	public MiniJeu getGame() {
 		return game;
+	}
+	
+	public String getEntityToDisplay() {
+		return entityToDisplay;
 	}
 	
 	public boolean equals(Node noeud){
