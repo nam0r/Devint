@@ -84,8 +84,8 @@ public class Tux extends Actor {
 			image = image.getFlippedCopy(true, false);
 		}
 		
-		//image.drawCentered(getX(), getY()-12);
-		image.draw(getX()-width/2, getY()-height/2, width, height);
+		if(!Globals.invulnerable || Globals.invulnerableTimer%2==1)
+			image.draw(getX()-width/2, getY()-height/2, width, height);
 	}
 	
 	public float stepRate(){

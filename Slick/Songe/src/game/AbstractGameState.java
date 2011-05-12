@@ -179,14 +179,18 @@ public abstract class AbstractGameState extends BasicGameState {
 								+ (other.getHeight() / 3)))
 								&& (event.getPoint().getY() > (Globals.player.getY()
 										+ (Globals.player.getHeight() / 3)))
-								&& (event.getPoint().getX() < (other.getX() - 1))
+								/*&& (event.getPoint().getX() < (other.getX() - 1))
 								&& (event.getPoint().getX() > (other.getX()
-										- (other.getWidth()) - 1))) {
+										- (other.getWidth()) - 1))*/) {
 							map.removeEntity(other);
+							Globals.score++;
 						}
 						//if the enemy is not killed, the player is hurt
 						else{
 							System.out.println("You've been hurt !");
+							if(Globals.score > 0)
+								Globals.score--;
+							Globals.invulnerable = true;
 						}
 					}
 				}

@@ -51,6 +51,7 @@ public class Enemy extends Actor {
 		way = Way.LEFT;
 
 		moveForce = 400;
+		body.setMaxVelocity(20, 120);
 
 		LoadingList.setDeferredLoading(false);
 		try {

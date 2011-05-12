@@ -279,6 +279,29 @@ public class GameplayState extends AbstractGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		super.update(gc, sbg, delta);
+		//// Invulnerability
+		// the first frame the player is invulnerable
+		if (Globals.invulnerable && Globals.invulnerableTimer > delta*5) {
+
+			for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+				if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+					Globals.player.getBody().addExcludedBody(map.getWorld().getBodies().get(i));
+				}
+			}
+		}
+		// the invulnerability is time limited
+		if(Globals.invulnerable){
+			Globals.invulnerableTimer += delta;
+			if(Globals.invulnerableTimer >= 1500){
+				Globals.invulnerable = false;
+				Globals.invulnerableTimer = 0;
+				for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+					if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+						Globals.player.getBody().removeExcludedBody(map.getWorld().getBodies().get(i));
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -368,7 +391,14 @@ public class GameplayState extends AbstractGameState {
 			map.addEntity(new HomerIA(100,100,new Node(1)));
 		}
 		if (input.isKeyPressed(Input.KEY_F5)) {
-			map.addEntity(new Enemy(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 100, 100, 40, 62, 2));
+			Enemy enemy = new Enemy(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 100, 100, 40, 62, 2);
+			map.addEntity(enemy);
+			//the ennemies do not collide between each other
+			for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+				if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+					enemy.getBody().addExcludedBody(map.getWorld().getBodies().get(i));
+				}
+			}
 		}
 		// determines if the character moves
 		Globals.player.setMoving(false);

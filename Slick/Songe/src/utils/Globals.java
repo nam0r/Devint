@@ -48,6 +48,10 @@ public class Globals {
 	public static LinkedList<Integer> stateToGoTo = new LinkedList<Integer>();
 	/** The list of the nodes */
 	public static LinkedList<Dimension> nodes = new LinkedList<Dimension>();
+	/** Indicates if the character is invulnerable */
+	public static boolean invulnerable = false;
+	/** Indicates the time that the player is invulnerable */
+	public static int invulnerableTimer = 0;
 
 	/**
 	 * Indicates if the player has already played the game and therefore doesn't
