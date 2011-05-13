@@ -1,0 +1,34 @@
+<nodes>
+    <node>
+        <id>1</id>
+        <images>
+            <walk>homeranim_big.png</imagew>
+            <walknum>8</imagewnum>
+            <jump>homeranim_big.png</imagew>
+            <jumpnum>1</imagewnum>
+        </images>
+        <size>
+            <width>72</width>
+            <height>130</height>
+            <yoffset>4</yoffset>
+        </size>
+        <type>WalkingIA</type>
+        <sounds>
+            <main>nuit</main>
+            <dejavu>deja_rencontres</dejavu>
+            <troptot>deja_rencontres</troptot>
+        </sounds>
+        <events>
+            <event>
+                <type>D</type>
+                <param>minijeuvaisseauF1</param>
+            </event>
+            <event>
+                <type>C</type>
+                <param>question_grand_pere</param>
+            </event>
+        </events>
+    </node>
+    
+
+</nodes>
