@@ -1,5 +1,8 @@
 Files[.ogg] : text
 
+deja_joue : "Avez-vous déjà joué au jeu ?"
+oui : "Oui"
+non : "Non"
 bienvenue : "Bienvenue dans l'univers de Songe !"
 jouer : "Jouer"
 instructions : "Instructions"

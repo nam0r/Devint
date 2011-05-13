@@ -335,7 +335,7 @@ public class GameplayState extends AbstractGameState {
 		if(Globals.nodeHasChanged) {
 			//map.addEntity(Globals.getEntityFromCurrentNode());
 			Node nodeStart = new Node(1);
-			map.addEntity(Globals.getEntityFromString("homer", nodeStart));
+			map.addEntity(Globals.getEntityFromString("spirit", nodeStart));
 			Globals.nodeHasChanged = false;
 		}
 		
@@ -483,7 +483,7 @@ public class GameplayState extends AbstractGameState {
 		
 		ia.onCollision();
 		if(!ia.isVisited() && Globals.node.equals(ia.getNode())){
-			map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
+			//map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
 			ia.setVisited(true);
 		}
 	}

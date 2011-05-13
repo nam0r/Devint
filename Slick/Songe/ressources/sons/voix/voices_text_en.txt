@@ -1,5 +1,8 @@
 Files[.ogg] : text
 
+deja_joue : "Have you already played this game ?"
+oui : "Yes"
+non : "No"
 bienvenue : "Welcome in the universe of Songe !"
 jouer : "Play"
 instructions : "Instructions"

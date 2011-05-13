@@ -20,9 +20,9 @@ public class InitialMenuState extends MenuState {
     	super(stateID);
     	
 		options = new String[] {"Non","Oui"};
-    	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores")};
+    	optionsVoices = new String[] {Conf.getVoice("non"),Conf.getVoice("oui")};
     	title = "Avez-vous déjà joué au jeu ?";
-    	titleVoice = Conf.getVoice("bienvenue");
+    	titleVoice = Conf.getVoice("deja_joue");
     }
 
 	@Override

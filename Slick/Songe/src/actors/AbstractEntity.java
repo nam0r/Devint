@@ -29,9 +29,9 @@ public abstract class AbstractEntity {
 		}
 	}
 	
-	public AbstractEntity() {
+	/*public AbstractEntity() {
 		this.scale = 1.0f;
-	}
+	}*/
 	
 	/* **************** *
 	 * Public Functions *
