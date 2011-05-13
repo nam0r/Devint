@@ -1,0 +1,49 @@
+questions_culture.txt
+questions
+    |question *
+        |id
+        |sound
+        |text
+        |choices *
+            |sound
+            |text
+            |true
+            
+questions_scenario.txt
+questions
+    |question *
+        |id
+        |sound
+        |text
+        |yes
+        |no
+        
+ia.txt
+ias
+ |ia *
+   |id
+   |images
+      |walk
+      |walknum
+      |jump
+      |jumpnum
+   |size
+      |width
+      |height
+      |yoffset
+   |sounds
+      |main
+      |dejavu
+      |troptot
+
+nodes.txt
+nodes
+    |node *
+        |id
+        |ia
+        |type_ia
+        |events
+            |event *
+                |type
+                |param
+            
