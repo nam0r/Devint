@@ -1,0 +1,20 @@
+<ias> 
+    <ia>
+        <images>
+            <walk>homeranim_big.png</imagew>
+            <walknum>8</imagewnum>
+            <jump>homeranim_big.png</imagew>
+            <jumpnum>1</imagewnum>
+        </images>
+        <size>
+            <width>72</width>
+            <height>130</height>
+            <yoffset>4</yoffset>
+        </size>
+        <sounds>
+            <main>nuit</main>
+            <dejavu>deja_rencontres</dejavu>
+            <troptot>deja_rencontres</troptot>
+        </sounds>
+    </ia>
+</ias>
