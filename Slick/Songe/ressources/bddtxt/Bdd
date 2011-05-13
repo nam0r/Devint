@@ -1,0 +1,42 @@
+nodes
+    |id int
+    |ia int (FK ias.id)
+    |type_ia int
+    
+events
+    |id int
+    |id_node int (FK nodes.id)
+    |type text
+    |param text
+    
+qscen
+    |id int
+    |sound text
+    |text text
+    |yes int (FK nodes.id)
+    |no int (FK nodes.id)
+    
+qcult
+    |id int
+    |sound text
+    |text text
+    
+choices
+    |id int
+    |id_question int (FK qcult.id)
+    |sound text
+    |text text
+    |true int
+    
+ias
+    |id int
+    |walk text
+    |walknum int
+    |jump text
+    |jumpnum int
+    |width int
+    |height int
+    |yoffset int
+    |mainsound text
+    |dejavusound text
+    |troptotsound text
