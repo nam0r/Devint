@@ -2,10 +2,14 @@ package main;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
+import bddcreate.BDDCreator;
+
 public class Main {
 
 	public static void main(String[] args) {
-		//new BDDCreator();
+		new BDDCreator();
+		
+		System.exit(0);
 		
 		AppGameContainer app;
 		// initial ratio for 4/3 screens
