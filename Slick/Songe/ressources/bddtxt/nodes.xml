@@ -16,10 +16,10 @@
 				<type>C</type>
 				<param></param>
 			</event>
-			<!--<event>
+			<event>
 				<type>S</type>
 				<param>1</param>
-			</event>-->
+			</event>
 		</events>
 		<node_id>2</node_id>
 	</node>

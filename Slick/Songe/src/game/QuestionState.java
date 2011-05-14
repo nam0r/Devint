@@ -75,8 +75,6 @@ public class QuestionState extends MenuState {
 					Globals.nodeHasChanged = true;
 				}
 				
-				
-				
 				chosen = true;
 			}
 		}

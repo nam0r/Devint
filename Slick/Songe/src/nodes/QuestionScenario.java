@@ -6,6 +6,7 @@ public class QuestionScenario extends Question<ChoiceScenario> {
 		super(text, sound);
 		
 		choices.add(new ChoiceScenario("Oui", "oui", yes));
+		choices.add(new ChoiceScenario("Non", "non", no));
 	}
 
 	@Override
