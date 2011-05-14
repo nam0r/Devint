@@ -2,6 +2,8 @@ package nodes;
 
 import java.util.ArrayList;
 
+import main.Songe;
+
 import utils.Conf;
 
 public abstract class Question<T extends Choice> implements Event {
@@ -56,6 +58,11 @@ public abstract class Question<T extends Choice> implements Event {
 		sb.append(sound);
 		sb.append("\n");
 		return sb.toString();
+	}
+	
+	@Override
+	public int getStateID() {
+		return Songe.QUESTIONSTATE;
 	}
 
 }

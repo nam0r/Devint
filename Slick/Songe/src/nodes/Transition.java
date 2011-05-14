@@ -8,6 +8,7 @@ public class Transition implements Event {
 		this.stateID = stateID;
 	}
 	
+	@Override
 	public int getStateID() {
 		return this.stateID;
 	}

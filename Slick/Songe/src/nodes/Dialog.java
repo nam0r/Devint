@@ -1,5 +1,7 @@
 package nodes;
 
+import main.Songe;
+
 public class Dialog implements Event {
 	
 	private String sound;
@@ -15,6 +17,11 @@ public class Dialog implements Event {
 	@Override
 	public String getType() {
 		return "D";
+	}
+	
+	@Override
+	public int getStateID() {
+		return Songe.DIALOGSTATE;
 	}
 
 }

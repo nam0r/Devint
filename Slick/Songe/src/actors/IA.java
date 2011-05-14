@@ -1,19 +1,16 @@
 package actors;
 
-import main.Songe;
-import nodes.Dialog;
-import nodes.Event;
 import nodes.Node;
-import nodes.QuestionCulture;
-import nodes.QuestionScenario;
-import nodes.Transition;
 
 import org.lwjgl.openal.AL10;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.loading.LoadingList;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import sound.Sound2;
 import utils.Conf;
@@ -184,44 +181,10 @@ public abstract class IA extends Actor {
 			}
 			return;
 		}
-		//si noeud de l'ia même que le noeud courant (donc ia valide)
-		if(Globals.node.equals(this.node)) {
-
-			while (Globals.node.eventSize() > 0) {
-				Event event = Globals.node.pollEvent();
-
-				// Dialog
-				if (event.getType().equals("D")) {
-					Dialog dialog = (Dialog) event;
-					LoadingList.setDeferredLoading(false);
-					try {
-						soundDialog = new Sound2(Conf.getVoice(dialog
-								.getSound()));
-					} catch (SlickException e) {
-						System.err.println("Probleme lors de la lecture de "
-								+ dialog.getSound());
-					}
-					soundDialog.play();
-					LoadingList.setDeferredLoading(true);
-				}
-				// Scenario
-				else if (event.getType().equals("S")) {
-					QuestionScenario question = (QuestionScenario) event;
-					Globals.question = question;
-					Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
-				}
-				// Culture
-				else if (event.getType().equals("C")) {
-					QuestionCulture question = (QuestionCulture) event;
-					Globals.question = question;
-					Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
-				}
-				// Transition
-				else if (event.getType().equals("T")) {
-					Transition transition = (Transition) event;
-					Globals.stateToGoTo.offer(transition.getStateID());
-				}
-			}
+		// si noeud de l'ia même que le noeud courant (donc ia valide)
+		if (Globals.node.equals(this.node)) {
+			Globals.nextEvent();
+			Globals.stateToGoTo.add(Globals.event.getStateID());
 		}
 		//si ia invalide à ce moment
 		else {

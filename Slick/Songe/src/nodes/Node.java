@@ -113,8 +113,8 @@ public class Node {
 		return events.poll();
 	}
 	
-	public int eventSize(){
-		return events.size();
+	public LinkedList<Event> getEvents(){
+		return events;
 	}
 	
 	public boolean equals(Node noeud){

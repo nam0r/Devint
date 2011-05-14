@@ -86,8 +86,17 @@ public class QuestionState extends MenuState {
 		}
 		
 		if (chosen && !bonneRep.playing() && !mauvaiseRep.playing()) {
-			sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
-				new FadeInTransition(Color.black));
+			//if there is no more events
+			if(Globals.node.getEvents().isEmpty())
+				sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
+						new FadeInTransition(Color.black));
+			//if there is some events to go to
+			else{
+				Globals.nextEvent();
+				sbg.enterState(Globals.event.getStateID(), new FadeOutTransition(Color.black),
+						new FadeInTransition(Color.black));
+			}
+				
 		}
 		
 		//we set the music volume, depending if voices are playing or not

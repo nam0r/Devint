@@ -332,6 +332,13 @@ public class GameplayState extends AbstractGameState {
 			Globals.nodeHasChanged = true;
 			
 		}
+		
+		// Here is managed the fact that the list of events is finished
+		if(Globals.node.getEvents().isEmpty() && Globals.event!=null){
+			Globals.event = null;
+			Globals.nodeHasChanged = true;
+		}
+		
 		super.enter(gc, sbg);
 		
 		if(Globals.nodeHasChanged) {

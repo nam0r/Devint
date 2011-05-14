@@ -1,5 +1,6 @@
 package main;
 
+import game.DialogState;
 import game.GameplayState;
 import game.QuestionState;
 import menu.ChoiceMiniGameState;
@@ -34,6 +35,7 @@ public class Songe extends StateBasedGame {
 	public static final int QUESTIONSTATE = 6;
 	public static final int CHOICEMINIGAMESTATE = 7;
 	public static final int INITIALMENUSTATE = 8;
+	public static final int DIALOGSTATE = 9;
 	
 	public Songe() {
 		super("Songe");
@@ -70,6 +72,7 @@ public class Songe extends StateBasedGame {
 		this.addState(new SaveHighScore(SAVEHIGHSCORE));
 		this.addState(new QuestionState(QUESTIONSTATE));
 		this.addState(new InitialMenuState(INITIALMENUSTATE));
+		this.addState(new DialogState(DIALOGSTATE));
 		
 		this.enterState(LOADINGSTATE);
 	}
