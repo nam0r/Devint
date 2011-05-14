@@ -10,12 +10,12 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-import actors.Actor;
+import actors.MainPlayer;
 
 /**
  * Lamasticot
  */
-public class Lamasticot extends Actor {
+public class Lamasticot extends MainPlayer {
 	private SpriteSheet walk;
 	private SpriteSheet jump;
 	

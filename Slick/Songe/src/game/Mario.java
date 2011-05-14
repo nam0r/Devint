@@ -9,12 +9,12 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-import actors.Actor;
+import actors.MainPlayer;
 
 /**
  * Mario
  */
-public class Mario extends Actor {
+public class Mario extends MainPlayer {
 	private SpriteSheet walk;
 	private SpriteSheet jump;
 	

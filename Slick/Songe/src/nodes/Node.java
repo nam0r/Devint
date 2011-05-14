@@ -1,7 +1,11 @@
 package nodes;
 
+import game.HomerIA;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Random;
 
 import actors.IA;
 import bdd.SQLiteDB;
@@ -15,8 +19,7 @@ public class Node {
 	
 	private IA ia;
 	
-	private Question question = null;
-	private MiniJeu game = null;
+	private LinkedList<Event> events; 
 	
 	public Node(int id) {
 		bdd = new SQLiteDB("data");
@@ -26,6 +29,9 @@ public class Node {
 		this.node_id = Integer.valueOf(node.get("node_id"));
 		
 		// Create the IA to display
+		// TODO Temp
+		ia = new HomerIA(100, 100, this);
+		
 		int id_ia = Integer.valueOf(node.get("ia"));
 		String type_ia = node.get("type_ia");
 		
@@ -36,7 +42,7 @@ public class Node {
 		int jumpnum = Integer.valueOf(infosIA.get("jumpnum"));
 		int width = Integer.valueOf(infosIA.get("width"));
 		int height = Integer.valueOf(infosIA.get("height"));
-		int offset = Integer.valueOf(infosIA.get("offset"));
+		int yoffset = Integer.valueOf(infosIA.get("yoffset"));
 		String mainsound = infosIA.get("mainsound");
 		String dejavusound = infosIA.get("dejavusound");
 		String troptotsound = infosIA.get("troptotsound");
@@ -46,106 +52,64 @@ public class Node {
 		/* ****** *
 		 * Events *
 		 * ****** */
-		ArrayList<HashMap<String,String>> events = bdd.select("SELECT * FROM events WHERE id_node=" + id);
+		this.events = new LinkedList<Event>();
 		
-		// TODO Ordonner ? (ajouter attr puis ORDER BY) Pour les choix des questions aussi ? Pas forcement ds XML.
-		for(HashMap<String,String> event : events) {
+		ArrayList<HashMap<String,String>> eventsProperties = bdd.select("SELECT * FROM events WHERE id_node=" + id + " ORDER BY ordre");
+		
+		for(HashMap<String,String> event : eventsProperties) {
 			String type = event.get("type");
 			
 			// Dialog
 			if(type.equals("D")) {
 				String soundDialog = event.get("param");
+				events.offer(new Dialog(soundDialog));
 			}
 			// Scenario
 			else if(type.equals("S")) {
 				int idQuestion = Integer.valueOf(event.get("param"));
 				HashMap<String,String> question = bdd.selectSingle("SELECT * FROM qscen WHERE id=" + idQuestion);
+				
+				String sound = question.get("sound");
+				String text = question.get("text");
+				int yes = Integer.valueOf(question.get("yes"));
+				int no = Integer.valueOf(question.get("no"));
+				
+				events.offer(new QuestionScenario(text, sound, yes, no));
 			}
 			// Culture
 			else if(type.equals("C")) {
-				// Random
-				// ArrayList<HashMap<String,String>> ids = bdd.select("SELECT id FROM qcult");
-				// int idQuestion = random entre O et ids.size() - 1;
-				// HashMap<String,String> question = bdd.selectSingle("SELECT * FROM qcult WHERE id=" + idQuestion);
+				ArrayList<HashMap<String,String>> ids = bdd.select("SELECT id FROM qcult");
+				
+				Random r = new Random();
+				int indice = r.nextInt(ids.size());
+				
+				HashMap<String,String> question = bdd.selectSingle("SELECT * FROM qcult WHERE id=" + ids.get(indice).get("id"));
+			
+				String sound = question.get("sound");
+				String text = question.get("text");
+				int points = Integer.valueOf(question.get("points"));
+				
+				events.offer(new QuestionCulture(text, sound, points));
 			}
 			// Transition
 			else if(type.equals("Transition")) {
 				int idState = Integer.valueOf(event.get("param"));
+				
+				events.offer(new Transition(idState));
 			}
 			
 		}
-		
-		// =================================================================================================== //
-		
-		// Add the question if there is one
-		if(node.get("question") != null && !node.get("question").equals("null")) {
-			HashMap<String,String> q = bdd.selectSingle("SELECT * FROM questions WHERE id=" + node.get("question"));
-			
-			boolean scenario = q.get("scenario").equals("1") ? true : false;
-			
-			// Create the choices
-			ArrayList< HashMap<String,String> > cs = bdd.select("SELECT * FROM choix WHERE id_question=" + q.get("id") +
-					" ORDER BY position"
-			);
-			
-			ArrayList<Choice> choices = new ArrayList<Choice>();
-			// For each choice
-			for(HashMap<String,String> c : cs) {
-				boolean correct = c.get("correct").equals("1") ? true : false;
-				
-				int nodeToGoTo = -1;
-				if(scenario) {
-					nodeToGoTo = Integer.valueOf(c.get("id_noeud"));
-				}
-				
-				Choice choix = new Choice(
-						c.get("enonce"),
-						c.get("fichiervoix"),
-						correct,
-						nodeToGoTo
-				);
-				
-				choices.add(choix);
-			}
-			
-			// Create the question
-			question = new Question(
-					q.get("enonce"),
-					q.get("fichiervoix"),
-					scenario,
-					choices.toArray(new Choice[choices.size()]),
-					Integer.valueOf(q.get("points"))
-			);
-			
-		}
-		
-		// Add the game if there is one
-		if(node.get("mini_jeu") != null && !node.get("mini_jeu").equals("null")) {
-			HashMap<String,String> g = bdd.selectSingle("SELECT * FROM minijeux WHERE id=" + node.get("mini_jeu"));
-			
-			game = new MiniJeu(
-					Integer.valueOf(g.get("id")),
-					Integer.valueOf(g.get("niv1")), Integer.valueOf(g.get("niv2")), Integer.valueOf(g.get("niv3")), Integer.valueOf(g.get("niv4")),
-					Integer.valueOf(g.get("score1")), Integer.valueOf(g.get("score2")), Integer.valueOf(g.get("score3")), Integer.valueOf(g.get("score4"))
-			);
-		}
 	}
 	
-	public Question getQuestion() {
-		return question;
+	public Event pollEvent() {
+		return events.poll();
 	}
-	
-	public MiniJeu getGame() {
-		return game;
-	}
-	
-	/*
-	public String getEntityToDisplay() {
-		return ;
-	}
-	*/
 	
 	public boolean equals(Node noeud){
 		return this.id == noeud.id;
+	}
+	
+	public int getNextNodeId() {
+		return this.node_id;
 	}
 }

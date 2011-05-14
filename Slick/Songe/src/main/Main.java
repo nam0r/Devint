@@ -11,9 +11,8 @@ public class Main {
 	public static void main(String[] args) {
 		new BDDCreator();
 		
-		new Node(1);
-		
-		System.exit(0);
+		//new Node(1);
+		//System.exit(0);
 		
 		AppGameContainer app;
 		// initial ratio for 4/3 screens

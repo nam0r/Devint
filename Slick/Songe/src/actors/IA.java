@@ -1,7 +1,12 @@
 package actors;
 
 import main.Songe;
+import nodes.Dialog;
+import nodes.Event;
 import nodes.Node;
+import nodes.QuestionCulture;
+import nodes.QuestionScenario;
+import nodes.Transition;
 
 import org.lwjgl.openal.AL10;
 import org.newdawn.slick.Graphics;
@@ -35,6 +40,8 @@ public abstract class IA extends Actor {
 	protected boolean hasBeenFar;
 	/** The sound to indicate an IA has already been visited */
 	protected Sound2 alreadyVisited;
+	/** The sound of the dialog */
+	protected Sound2 soundDialog;
 	/** A permanent sound from the IA */
 	protected Sound2 sound;
 	/** an y offset for the image */
@@ -42,6 +49,8 @@ public abstract class IA extends Actor {
 	/** Indicates if the sprites have to be flipped */
 	protected boolean flip;
 
+	protected Node node;
+	
 	/**
 	 * An IA in the game
 	 * @param pathToSpriteSheet the path to walking spritesheet
@@ -55,7 +64,9 @@ public abstract class IA extends Actor {
 	 */
 	public IA(String pathToSpriteSheet, int nb_sprites, float yoffset, boolean flip, float x, float y,
 			float width, float height, float mass, Node node) { // Node a remonter dans Actor
-		super(pathToSpriteSheet, x, y, mass, width, height, node);
+		super(pathToSpriteSheet, x, y, mass, width, height);
+		
+		this.node = node;
 		
 		this.nb_sprites = nb_sprites;
 		this.yoffset = yoffset;
@@ -137,6 +148,11 @@ public abstract class IA extends Actor {
 		
 		sound.setSourcePosition(getX() - getWidth() / 2, getY() - getHeight() / 2, 0f);
 		sound.setSourceVelocity(getVelX(), getVelY(), 0f);
+		
+		if(soundDialog != null && soundDialog.playing()) {
+			soundDialog.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+					Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+		}
 	}
 
 	@Override
@@ -162,31 +178,46 @@ public abstract class IA extends Actor {
 			if(hasBeenFar()){
 				alreadyVisited.stop();
 				alreadyVisited.play();
-				alreadyVisited
-						.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-								Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+				alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+						Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 				setHasBeenFar(false);
 			}
 			return;
 		}
 		//si noeud de l'ia même que le noeud courant (donc ia valide)
 		if(Globals.node.equals(this.node)) {
-			if (Globals.node.getQuestion() == null && Globals.node.getGame() == null) {
-				Globals.stateToGoTo.offer(Songe.SAVEHIGHSCORE);
-			}
 			
-			if (Globals.node.getQuestion() != null) {
+			Event event = Globals.node.pollEvent();
+			
+			// Dialog
+			if(event.getType().equals("D")) {
+				Dialog dialog = (Dialog)event;
+				LoadingList.setDeferredLoading(false);
+				try {
+					soundDialog = new Sound2(Conf.getVoice(dialog.getSound()));
+				} catch (SlickException e) {
+					System.err.println("Probleme lors de la lecture de " + dialog.getSound());
+				}
+				soundDialog.play();
+				LoadingList.setDeferredLoading(true);
+			}
+			// Scenario
+			else if(event.getType().equals("S")) {
+				QuestionScenario question = (QuestionScenario)event;
+				Globals.question = question;
 				Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
 			}
-			
-			if (Globals.node.getGame() != null) {
-				Globals.stateToGoTo.offer(Globals.node.getGame().getId());
+			// Culture
+			else if(event.getType().equals("C")) {
+				QuestionCulture question = (QuestionCulture)event;
+				Globals.question = question;
+				Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
 			}
-			//si ia non visitée
-			/*if(!visited) {
-				visited = true;
+			// Transition
+			else if(event.getType().equals("T")) {
+				Transition transition = (Transition)event;
+				Globals.stateToGoTo.offer(transition.getStateID());
 			}
-			*/
 		}
 		//si ia invalide à ce moment
 		else {

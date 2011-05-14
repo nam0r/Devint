@@ -1,72 +1,59 @@
 package nodes;
 
+import java.util.ArrayList;
+
 import utils.Conf;
 
-public abstract class Question {
+public abstract class Question<T extends Choice> implements Event {
 	
 	protected String text;
 	protected String sound;
-	protected Choice[] choices;
+	protected ArrayList<T> choices;
 	
 	public Question(String text, String sound) {
 		this.text = text;
 		this.sound = sound;
 	}
 	
-	public int getPoints() {
-		return this.points;
-	}
-	
-	public Choice[] getChoices() {
+	public ArrayList<T> getChoices() {
 		return this.choices;
 	}
 	
+	public void addChoice(T c) {
+		this.choices.add(c);
+	}
+	
 	public String[] getChoicesWordings() {
-		String[] choicesWordings = new String[choices.length];
-		for(int i = 0; i < choices.length; i++) {
-			choicesWordings[i] = choices[i].getWording();
+		String[] choicesWordings = new String[choices.size()];
+		for(int i = 0; i < choices.size(); i++) {
+			choicesWordings[i] = choices.get(i).getWording();
 		}
 		return choicesWordings;
 	}
 	
 	public String[] getChoicesVoices() {
-		String[] choicesVoices = new String[choices.length];
-		for(int i = 0; i < choices.length; i++) {
-			choicesVoices[i] = Conf.getVoice(choices[i].getVoice());
+		String[] choicesVoices = new String[choices.size()];
+		for(int i = 0; i < choices.size(); i++) {
+			choicesVoices[i] = Conf.getVoice(choices.get(i).getVoice());
 		}
 		return choicesVoices;
 	}
 	
-	public String getWording() {
-		return this.wording;
+	public String getText() {
+		return this.text;
 	}
 	
-	public String getVoice() {
-		return Conf.getVoice(this.voice);
-	}
-	
-	public boolean getScenario() {
-		return scenario;
-	}
-	
-	public boolean isOk(int indice) {
-		return choices[indice].getIsAnswer();
+	public String getSound() {
+		return Conf.getVoice(this.sound);
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(wording);
+		sb.append(text);
 		sb.append("\n");
-		sb.append(voice);
+		sb.append(sound);
 		sb.append("\n");
-		sb.append(points);
-		sb.append("\n");
-		for(Choice choice : choices) {
-			sb.append("\t");
-			sb.append(choice.getWording());
-			sb.append("\n");
-		}
 		return sb.toString();
 	}
 

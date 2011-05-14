@@ -1,39 +1,21 @@
 package nodes;
 
-// On peut aussi penser faire une classe abstraite et la dériver
-// en "ChoixScenario" et "ChoixNormal"
-public class Choice {
+public abstract class Choice {
 	
-	private String wording = null;
-	private String voice = null;
-	private int nodeToGoTo = -1;
-	private boolean isAnswer = false;
+	protected String text = null;
+	protected String sound = null;
 	
-	private Choice(String wording, String voice, boolean isAnswer) {
-		this.wording = wording;
-		this.voice = voice;
-		this.isAnswer = isAnswer;
-	}
-	
-	public Choice(String wording, String voice, boolean isAnswer, int nodeToGoTo) {
-		this(wording, voice, isAnswer);
-		this.nodeToGoTo = nodeToGoTo;
+	public Choice(String text, String sound) {
+		this.text = text;
+		this.sound = sound;
 	}
 	
 	public String getWording() {
-		return wording;
+		return text;
 	}
 	
 	public String getVoice() {
-		return voice;
-	}
-	
-	public int getNodeToGoTo() {
-		return nodeToGoTo;
-	}
-	
-	public boolean getIsAnswer() {
-		return isAnswer;
+		return sound;
 	}
 
 }

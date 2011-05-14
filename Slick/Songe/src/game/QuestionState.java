@@ -3,6 +3,8 @@ package game;
 import menu.MenuState;
 import nodes.Node;
 import nodes.Question;
+import nodes.QuestionCulture;
+import nodes.QuestionScenario;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -54,21 +56,28 @@ public class QuestionState extends MenuState {
 		Input input = gc.getInput();
 		if (!chosen) {
 			if (input.isKeyPressed(Input.KEY_ENTER)) {
-				if (question.isOk(selected)) {
-					Globals.score += question.getPoints();
-					if (question.getScenario()) {
-						// TODO A bouger dans le if (input.isKeyPressed(Input.KEY_ENTER)) ?
-						Globals.node = new Node(question.getChoices()[selected].getNodeToGoTo());
-						Globals.nodeHasChanged = true;
+				if(question instanceof QuestionCulture) {
+					QuestionCulture qCulture = (QuestionCulture)question;
+					if (qCulture.isAnswer(selected)) {
+						Globals.score += qCulture.getPoints();
+						
+						AlUtils.stopAllSounds();
+						bonneRep.play();
+					} else {
+						AlUtils.stopAllSounds();
+						mauvaiseRep.play();
 					}
-					AlUtils.stopAllSounds();
-					bonneRep.play();
-					chosen = true; // TODO Duplicat
-				} else {
-					AlUtils.stopAllSounds();
-					mauvaiseRep.play();
-					chosen = true; // TODO Duplicat
 				}
+				else if(question instanceof QuestionScenario) {
+					QuestionScenario qScenario = (QuestionScenario)question;
+					
+					Globals.node = new Node(qScenario.getChoices().get(selected).getNodeToGoTo());
+					Globals.nodeHasChanged = true;
+				}
+				
+				
+				
+				chosen = true;
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
@@ -96,14 +105,14 @@ public class QuestionState extends MenuState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		
-		question = Globals.node.getQuestion();
+		question = Globals.question;
 		if(question == null) {
 			System.err.println("Il n'y a pas de question a lire !!!");
 		}
 		options = question.getChoicesWordings(); // the choices
-		title = question.getWording(); // the question
+		title = question.getText(); // the question
 		// the sound of the question
-		titleVoice = question.getVoice();
+		titleVoice = question.getSound();
 		// The sounds to read for the answers to the question
 		//optionsVoices = new String[]{Conf.getVoice("14ans"), Conf.getVoice("80ans"), Conf.getVoice("140ans")};
 		optionsVoices = question.getChoicesVoices();

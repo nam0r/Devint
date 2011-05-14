@@ -335,7 +335,7 @@ public class GameplayState extends AbstractGameState {
 		
 		if(Globals.nodeHasChanged) {
 			//map.addEntity(Globals.getEntityFromCurrentNode());
-			Node nodeStart = new Node(1);
+			Node nodeStart = Globals.player.getNode();
 			map.addEntity(Globals.getEntityFromString("spirit", nodeStart));
 			Globals.nodeHasChanged = false;
 		}
@@ -497,8 +497,8 @@ public class GameplayState extends AbstractGameState {
 		entity.onCollision();
 		//spirit type objects disappear when touched
 		if(entity.getType().equals("spirit")){
+			map.addEntity(Globals.getEntityFromString("spirit", new Node(Globals.node.getNextNodeId())));
 			map.removeEntity(entity);
-			map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
 		}
 	}
 	

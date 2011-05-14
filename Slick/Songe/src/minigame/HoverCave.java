@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Vector;
 
 import main.Songe;
-import nodes.Node;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
@@ -201,10 +200,6 @@ public class HoverCave extends BasicGameState {
 					if(Globals.returnState != Songe.MAINMENUSTATE){
 						//The score is set
 						Globals.score += distance/1000;
-						//The next node is set
-
-						Globals.node = new Node(Globals.node.getGame().getLevelFromScore(distance/1000));
-						Globals.nodeHasChanged = true;
 					}
 						
 					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),

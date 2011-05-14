@@ -55,8 +55,8 @@ public class BDDCreator {
 				String type = eventsList.get(j).getChildrenByName("type").get(0).getContent();
 				String param = eventsList.get(j).getChildrenByName("param").get(0).getContent();
 				
-				String queryEvent = "INSERT INTO events(id_node, type, param) " +
-				"VALUES(" + id + ", '" +	escapeQuotes(type) + "', '" + escapeQuotes(param) + "')";
+				String queryEvent = "INSERT INTO events(id_node, type, param, ordre) " +
+				"VALUES(" + id + ", '" +	escapeQuotes(type) + "', '" + escapeQuotes(param) + "', " + j + ")";
 				
 				// Insert the node
 				db.executeQuery(queryEvent);
@@ -107,9 +107,10 @@ public class BDDCreator {
 			String id = questionsList.get(i).getChildrenByName("id").get(0).getContent();
 			String sound = questionsList.get(i).getChildrenByName("sound").get(0).getContent();
 			String text = questionsList.get(i).getChildrenByName("text").get(0).getContent();
+			String points = questionsList.get(i).getChildrenByName("points").get(0).getContent();
 			
-			String query = "INSERT INTO qcult(id, sound, text) " +
-			"VALUES(" + id + ", '" + escapeQuotes(sound) + "', '" + escapeQuotes(text) + "')";
+			String query = "INSERT INTO qcult(id, sound, text, points) " +
+			"VALUES(" + id + ", '" + escapeQuotes(sound) + "', '" + escapeQuotes(text) + "', " + points + ")";
 			
 			// Insert the question
 			db.executeQuery(query);

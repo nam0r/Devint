@@ -10,12 +10,12 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-import actors.Actor;
+import actors.MainPlayer;
 
 /**
  * Tux
  */
-public class Tux extends Actor {
+public class Tux extends MainPlayer {
 	private SpriteSheet walk;
 	private SpriteSheet jump;
 	

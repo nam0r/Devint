@@ -18,7 +18,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Conf;
 import utils.Globals;
-import actors.Actor;
+import actors.MainPlayer;
 
 public class ChoicePersoState extends ChoiceMenuState {
 
@@ -65,7 +65,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 	 * Create the player object
 	 * @return the player itself
 	 */
-	protected Actor createPlayer() {
+	protected MainPlayer createPlayer() {
 		switch (selected) {
 		case 0:
 			return new Tux(new Node(1));

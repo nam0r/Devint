@@ -20,7 +20,7 @@ CREATE TABLE nodes(id integer primary key, ia integer, type_ia text, node_id int
 
 -- ========== Evenements lies au noeud ==========
 
-CREATE TABLE events(id integer primary key, id_node int, type text, param text, FOREIGN KEY(id_node) REFERENCES nodes(id))
+CREATE TABLE events(id integer primary key, id_node int, type text, param text, ordre int, FOREIGN KEY(id_node) REFERENCES nodes(id))
 
 -- ========== Questions de scenario ==========
 
@@ -28,7 +28,7 @@ CREATE TABLE qscen(id integer primary key, sound text, text text, yes int, no in
 
 -- ========== Questions de culture generale ==========
 
-CREATE TABLE qcult(id integer primary key, sound text, text text)
+CREATE TABLE qcult(id integer primary key, sound text, text text, points int)
 
 -- ========== Choix des questions de culture generale ==========
 

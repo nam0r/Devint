@@ -4,6 +4,7 @@ questions
         |id
         |sound
         |text
+	|points
         |choices *
             |sound
             |text

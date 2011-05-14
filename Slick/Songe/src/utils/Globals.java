@@ -14,8 +14,10 @@ import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.shapes.DynamicShape;
 import net.phys2d.raw.shapes.Polygon;
+import nodes.Choice;
 import nodes.Node;
-import actors.Actor;
+import nodes.Question;
+import actors.MainPlayer;
 import actors.PhysicalEntity;
 
 /**
@@ -28,11 +30,13 @@ public class Globals {
 	/** current player type */
 	public static int playerType;
 	/** Current player */
-	public static Actor player;
+	public static MainPlayer player;
 	/** Return to state */
 	public static int returnState;
 	/** The current scenario Node */
 	public static Node node;
+	/** The current question */
+	public static Question<? extends Choice> question;
 	/** Tells whether the current node has changed */
 	public static boolean nodeHasChanged;
 	

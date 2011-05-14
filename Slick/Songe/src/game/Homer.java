@@ -8,12 +8,12 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-import actors.Actor;
+import actors.MainPlayer;
 
 /**
  * Un exemple de personnage
  */
-public class Homer extends Actor {
+public class Homer extends MainPlayer {
 	private SpriteSheet run;
 	private SpriteSheet jump;
 	

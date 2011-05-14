@@ -9,6 +9,7 @@ events
     |id_node int (FK nodes.id)
     |type text
     |param text
+    |ordre int
     
 qscen
     |id int
@@ -21,6 +22,7 @@ qcult
     |id int
     |sound text
     |text text
+    |points int
     
 choices
     |id int

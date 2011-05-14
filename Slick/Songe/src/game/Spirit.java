@@ -60,6 +60,7 @@ public class Spirit extends Emitter {
 	/**
 	 * Makes additional actions when collision with the player
 	 */
+	@Override
 	public void onCollision() {
 		System.out.println("collision with spirit");
 	}
