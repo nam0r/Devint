@@ -12,6 +12,7 @@ import utils.Globals;
 import actors.PhysicalEntity;
 import environment.TileEnvironment;
 import game.Crate;
+import game.Enemy;
 
 /**
  * A loader for a very simple tile based map text format that maps from
@@ -74,7 +75,10 @@ public class MapLoader {
 				if (object != null){
 					//necessary because if set directly, the Body class considers that all the same crates have the same id, so it bugs
 					// TODO à changer
-					env.addEntity(new Crate(object.getPath(), x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
+					if(object instanceof Crate)
+						env.addEntity(new Crate(object.getPath(), x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
+					else if(object instanceof Enemy)
+						env.addEntity(new Enemy(object.getPath(), ((Enemy)object).getSpriteNum(), x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
 				}
 				if(nodeDimension != null){
 					nodeDimension.setSize(x*env.getTileWidth(), y*env.getTileHeight());

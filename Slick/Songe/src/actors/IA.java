@@ -37,6 +37,10 @@ public abstract class IA extends Actor {
 	protected Sound2 alreadyVisited;
 	/** A permanent sound from the IA */
 	protected Sound2 sound;
+	/** an y offset for the image */
+	protected float yoffset;
+	/** Indicates if the sprites have to be flipped */
+	protected boolean flip;
 
 	/**
 	 * An IA in the game
@@ -49,17 +53,19 @@ public abstract class IA extends Actor {
 	 * @param mass the mass of the IA
 	 * @param node the node of the IA
 	 */
-	public IA(String pathToSpriteSheet, int nb_sprites, float x, float y,
+	public IA(String pathToSpriteSheet, int nb_sprites, float yoffset, boolean flip, float x, float y,
 			float width, float height, float mass, Node node) { // Node a remonter dans Actor
 		super(pathToSpriteSheet, x, y, mass, width, height, node);
 		
 		this.nb_sprites = nb_sprites;
+		this.yoffset = yoffset;
+		this.flip = flip;
 		walk = new SpriteSheet(image, (int) width, (int) height); // A revoir
 
 		way = Way.LEFT;
 		walkingTimer = 0;
 
-		moveForce = 400;
+		moveForce = 100;
 
 		visited = false;
 		walkingTime = 1000; // 1 sec
@@ -67,12 +73,12 @@ public abstract class IA extends Actor {
 		LoadingList.setDeferredLoading(false);
 		try {
 			alreadyVisited = new Sound2(Conf.getVoice("deja_rencontres"));
-			sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH + "nuit.ogg");
+			sound = new Sound2(Conf.SND_PERSOS_PATH + "nuit.ogg");
 		} catch (SlickException e) {
 			System.out.println("le son de alreadyvisited n'a pas pu être trouvé.");
 		}
 		LoadingList.setDeferredLoading(true);
-		
+		enter();
 		
 	}
 	
@@ -111,13 +117,14 @@ public abstract class IA extends Actor {
 
 		// get the appropriate sprite
 		Image image = walk.getSprite(sx, sy);
+		if(flip) image = image.getFlippedCopy(true, false);
 
 		// if we're facing the other direction, flip the sprite over
 		if (facingRight()) {
 			image = image.getFlippedCopy(true, false);
 		}
 
-		image.draw(getX() - width / 2, getY() - height / 2, width, height);
+		image.draw(getX() - width / 2, getY() - height / 2, width, height+yoffset);
 		permanentSound();
 	}
 	
@@ -135,20 +142,6 @@ public abstract class IA extends Actor {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-
-		setMoving(true);
-
-		walkingTimer += delta;
-
-		if (walkingTimer > walkingTime) {
-			walkingTimer = 0;
-			way = (way == Way.LEFT) ? Way.RIGHT : Way.LEFT; // On change de sens
-		}
-
-		if (way == Way.LEFT)
-			moveLeft();
-		else
-			moveRight();
 
 		// if is no more on the screen, then the IA is "far" from the main
 		// character

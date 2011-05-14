@@ -13,6 +13,7 @@ import actors.Actor;
 
 import sound.Sound2;
 import utils.Conf;
+import utils.Globals;
 
 public class Enemy extends Actor {
 	/** the walk spritesheet */
@@ -52,15 +53,23 @@ public class Enemy extends Actor {
 
 		moveForce = 400;
 		body.setMaxVelocity(20, 120);
-
-		LoadingList.setDeferredLoading(false);
+		//the sound is deferred according to the moment the map is created
+		//this is useful to avoid deferred loading problems
+		if(Globals.started)
+			LoadingList.setDeferredLoading(false);
 		try {
-			sound = new Sound2(Conf.SND_ENVIRONEMENT_PATH + "nuit.ogg");
+			sound = new Sound2(Conf.SND_PERSOS_PATH + "nuit.ogg");
 		} catch (SlickException e) {
-			System.out.println("le son de alreadyvisited n'a pas pu être trouvé.");
+			System.out.println("le son de alreadyvisited n'" +
+					"a pas pu être trouvé.");
+			e.printStackTrace();
 		}
-		LoadingList.setDeferredLoading(true);
+		if(Globals.started){
+			LoadingList.setDeferredLoading(true);
+			//sound.loop();
+		}
 		
+		//enter();
 		temp = 0;
 		
 	}
@@ -82,6 +91,13 @@ public class Enemy extends Actor {
 	 */
 	public void leave(){
 		
+	}
+	
+	/**
+	 * To stop the sound when the enemy is dead
+	 */
+	public void stopSound(){
+		sound.stop();
 	}
 
 	@Override
@@ -144,4 +160,11 @@ public class Enemy extends Actor {
 		
 	}
 
+	/**
+	 * returns the amount of images in for the walking sprites
+	 * @return nb_sprites
+	 */
+	public int getSpriteNum(){
+		return nb_sprites;
+	}
 }

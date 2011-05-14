@@ -21,6 +21,7 @@ public class Conf {
 	public static final String SND_BIP_PATH = RESS_PATH+"sons/bip/";
 	public static final String SND_VOIX_PATH = RESS_PATH+"sons/voix/julie/";
 	public static final String SND_MUSIC_PATH = RESS_PATH+"sons/musiques/";
+	public static final String SND_PERSOS_PATH = RESS_PATH+"sons/persos/";
 	public static final String EMITTERS_PATH = RESS_PATH+"emitters/";
 	
 	/** The game path (for database and so) */

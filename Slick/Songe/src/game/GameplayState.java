@@ -26,6 +26,7 @@ import utils.Globals;
 import utils.Utils;
 import actors.IA;
 import actors.PhysicalEntity;
+import actors.WalkingIA;
 
 /**
  * This class manages the main game
@@ -120,7 +121,7 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		super.render(gc, sbg, g);
+		if(map!=null) super.render(gc, sbg, g);
 		font.drawString(4 * gc.getWidth() / 5, 30, "" + Globals.score);
 		Utils.drawCenteredString(g,
 				"Cursors - Move   Ctrl - Jump   B - Show Bounds   R - Restart",
@@ -307,15 +308,14 @@ public class GameplayState extends AbstractGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		super.enter(gc, sbg);
 		currentState = States.IN_GAME;
 		
 		// If the "main" previous state was not the game state, then it's
 		// probably the menu state
 		if (Globals.returnState != stateID) {
-			
 			Globals.stateToGoTo.clear();
 			Globals.nodes.clear();
+			Globals.started = true;
 			
 			createMap();
 			
@@ -331,6 +331,7 @@ public class GameplayState extends AbstractGameState {
 			Globals.nodeHasChanged = true;
 			
 		}
+		super.enter(gc, sbg);
 		
 		if(Globals.nodeHasChanged) {
 			//map.addEntity(Globals.getEntityFromCurrentNode());
@@ -347,6 +348,9 @@ public class GameplayState extends AbstractGameState {
 		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
 			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof IA) {
 				((IA) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
+			}
+			else if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+				((Enemy) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
 			}
 		}
 	}
@@ -388,7 +392,7 @@ public class GameplayState extends AbstractGameState {
 		}
 
 		if (input.isKeyPressed(Input.KEY_F4)) {
-			map.addEntity(new HomerIA(100,100,new Node(1)));
+			map.addEntity(new WalkingIA(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 0, false, 100, 100, 40, 62, 12,new Node(1)));
 		}
 		if (input.isKeyPressed(Input.KEY_F5)) {
 			Enemy enemy = new Enemy(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 100, 100, 40, 62, 2);

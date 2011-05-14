@@ -1,6 +1,7 @@
 package map;
 
 import game.Crate;
+import game.Enemy;
 
 import java.awt.Dimension;
 import java.util.HashMap;
@@ -57,13 +58,21 @@ public class TileSet {
 			for (int j=0;j<objectList.size();j++) {
 				XMLElement element = objectList.get(j);
 				char id = element.getAttribute("id").charAt(0);
-				//String image = element.getAttribute("image");
-				int size = Integer.parseInt(element.getAttribute("size"));
 				int mass = Integer.parseInt(element.getAttribute("mass"));
 				String image = element.getAttribute("image");
-
-				//else if(id == 'b') object = new Crate();
-				objects.put(id, new Crate(Conf.IMG_TEXTURES_PATH+image, 0, 0, size, size, mass));
+				int size = 0, height = 0, width = 0, spritenum = 0;
+				//if it's a crate
+				if(element.getAttribute("type").equals("crate")){
+					size = Integer.parseInt(element.getAttribute("size"));
+					objects.put(id, new Crate(Conf.IMG_TEXTURES_PATH+image, 0, 0, size, size, mass));
+				}
+				//if it's an enemy
+				else if(element.getAttribute("type").equals("enemy")){
+					width = Integer.parseInt(element.getAttribute("width"));
+					height = Integer.parseInt(element.getAttribute("height"));
+					spritenum = Integer.parseInt(element.getAttribute("spritenum"));
+					objects.put(id, new Enemy(Conf.IMG_SPRITES_PATH+image, spritenum, 0, 0, width, height, mass));
+				}
 			}
 		}
 		//nodes

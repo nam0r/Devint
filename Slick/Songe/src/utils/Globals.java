@@ -52,6 +52,8 @@ public class Globals {
 	public static boolean invulnerable = false;
 	/** Indicates the time that the player is invulnerable */
 	public static int invulnerableTimer = 0;
+	/** indicates if the game has started */
+	public static boolean started;
 
 	/**
 	 * Indicates if the player has already played the game and therefore doesn't

@@ -16,7 +16,7 @@ public class AlienIA extends IA {
 	private SpriteSheet run;
 	
 	public AlienIA(int x, int y, Node node) {
-		super(Conf.IMG_SPRITES_PATH+"all_big.png", 3, x, y, 48, 72, 8, node);
+		super(Conf.IMG_SPRITES_PATH+"all_big.png", 3, 0, false, x, y, 48, 72, 8, node);
 		body.setMaxVelocity(30, 110);
 		walkingTime = 1200;
 		moveForce = 200;

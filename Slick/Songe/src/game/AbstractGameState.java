@@ -183,6 +183,7 @@ public abstract class AbstractGameState extends BasicGameState {
 								&& (event.getPoint().getX() > (other.getX()
 										- (other.getWidth()) - 1))*/) {
 							map.removeEntity(other);
+							((Enemy)other).stopSound();
 							Globals.score++;
 						}
 						//if the enemy is not killed, the player is hurt
