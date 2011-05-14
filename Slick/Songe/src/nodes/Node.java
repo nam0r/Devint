@@ -88,8 +88,16 @@ public class Node {
 				String sound = question.get("sound");
 				String text = question.get("text");
 				int points = Integer.valueOf(question.get("points"));
-				
-				events.offer(new QuestionCulture(text, sound, points));
+				QuestionCulture theQuestion = new QuestionCulture(text, sound, points);
+				//choices added
+				ArrayList<HashMap<String,String>> choices = bdd.select("SELECT * FROM choices WHERE id_question=" + ids.get(indice).get("id"));
+				for(HashMap<String, String> c : choices){
+					if(Integer.valueOf(c.get("true")) == 0)
+						theQuestion.addChoice(new ChoiceCulture(c.get("text"), c.get("sound"), false));
+					else
+						theQuestion.addChoice(new ChoiceCulture(c.get("text"), c.get("sound"), true));
+				}
+				events.offer(theQuestion);
 			}
 			// Transition
 			else if(type.equals("Transition")) {
@@ -105,11 +113,19 @@ public class Node {
 		return events.poll();
 	}
 	
+	public int eventSize(){
+		return events.size();
+	}
+	
 	public boolean equals(Node noeud){
 		return this.id == noeud.id;
 	}
 	
 	public int getNextNodeId() {
 		return this.node_id;
+	}
+	
+	public IA getIA(){
+		return ia;
 	}
 }

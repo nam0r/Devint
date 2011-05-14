@@ -186,37 +186,41 @@ public abstract class IA extends Actor {
 		}
 		//si noeud de l'ia même que le noeud courant (donc ia valide)
 		if(Globals.node.equals(this.node)) {
-			
-			Event event = Globals.node.pollEvent();
-			
-			// Dialog
-			if(event.getType().equals("D")) {
-				Dialog dialog = (Dialog)event;
-				LoadingList.setDeferredLoading(false);
-				try {
-					soundDialog = new Sound2(Conf.getVoice(dialog.getSound()));
-				} catch (SlickException e) {
-					System.err.println("Probleme lors de la lecture de " + dialog.getSound());
+
+			while (Globals.node.eventSize() > 0) {
+				Event event = Globals.node.pollEvent();
+
+				// Dialog
+				if (event.getType().equals("D")) {
+					Dialog dialog = (Dialog) event;
+					LoadingList.setDeferredLoading(false);
+					try {
+						soundDialog = new Sound2(Conf.getVoice(dialog
+								.getSound()));
+					} catch (SlickException e) {
+						System.err.println("Probleme lors de la lecture de "
+								+ dialog.getSound());
+					}
+					soundDialog.play();
+					LoadingList.setDeferredLoading(true);
 				}
-				soundDialog.play();
-				LoadingList.setDeferredLoading(true);
-			}
-			// Scenario
-			else if(event.getType().equals("S")) {
-				QuestionScenario question = (QuestionScenario)event;
-				Globals.question = question;
-				Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
-			}
-			// Culture
-			else if(event.getType().equals("C")) {
-				QuestionCulture question = (QuestionCulture)event;
-				Globals.question = question;
-				Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
-			}
-			// Transition
-			else if(event.getType().equals("T")) {
-				Transition transition = (Transition)event;
-				Globals.stateToGoTo.offer(transition.getStateID());
+				// Scenario
+				else if (event.getType().equals("S")) {
+					QuestionScenario question = (QuestionScenario) event;
+					Globals.question = question;
+					Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
+				}
+				// Culture
+				else if (event.getType().equals("C")) {
+					QuestionCulture question = (QuestionCulture) event;
+					Globals.question = question;
+					Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
+				}
+				// Transition
+				else if (event.getType().equals("T")) {
+					Transition transition = (Transition) event;
+					Globals.stateToGoTo.offer(transition.getStateID());
+				}
 			}
 		}
 		//si ia invalide à ce moment

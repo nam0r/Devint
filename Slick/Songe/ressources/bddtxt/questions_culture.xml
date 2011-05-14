@@ -23,5 +23,34 @@
         </choices>
     </question>
     
+    <question>
+        <id>2</id>
+        <sound>question_grand_pere</sound>
+        <text>ONCHE ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>14 ans</text>
+                <sound>14ans</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>80 ans</text>
+                <sound>80ans</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>140 ans</text>
+                <sound>140ans</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>140 ans</text>
+                <sound>140ans</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    
     
 </questions>

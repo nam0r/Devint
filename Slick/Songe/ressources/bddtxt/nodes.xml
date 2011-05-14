@@ -5,12 +5,20 @@
 		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
+				<type>C</type>
+				<param></param>
+			</event>
+			<event>
+				<type>S</type>
+				<param>1</param>
+			</event>
+			<event>
 				<type>D</type>
 				<param>minijeuvaisseauF1</param>
 			</event>
 			<event>
 				<type>C</type>
-				<param>question_grand_pere</param>
+				<param></param>
 			</event>
 		</events>
 		<node_id>2</node_id>

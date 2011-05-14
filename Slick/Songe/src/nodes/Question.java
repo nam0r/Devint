@@ -13,6 +13,7 @@ public abstract class Question<T extends Choice> implements Event {
 	public Question(String text, String sound) {
 		this.text = text;
 		this.sound = sound;
+		choices = new ArrayList<T>();
 	}
 	
 	public ArrayList<T> getChoices() {
