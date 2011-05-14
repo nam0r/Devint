@@ -2,20 +2,15 @@ package nodes;
 
 import utils.Conf;
 
-public class Question {
+public abstract class Question {
 	
-	private String wording;
-	private String voice;
-	private boolean scenario;
-	private Choice[] choices;
-	private int points;
+	protected String text;
+	protected String sound;
+	protected Choice[] choices;
 	
-	public Question(String wording, String voice, boolean scenario, Choice[] choices, int points) {
-		this.wording = wording;
-		this.voice = voice;
-		this.scenario = scenario;
-		this.choices = choices;
-		this.points = points;
+	public Question(String text, String sound) {
+		this.text = text;
+		this.sound = sound;
 	}
 	
 	public int getPoints() {

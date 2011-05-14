@@ -1,4 +1,4 @@
-questions_culture.txt
+questions_culture.xml
 questions
     |question *
         |id
@@ -9,7 +9,7 @@ questions
             |text
             |true
             
-questions_scenario.txt
+questions_scenario.xml
 questions
     |question *
         |id
@@ -18,7 +18,7 @@ questions
         |yes
         |no
         
-ia.txt
+ias.xml
 ias
  |ia *
    |id
@@ -36,12 +36,13 @@ ias
       |dejavu
       |troptot
 
-nodes.txt
+nodes.xml
 nodes
     |node *
         |id
         |ia
         |type_ia
+	|node_id
         |events
             |event *
                 |type

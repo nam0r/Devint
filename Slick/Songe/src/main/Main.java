@@ -1,4 +1,6 @@
 package main;
+import nodes.Node;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
@@ -8,6 +10,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		new BDDCreator();
+		
+		new Node(1);
 		
 		System.exit(0);
 		

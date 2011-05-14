@@ -14,7 +14,7 @@ public class DBInteractor extends SQLiteDB {
 	private String query;
 	
 	public DBInteractor() {
-		super("data2");
+		super("data");
 
 		//fromFile("scriptBdd.txt");
 		//fromCmdLine();

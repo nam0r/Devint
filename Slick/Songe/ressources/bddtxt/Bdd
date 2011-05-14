@@ -1,7 +1,8 @@
 nodes
     |id int
     |ia int (FK ias.id)
-    |type_ia int
+    |type_ia text
+    |node_id int (FK nodes.id)
     
 events
     |id int
