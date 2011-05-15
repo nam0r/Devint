@@ -12,7 +12,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -24,9 +23,12 @@ import utils.Conf;
 import utils.Globals;
  
 public class QuestionState extends MenuState {
-	
+	/** the question */
 	private Question question;
-	private Sound bonneRep, mauvaiseRep;
+	/** good and bad answer sounds */
+	private Sound2 bonneRep, mauvaiseRep;
+	/** The music of the scenarii questions */
+	private Music musicScen;
 	
     public QuestionState(int stateID) throws SlickException {
     	super(stateID);
@@ -37,9 +39,10 @@ public class QuestionState extends MenuState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		bonneRep = new Sound(Conf.SND_VOIX_PATH+"bonne_reponse.ogg");
-		mauvaiseRep = new Sound(Conf.SND_VOIX_PATH+"mauvaise_reponse.ogg");
-		music = new Music(Conf.SND_MUSIC_PATH + "untitled.ogg");
+		bonneRep = new Sound2(Conf.SND_VOIX_PATH+"bonne_reponse.ogg");
+		mauvaiseRep = new Sound2(Conf.SND_VOIX_PATH+"mauvaise_reponse.ogg");
+		music = new Music(Conf.SND_MUSIC_PATH + "questioncult.ogg");
+		musicScen = new Music(Conf.SND_MUSIC_PATH + "choixscenar.ogg");
 	}
 
 	@Override
@@ -96,16 +99,28 @@ public class QuestionState extends MenuState {
 			}
 				
 		}
-		
-		//we set the music volume, depending if voices are playing or not
-		if(!AlUtils.anySoundPlaying()){
-			if(music.getVolume() < 0.8)
-				music.setVolume(music.getVolume()+0.015f);
+		if(music.playing()){
+			//we set the music volume, depending if voices are playing or not
+			if(!AlUtils.anySoundPlaying()){
+				if(music.getVolume() < 0.8)
+					music.setVolume(music.getVolume()+0.015f);
+				else
+					music.setVolume(0.8f);
+			}
 			else
-				music.setVolume(0.8f);
+				music.setVolume(0.08f);
 		}
-		else
-			music.setVolume(0.08f);
+		else if(musicScen.playing()){
+			//we set the music volume, depending if voices are playing or not
+			if(!AlUtils.anySoundPlaying()){
+				if(musicScen.getVolume() < 0.8)
+					musicScen.setVolume(musicScen.getVolume()+0.015f);
+				else
+					musicScen.setVolume(0.8f);
+			}
+			else
+				musicScen.setVolume(0.08f);
+		}
 	}
 	
 	@Override
@@ -134,7 +149,12 @@ public class QuestionState extends MenuState {
     	}
 		
 		LoadingList.setDeferredLoading(true);
-		music.loop();
+		//the music to be played
+		if(question instanceof QuestionCulture)
+			music.loop();
+		else if(question instanceof QuestionScenario)
+			musicScen.loop();
+		
 		super.enter(gc, sbg); //It will read the options[selected]
 	}
 	

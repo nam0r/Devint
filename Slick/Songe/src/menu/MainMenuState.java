@@ -25,7 +25,6 @@ public class MainMenuState extends MenuState {
     	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores"),Conf.getVoice("minijeux"),Conf.getVoice("quitter")};
     	title = "Bienvenue dans l'univers de Songe";
     	titleVoice = Conf.getVoice("bienvenue");
-    	music = new Music(Conf.SND_MUSIC_PATH + "fond.ogg");
     }
 
 	@Override
@@ -33,6 +32,7 @@ public class MainMenuState extends MenuState {
 			throws SlickException {
 		super.init(gc, sbg);
     	initSounds();
+    	music = new Music(Conf.SND_MUSIC_PATH + "maintitlecourt.ogg");
 	}
 
 	@Override
