@@ -128,4 +128,16 @@ public class Node {
 	public IA getIA(){
 		return ia;
 	}
+	
+	/**
+	 * Indicates if the node contains a scenario question
+	 * @return if the node has a scenario question event
+	 */
+	public boolean hasScenarioQuestion(){
+		for(Event e : events){
+			if(e.getType().equals("S"))
+				return true;
+		}
+		return false;
+	}
 }
