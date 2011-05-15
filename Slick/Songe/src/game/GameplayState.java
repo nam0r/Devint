@@ -337,7 +337,7 @@ public class GameplayState extends AbstractGameState {
 		
 		if(Globals.nodeHasChanged) {
 			//map.addEntity(Globals.getEntityFromCurrentNode());
-			IA ia = Globals.player.getNode().getIA();
+			IA ia = Globals.node.getIA();
 			//we set the ia's position
 			Dimension d = Globals.nodes.poll();
 			ia.setPosition((float)d.getWidth(), (float)d.getHeight());

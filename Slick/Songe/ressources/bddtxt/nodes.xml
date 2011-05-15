@@ -5,10 +5,6 @@
 		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
-				<type>C</type>
-				<param></param>
-			</event>
-			<event>
 				<type>D</type>
 				<param>minijeuvaisseauF1</param>
 			</event>

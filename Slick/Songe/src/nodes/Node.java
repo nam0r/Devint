@@ -125,6 +125,10 @@ public class Node {
 		}
 	}
 	
+	public int getID(){
+		return id;
+	}
+	
 	public Event pollEvent() {
 		return events.poll();
 	}

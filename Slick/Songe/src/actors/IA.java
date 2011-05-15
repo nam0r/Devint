@@ -179,10 +179,11 @@ public abstract class IA extends Actor {
 			}
 			return;
 		}
+		System.out.println("Global.node "+Globals.node.getID());
+		System.out.println("ia "+node.getID());
 		// si noeud de l'ia même que le noeud courant (donc ia valide)
 		if (Globals.node.equals(this.node)) {
 			Globals.nextEvent(sbg);
-			//Globals.stateToGoTo.offer(Globals.event.getStateID());
 		}
 		//si ia invalide à ce moment
 		else {
