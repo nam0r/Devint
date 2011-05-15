@@ -1,6 +1,6 @@
 <ias> 
     <ia>
-	<id>1</id>
+		<id>1</id>
         <images>
             <walk>homeranim_big.png</walk>
             <walknum>8</walknum>
@@ -19,22 +19,22 @@
         </sounds>
     </ia>
     <ia>
-	<id>2</id>
+		<id>2</id>
         <images>
-            <walk>homeranim_big.png</walk>
-            <walknum>8</walknum>
-            <jump>homeranim_big.png</jump>
-            <jumpnum>1</jumpnum>
+            <walk></walk>
+            <walknum>0</walknum>
+            <jump></jump>
+            <jumpnum>0</jumpnum>
         </images>
         <size>
-            <width>72</width>
-            <height>130</height>
-            <yoffset>4</yoffset>
+            <width>5</width>
+            <height>5</height>
+            <yoffset>0</yoffset>
         </size>
         <sounds>
-            <main>nuit</main>
-            <dejavu>deja_rencontres</dejavu>
-            <troptot>deja_rencontres</troptot>
+            <main></main>
+            <dejavu></dejavu>
+            <troptot></troptot>
         </sounds>
     </ia>
 </ias>

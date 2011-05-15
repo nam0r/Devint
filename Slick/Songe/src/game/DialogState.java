@@ -50,7 +50,7 @@ public class DialogState extends BasicGameState {
 			throws SlickException {
 		input = gc.getInput();
 		//if the player pushes a button he wants to pass
-		if (input.isKeyPressed(Input.KEY_ENTER)) {
+		if (input.isKeyPressed(Input.KEY_ENTER) || !sound.playing()) {
 
 			Globals.nextEvent(sbg);
 			

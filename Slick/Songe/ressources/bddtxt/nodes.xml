@@ -1,5 +1,15 @@
 <nodes>
 	<node>
+		<id>0</id>
+		<ia>1</ia>
+		<type_ia></type_ia>
+		<events>
+		</events>
+		<node_id>0</node_id>
+	</node>
+
+
+	<node>
 		<id>1</id>
 		<ia>1</ia>
 		<type_ia>WalkingIA</type_ia>
@@ -22,17 +32,117 @@
 	<node>
 		<id>2</id>
 		<ia>2</ia>
-		<type_ia>WalkingIA</type_ia>
+		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
 				<type>D</type>
 				<param>minijeuvaisseauF1</param>
 			</event>
+		</events>
+		<node_id>3</node_id>
+	</node>
+	<node>
+		<id>3</id>
+		<ia>2</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
 			<event>
-				<type>C</type>
-				<param>question_grand_pere</param>
+				<type>D</type>
+				<param>oui</param>
 			</event>
 		</events>
-		<node_id>2</node_id>
+		<node_id>3</node_id>
 	</node>
+	
+	<!-- ************************************************************************ -->
+	<!-- Noeuds de 1xxxx => noeuds de didacticiel -->
+	<node>
+		<id>10000</id>
+		<ia>2</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>oui</param>
+			</event>
+		</events>
+		<node_id>10001</node_id>
+	</node>
+	<node>
+		<id>10001</id>
+		<ia>2</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>oui</param>
+			</event>
+		</events>
+		<node_id>10002</node_id>
+	</node>
+	<node>
+		<id>10002</id>
+		<ia>2</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>oui</param>
+			</event>
+		</events>
+		<node_id>10003</node_id>
+	</node>
+	<node>
+		<id>10003</id>
+		<ia>2</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>oui</param>
+			</event>
+		</events>
+		<node_id>10004</node_id>
+	</node>
+	<node>
+		<id>10004</id>
+		<ia>2</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>oui</param>
+			</event>
+		</events>
+		<node_id>10005</node_id>
+	</node>
+	<node>
+		<id>10005</id>
+		<ia>2</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>oui</param>
+			</event>
+		</events>
+		<node_id>0</node_id>
+	</node>
+	
+	<!-- ************************************************************************ -->
+	<!-- Noeuds de 2xxxx => noeuds d'Aurore -->
+	
+	
+	<!-- ************************************************************************ -->
+	<!-- Noeuds de 3xxxx => noeuds de Timéo -->
+	
+	
+	<!-- ************************************************************************ -->
+	<!-- Noeuds de 4xxxx => noeuds de Tux -->
+	
+	
+	<!-- ************************************************************************ -->
+	<!-- Noeuds de 4xxxx => noeuds de Lamasticot -->
+	
+	
 </nodes>

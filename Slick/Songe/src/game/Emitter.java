@@ -10,6 +10,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleIO;
 import org.newdawn.slick.particles.ParticleSystem;
+import org.newdawn.slick.state.StateBasedGame;
 
 import utils.Conf;
 import actors.PhysicalEntity;
@@ -106,7 +107,7 @@ public class Emitter extends PhysicalEntity {
 	/**
 	 * Makes additional actions when collision with the player
 	 */
-	public void onCollision() {
+	public void onCollision(StateBasedGame sbg) {
 		System.out.println("collision with spirit");
 	}
 }

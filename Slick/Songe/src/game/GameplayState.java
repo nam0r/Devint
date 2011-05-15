@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 import main.Songe;
+import net.phys2d.raw.CollisionEvent;
 import nodes.Node;
 
 import org.lwjgl.openal.AL10;
@@ -83,14 +84,26 @@ public class GameplayState extends AbstractGameState {
 	/** Indicates if jump sound is still playing */
 	protected boolean soundJumpPlaying;
 	/** The font we're going to use to render the score */
-	private Font font;
+	protected Font font;
 
 	/** Indicates if things to do once have been done */
 	protected boolean onceOnEnter;
 	
+	public GameplayState(int id, String imagePath, String levelPath) {
+		super(id, Conf.IMG_TEXTURES_PATH + imagePath, Conf.LEVELS_PATH
+				+ "tiles.xml", Conf.LEVELS_PATH + levelPath, Conf.TILE_WIDTH,
+				Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
+		bumpWallPlayed = false;
+		bumpTopPlayed = false;
+		bumpWallX = 0;
+		bumpTopX = 0;
+		bumpTopY = 0;
+		onceOnEnter = false;
+	}
+
 	public GameplayState(int id) {
-		super(id, Conf.IMG_TEXTURES_PATH + "sky2.jpg", Conf.RESS_PATH
-				+ "tiles.xml", Conf.RESS_PATH + "niveau1.txt", Conf.TILE_WIDTH,
+		super(id, Conf.IMG_TEXTURES_PATH + "sky2.jpg", Conf.LEVELS_PATH
+				+ "tiles.xml", Conf.LEVELS_PATH + "niveau1.txt", Conf.TILE_WIDTH,
 				Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
 		bumpWallPlayed = false;
 		bumpTopPlayed = false;
@@ -109,7 +122,7 @@ public class GameplayState extends AbstractGameState {
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH + "saut.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH + "bump.ogg");
 		
-		font = new AngelCodeFont(Conf.RESS_PATH + "hiero.fnt", Conf.RESS_PATH
+		font = new AngelCodeFont(Conf.FONTS_PATH + "hiero.fnt", Conf.FONTS_PATH
 				+ "hiero.png");
 		// We set Open Al constants about physical world
 		AL10.alDopplerFactor(1.0f); // Doppler effect
@@ -336,13 +349,16 @@ public class GameplayState extends AbstractGameState {
 		super.enter(gc, sbg);
 		
 		if(Globals.nodeHasChanged) {
-			//map.addEntity(Globals.getEntityFromCurrentNode());
-			IA ia = Globals.node.getIA();
-			//we set the ia's position
-			Dimension d = Globals.nodes.poll();
-			ia.setPosition((float)d.getWidth(), (float)d.getHeight());
-			//we set the ia
-			map.addEntity(ia);
+			//if this is not the last node
+			if(Globals.node.getID() != 0){
+				//map.addEntity(Globals.getEntityFromCurrentNode());
+				PhysicalEntity ia = Globals.node.getIA();
+				//we set the ia's position
+				Dimension d = Globals.nodes.poll();
+				ia.setPosition((float)d.getWidth(), (float)d.getHeight());
+				//we set the ia
+				map.addEntity(ia);
+			}
 			Globals.nodeHasChanged = false;
 		}
 		
@@ -493,26 +509,41 @@ public class GameplayState extends AbstractGameState {
 		
 		ia.onCollision(sbg);
 		if(!ia.isVisited() && Globals.node.equals(ia.getNode())){
-			//map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
 			ia.setVisited(true);
 		}
 	}
 	
 	@Override
 	protected void collisions(Emitter entity){
-		entity.onCollision();
+		entity.onCollision(sbg);
 		//spirit type objects disappear when touched
 		if(entity.getType().equals("spirit")){
-			map.addEntity(Globals.getEntityFromString("spirit", new Node(Globals.node.getNextNodeId())));
 			map.removeEntity(entity);
 		}
 	}
 	
 	@Override
-	protected void collisions(Enemy enemy){
+	protected void collisions(Enemy enemy, CollisionEvent event){
 		enemy.onCollision();
 		
-		
+		//if the enemy is under the feet of the player, it dies
+		if ((event.getPoint().getY() < (enemy.getY()
+				+ (enemy.getHeight() / 3)))
+				&& (event.getPoint().getY() > (Globals.player.getY()
+						+ (Globals.player.getHeight() / 3)))
+				/*&& (event.getPoint().getX() < (other.getX() - 1))
+				&& (event.getPoint().getX() > (other.getX()
+						- (other.getWidth()) - 1))*/) {
+			map.removeEntity(enemy);
+			((Enemy)enemy).stopSound();
+			Globals.score++;
+		}
+		//if the enemy is not killed, the player is hurt
+		else{
+			if(Globals.score > 0)
+				Globals.score--;
+			Globals.invulnerable = true;
+		}
 	}
 
 }
