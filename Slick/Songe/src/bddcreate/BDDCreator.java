@@ -145,6 +145,8 @@ public class BDDCreator {
 		
 		XMLElementList iasList = root.getChildrenByName("ia");
 		for(int i=0; i<iasList.size(); i++) {
+			String id = iasList.get(i).getChildrenByName("id").get(0).getContent();
+			
 			XMLElement images = iasList.get(i).getChildrenByName("images").get(0);
 			
 			String walk = images.getChildrenByName("walk").get(0).getContent(); // string
@@ -164,8 +166,8 @@ public class BDDCreator {
 			String dejavu = sounds.getChildrenByName("dejavu").get(0).getContent(); // string
 			String troptot = sounds.getChildrenByName("troptot").get(0).getContent(); // string
 			
-			String query = "INSERT INTO ias(walk, walknum, jump, jumpnum, width, height, yoffset, mainsound, dejavusound, troptotsound) " +
-			"VALUES('" + escapeQuotes(walk) + "', " + walknum + ", '" + escapeQuotes(jump) + "', " + jumpnum + 
+			String query = "INSERT INTO ias(id, walk, walknum, jump, jumpnum, width, height, yoffset, mainsound, dejavusound, troptotsound) " +
+			"VALUES(" + id + ", '" + escapeQuotes(walk) + "', " + walknum + ", '" + escapeQuotes(jump) + "', " + jumpnum + 
 			", " + width + ", "	+ height + ", " + yoffset + ", '" + escapeQuotes(main) + 
 			"', '" + escapeQuotes(dejavu) + "', '" + escapeQuotes(troptot) + "')";
 			

@@ -1,13 +1,13 @@
 package nodes;
 
-import game.HomerIA;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
+import utils.Conf;
 import actors.IA;
+import actors.WalkingIA;
 import bdd.SQLiteDB;
 
 public class Node {
@@ -29,8 +29,8 @@ public class Node {
 		this.node_id = Integer.valueOf(node.get("node_id"));
 		
 		// Create the IA to display
-		// TODO Temp
-		ia = new HomerIA(100, 100, this);
+		 
+		//ia = new HomerIA(100, 100, this);
 		
 		int id_ia = Integer.valueOf(node.get("ia"));
 		String type_ia = node.get("type_ia");
@@ -46,8 +46,17 @@ public class Node {
 		String mainsound = infosIA.get("mainsound");
 		String dejavusound = infosIA.get("dejavusound");
 		String troptotsound = infosIA.get("troptotsound");
+		// TODO A recuperer
+		boolean flip = true;
+		float mass = 5;
 		
-		
+		if(type_ia.equals("WalkingIA")) {
+			ia = new WalkingIA(Conf.IMG_SPRITES_PATH + walk, walknum, yoffset, flip, 0, 0, 
+					width, height, mass, this);
+		}
+		else if(type_ia.equals("JumpingIA")) {
+			// TODO A implementer
+		}
 		
 		/* ****** *
 		 * Events *

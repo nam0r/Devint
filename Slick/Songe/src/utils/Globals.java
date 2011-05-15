@@ -10,11 +10,6 @@ import game.Spirit;
 import java.awt.Dimension;
 import java.util.LinkedList;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.loading.LoadingList;
-
-import sound.Sound2;
-
 import main.Songe;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
@@ -27,7 +22,12 @@ import nodes.Node;
 import nodes.Question;
 import nodes.QuestionCulture;
 import nodes.QuestionScenario;
-import nodes.Transition;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
+
 import actors.MainPlayer;
 import actors.PhysicalEntity;
 
@@ -62,7 +62,7 @@ public class Globals {
 	/** the real time x screen offset */
 	public static float yoffset;
 	/** The list of the states the player has to go */
-	public static LinkedList<Integer> stateToGoTo = new LinkedList<Integer>();
+	//public static LinkedList<Integer> stateToGoTo = new LinkedList<Integer>();
 	/** The list of the node's places */
 	public static LinkedList<Dimension> nodes = new LinkedList<Dimension>();
 	/** Indicates if the character is invulnerable */
@@ -86,6 +86,7 @@ public class Globals {
 	 * @param n the node to associate to it
 	 * @return entity the entity corresponding to the ID we gave
 	 */
+	// TODO Useless
 	public static PhysicalEntity getEntityFromString(String entityID, Node n) {
 		PhysicalEntity entity = null;
 		
@@ -114,47 +115,56 @@ public class Globals {
 	}
 	
 	/**
-	 * Prepare the nexe event
+	 * Prepare the next event
 	 */
-	public static void nextEvent(){
-		// if no more events, what are we doing here ?
-		if(node.getEvents().isEmpty()){
-			nodeHasChanged = true;
-			return;
-		}
+	public static void nextEvent(StateBasedGame sbg, int idNode){
 		
-		event = node.pollEvent();
-		// Dialog
-		if (event.getType().equals("D")) {
-			Dialog d = (Dialog) event;
-			dialog = d;
-			/*LoadingList.setDeferredLoading(false);
-			try {
-				soundDialog = new Sound2(Conf.getVoice(dialog.getSound()));
-			} catch (SlickException e) {
-				System.err.println("Probleme lors de la lecture de "
-						+ dialog.getSound());
+		System.out.println("1 === " + Globals.node.getEvents().size());
+		Globals.event = Globals.node.pollEvent();
+		System.out.println("2 === " + Globals.node.getEvents().size());
+		
+		
+		// No more event => we go to the next default node
+		if(Globals.event == null) {
+			if(idNode == -1) {
+				Globals.node = new Node(Globals.node.getNextNodeId());
 			}
-			soundDialog.play();
-			LoadingList.setDeferredLoading(true);*/
+			else {
+				Globals.node = new Node(idNode);
+			}
+			Globals.nodeHasChanged = true;
+			
+			Globals.goToState(Globals.returnState, sbg);
 		}
-		// Scenario
-		else if (event.getType().equals("S")) {
-			QuestionScenario q = (QuestionScenario) event;
-			question = q;
-			//Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
+		else {
+			// Dialog
+			if (Globals.event.getType().equals("D")) {
+				Dialog d = (Dialog) Globals.event;
+				Globals.dialog = d;
+			}
+			// Scenario
+			else if (Globals.event.getType().equals("S")) {
+				QuestionScenario q = (QuestionScenario) Globals.event;
+				Globals.question = q;
+			}
+			// Culture
+			else if (Globals.event.getType().equals("C")) {
+				QuestionCulture q = (QuestionCulture) Globals.event;
+				Globals.question = q;
+			}
+			// Transition (nothing to do)
+			
+			Globals.goToState(Globals.event.getStateID(), sbg);
 		}
-		// Culture
-		else if (Globals.event.getType().equals("C")) {
-			QuestionCulture q = (QuestionCulture) Globals.event;
-			question = q;
-			//Globals.stateToGoTo.offer(Songe.QUESTIONSTATE);
-		}
-		// Transition
-		else if (Globals.event.getType().equals("T")) {
-			//Transition transition = (Transition) Globals.event;
-			//Globals.stateToGoTo.offer(transition.getStateID());
-		}
+	}
+	
+	private static void goToState(int idState, StateBasedGame sbg) {
+		sbg.enterState(idState, new FadeOutTransition(Color.black),
+				new FadeInTransition(Color.black));
+	}
+	
+	public static void nextEvent(StateBasedGame sbg){
+		Globals.nextEvent(sbg, -1);
 	}
 	
 }

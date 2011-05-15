@@ -7,14 +7,11 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Globals;
 import actors.IA;
@@ -42,6 +39,8 @@ public abstract class AbstractGameState extends BasicGameState {
 	/** The interval to check the controls at */
 	private int controlInterval = 50;
 	
+	protected StateBasedGame sbg;
+	
 	
 	
 	public AbstractGameState(int id, String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
@@ -66,6 +65,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 	
+		this.sbg = sbg;
 		createMap();
 		// Moving objects are created and added
 		/*
@@ -90,7 +90,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		map.render(g, gc);	
+		map.render(g, gc);
 	}
 	
 	@Override
@@ -117,8 +117,10 @@ public abstract class AbstractGameState extends BasicGameState {
 		// Update the map
 		map.update(delta, gc, Globals.player);
 		
+		/*
 		if(Globals.stateToGoTo.peek() != null)
 			sbg.enterState(Globals.stateToGoTo.poll(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		*/
 
 	}
 	

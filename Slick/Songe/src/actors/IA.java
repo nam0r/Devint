@@ -3,14 +3,12 @@ package actors;
 import nodes.Node;
 
 import org.lwjgl.openal.AL10;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.loading.LoadingList;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.StateBasedGame;
 
 import sound.Sound2;
 import utils.Conf;
@@ -169,7 +167,7 @@ public abstract class IA extends Actor {
 	/**
 	 * Makes additional actions when collision with the player
 	 */
-	public void onCollision() {
+	public void onCollision(StateBasedGame sbg) {
 		//si ia visitée
 		if(visited){
 			if(hasBeenFar()){
@@ -183,8 +181,8 @@ public abstract class IA extends Actor {
 		}
 		// si noeud de l'ia même que le noeud courant (donc ia valide)
 		if (Globals.node.equals(this.node)) {
-			Globals.nextEvent();
-			Globals.stateToGoTo.add(Globals.event.getStateID());
+			Globals.nextEvent(sbg);
+			//Globals.stateToGoTo.offer(Globals.event.getStateID());
 		}
 		//si ia invalide à ce moment
 		else {

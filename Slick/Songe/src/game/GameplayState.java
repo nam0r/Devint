@@ -314,7 +314,7 @@ public class GameplayState extends AbstractGameState {
 		// If the "main" previous state was not the game state, then it's
 		// probably the menu state
 		if (Globals.returnState != stateID) {
-			Globals.stateToGoTo.clear();
+			//Globals.stateToGoTo.clear();
 			Globals.nodes.clear();
 			Globals.started = true;
 			
@@ -331,12 +331,6 @@ public class GameplayState extends AbstractGameState {
 			
 			Globals.nodeHasChanged = true;
 			
-		}
-		
-		// Here is managed the fact that the list of events is finished
-		if(Globals.node.getEvents().isEmpty() && Globals.event!=null){
-			Globals.event = null;
-			Globals.nodeHasChanged = true;
 		}
 		
 		super.enter(gc, sbg);
@@ -497,7 +491,7 @@ public class GameplayState extends AbstractGameState {
 	protected void collisions(IA ia) {
 		//System.out.println("Collision avec " + ia);
 		
-		ia.onCollision();
+		ia.onCollision(sbg);
 		if(!ia.isVisited() && Globals.node.equals(ia.getNode())){
 			//map.addEntity(Globals.getEntityFromString("spirit", new Node(3)));
 			ia.setVisited(true);

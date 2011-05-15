@@ -1,7 +1,7 @@
 package game;
 
 import menu.MenuState;
-import nodes.Node;
+import nodes.Choice;
 import nodes.Question;
 import nodes.QuestionCulture;
 import nodes.QuestionScenario;
@@ -24,11 +24,13 @@ import utils.Globals;
  
 public class QuestionState extends MenuState {
 	/** the question */
-	private Question question;
+	private Question<? extends Choice> question;
 	/** good and bad answer sounds */
 	private Sound2 bonneRep, mauvaiseRep;
-	/** The music of the scenarii questions */
+	/** The music of the scenario questions */
 	private Music musicScen;
+	
+	private int goTo;
 	
     public QuestionState(int stateID) throws SlickException {
     	super(stateID);
@@ -74,8 +76,8 @@ public class QuestionState extends MenuState {
 				else if(question instanceof QuestionScenario) {
 					QuestionScenario qScenario = (QuestionScenario)question;
 					
-					Globals.node = new Node(qScenario.getChoices().get(selected).getNodeToGoTo());
-					Globals.nodeHasChanged = true;
+					// If it's a QuestionScenario, set the node corresponding to the selected choice (yes/no)
+					goTo = qScenario.getChoices().get(selected).getNodeToGoTo();
 				}
 				
 				chosen = true;
@@ -87,6 +89,14 @@ public class QuestionState extends MenuState {
 		}
 		
 		if (chosen && !bonneRep.playing() && !mauvaiseRep.playing()) {
+
+			// If QuestionScenario : go to the node corresponding to the selected choice
+			if(goTo != -1)
+				Globals.nextEvent(sbg, goTo);
+			else
+				Globals.nextEvent(sbg);
+			
+			/*
 			//if there is no more events
 			if(Globals.node.getEvents().isEmpty())
 				sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
@@ -97,6 +107,7 @@ public class QuestionState extends MenuState {
 				sbg.enterState(Globals.event.getStateID(), new FadeOutTransition(Color.black),
 						new FadeInTransition(Color.black));
 			}
+			*/
 				
 		}
 		if(music.playing()){
@@ -126,6 +137,8 @@ public class QuestionState extends MenuState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		
+		goTo = -1;
 		
 		question = Globals.question;
 		if(question == null) {
