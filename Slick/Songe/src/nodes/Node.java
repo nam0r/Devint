@@ -7,13 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
-import net.phys2d.math.ROVector2f;
-import net.phys2d.math.Vector2f;
-import net.phys2d.raw.shapes.DynamicShape;
-import net.phys2d.raw.shapes.Polygon;
-
 import utils.Conf;
-import actors.IA;
 import actors.PhysicalEntity;
 import actors.WalkingIA;
 import bdd.SQLiteDB;
@@ -86,7 +80,8 @@ public class Node {
 			// Dialog
 			if(type.equals("D")) {
 				String soundDialog = event.get("param");
-				events.offer(new Dialog(soundDialog));
+				String imageDialog = event.get("param2");
+				events.offer(new Dialog(soundDialog, imageDialog));
 			}
 			// Scenario
 			else if(type.equals("S")) {

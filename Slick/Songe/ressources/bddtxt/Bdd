@@ -9,6 +9,7 @@ events
     |id_node int (FK nodes.id)
     |type text
     |param text
+	|param2 text
     |ordre int
     
 qscen

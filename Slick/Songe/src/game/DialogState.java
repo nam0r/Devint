@@ -4,6 +4,7 @@ import nodes.Dialog;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.loading.LoadingList;
@@ -25,9 +26,14 @@ public class DialogState extends BasicGameState {
 	private Input input;
 	/** The dialog sound to play */
 	private Sound2 sound;
+	/** the image to display */
+	private Image image;
+	/** indicates if the image is set */
+	private boolean imageIsSet;
 	
     public DialogState(int stateID) throws SlickException {
     	this.stateID = stateID;
+    	imageIsSet = false;
     }
     
 	@Override
@@ -43,6 +49,9 @@ public class DialogState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gfx)
 			throws SlickException {
+		if(imageIsSet)
+			image.draw(gc.getWidth()/2 - image.getWidth()/2, gc.getHeight()/2 - image.getHeight()/2);
+		
 	}
 
 	@Override
@@ -81,7 +90,9 @@ public class DialogState extends BasicGameState {
 		}
 		
 		LoadingList.setDeferredLoading(false);
-		sound = new Sound2(Conf.getVoice(dialog.getSound())); 
+		sound = new Sound2(Conf.getVoice(dialog.getSound()));
+		image = new Image(Conf.IMG_PATH+dialog.getImage());
+		imageIsSet = true;
 		LoadingList.setDeferredLoading(true);
 		
 		sound.play();
@@ -92,6 +103,7 @@ public class DialogState extends BasicGameState {
 	public void leave(GameContainer gc, StateBasedGame sb)
 			throws SlickException {
 		AlUtils.stopAllSounds();
+		imageIsSet = false;
 	}
 
 }
