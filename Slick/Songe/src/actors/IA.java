@@ -236,5 +236,7 @@ public abstract class IA extends Actor {
 	public void setHasBeenFar(boolean hasBeenFar) {
 		this.hasBeenFar = hasBeenFar;
 	}
+	
+	
 
 }

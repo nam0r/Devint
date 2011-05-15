@@ -26,7 +26,7 @@
 	<node>
 		<id>2</id>
 		<ia>2</ia>
-		<type_ia>JumpingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>

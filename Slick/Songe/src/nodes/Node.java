@@ -18,8 +18,22 @@ public class Node {
 	private int node_id;
 	
 	private IA ia;
+	private String type_ia;
+	private int id_ia;
+	private String walk;
+	private int walknum;
+	private String jump;
+	private int jumpnum;
+	private int width;
+	private int height;
+	private int yoffset;
+	private String mainsound;
+	private String dejavusound;
+	private String troptotsound;
+	private boolean flip = true;
+	private float mass = 5;
 	
-	private LinkedList<Event> events; 
+	private LinkedList<Event> events;
 	
 	public Node(int id) {
 		bdd = new SQLiteDB("data");
@@ -32,31 +46,24 @@ public class Node {
 		 
 		//ia = new HomerIA(100, 100, this);
 		
-		int id_ia = Integer.valueOf(node.get("ia"));
-		String type_ia = node.get("type_ia");
+		id_ia = Integer.valueOf(node.get("ia"));
+		type_ia = node.get("type_ia");
 		
 		HashMap<String,String> infosIA = bdd.selectSingle("SELECT * FROM ias WHERE id=" + id_ia);
-		String walk = infosIA.get("walk");
-		int walknum = Integer.valueOf(infosIA.get("walknum"));
-		String jump = infosIA.get("jump");
-		int jumpnum = Integer.valueOf(infosIA.get("jumpnum"));
-		int width = Integer.valueOf(infosIA.get("width"));
-		int height = Integer.valueOf(infosIA.get("height"));
-		int yoffset = Integer.valueOf(infosIA.get("yoffset"));
-		String mainsound = infosIA.get("mainsound");
-		String dejavusound = infosIA.get("dejavusound");
-		String troptotsound = infosIA.get("troptotsound");
-		// TODO A recuperer
-		boolean flip = true;
-		float mass = 5;
+		walk = infosIA.get("walk");
+		walknum = Integer.valueOf(infosIA.get("walknum"));
+		jump = infosIA.get("jump");
+		jumpnum = Integer.valueOf(infosIA.get("jumpnum"));
+		width = Integer.valueOf(infosIA.get("width"));
+		height = Integer.valueOf(infosIA.get("height"));
+		yoffset = Integer.valueOf(infosIA.get("yoffset"));
+		mainsound = infosIA.get("mainsound");
+		dejavusound = infosIA.get("dejavusound");
+		troptotsound = infosIA.get("troptotsound");
+		flip = true;
+		mass = 5;
 		
-		if(type_ia.equals("WalkingIA")) {
-			ia = new WalkingIA(Conf.IMG_SPRITES_PATH + walk, walknum, yoffset, flip, 0, 0, 
-					width, height, mass, this);
-		}
-		else if(type_ia.equals("JumpingIA")) {
-			// TODO A implementer
-		}
+		ia = getIA();
 		
 		/* ****** *
 		 * Events *
@@ -135,7 +142,14 @@ public class Node {
 	}
 	
 	public IA getIA(){
-		return ia;
+		if(type_ia.equals("WalkingIA")) {
+			return new WalkingIA(Conf.IMG_SPRITES_PATH + walk, walknum, yoffset, flip, 0, 0, 
+					width, height, mass, this);
+		}
+		else if(type_ia.equals("JumpingIA")) {
+			// TODO A implementer
+		}
+		return null;
 	}
 	
 	/**

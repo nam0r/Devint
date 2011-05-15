@@ -78,13 +78,13 @@ public class MainMenuState extends MenuState {
 		
 		//we set the music volume, depending if voices are playing or not
 		if(!AlUtils.anySoundPlaying()){
-			if(music.getVolume() < 0.8)
+			if(music.getVolume() < 0.7)
 				music.setVolume(music.getVolume()+0.015f);
 			else
-				music.setVolume(0.8f);
+				music.setVolume(0.7f);
 		}
 		else
-			music.setVolume(0.08f);
+			music.setVolume(0.07f);
 	}
 	
 	@Override
