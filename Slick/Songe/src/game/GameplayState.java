@@ -338,11 +338,21 @@ public class GameplayState extends AbstractGameState {
 		if(Globals.nodeHasChanged) {
 			//map.addEntity(Globals.getEntityFromCurrentNode());
 			IA ia = Globals.node.getIA();
-			//we set the ia's position
-			Dimension d = Globals.nodes.poll();
-			ia.setPosition((float)d.getWidth(), (float)d.getHeight());
-			//we set the ia
-			map.addEntity(ia);
+			if(ia != null) {
+				//we set the ia's position
+				Dimension d = Globals.nodes.poll();
+				if(d != null) {
+					ia.setPosition((float)d.getWidth(), (float)d.getHeight());
+				}
+				else {
+					System.err.println("No more node locations available.");
+				}
+				//we set the ia
+				map.addEntity(ia);
+			}
+			else {
+				System.err.println("The current node doesn't have an ia.");
+			}
 			Globals.nodeHasChanged = false;
 		}
 		
