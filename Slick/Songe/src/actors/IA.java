@@ -34,7 +34,9 @@ public abstract class IA extends Actor {
 	/** indicates if the IA has been far */
 	protected boolean hasBeenFar;
 	/** The sound to indicate an IA has already been visited */
-	protected Sound2 alreadyVisited;
+	protected Sound2 alreadyVisitedSound;
+	/** The sound to indicate an IA can not be visited for the moment */
+	protected Sound2 notYetSound;
 	/** The sound of the dialog */
 	protected Sound2 soundDialog;
 	/** A permanent sound from the IA */
@@ -78,7 +80,8 @@ public abstract class IA extends Actor {
 		hasBeenFar = true;
 		LoadingList.setDeferredLoading(false);
 		try {
-			alreadyVisited = new Sound2(Conf.getVoice("deja_rencontres"));
+			alreadyVisitedSound = new Sound2(Conf.getVoice("deja_rencontres"));
+			notYetSound = new Sound2(Conf.getVoice("reviens_plus_tard"));
 			sound = new Sound2(Conf.SND_PERSOS_PATH + "nuit.ogg");
 		} catch (SlickException e) {
 			System.out.println("le son de alreadyvisited n'a pas pu être trouvé.");
@@ -137,7 +140,9 @@ public abstract class IA extends Actor {
 	 * Sets the position and the speed of the sound source of the IA
 	 */
 	public void permanentSound(){
-		alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+		alreadyVisitedSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+		notYetSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
 				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 		
 		sound.setSourcePosition(getX() - getWidth() / 2, getY() - getHeight() / 2, 0f);
@@ -170,9 +175,8 @@ public abstract class IA extends Actor {
 		//si ia visitée
 		if(visited){
 			if(hasBeenFar()){
-				alreadyVisited.stop();
-				alreadyVisited.play();
-				alreadyVisited.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+				alreadyVisitedSound.play();
+				alreadyVisitedSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
 						Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 				setHasBeenFar(false);
 			}
@@ -187,8 +191,9 @@ public abstract class IA extends Actor {
 		//si ia invalide à ce moment
 		else {
 			if(hasBeenFar()){
-				// TODO Play sound: "Tu dois aller voir 'l'autre' avant..."
-				System.out.println("Totototototototototo");
+				notYetSound.play();
+				notYetSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
+						Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
 				/*
 				alreadyVisited.stop();
 				alreadyVisited.play();

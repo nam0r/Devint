@@ -2,6 +2,7 @@ package game;
 
 import nodes.Dialog;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -10,6 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.loading.LoadingList;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import sound.AlUtils;
 import sound.Sound2;
@@ -60,8 +63,18 @@ public class DialogState extends BasicGameState {
 		input = gc.getInput();
 		//if the player pushes a button he wants to pass
 		if (input.isKeyPressed(Input.KEY_ENTER) || !sound.playing()) {
-
-			Globals.nextEvent(sbg);
+			
+			// if there is no specified state to go to from here, we go to the next event
+			if(Globals.dialogNextState == -1)
+				Globals.nextEvent(sbg);
+			//else we go to that state
+			else{
+				int state = Globals.dialogNextState;
+				Globals.dialogNextState = -1;
+				sbg.enterState(state, new FadeOutTransition(Color.black),
+						new FadeInTransition(Color.black));
+			}
+				
 			
 			/*
 			Globals.nextEvent();

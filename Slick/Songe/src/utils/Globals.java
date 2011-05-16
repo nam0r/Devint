@@ -79,6 +79,8 @@ public class Globals {
 	 * need a lot of explanation
 	 */
 	public static boolean hasAlreadyPlayed;
+	/** Specifies a special state to go to from the dialog state */
+	public static int dialogNextState = -1;
 
 	/**
 	 * Returns an entity from its ID

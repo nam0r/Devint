@@ -35,6 +35,9 @@ minijeuvaisseauF1:"Ceci est un mini-jeu : tu manipules un vaisseau qui tombe ver
 
 finminijeu:"Tu as terminé le mini-jeu. Tu as fait un score de :"
 
+reviens_plus_tard: "Reviens me voir plus tard"
+deja_rencontres: "Oh, nous nous commes déjà rencontrés"
+
 question:"Question"
 bonnereponse:"Bien joué, c'est la bonne réponse."
 mauvaisereponse:"Raté, c'est la mauvaise réponse."
