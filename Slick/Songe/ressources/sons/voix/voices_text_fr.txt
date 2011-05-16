@@ -36,6 +36,9 @@ minijeuvaisseauF1:"Ceci est un mini-jeu : tu manipules un vaisseau qui tombe ver
 finminijeu:"Tu as terminé le mini-jeu. Tu as fait un score de :"
 
 question:"Question"
+bonnereponse:"Bien joué, c'est la bonne réponse."
+mauvaisereponse:"Raté, c'est la mauvaise réponse."
+
 question_grand_pere : "Quel est l'âge de mon grand-père ?"
 14ans : "14 ans"
 80ans : "80 ans"
@@ -46,11 +49,50 @@ nord: "Au Pôle Nord"
 centre: "À Paris"
 sud: "Au Pôle Sud"
 
+question_abricot : "De quelle couleur est l'abricot ?"
+marron: "Marron"
+orange: "Orange"
+pamplemousse: "Pamplemousse"
 
-bonnereponse:"Bien joué, c'est la bonne réponse."
-mauvaisereponse:"Raté, c'est la mauvaise réponse."
+question_lamasticot : "Combien de pattes possède le lamasticot ?"
+0: "Zéro"
+2: "Deux"
+4: "Quatre"
+
+question_vol_animaux : "Lequel de ces animaux peut voler ?"
+manchot: "Le manchot"
+cochon: "Le cochon"
+pingouin: "Le pingouin"
+
+question_3plus5 : "Combien font 3+5 ?"
+42: "42"
+15: "15"
+8: "8"
+
+question_30moins24 : "Quel est le résultat de 30-24 ?"
+4: "4"
+6: "6"
+9: "9"
+
+question_capitale_france : "Quelle est la capitale de France ?"
+paris: "Paris"
+bruxelles: "Bruxelles"
+marseille: "Marseille"
+
+question_guitare : "Une guitare est un instrument :"
+vent: "à vent"
+cordes: "à cordes"
+guitare_fruit: "La guitare est un fruit"
 
 
 findujeu:"Tu as réussi le jeu. Ton score est de :"
 bonscore:"Tu as fait un très bon score. Entre ton nom."
 entendrescore:"Pour entendre les scores, appuie sur F2."
+
+learn1: "Bienvenue cher ami. Je suis l'esprit du jeu et je vais t'aider à apprendre à y jouer. Pour cela, suis-moi dans ce niveau. Utilise les flèches gauche et droite pour avancer."
+learn2: "Bien, à présent avance jusqu'au mur."
+learn3: "Si tu avances d'avantage, tu va heurter le mur. Pour le franchir tu dois sauter. Appuies sur contrôle et sur la flèche droite pour sauter vers l'avant."
+learn4: "Excellent. Tu vas maintenant trouver plus loin une plate-forme, avec deux caisses dessus. Je suis sur la deuxième. Viens me chercher."
+learn5: "Parfait. Note bien qu'en avançant sur les caisses, tu peux les pousser. Le prochain obstacle est plus grand, tu vas devoir sauter plus haut si tu veux le franchir. Pour cela, soit appuis deux fois rapidement sur le bouton de saut, soit maintiens ce bouton lors du saut."
+learn6: "Bravo, tu te débrouilles très bien. Il reste cependant encore une épreuve avant de commencer le jeu. Suis-moi, je vais sur la grosse caisse plus loin."
+learn7: "Bon. Au delà de cette caisse, tu trouveras deux ennemis. Si tu les touche de face, ils te blesseront. Pour les faire disparaître, il faut que tu leur saute dessus. Le jeu commencera dès que tu auras fait disparaître un ennemi. Bonne chance."

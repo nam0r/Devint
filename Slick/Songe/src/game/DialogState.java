@@ -74,7 +74,6 @@ public class DialogState extends BasicGameState {
 						new FadeInTransition(Color.black));
 			}
 			*/
-			
 		}
 		
 
