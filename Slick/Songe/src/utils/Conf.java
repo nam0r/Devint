@@ -23,6 +23,8 @@ public class Conf {
 	public static final String SND_MUSIC_PATH = RESS_PATH+"sons/musiques/";
 	public static final String SND_PERSOS_PATH = RESS_PATH+"sons/persos/";
 	public static final String EMITTERS_PATH = RESS_PATH+"emitters/";
+	public static final String LEVELS_PATH = RESS_PATH+"levels/";
+	public static final String FONTS_PATH = RESS_PATH+"fonts/";
 	
 	/** The game path (for database and so) */
 	public static final File HOME = new File(new File(System.getProperty("user.home")), "Songe");

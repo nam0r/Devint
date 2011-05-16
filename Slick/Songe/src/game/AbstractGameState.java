@@ -145,7 +145,7 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void collisions(IA ia);
 	protected abstract void collisions(Emitter entity);
-	protected abstract void collisions(Enemy enemy);
+	protected abstract void collisions(Enemy enemy, CollisionEvent event);
 	
 	/**
 	 * Manage collisions with other entities
@@ -175,26 +175,8 @@ public abstract class AbstractGameState extends BasicGameState {
 					}
 					//If the object is an enemy
 					else if(other instanceof Enemy) {
-						collisions(((Enemy)other));
-						//if the enemy is under the feet of the player, it dies
-						if ((event.getPoint().getY() < (other.getY()
-								+ (other.getHeight() / 3)))
-								&& (event.getPoint().getY() > (Globals.player.getY()
-										+ (Globals.player.getHeight() / 3)))
-								/*&& (event.getPoint().getX() < (other.getX() - 1))
-								&& (event.getPoint().getX() > (other.getX()
-										- (other.getWidth()) - 1))*/) {
-							map.removeEntity(other);
-							((Enemy)other).stopSound();
-							Globals.score++;
-						}
-						//if the enemy is not killed, the player is hurt
-						else{
-							System.out.println("You've been hurt !");
-							if(Globals.score > 0)
-								Globals.score--;
-							Globals.invulnerable = true;
-						}
+						collisions(((Enemy)other), event);
+						
 					}
 				}
 			}

@@ -54,9 +54,10 @@ public class BDDCreator {
 			for(int j=0; j<eventsList.size(); j++) {
 				String type = eventsList.get(j).getChildrenByName("type").get(0).getContent();
 				String param = eventsList.get(j).getChildrenByName("param").get(0).getContent();
+				String param2 = eventsList.get(j).getChildrenByName("param2").get(0).getContent();
 				
-				String queryEvent = "INSERT INTO events(id_node, type, param, ordre) " +
-				"VALUES(" + id + ", '" +	escapeQuotes(type) + "', '" + escapeQuotes(param) + "', " + j + ")";
+				String queryEvent = "INSERT INTO events(id_node, type, param, param2, ordre) " +
+				"VALUES(" + id + ", '" +	escapeQuotes(type) + "', '" + escapeQuotes(param)+ "', '" + escapeQuotes(param2) + "', " + j + ")";
 				
 				// Insert the node
 				db.executeQuery(queryEvent);

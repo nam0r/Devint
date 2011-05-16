@@ -97,7 +97,6 @@ public abstract class IA extends Actor {
 		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
-		System.out.println("iaaaaaaaaaaaaa");
 	}
 	
 	/**

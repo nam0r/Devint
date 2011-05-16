@@ -53,7 +53,11 @@ public class ChoicePersoState extends ChoiceMenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			// The player is created
 			Globals.player = createPlayer();
-			sbg.enterState(Songe.GAMEPLAYSTATE, new FadeOutTransition(
+			if(Globals.hasAlreadyPlayed)
+				sbg.enterState(Songe.MAINLEVEL, new FadeOutTransition(
+					Color.black), new FadeInTransition(Color.black));
+			else
+				sbg.enterState(Songe.LEARNGAMEPLAYSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 		    sbg.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(Color.black),
@@ -68,13 +72,25 @@ public class ChoicePersoState extends ChoiceMenuState {
 	protected MainPlayer createPlayer() {
 		switch (selected) {
 		case 0:
-			return new Tux(new Node(1));
+			if(Globals.hasAlreadyPlayed)
+				return new Tux(new Node(1));
+			else
+				return new Tux(new Node(10000));
 		case 1:
-			return new Alien(new Node(1));
+			if(Globals.hasAlreadyPlayed)
+				return new Alien(new Node(1));
+			else
+				return new Alien(new Node(10000));
 		case 2:
-			return new Tux(new Node(1));
+			if(Globals.hasAlreadyPlayed)
+				return new Tux(new Node(1));
+			else
+				return new Tux(new Node(10000));
 		case 3:
-			return new Lamasticot(new Node(1));
+			if(Globals.hasAlreadyPlayed)
+				return new Lamasticot(new Node(1));
+			else
+				return new Lamasticot(new Node(10000));
 		default:
 			return new Tux(new Node(1));
 		}

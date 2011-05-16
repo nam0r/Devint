@@ -1,7 +1,8 @@
 package main;
 
 import game.DialogState;
-import game.GameplayState;
+import game.LearnLevel;
+import game.MainLevel;
 import game.QuestionState;
 import menu.ChoiceMiniGameState;
 import menu.ChoicePersoState;
@@ -10,12 +11,13 @@ import menu.LoadingState;
 import menu.MainMenuState;
 import menu.SaveHighScore;
 import minigame.HoverCave;
-import utils.Globals;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import utils.Globals;
 
 
 
@@ -29,13 +31,14 @@ public class Songe extends StateBasedGame {
 	public static final int LOADINGSTATE = 0;
 	public static final int MAINMENUSTATE = 1;
 	public static final int CHOICEPERSOSTATE = 2;
-	public static final int GAMEPLAYSTATE = 3;
+	public static final int MAINLEVEL = 3;
 	public static final int HOVERCAVESTATE = 4;
 	public static final int SAVEHIGHSCORE = 5;
 	public static final int QUESTIONSTATE = 6;
 	public static final int CHOICEMINIGAMESTATE = 7;
 	public static final int INITIALMENUSTATE = 8;
 	public static final int DIALOGSTATE = 9;
+	public static final int LEARNGAMEPLAYSTATE = 10;
 	
 	public Songe() {
 		super("Songe");
@@ -67,12 +70,13 @@ public class Songe extends StateBasedGame {
 		this.addState(new MainMenuState(MAINMENUSTATE));
 		this.addState(new ChoicePersoState(CHOICEPERSOSTATE));
 		this.addState(new ChoiceMiniGameState(CHOICEMINIGAMESTATE));
-		this.addState(new GameplayState(GAMEPLAYSTATE));
+		this.addState(new MainLevel(MAINLEVEL));
 		this.addState(new HoverCave(HOVERCAVESTATE));
 		this.addState(new SaveHighScore(SAVEHIGHSCORE));
 		this.addState(new QuestionState(QUESTIONSTATE));
 		this.addState(new InitialMenuState(INITIALMENUSTATE));
 		this.addState(new DialogState(DIALOGSTATE));
+		this.addState(new LearnLevel(LEARNGAMEPLAYSTATE));
 		
 		this.enterState(LOADINGSTATE);
 	}

@@ -1,12 +1,14 @@
 package nodes;
 
+import game.Spirit;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
 import utils.Conf;
-import actors.IA;
+import actors.PhysicalEntity;
 import actors.WalkingIA;
 import bdd.SQLiteDB;
 
@@ -17,7 +19,7 @@ public class Node {
 	private int id;
 	private int node_id;
 	
-	private IA ia;
+	private PhysicalEntity ia;
 	private String type_ia;
 	private int id_ia;
 	private String walk;
@@ -78,7 +80,8 @@ public class Node {
 			// Dialog
 			if(type.equals("D")) {
 				String soundDialog = event.get("param");
-				events.offer(new Dialog(soundDialog));
+				String imageDialog = event.get("param2");
+				events.offer(new Dialog(soundDialog, imageDialog));
 			}
 			// Scenario
 			else if(type.equals("S")) {
@@ -145,13 +148,18 @@ public class Node {
 		return this.node_id;
 	}
 	
-	public IA getIA(){
+	public PhysicalEntity getIA(){
 		if(type_ia.equals("WalkingIA")) {
 			return new WalkingIA(Conf.IMG_SPRITES_PATH + walk, walknum, yoffset, flip, 0, 0, 
 					width, height, mass, this);
 		}
 		else if(type_ia.equals("JumpingIA")) {
 			// TODO A implementer
+		}
+		else if(type_ia.equals("Spirit")){
+			/*ROVector2f[] points = {new Vector2f(-width,0), new Vector2f(0,-3), new Vector2f(width,0)};
+			DynamicShape spirit = new Polygon(points);*/
+			return new Spirit(Conf.EMITTERS_PATH+"blue_spirit.xml", -50f, 1, 0f, 0f, (float)width, (float)height, (float)mass, this);
 		}
 		return null;
 	}

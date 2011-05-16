@@ -6,8 +6,9 @@ import nodes.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
-import utils.Conf;
+import utils.Globals;
 
 /**
  * A spirit
@@ -44,8 +45,8 @@ public class Spirit extends Emitter {
 	 * @param mass The mass of the emitter
 	 * @throws SlickException Indicates a failure to load the resources
 	 */
-	public Spirit(String emitterPath, String type, float yOffset, int emitterNumber, float x, float y, float width, float height, float mass , Node node) {
-		super(Conf.IMG_PATH+"transparent.png", "spirit",yOffset, emitterNumber, x, y, width, height, mass);
+	public Spirit(String emitterPath, float yOffset, int emitterNumber, float x, float y, float width, float height, float mass , Node node) {
+		super(emitterPath, "spirit",yOffset, emitterNumber, x, y, width, height, mass);
 		this.node = node;
 	}
 
@@ -61,7 +62,9 @@ public class Spirit extends Emitter {
 	 * Makes additional actions when collision with the player
 	 */
 	@Override
-	public void onCollision() {
-		System.out.println("collision with spirit");
+	public void onCollision(StateBasedGame sbg) {
+		if (Globals.node.equals(this.node)) {
+			Globals.nextEvent(sbg);
+		}
 	}
 }
