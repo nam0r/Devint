@@ -69,7 +69,7 @@
 			<event>
 				<type>D</type>
 				<param>learn2</param>
-				<param2>interrogation.png</param2>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10001</node_id>
@@ -82,7 +82,7 @@
 			<event>
 				<type>D</type>
 				<param>learn3</param>
-				<param2>interrogation.png</param2>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10002</node_id>
@@ -95,7 +95,7 @@
 			<event>
 				<type>D</type>
 				<param>learn4</param>
-				<param2>interrogation.png</param2>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10003</node_id>
@@ -108,7 +108,7 @@
 			<event>
 				<type>D</type>
 				<param>learn5</param>
-				<param2>interrogation.png</param2>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10004</node_id>
@@ -121,7 +121,7 @@
 			<event>
 				<type>D</type>
 				<param>learn6</param>
-				<param2>interrogation.png</param2>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10005</node_id>
@@ -134,7 +134,7 @@
 			<event>
 				<type>D</type>
 				<param>learn7</param>
-				<param2>interrogation.png</param2>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>0</node_id>

@@ -62,7 +62,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			//we first play a tutorial to learn playing the game
 			else{
 				Globals.dialogNextState = Songe.LEARNGAMEPLAYSTATE;
-				Globals.dialog = new Dialog("learn1", "interrogation.png");
+				Globals.dialog = new Dialog("learn1", "blue_spirit_emit.xml");
 				sbg.enterState(Songe.DIALOGSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 			}
