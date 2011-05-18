@@ -132,6 +132,10 @@ public class Node {
 		return id;
 	}
 	
+	public String getMainSound(){
+		return mainsound;
+	}
+	
 	public Event pollEvent() {
 		return events.poll();
 	}
@@ -175,4 +179,6 @@ public class Node {
 		}
 		return false;
 	}
+	
+	
 }

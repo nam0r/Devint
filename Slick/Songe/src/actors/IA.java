@@ -82,7 +82,7 @@ public abstract class IA extends Actor {
 		try {
 			alreadyVisitedSound = new Sound2(Conf.getVoice("deja_rencontres"));
 			notYetSound = new Sound2(Conf.getVoice("reviens_plus_tard"));
-			sound = new Sound2(Conf.SND_PERSOS_PATH + "nuit.ogg");
+			sound = new Sound2(Conf.SND_PERSOS_PATH + node.getMainSound()+".ogg");
 		} catch (SlickException e) {
 			System.out.println("le son de alreadyvisited n'a pas pu être trouvé.");
 		}
