@@ -479,6 +479,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 	@Override
 	protected void statesManagement(GameContainer gc, StateBasedGame sbg,
 			int delta) {
+		
 		switch (currentState) {
 		case IN_GAME:
 			break;
