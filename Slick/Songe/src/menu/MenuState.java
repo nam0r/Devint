@@ -196,6 +196,9 @@ public abstract class MenuState extends BasicGameState {
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
 		AlUtils.stopAllSounds();
+		for(int i=0; i<options.length; i++){
+    		optionsSounds[i].reinitPlayedOnce();
+    	}
 	}
 
 }

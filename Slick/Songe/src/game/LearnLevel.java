@@ -19,6 +19,9 @@ import utils.Globals;
 
 public class LearnLevel extends AbstractGameplayState {
 
+	/** The player's ora particle */
+	private Emitter ora;
+	
 	public LearnLevel(int id) {
 		super(id, "space.jpg", "learn.txt");
 	}
@@ -27,6 +30,7 @@ public class LearnLevel extends AbstractGameplayState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
+		//ora = new Emitter(Conf.EMITTERS_PATH+"ora.xml", "flame", 0, 1, 100, 100, 10, 10, 1);
 	}
 
 	@Override
@@ -39,12 +43,18 @@ public class LearnLevel extends AbstractGameplayState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		super.update(gc, sbg, delta);
+		//ora.setPosition(Globals.player.getX(), Globals.player.getY()+Globals.player.getHeight()/2);
 	}
 	
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.enter(gc, sbg);
+		/*map.removeEntity(Globals.player);
+		map.addEntity(ora);
+		ora.getBody().setEnabled(false);
+		map.addEntity(Globals.player);*/
+		
 	}
 	
 	@Override

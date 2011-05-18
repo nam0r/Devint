@@ -107,9 +107,8 @@ public class Lamasticot extends MainPlayer {
 		if (!facingRight()) {
 			theImage = theImage.getFlippedCopy(true, false);
 		}
-		
-		//image.drawCentered(getX(), getY()-12);
-		theImage.draw(getX()-width/2, getY()-height/2, width, height);
+		if(!Globals.invulnerable || Globals.invulnerableTimer%2==1)
+			theImage.draw(getX()-width/2, getY()-height/2, width, height);
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ import game.Alien;
 import game.Lamasticot;
 import game.Tux;
 import main.Songe;
+import nodes.Dialog;
 import nodes.Node;
 
 import org.newdawn.slick.Color;
@@ -53,12 +54,18 @@ public class ChoicePersoState extends ChoiceMenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			// The player is created
 			Globals.player = createPlayer();
+			// depending if the player has already played the game
+			//we play now the main game
 			if(Globals.hasAlreadyPlayed)
 				sbg.enterState(Songe.MAINLEVEL, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
-			else
-				sbg.enterState(Songe.LEARNGAMEPLAYSTATE, new FadeOutTransition(
+			//we first play a tutorial to learn playing the game
+			else{
+				Globals.dialogNextState = Songe.LEARNGAMEPLAYSTATE;
+				Globals.dialog = new Dialog("learn1", "blue_spirit_emit.xml");
+				sbg.enterState(Songe.DIALOGSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
+			}
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 		    sbg.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(Color.black),
                     new FadeInTransition(Color.black));

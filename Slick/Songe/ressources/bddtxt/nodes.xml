@@ -34,7 +34,7 @@
 	</node>
 	<node>
 		<id>2</id>
-		<ia>2</ia>
+		<ia>1</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
@@ -68,8 +68,8 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param>
-				<param2>interrogation.png</param2>
+				<param>learn2</param>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10001</node_id>
@@ -81,8 +81,8 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param>
-				<param2>interrogation.png</param2>
+				<param>learn3</param>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10002</node_id>
@@ -94,8 +94,8 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param>
-				<param2>interrogation.png</param2>
+				<param>learn4</param>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10003</node_id>
@@ -107,8 +107,8 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param>
-				<param2>interrogation.png</param2>
+				<param>learn5</param>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10004</node_id>
@@ -120,8 +120,8 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param>
-				<param2>interrogation.png</param2>
+				<param>learn6</param>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>10005</node_id>
@@ -133,8 +133,8 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param>
-				<param2>interrogation.png</param2>
+				<param>learn7</param>
+				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
 		<node_id>0</node_id>
