@@ -1,8 +1,6 @@
 package game;
 
 
-import nodes.Node;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -26,8 +24,8 @@ public class Tux extends MainPlayer {
 	/** the path to the walking sound */
 	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg";
 	
-	public Tux(Node n) {
-		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95, n);
+	public Tux(int n) {
+		super(n, Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
 		
 		jump = new SpriteSheet(image,65,95);
 		
@@ -43,8 +41,6 @@ public class Tux extends MainPlayer {
 		MAX_JUMP_VEL = 105;
 		body.setMaxVelocity(40, 105);
 		jumpTime = 200;
-		
-		Globals.node = node;
 	}
 
 	public void render(Graphics g) {

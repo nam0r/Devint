@@ -39,12 +39,12 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 	 * Useful parameters to consider the background more or less far and
 	 * therefore moving
 	 */
-	public static final float BACKPAR = 1f;
+	protected float backpar; // 1f
 	/**
 	 * Useful parameters to consider the background more or less far and
 	 * therefore moving
 	 */
-	public static final float BACKPAR2 = 1.7f;
+	protected float backpar2; // 1.7f
 	/** The input */
 	protected Input input;
 
@@ -89,16 +89,17 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 	/** Indicates if things to do once have been done */
 	protected boolean onceOnEnter;
 	
-	public AbstractGameplayState(int id, String imagePath, String levelPath) {
+	public AbstractGameplayState(int id, String imagePath, String levelPath, float backpar, float backpar2) {
 		super(id, Conf.IMG_TEXTURES_PATH + imagePath, Conf.LEVELS_PATH
 				+ "tiles.xml", Conf.LEVELS_PATH + levelPath, Conf.TILE_WIDTH,
-				Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
+				Conf.TILE_HEIGHT, backpar, backpar2);
 		bumpWallPlayed = false;
 		bumpTopPlayed = false;
 		bumpWallX = 0;
 		bumpTopX = 0;
 		bumpTopY = 0;
 		onceOnEnter = false;
+		
 	}
 
 	@Override

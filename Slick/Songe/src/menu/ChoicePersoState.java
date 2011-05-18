@@ -5,7 +5,6 @@ import game.Lamasticot;
 import game.Tux;
 import main.Songe;
 import nodes.Dialog;
-import nodes.Node;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -78,28 +77,16 @@ public class ChoicePersoState extends ChoiceMenuState {
 	 */
 	protected MainPlayer createPlayer() {
 		switch (selected) {
-		case 0:
-			if(Globals.hasAlreadyPlayed)
-				return new Tux(new Node(1));
-			else
-				return new Tux(new Node(10000));
-		case 1:
-			if(Globals.hasAlreadyPlayed)
-				return new Alien(new Node(1));
-			else
-				return new Alien(new Node(10000));
-		case 2:
-			if(Globals.hasAlreadyPlayed)
-				return new Tux(new Node(1));
-			else
-				return new Tux(new Node(10000));
-		case 3:
-			if(Globals.hasAlreadyPlayed)
-				return new Lamasticot(new Node(1));
-			else
-				return new Lamasticot(new Node(10000));
-		default:
-			return new Tux(new Node(1));
+			case 0: // Aurore
+				return new Tux(1);
+			case 1: // Timéo
+				return new Alien(1);
+			case 2: // Tux
+				return new Tux(1);
+			case 3: // Lamasticot
+				return new Lamasticot(1);
+			default: // Default
+				return new Tux(1);
 		}
 	}
 

@@ -1,13 +1,10 @@
 package game;
 
-import nodes.Node;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
-import utils.Globals;
 import actors.MainPlayer;
 
 /**
@@ -20,8 +17,8 @@ public class Homer extends MainPlayer {
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 8;
 	
-	public Homer(Node n) {
-		super(Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126, n);
+	public Homer(int n) {
+		super(n, Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126);
 		
 		//run = getSpriteSheet(0,36,65);
 		//jump = getSpriteSheet(150,50,50);
@@ -31,10 +28,7 @@ public class Homer extends MainPlayer {
 		moveForce = 400;
 		jumpForce = 50000;
 		MAX_JUMP_VEL = 100;
-		body.setMaxVelocity(28, 93);
-		
-		Globals.node = node;
-		
+		body.setMaxVelocity(28, 93);		
 	}
 
 	public void render(Graphics g) {

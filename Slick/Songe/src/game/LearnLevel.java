@@ -2,6 +2,7 @@ package game;
 
 import main.Songe;
 import net.phys2d.raw.CollisionEvent;
+import nodes.Node;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -18,12 +19,9 @@ import utils.Globals;
  */
 
 public class LearnLevel extends AbstractGameplayState {
-
-	/** The player's ora particle */
-	private Emitter ora;
 	
 	public LearnLevel(int id) {
-		super(id, "space.jpg", "learn.txt");
+		super(id, "space.jpg", "learn.txt", 1f, 1.7f);
 	}
 	
 	@Override

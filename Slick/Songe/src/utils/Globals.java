@@ -10,7 +10,6 @@ import game.Spirit;
 import java.awt.Dimension;
 import java.util.LinkedList;
 
-import main.Songe;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.shapes.DynamicShape;

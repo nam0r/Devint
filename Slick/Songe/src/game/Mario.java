@@ -1,14 +1,11 @@
 package game;
 
-import nodes.Node;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
-import utils.Globals;
 import actors.MainPlayer;
 
 /**
@@ -21,8 +18,8 @@ public class Mario extends MainPlayer {
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 3;
 	
-	public Mario(Node n) {
-		super(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 100, 150, 2f, 40, 62, n);
+	public Mario(int n) {
+		super(n, Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 100, 150, 2f, 40, 62);
 		
 		walk = new SpriteSheet(image,40,62);
 		
@@ -37,9 +34,6 @@ public class Mario extends MainPlayer {
 		jumpForce = 40000;
 		MAX_JUMP_VEL = 120;
 		body.setMaxVelocity(40, 120);
-		
-		Globals.node = node;
-		
 	}
 
 	public void render(Graphics g) {

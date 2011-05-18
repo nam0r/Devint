@@ -1,8 +1,6 @@
 package game;
 
 
-import nodes.Node;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -36,8 +34,8 @@ public class Lamasticot extends MainPlayer {
 	private int walkingTimer;
 	private boolean moveUp;*/
 	
-	public Lamasticot(Node n) {
-		super(Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92, n);
+	public Lamasticot(int n) {
+		super(n, Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92);
 		
 		jump = new SpriteSheet(image,125,92);
 		
@@ -59,9 +57,6 @@ public class Lamasticot extends MainPlayer {
 		
 		/*walkingTimer = 200;
 		moveUp = false;*/
-		
-		Globals.node = node;
-		
 	}
 
 	public void render(Graphics g) {
