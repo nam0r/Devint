@@ -57,7 +57,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			// depending if the player has already played the game
 			//we play now the main game
 			if(Globals.hasAlreadyPlayed)
-				sbg.enterState(Songe.GAMEPLAYSTATE, new FadeOutTransition(
+				sbg.enterState(Songe.MAINLEVEL, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 			//we first play a tutorial to learn playing the game
 			else{

@@ -22,12 +22,12 @@
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2></param2>
+				<param2>interrogation.png</param2>
 			</event>
 			<event>
 				<type>S</type>
 				<param>1</param>
-				<param2></param2>
+				<param2>interrogation.png</param2>
 			</event>
 		</events>
 		<node_id>2</node_id>

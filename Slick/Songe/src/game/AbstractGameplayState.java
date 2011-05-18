@@ -34,7 +34,7 @@ import actors.WalkingIA;
  * This class manages the main game
  */
 
-public class GameplayState extends AbstractGameState {
+public abstract class AbstractGameplayState extends AbstractGameState {
 	/**
 	 * Useful parameters to consider the background more or less far and
 	 * therefore moving
@@ -89,21 +89,9 @@ public class GameplayState extends AbstractGameState {
 	/** Indicates if things to do once have been done */
 	protected boolean onceOnEnter;
 	
-	public GameplayState(int id, String imagePath, String levelPath) {
+	public AbstractGameplayState(int id, String imagePath, String levelPath) {
 		super(id, Conf.IMG_TEXTURES_PATH + imagePath, Conf.LEVELS_PATH
 				+ "tiles.xml", Conf.LEVELS_PATH + levelPath, Conf.TILE_WIDTH,
-				Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
-		bumpWallPlayed = false;
-		bumpTopPlayed = false;
-		bumpWallX = 0;
-		bumpTopX = 0;
-		bumpTopY = 0;
-		onceOnEnter = false;
-	}
-
-	public GameplayState(int id) {
-		super(id, Conf.IMG_TEXTURES_PATH + "sky2.jpg", Conf.LEVELS_PATH
-				+ "tiles.xml", Conf.LEVELS_PATH + "niveau1.txt", Conf.TILE_WIDTH,
 				Conf.TILE_HEIGHT, BACKPAR, BACKPAR2);
 		bumpWallPlayed = false;
 		bumpTopPlayed = false;
@@ -170,6 +158,115 @@ public class GameplayState extends AbstractGameState {
 		soundJump();
 		
 	}
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
+			throws SlickException {
+		super.update(gc, sbg, delta);
+		//// Invulnerability
+		// the first frame the player is invulnerable
+		if (Globals.invulnerable && Globals.invulnerableTimer > delta*5) {
+
+			for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+				if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+					Globals.player.getBody().addExcludedBody(map.getWorld().getBodies().get(i));
+				}
+			}
+		}
+		// the invulnerability is time limited
+		if(Globals.invulnerable){
+			Globals.invulnerableTimer += delta;
+			if(Globals.invulnerableTimer >= 1500){
+				Globals.invulnerable = false;
+				Globals.invulnerableTimer = 0;
+				for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+					if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+						Globals.player.getBody().removeExcludedBody(map.getWorld().getBodies().get(i));
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		currentState = States.IN_GAME;
+		
+		// If the "main" previous state was not the game state, then it's
+		// probably the menu state
+		if (Globals.returnState != stateID) {
+			//Globals.stateToGoTo.clear();
+			Globals.nodes.clear();
+			Globals.started = true;
+			
+			createMap();
+			
+			LoadingList.setDeferredLoading(false);
+			soundWalk = new Sound2(Globals.player.getSoundWalk());
+			LoadingList.setDeferredLoading(true);
+			
+			Globals.score = 0;
+			map.setMainPlayer(Globals.player);
+			Globals.player.reinitPosition();
+			voix = new t2s.SIVOXDevint();
+			
+			Globals.nodeHasChanged = true;
+			
+		}
+		
+		super.enter(gc, sbg);
+		
+		if(Globals.nodeHasChanged) {
+
+			//map.addEntity(Globals.getEntityFromCurrentNode());
+			PhysicalEntity ia = Globals.node.getIA();
+			if(ia != null) {
+				//we set the ia's position
+				Dimension d = Globals.nodes.poll();
+				if(d != null) {
+					ia.setPosition((float)d.getWidth(), (float)d.getHeight());
+				}
+				else {
+					System.err.println("No more node locations available.");
+				}
+				//we set the ia
+				map.addEntity(ia);
+			}
+			else {
+				System.err.println("The current node doesn't have an ia.");
+			}
+			
+			Globals.nodeHasChanged = false;
+		}
+		
+		// this state is important so we put it in Globals
+		Globals.returnState = stateID;
+		
+		AL10.alDopplerFactor(1.0f);
+		//we execute enter methods for all the IA
+		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof IA) {
+				((IA) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
+			}
+			else if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+				((Enemy) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
+			}
+		}
+	}
+
+	@Override
+	public void leave(GameContainer gc, StateBasedGame sb)
+			throws SlickException {
+		super.leave(gc, sb);
+		// If coming in game again, the player will be moved
+		Globals.player.setPosition(Globals.player.getX() + 200, Globals.player.getY() - 100);
+		AlUtils.stopAllSounds();
+	}
+	
+	/* ****** *
+	 * Sounds *
+	 * ****** */
 
 	private void soundWalk() {
 		// if the player is moving and not jumping we play the walk sound
@@ -290,102 +387,10 @@ public class GameplayState extends AbstractGameState {
 
 	}
 
-	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int delta)
-			throws SlickException {
-		super.update(gc, sbg, delta);
-		//// Invulnerability
-		// the first frame the player is invulnerable
-		if (Globals.invulnerable && Globals.invulnerableTimer > delta*5) {
-
-			for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
-				if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
-					Globals.player.getBody().addExcludedBody(map.getWorld().getBodies().get(i));
-				}
-			}
-		}
-		// the invulnerability is time limited
-		if(Globals.invulnerable){
-			Globals.invulnerableTimer += delta;
-			if(Globals.invulnerableTimer >= 1500){
-				Globals.invulnerable = false;
-				Globals.invulnerableTimer = 0;
-				for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
-					if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
-						Globals.player.getBody().removeExcludedBody(map.getWorld().getBodies().get(i));
-					}
-				}
-			}
-		}
-	}
-
-	@Override
-	public void enter(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
-		currentState = States.IN_GAME;
-		
-		// If the "main" previous state was not the game state, then it's
-		// probably the menu state
-		if (Globals.returnState != stateID) {
-			//Globals.stateToGoTo.clear();
-			Globals.nodes.clear();
-			Globals.started = true;
-			
-			createMap();
-			
-			LoadingList.setDeferredLoading(false);
-			soundWalk = new Sound2(Globals.player.getSoundWalk());
-			LoadingList.setDeferredLoading(true);
-			
-			Globals.score = 0;
-			map.setMainPlayer(Globals.player);
-			Globals.player.reinitPosition();
-			voix = new t2s.SIVOXDevint();
-			
-			Globals.nodeHasChanged = true;
-			
-		}
-		
-		super.enter(gc, sbg);
-		
-		if(Globals.nodeHasChanged) {
-			//if this is not the last node
-			if(Globals.node.getID() != 0){
-				//map.addEntity(Globals.getEntityFromCurrentNode());
-				PhysicalEntity ia = Globals.node.getIA();
-				//we set the ia's position
-				Dimension d = Globals.nodes.poll();
-				ia.setPosition((float)d.getWidth(), (float)d.getHeight());
-				//we set the ia
-				map.addEntity(ia);
-			}
-			Globals.nodeHasChanged = false;
-		}
-		
-		// this state is important so we put it in Globals
-		Globals.returnState = stateID;
-		
-		AL10.alDopplerFactor(1.0f);
-		//we execute enter methods for all the IA
-		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
-			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof IA) {
-				((IA) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
-			}
-			else if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
-				((Enemy) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
-			}
-		}
-	}
-
-	@Override
-	public void leave(GameContainer gc, StateBasedGame sb)
-			throws SlickException {
-		super.leave(gc, sb);
-		// If coming in game again, the player will be moved
-		Globals.player.setPosition(Globals.player.getX() + 200, Globals.player.getY() - 100);
-		AlUtils.stopAllSounds();
-	}
-
+	
+	/* ****** *
+	 * Events *
+	 * ****** */
 	@Override
 	protected void notTimedEvents(GameContainer gc, StateBasedGame sbg,
 			int delta) {
@@ -465,21 +470,10 @@ public class GameplayState extends AbstractGameState {
 			}
 		}
 	}
-
-	@Override
-	protected ArrayList<PhysicalEntity> createEntities() throws SlickException {
-		/*
-		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
-
-		entities.add(new AlienIA(920, 350, new Node(1)));
-		entities.add(new HomerIA(2800, 350, new Node(1)));
-		entities.add(new AlienIA(3600, 350, new Node(1)));
-		
-		
-		return entities;
-		*/
-		return null;
-	}
+	
+	/* ****** *
+	 * States *
+	 * ****** */
 
 	@Override
 	protected void statesManagement(GameContainer gc, StateBasedGame sbg,
@@ -501,7 +495,9 @@ public class GameplayState extends AbstractGameState {
 		}
 	}
 
-	/***************** Collision management ********************/
+	/* ******************** *
+	 * Collision management *
+	 * ******************** */
 	
 	@Override
 	protected void collisions(IA ia) {
@@ -522,7 +518,6 @@ public class GameplayState extends AbstractGameState {
 		}
 	}
 	
-	@Override
 	protected void collisions(Enemy enemy, CollisionEvent event){
 		enemy.onCollision();
 		
@@ -544,6 +539,25 @@ public class GameplayState extends AbstractGameState {
 				Globals.score--;
 			Globals.invulnerable = true;
 		}
+	}
+	
+	/* ***** *
+	 * Other *
+	 * ***** */
+	
+	@Override
+	protected ArrayList<PhysicalEntity> createEntities() throws SlickException {
+		/*
+		ArrayList<PhysicalEntity> entities = new ArrayList<PhysicalEntity>();
+
+		entities.add(new AlienIA(920, 350, new Node(1)));
+		entities.add(new HomerIA(2800, 350, new Node(1)));
+		entities.add(new AlienIA(3600, 350, new Node(1)));
+		
+		
+		return entities;
+		*/
+		return null;
 	}
 
 }

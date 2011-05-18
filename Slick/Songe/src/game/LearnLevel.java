@@ -1,7 +1,5 @@
 package game;
 
-import java.io.IOException;
-
 import main.Songe;
 import net.phys2d.raw.CollisionEvent;
 
@@ -9,26 +7,22 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.particles.ConfigurableEmitter;
-import org.newdawn.slick.particles.ParticleIO;
-import org.newdawn.slick.particles.ParticleSystem;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import utils.Conf;
 import utils.Globals;
 
 /**
  * Game play state to learn the game
  */
 
-public class LearnGameplayState extends GameplayState {
+public class LearnLevel extends AbstractGameplayState {
 
 	/** The player's ora particle */
 	private Emitter ora;
 	
-	public LearnGameplayState(int id) {
+	public LearnLevel(int id) {
 		super(id, "space.jpg", "learn.txt");
 	}
 	
@@ -80,7 +74,7 @@ public class LearnGameplayState extends GameplayState {
 						+ (Globals.player.getHeight() / 3)))) {
 			map.removeEntity(enemy);
 			((Enemy)enemy).stopSound();
-			sbg.enterState(Songe.GAMEPLAYSTATE, new FadeOutTransition(
+			sbg.enterState(Songe.MAINLEVEL, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		}
 		//if the enemy is not killed, the player is hurt
