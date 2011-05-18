@@ -13,7 +13,7 @@ public class MainLevel extends AbstractGameplayState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
-		
+		super.enter(gc, sbg);
 	}
 
 }
