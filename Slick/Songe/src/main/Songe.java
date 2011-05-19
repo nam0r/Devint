@@ -10,6 +10,7 @@ import menu.InitialMenuState;
 import menu.LoadingState;
 import menu.MainMenuState;
 import menu.SaveHighScore;
+import minigame.CheckTonScore;
 import minigame.HoverCave;
 
 import org.newdawn.slick.GameContainer;
@@ -39,6 +40,7 @@ public class Songe extends StateBasedGame {
 	public static final int INITIALMENUSTATE = 8;
 	public static final int DIALOGSTATE = 9;
 	public static final int LEARNGAMEPLAYSTATE = 10;
+	public static final int CHECKTONSCORESTATE = 11;
 	
 	public Songe() {
 		super("Songe");
@@ -77,6 +79,7 @@ public class Songe extends StateBasedGame {
 		this.addState(new InitialMenuState(INITIALMENUSTATE));
 		this.addState(new DialogState(DIALOGSTATE));
 		this.addState(new LearnLevel(LEARNGAMEPLAYSTATE));
+		this.addState(new CheckTonScore(CHECKTONSCORESTATE));
 		
 		this.enterState(LOADINGSTATE);
 	}

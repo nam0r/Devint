@@ -219,6 +219,19 @@
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 4xxxx => noeuds de Tux -->
 	
+	<node>
+		<id>40000</id>
+		<ia>-1</ia>
+		<type_ia></type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>oui</param><!-- auroreTimeo2 -->
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>40001</node_id>
+	</node>
 	
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 4xxxx => noeuds de Lamasticot -->
