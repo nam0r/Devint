@@ -1,5 +1,8 @@
 Files[.ogg] : text
 
+deja_joue : "Have you already played this game ?"
+oui : "Yes"
+non : "No"
 bienvenue : "Welcome in the universe of Songe !"
 jouer : "Play"
 instructions : "Instructions"
@@ -33,12 +36,13 @@ minijeuvaisseauF1:"This is a mini-game : you have a space ship that falls to the
 finminijeu:"You have finished the mini-game. You made a score of :"
 
 question:"Question"
+bonnereponse:"Well done, this is the good answer."
+mauvaisereponse:"Sorry, this is the wrong answer."
+
 question_grand_pere : "How old is my grandfather ?"
 14ans : "14 years"
 80ans : "80 years"
 140ans : "140 years"
-bonnereponse:"Well done, this is the good answer."
-mauvaisereponse:"Sorry, this is the wrong answer."
 
 question_banquise : "Où se trouve la banquise ?"
 nord: "Au Pôle Nord"

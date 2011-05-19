@@ -1,202 +1,185 @@
 package bddcreate;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import org.newdawn.slick.util.ResourceLoader;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.xml.XMLElement;
+import org.newdawn.slick.util.xml.XMLElementList;
+import org.newdawn.slick.util.xml.XMLParser;
 
 import utils.Conf;
 
 public class BDDCreator {
 
-	private BufferedReader reader;
 	private DBInteractor db;
+	private XMLParser parser;
 	
 	public BDDCreator() {
+		parser = new XMLParser();
 		
 		db = new DBInteractor();
-		db.fromFile(Conf.RESS_PATH+"scriptBdd.txt");
+		db.fromFile(Conf.RESS_PATH+"bddtxt/scriptBdd.txt");
 		createNodesFromFile();
-		createQuestionsFromFile();
-		createGamesFromFile();
-		db.executeQuery("SELECT * FROM questions");
+		createQuestionsScenarioFromFile();
+		createQuestionsCultureFromFile();
+		createIAsFromFile();
+		//db.executeQuery("SELECT * FROM questions");
 		db.close();
 		
 	}
 
 	private void createNodesFromFile() {
 		System.out.println("===> Insertion des noeuds");
-		ArrayList< ArrayList<String[]> > noeuds = createFromFile(Conf.RESS_PATH+"nodes.txt");
-		for(ArrayList<String[]> n : noeuds) {
-			
-			String game = "NULL";
-			String question = "NULL";
-			for(int i = 1; i < n.size(); i++) {
-				if(n.get(i)[0].equals("game")) {
-					game = n.get(i)[1];
-				}
-				else if(n.get(i)[0].equals("question")) {
-					question = n.get(i)[1];
-				}
-			}
-			
-			String queryNode = "INSERT INTO noeuds(id, question, mini_jeu) " +
-					"VALUES(" + 
-						n.get(0)[1] + ", " + // id
-						question + ", " + // question
-						game + // mini jeu
-					")";
-			
-			// Insert the question
-			//System.out.println(queryNode);
-			db.executeQuery(queryNode);
+		
+		XMLElement root = null;
+		try {
+			root = parser.parse(Conf.RESS_PATH+"bddtxt/nodes.xml");
+		} catch (SlickException e) {
+			System.err.println("File nodes.xml not found.");
 		}
-	}
-	
-	private void createGamesFromFile() {
-		System.out.println("===> Insertion des mini-jeux");
-		ArrayList< ArrayList<String[]> > minijeux = createFromFile(Conf.RESS_PATH+"games.txt");
-		for(ArrayList<String[]> g : minijeux) {
-			String queryGame = "INSERT INTO minijeux(id, niv1, niv2, niv3, niv4, score1, score2, score3, score4) " +
-					"VALUES(" + 
-						g.get(0)[1] + ", " + // id
-						g.get(1)[1] + ", " + // niv1
-						g.get(2)[1] + ", " + // niv2
-						g.get(3)[1] + ", " + // niv2
-						g.get(4)[1] + ", " + // niv4
-						
-						g.get(1)[2] + ", " + // score1
-						g.get(2)[2] + ", " + // score2
-						g.get(3)[2] + ", " + // score2
-						g.get(4)[2] + // score4
-					")";
+		
+		XMLElementList nodesList = root.getChildrenByName("node");
+		for(int i=0; i<nodesList.size(); i++) {
+			String id = nodesList.get(i).getChildrenByName("id").get(0).getContent();
+			String ia = nodesList.get(i).getChildrenByName("ia").get(0).getContent();
+			String type_ia = nodesList.get(i).getChildrenByName("type_ia").get(0).getContent();
+			String node_id = nodesList.get(i).getChildrenByName("node_id").get(0).getContent();
 			
-			// Insert the question
-			//System.out.println(queryGame);
-			db.executeQuery(queryGame);
-		}
-	}
-	
-	private void createQuestionsFromFile() {
-		System.out.println("===> Insertion des questions");
-		ArrayList< ArrayList<String[]> > questions = createFromFile(Conf.RESS_PATH+"questions.txt");
-		for(ArrayList<String[]> q : questions) {
-			String queryQuestion = "INSERT INTO questions(id, enonce, fichiervoix, scenario, points) " +
-					"VALUES(" + 
-						q.get(0)[1] + ", " + // id
-						"'" + q.get(1)[1] + "', " + // enonce
-						"'" + q.get(2)[1] + "', " + // fichiervoix
-						q.get(4)[1] + ", " + // scenario
-						q.get(3)[1] + // points
-					")";
+			String query = "INSERT INTO nodes(id, ia, type_ia, node_id) " +
+			"VALUES(" + id + ", " +	ia + ", '" + escapeQuotes(type_ia) + "', " + node_id + ")";
 			
-			// Insert the choices
-			System.out.println("     ===> Insertion des choix de la question");
-			int pos = 0;
-			for(int i = 5; i < q.size(); i++) { // For each choice
-				String[] line = q.get(i);
-				String enonce = "", fichiervoix = "", id_noeud = "NULL", correct = "";
-				if(line[0].equals("choice")) {
-					enonce = line[1]; // enonce
-					fichiervoix = line[2]; // fichiervoix
-					correct = line[3];
-					if(Integer.valueOf(q.get(4)[1]) == 1) { // If it's a scenario
-						id_noeud = line[4]; // Node
-					}
-				}
-				String queryChoice = "INSERT INTO choix(enonce, fichiervoix, id_question, position, id_noeud, correct) " +
-						"VALUES(" +
-					"'" + enonce + "', " + 
-					"'" + fichiervoix + "', " +
-					q.get(0)[1] + ", " + // id_question
-					pos + ", " +
-					id_noeud + ", " +
-					correct +
-				")";
-				//System.out.println(queryChoice);
-				db.executeQuery(queryChoice);
+			// Insert the node
+			db.executeQuery(query);
+			
+			// EVENTS
+			XMLElementList eventsList = nodesList.get(i).getChildrenByName("events").get(0).getChildrenByName("event");
+			for(int j=0; j<eventsList.size(); j++) {
+				String type = eventsList.get(j).getChildrenByName("type").get(0).getContent();
+				String param = eventsList.get(j).getChildrenByName("param").get(0).getContent();
+				String param2 = eventsList.get(j).getChildrenByName("param2").get(0).getContent();
 				
-				pos++;
+				String queryEvent = "INSERT INTO events(id_node, type, param, param2, ordre) " +
+				"VALUES(" + id + ", '" +	escapeQuotes(type) + "', '" + escapeQuotes(param)+ "', '" + escapeQuotes(param2) + "', " + j + ")";
+				
+				// Insert the node
+				db.executeQuery(queryEvent);
 			}
+		}
+		
+	}
+	
+	private void createQuestionsScenarioFromFile() {
+		System.out.println("===> Insertion des questions de scénario");
+		
+		XMLElement root = null;
+		try {
+			root = parser.parse(Conf.RESS_PATH+"bddtxt/questions_scenario.xml");
+		} catch (SlickException e) {
+			System.err.println("File questions_scenario.xml not found.");
+		}
+		
+		XMLElementList questionsList = root.getChildrenByName("question");
+		for(int i=0; i<questionsList.size(); i++) {
+			String id = questionsList.get(i).getChildrenByName("id").get(0).getContent();
+			String sound = questionsList.get(i).getChildrenByName("sound").get(0).getContent();
+			String text = questionsList.get(i).getChildrenByName("text").get(0).getContent();
+			String yes = questionsList.get(i).getChildrenByName("yes").get(0).getContent();
+			String no = questionsList.get(i).getChildrenByName("no").get(0).getContent();
+			
+			String query = "INSERT INTO qscen(id, sound, text, yes, no) " +
+			"VALUES(" + id + ", '" + escapeQuotes(sound) + "', '" + escapeQuotes(text) + "', " + yes + ", " + no + ")";
 			
 			// Insert the question
-			//System.out.println(queryQuestion);
-			db.executeQuery(queryQuestion);
+			db.executeQuery(query);
 		}
-	}
-	
-	private ArrayList<ArrayList<String[]>> createFromFile(String filename) {
-		
-		ArrayList<ArrayList<String[]>> questions = new ArrayList<ArrayList<String[]>>();
-		ArrayList<String[]> al = new ArrayList<String[]>();
-		
-		String data;
-		/*InputStream ips = null;
-		try {
-			ips = new FileInputStream(filename);
-		} catch (FileNotFoundException e1) {
-			System.err.println("Erreur lors de l'ouverture du fichier " + filename + " : File not found");
-		}*/
-		reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(filename)));
-		try {
-			// Creation des questions :
-			//   - une HashMap par question
-			//   - un ArrayList pour stocker l'ensemble des questions
-			while ((data = reader.readLine()) != null){
-				if(!data.startsWith("#") && !data.isEmpty()) {
-					
-					/*
-					System.out.println(label(data));
-					for(String s : values(data)) {
-						System.out.println("\t" + s);
-					}
-					*/
-					
-					String[] parsed = parse(data);
-					if(parsed[0].equals("id")) {
-						al = new ArrayList<String[]>();
-						questions.add(al);
-					}
-					al.add(parsed);
-					
-					//executeQuery(query);
-				}
-			}
-		} catch (IOException e) {
-			System.err.println("Erreur lors de la lecture du fichier de définition des questions.");
-		}
-		
-		return questions;
-	}
 
-	private String[] parse(String data) {
-		String[] values = values(data);
-		String[] parsed = new String[values.length + 1];
-		parsed[0] = label(data);
-		for(int i = 0; i < values.length; i++) {
-			parsed[i+1] = values[i];
+	}
+	
+	private void createQuestionsCultureFromFile() {
+		System.out.println("===> Insertion des questions de culture générale");
+		
+		XMLElement root = null;
+		try {
+			root = parser.parse(Conf.RESS_PATH+"bddtxt/questions_culture.xml");
+		} catch (SlickException e) {
+			System.err.println("File questions_culture.xml not found.");
 		}
-		return parsed;
+		
+		XMLElementList questionsList = root.getChildrenByName("question");
+		for(int i=0; i<questionsList.size(); i++) {
+			String id = questionsList.get(i).getChildrenByName("id").get(0).getContent();
+			String sound = questionsList.get(i).getChildrenByName("sound").get(0).getContent();
+			String text = questionsList.get(i).getChildrenByName("text").get(0).getContent();
+			String points = questionsList.get(i).getChildrenByName("points").get(0).getContent();
+			
+			String query = "INSERT INTO qcult(id, sound, text, points) " +
+			"VALUES(" + id + ", '" + escapeQuotes(sound) + "', '" + escapeQuotes(text) + "', " + points + ")";
+			
+			// Insert the question
+			db.executeQuery(query);
+			
+			
+			// CHOICES
+			XMLElementList choicesList = questionsList.get(i).getChildrenByName("choices").get(0).getChildrenByName("choice");
+			for(int j=0; j<choicesList.size(); j++) {
+				String textChoice = choicesList.get(j).getChildrenByName("text").get(0).getContent();
+				String soundChoice = choicesList.get(j).getChildrenByName("sound").get(0).getContent();
+				String trueChoice = choicesList.get(j).getChildrenByName("true").get(0).getContent();
+				
+				String queryChoice = "INSERT INTO choices(id_question, sound, text, true) " +
+				"VALUES(" + id + ", '" +	escapeQuotes(soundChoice) + "', '" + escapeQuotes(textChoice) + "', " + trueChoice + ")";
+				
+				// Insert the choice
+				db.executeQuery(queryChoice);
+			}
+		}
+
 	}
 	
-	private String label(String data) {
-		return data.substring(0, data.indexOf(":"));
+	private void createIAsFromFile() {
+		System.out.println("===> Insertion des IAs");
+		
+		XMLElement root = null;
+		try {
+			root = parser.parse(Conf.RESS_PATH+"bddtxt/ias.xml");
+		} catch (SlickException e) {
+			System.err.println("File ias.xml not found.");
+		}
+		
+		XMLElementList iasList = root.getChildrenByName("ia");
+		for(int i=0; i<iasList.size(); i++) {
+			String id = iasList.get(i).getChildrenByName("id").get(0).getContent();
+			
+			XMLElement images = iasList.get(i).getChildrenByName("images").get(0);
+			
+			String walk = images.getChildrenByName("walk").get(0).getContent(); // string
+			String walknum = images.getChildrenByName("walknum").get(0).getContent();
+			String jump = images.getChildrenByName("jump").get(0).getContent(); // string
+			String jumpnum = images.getChildrenByName("jumpnum").get(0).getContent();
+			
+			XMLElement size = iasList.get(i).getChildrenByName("size").get(0);
+			
+			String width = size.getChildrenByName("width").get(0).getContent();
+			String height = size.getChildrenByName("height").get(0).getContent();
+			String yoffset = size.getChildrenByName("yoffset").get(0).getContent();
+			
+			XMLElement sounds = iasList.get(i).getChildrenByName("sounds").get(0);
+			
+			String main = sounds.getChildrenByName("main").get(0).getContent(); // string
+			String dejavu = sounds.getChildrenByName("dejavu").get(0).getContent(); // string
+			String troptot = sounds.getChildrenByName("troptot").get(0).getContent(); // string
+			
+			String query = "INSERT INTO ias(id, walk, walknum, jump, jumpnum, width, height, yoffset, mainsound, dejavusound, troptotsound) " +
+			"VALUES(" + id + ", '" + escapeQuotes(walk) + "', " + walknum + ", '" + escapeQuotes(jump) + "', " + jumpnum + 
+			", " + width + ", "	+ height + ", " + yoffset + ", '" + escapeQuotes(main) + 
+			"', '" + escapeQuotes(dejavu) + "', '" + escapeQuotes(troptot) + "')";
+			
+			// Insert the question
+			db.executeQuery(query);
+		}
+
 	}
 	
-	private String[] values(String data) {
-		String rp = data.substring(data.indexOf(":")+1);
-		String[] raw_values = rp.split("\\|");
-		
-		String[] values = new String[raw_values.length];
-		for(int i=0; i<values.length; i++)
-			values[i] = raw_values[i].trim();
-		
-		return values;
+	private String escapeQuotes(String str) {
+		return str.replace("'", "''");
 	}
 
 }

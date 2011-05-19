@@ -1,5 +1,6 @@
 package map;
 
+import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,10 +8,11 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.util.ResourceLoader;
 
+import utils.Globals;
 import actors.PhysicalEntity;
-
 import environment.TileEnvironment;
 import game.Crate;
+import game.Enemy;
 
 /**
  * A loader for a very simple tile based map text format that maps from
@@ -66,12 +68,21 @@ public class MapLoader {
 				char c = lines.get(y).charAt(x);
 				Tile tile = set.getTile(c);
 				PhysicalEntity object = set.getObject(c);
+				Dimension nodeDimension = set.getNode(c);
 				//we add the tile if exists
 				if (tile != null) env.setTile(x, y, tile);
 				//Or we add the object if exists
 				if (object != null){
 					//necessary because if set directly, the Body class considers that all the same crates have the same id, so it bugs
-					env.addEntity(new Crate(object.getPath(), x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
+					// TODO à changer
+					if(object instanceof Crate)
+						env.addEntity(new Crate(object.getPath(), x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
+					else if(object instanceof Enemy)
+						env.addEntity(new Enemy(object.getPath(), ((Enemy)object).getSpriteNum(), x*env.getTileWidth(), y*env.getTileHeight(), object.getWidth(), object.getHeight(), object.getBody().getMass()));
+				}
+				if(nodeDimension != null){
+					nodeDimension.setSize(x*env.getTileWidth(), y*env.getTileHeight());
+					Globals.nodes.offer(nodeDimension);
 				}
 			}
 		}

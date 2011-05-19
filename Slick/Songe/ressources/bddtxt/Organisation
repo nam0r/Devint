@@ -1,0 +1,51 @@
+questions_culture.xml
+questions
+    |question *
+        |id
+        |sound
+        |text
+	|points
+        |choices *
+            |sound
+            |text
+            |true
+            
+questions_scenario.xml
+questions
+    |question *
+        |id
+        |sound
+        |text
+        |yes
+        |no
+        
+ias.xml
+ias
+ |ia *
+   |id
+   |images
+      |walk
+      |walknum
+      |jump
+      |jumpnum
+   |size
+      |width
+      |height
+      |yoffset
+   |sounds
+      |main
+      |dejavu
+      |troptot
+
+nodes.xml
+nodes
+    |node *
+        |id
+        |ia
+        |type_ia
+	|node_id
+        |events
+            |event *
+                |type
+                |param
+            

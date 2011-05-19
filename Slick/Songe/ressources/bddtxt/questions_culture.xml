@@ -1,0 +1,210 @@
+<questions>
+    <question>
+        <id>1</id>
+        <sound>question_grand_pere</sound>
+        <text>Quel est l'âge de mon grand père ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>14 ans</text>
+                <sound>14ans</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>80 ans</text>
+                <sound>80ans</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>140 ans</text>
+                <sound>140ans</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>2</id>
+        <sound>question_banquise</sound>
+        <text>Où se trouve la banquise ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>Au Pôle Nord</text>
+                <sound>nord</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>À Paris</text>
+                <sound>centre</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>Au Pôle Sud</text>
+                <sound>sud</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>3</id>
+        <sound>question_abricot</sound>
+        <text>De quelle couleur est l'abricot ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>Marron</text>
+                <sound>marron</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>Orange</text>
+                <sound>orange</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>Pamplemousse</text>
+                <sound>pamplemousse</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>4</id>
+        <sound>question_lamasticot</sound>
+        <text>Combien de pattes possède le lamasticot ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>Zéro</text>
+                <sound>0</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>Deux</text>
+                <sound>2</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>Quatre</text>
+                <sound>4</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>5</id>
+        <sound>question_vol_animaux</sound>
+        <text>Lequel de ces animaux peut voler ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>Le manchot</text>
+                <sound>manchot</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>Le cochon</text>
+                <sound>Le pingouin</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>Quatre</text>
+                <sound>pingouin</sound>
+                <true>1</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>6</id>
+        <sound>question_3plus5</sound>
+        <text>Combien font 3+5 ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>42</text>
+                <sound>42</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>15</text>
+                <sound>15</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>8</text>
+                <sound>8</sound>
+                <true>1</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>7</id>
+        <sound>question_30moins24</sound>
+        <text>Quel est le résultat de 30-24 ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>4</text>
+                <sound>4</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>6</text>
+                <sound>6</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>9</text>
+                <sound>9</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>8</id>
+        <sound>question_capitale_france</sound>
+        <text>Quelle est la capitale de France ?</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>Paris</text>
+                <sound>paris</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>Bruxelles</text>
+                <sound>bruxelles</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>Marseille</text>
+                <sound>marseille</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    <question>
+        <id>9</id>
+        <sound>question_guitare</sound>
+        <text>Une guitare est un instrument</text>
+	<points>5</points>
+        <choices>
+            <choice>
+                <text>à vent</text>
+                <sound>vent</sound>
+                <true>1</true>
+            </choice>
+            <choice>
+                <text>à cordes</text>
+                <sound>cordes</sound>
+                <true>0</true>
+            </choice>
+            <choice>
+                <text>La guitare est un fruit</text>
+                <sound>guitare_fruit</sound>
+                <true>0</true>
+            </choice>
+        </choices>
+    </question>
+    
+</questions>

@@ -1,8 +1,6 @@
 package game;
 
 
-import nodes.Node;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -10,21 +8,24 @@ import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
 import utils.Globals;
-
-import actors.Actor;
+import actors.MainPlayer;
 
 /**
  * Tux
  */
-public class Tux extends Actor {
+public class Tux extends MainPlayer {
 	private SpriteSheet walk;
 	private SpriteSheet jump;
 	
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 7;
+	/** the step rate constant for the step sound */
+	private final float STEPRATE = 35f;
+	/** the path to the walking sound */
+	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg";
 	
-	public Tux() {
-		super(Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
+	public Tux(int n) {
+		super(n, Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
 		
 		jump = new SpriteSheet(image,65,95);
 		
@@ -40,9 +41,6 @@ public class Tux extends Actor {
 		MAX_JUMP_VEL = 105;
 		body.setMaxVelocity(40, 105);
 		jumpTime = 200;
-		
-		//Globals.node = new Node(1);
-		
 	}
 
 	public void render(Graphics g) {
@@ -82,8 +80,16 @@ public class Tux extends Actor {
 			image = image.getFlippedCopy(true, false);
 		}
 		
-		//image.drawCentered(getX(), getY()-12);
-		image.draw(getX()-width/2, getY()-height/2, width, height);
+		if(!Globals.invulnerable || Globals.invulnerableTimer%2==1)
+			image.draw(getX()-width/2, getY()-height/2, width, height);
+	}
+	
+	public float stepRate(){
+		return STEPRATE;
+	}
+	
+	public String getSoundWalk(){
+		return SOUND_WALK_PATH;
 	}
 
 }

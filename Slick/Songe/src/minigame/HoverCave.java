@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Vector;
 
 import main.Songe;
-import nodes.Node;
 
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.AL11;
@@ -35,7 +34,7 @@ public class HoverCave extends BasicGameState {
 	/** The resolution of the wall */
 	private final int WALL_RES = 30;
 	/** the sensitivity of the object to touch the wall */
-	private final int SENSITIVITY = 15;
+	private final int SENSITIVITY = 10;
 	private GameContainer container;
 	/** The object's y position */
 	private float dudeHeight;
@@ -132,8 +131,8 @@ public class HoverCave extends BasicGameState {
 		actualLowerWall = 0;
 		spX = 0;
 		try {
-			explosion = ParticleIO.loadConfiguredSystem(Conf.RESS_PATH+"explosion.xml");
-			trail = ParticleIO.loadConfiguredSystem(Conf.RESS_PATH+"smoketrail.xml");
+			explosion = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"explosion.xml");
+			trail = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"smoketrail.xml");
 			
 		} catch (IOException e) {
 			throw new SlickException("Failed to load particle systems", e);
@@ -151,9 +150,9 @@ public class HoverCave extends BasicGameState {
 	}
 
 	@Override
-	public void update(GameContainer container, StateBasedGame game, int delta)
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-		Input input = container.getInput();
+		Input input = gc.getInput();
 		//If the beginning explanation is finished
 		if(playTheGame){
 			//if the player is not dead
@@ -201,12 +200,13 @@ public class HoverCave extends BasicGameState {
 					if(Globals.returnState != Songe.MAINMENUSTATE){
 						//The score is set
 						Globals.score += distance/1000;
-						//The next node is set
-						Globals.node = new Node(Globals.node.getGame().getLevelFromScore(Globals.score));
 					}
 						
+					/*
 					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 							new FadeInTransition(Color.black));
+					*/
+					Globals.nextEvent(sbg);
 				}
 			}
 		}
@@ -224,7 +224,7 @@ public class HoverCave extends BasicGameState {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-			game.enterState(Globals.returnState, new FadeOutTransition(
+			sbg.enterState(Globals.returnState, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		}
 		spX -= delta * 4.0f * speed;

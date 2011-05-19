@@ -82,7 +82,7 @@ public abstract class MenuState extends BasicGameState {
 			throws SlickException {
 		input = gc.getInput();
 		input.enableKeyRepeat();
-		font = new AngelCodeFont(Conf.RESS_PATH+"46.fnt",Conf.RESS_PATH+"46_0.tga");
+		font = new AngelCodeFont(Conf.FONTS_PATH+"46.fnt",Conf.FONTS_PATH+"46_0.tga");
 		width = gc.getWidth();
 		height = gc.getHeight();
 		caseLarge = height/7;
@@ -196,6 +196,9 @@ public abstract class MenuState extends BasicGameState {
 		//because it would cause graphical disaster in other states
 		gfx.setLineWidth(1);
 		AlUtils.stopAllSounds();
+		for(int i=0; i<options.length; i++){
+    		optionsSounds[i].reinitPlayedOnce();
+    	}
 	}
 
 }

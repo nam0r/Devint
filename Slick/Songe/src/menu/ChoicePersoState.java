@@ -4,6 +4,7 @@ import game.Alien;
 import game.Lamasticot;
 import game.Tux;
 import main.Songe;
+import nodes.Dialog;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -15,10 +16,9 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import actors.Actor;
-
 import utils.Conf;
 import utils.Globals;
+import actors.MainPlayer;
 
 public class ChoicePersoState extends ChoiceMenuState {
 
@@ -53,8 +53,18 @@ public class ChoicePersoState extends ChoiceMenuState {
 		if (input.isKeyPressed(Input.KEY_ENTER)) {
 			// The player is created
 			Globals.player = createPlayer();
-			sbg.enterState(Songe.GAMEPLAYSTATE, new FadeOutTransition(
+			// depending if the player has already played the game
+			//we play now the main game
+			if(Globals.hasAlreadyPlayed)
+				sbg.enterState(Songe.MAINLEVEL, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
+			//we first play a tutorial to learn playing the game
+			else{
+				Globals.dialogNextState = Songe.LEARNGAMEPLAYSTATE;
+				Globals.dialog = new Dialog("learn1", "blue_spirit_emit.xml");
+				sbg.enterState(Songe.DIALOGSTATE, new FadeOutTransition(
+					Color.black), new FadeInTransition(Color.black));
+			}
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 		    sbg.enterState(Songe.MAINMENUSTATE, new FadeOutTransition(Color.black),
                     new FadeInTransition(Color.black));
@@ -65,18 +75,18 @@ public class ChoicePersoState extends ChoiceMenuState {
 	 * Create the player object
 	 * @return the player itself
 	 */
-	protected Actor createPlayer() {
+	protected MainPlayer createPlayer() {
 		switch (selected) {
-		case 0:
-			return new Tux();
-		case 1:
-			return new Alien();
-		case 2:
-			return new Tux();
-		case 3:
-			return new Lamasticot();
-		default:
-			return new Tux();
+			case 0: // Aurore
+				return new Tux(1);
+			case 1: // Timéo
+				return new Alien(1);
+			case 2: // Tux
+				return new Tux(1);
+			case 3: // Lamasticot
+				return new Lamasticot(1);
+			default: // Default
+				return new Tux(1);
 		}
 	}
 

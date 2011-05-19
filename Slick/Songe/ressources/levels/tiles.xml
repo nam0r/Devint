@@ -1,0 +1,26 @@
+<tiles>
+	<tiles>
+		<tile id="=" image="tile1.png" shape="BLOCK" />
+		<tile id="#" image="tile2.png" shape="BLOCK" />
+		<tile id="/" image="tile3.png" shape="LEFTSLOPE" />
+		<tile id="\" image="tile4.png" shape="RIGHTSLOPE" />
+	</tiles>
+	<objects>
+		<object id="a" type="crate" size="40" mass="2" image="crate2.jpg" />
+		<object id="b" type="crate" size="70" mass="6" image="crate2.jpg" />
+		<object id="c" type="crate" size="90" mass="10" image="crate2.jpg" />
+		<object id="d" type="crate" size="120" mass="20" image="crate2.jpg" />
+		<object id="e" type="crate" size="140" mass="30" image="crate2.jpg" />
+		<object id="f" type="crate" size="160" mass="40" image="crate2.jpg" />
+		<object id="g" type="crate" size="90" mass="28" image="crate3.jpg" />
+		<object id="h" type="crate" size="120" mass="30" image="crate3.jpg" />
+		
+		<object id="A" type="enemy" width="40" height="62" mass="2" image="mariowalk_big.png" spritenum="3" />
+		<object id="B" type="enemy" width="70" height="40" mass="6" image="mariowalk_big.png" spritenum="3" />
+		<object id="C" type="enemy" width="90" height="40" mass="10" image="mariowalk_big.png" spritenum="3" />
+		<object id="D" type="enemy" width="120" height="40" mass="20" image="mariowalk_big.png" spritenum="3" />
+	</objects>
+	<nodes>
+		<node id="N" />
+	</nodes>
+</tiles>

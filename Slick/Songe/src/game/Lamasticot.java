@@ -7,12 +7,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
-import actors.Actor;
+import utils.Globals;
+import actors.MainPlayer;
 
 /**
  * Lamasticot
  */
-public class Lamasticot extends Actor {
+public class Lamasticot extends MainPlayer {
 	private SpriteSheet walk;
 	private SpriteSheet jump;
 	
@@ -23,13 +24,18 @@ public class Lamasticot extends Actor {
 	private int jumpTimer;
 	/** Indicates if a jump has been initiated */
 	private boolean beginJumpTimer;
+	/** the step rate constant for the step sound */
+	private final float STEPRATE = 90f;
+	/** the path to the walking sound */
+	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "crawl.ogg";
+	
 	
 	/*private static final int walkingTime = 1000;
 	private int walkingTimer;
 	private boolean moveUp;*/
 	
-	public Lamasticot() {
-		super(Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92);
+	public Lamasticot(int n) {
+		super(n, Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92);
 		
 		jump = new SpriteSheet(image,125,92);
 		
@@ -51,9 +57,6 @@ public class Lamasticot extends Actor {
 		
 		/*walkingTimer = 200;
 		moveUp = false;*/
-		
-		//Globals.node = new Node(1);
-		
 	}
 
 	public void render(Graphics g) {
@@ -99,9 +102,8 @@ public class Lamasticot extends Actor {
 		if (!facingRight()) {
 			theImage = theImage.getFlippedCopy(true, false);
 		}
-		
-		//image.drawCentered(getX(), getY()-12);
-		theImage.draw(getX()-width/2, getY()-height/2, width, height);
+		if(!Globals.invulnerable || Globals.invulnerableTimer%2==1)
+			theImage.draw(getX()-width/2, getY()-height/2, width, height);
 	}
 	
 	@Override
@@ -121,6 +123,14 @@ public class Lamasticot extends Actor {
 			applyForce(0, -jumpForce);
 			jumpTimer = 0;
 		}
+	}
+	
+	public float stepRate(){
+		return STEPRATE;
+	}
+	
+	public String getSoundWalk(){
+		return SOUND_WALK_PATH;
 	}
 	
 	/*@Override

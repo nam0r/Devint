@@ -7,14 +7,11 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Globals;
 import actors.IA;
@@ -42,7 +39,8 @@ public abstract class AbstractGameState extends BasicGameState {
 	/** The interval to check the controls at */
 	private int controlInterval = 50;
 	
-	protected int stateToGoTo;
+	protected StateBasedGame sbg;
+	
 	
 	
 	public AbstractGameState(int id, String pathToBackground, String pathToTilesDefinitions, String pathToMap, 
@@ -66,27 +64,33 @@ public abstract class AbstractGameState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
-		restart();
-		// We initialize the map
-		map.init();
-		// We manage collisions (especially for IAs)
-		manageCollisions();
+	
+		this.sbg = sbg;
+		createMap();
 		// Moving objects are created and added
+		/*
 		ArrayList<PhysicalEntity> entities = createEntities();
 		for(PhysicalEntity pe : entities) {
 			map.addEntity(pe);
 		}
+		*/
 	}
 	
-	public void restart(){
-		stateToGoTo = -1;
+	protected void createMap() {
+		
+		map = new Map(pathToBackground, pathToTilesDefinitions, pathToMap, tilesWidth, tilesHeight, backPar, backPar2);
+		// We initialize the map
+		map.init();
+		
+		// We manage collisions (especially for IAs)
+		manageCollisions();
+		
 	}
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		map.render(g, gc);	
+		map.render(g, gc);
 	}
 	
 	@Override
@@ -113,8 +117,10 @@ public abstract class AbstractGameState extends BasicGameState {
 		// Update the map
 		map.update(delta, gc, Globals.player);
 		
-		if(stateToGoTo != -1)
-			sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		/*
+		if(Globals.stateToGoTo.peek() != null)
+			sbg.enterState(Globals.stateToGoTo.poll(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		*/
 
 	}
 	
@@ -138,8 +144,12 @@ public abstract class AbstractGameState extends BasicGameState {
 	protected abstract void timedEvents(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void statesManagement(GameContainer gc, StateBasedGame sbg, int delta);
 	protected abstract void collisions(IA ia);
+	protected abstract void collisions(Emitter entity);
+	protected abstract void collisions(Enemy enemy, CollisionEvent event);
 	
-	
+	/**
+	 * Manage collisions with other entities
+	 */
 	private void manageCollisions() {
 		
 		map.getWorld().addListener(new CollisionListener() {
@@ -157,31 +167,16 @@ public abstract class AbstractGameState extends BasicGameState {
 					PhysicalEntity other = map.getEntityByBody(bodyOther);
 					//If the object is an IA
 					if(other instanceof IA) {
-						
-						/* Idee : creer un attribut "stateToGoTo" initialise a null.
-						 * Mettre une methode "public State stateToGoTo" dans IA qui renvoie l'etat dans lequel
-						 * on passe apres une collision avec l'IA.
-						 * Ici, faire "this.stateToGoTo = ((IA)other).stateToGoTo();
-						 * 
-						 * Dans update, faire :
-						 * if(this.stateToGoTo != null) {
-						 *     sbg.enterState(this.stateToGoTo, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
-						 * }
-						 * 
-						 * Dans leave(), rajouter "this.stateToGoTo = null;"
-						 */
-						
-						
-						/*
-						& * ====================================================
-						((IA)other).onCollision();
-						stateToGoTo = ((IA)other).stateToGoTo();
-						=======================================================
-						*/
-						
 						collisions(((IA)other));
+					}
+					//If the object is a physical entity
+					else if(other instanceof Emitter) {
+						collisions(((Emitter)other));
+					}
+					//If the object is an enemy
+					else if(other instanceof Enemy) {
+						collisions(((Enemy)other), event);
 						
-						//Question question = ((IA)other).getQuestion();
 					}
 				}
 			}

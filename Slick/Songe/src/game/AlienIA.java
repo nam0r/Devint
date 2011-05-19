@@ -1,13 +1,12 @@
 package game;
 
-import main.Songe;
+import nodes.Node;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
-
 import actors.IA;
 
 /**
@@ -16,8 +15,8 @@ import actors.IA;
 public class AlienIA extends IA {
 	private SpriteSheet run;
 	
-	public AlienIA(int x, int y) {
-		super(Conf.IMG_SPRITES_PATH+"all_big.png", 3, x, y, 48, 72, 8);
+	public AlienIA(int x, int y, Node node) {
+		super(Conf.IMG_SPRITES_PATH+"all_big.png", 3, 0, false, x, y, 48, 72, 8, node);
 		body.setMaxVelocity(30, 110);
 		walkingTime = 1200;
 		moveForce = 200;
@@ -53,6 +52,10 @@ public class AlienIA extends IA {
 		
 		//image.drawCentered(getX(), getY()-12);
 		image.draw(getX()-48, getY()-56, 100, 100);
+	}
+	
+	public String toString() {
+		return "Alien";
 	}
 
 }

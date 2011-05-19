@@ -25,7 +25,6 @@ public class MainMenuState extends MenuState {
     	optionsVoices = new String[] {Conf.getVoice("jouer"),Conf.getVoice("scores"),Conf.getVoice("minijeux"),Conf.getVoice("quitter")};
     	title = "Bienvenue dans l'univers de Songe";
     	titleVoice = Conf.getVoice("bienvenue");
-    	music = new Music(Conf.SND_MUSIC_PATH + "fond.ogg");
     }
 
 	@Override
@@ -33,6 +32,7 @@ public class MainMenuState extends MenuState {
 			throws SlickException {
 		super.init(gc, sbg);
     	initSounds();
+    	music = new Music(Conf.SND_MUSIC_PATH + "maintitlecourt.ogg");
 	}
 
 	@Override
@@ -78,13 +78,13 @@ public class MainMenuState extends MenuState {
 		
 		//we set the music volume, depending if voices are playing or not
 		if(!AlUtils.anySoundPlaying()){
-			if(music.getVolume() < 0.8)
+			if(music.getVolume() < 0.7)
 				music.setVolume(music.getVolume()+0.015f);
 			else
-				music.setVolume(0.8f);
+				music.setVolume(0.7f);
 		}
 		else
-			music.setVolume(0.08f);
+			music.setVolume(0.07f);
 	}
 	
 	@Override

@@ -27,8 +27,11 @@ public abstract class AbstractEntity {
 		} catch (SlickException e) {
 			System.err.println("Couldn't load image");
 		}
-	
 	}
+	
+	/*public AbstractEntity() {
+		this.scale = 1.0f;
+	}*/
 	
 	/* **************** *
 	 * Public Functions *

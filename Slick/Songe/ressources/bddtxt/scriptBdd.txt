@@ -1,0 +1,45 @@
+-- Syntaxe :
+-- '#' : Commentaire qui sera affiché dans les logs
+-- '--' : Commentaire qui ne sera pas affiché dans les logs
+-- Il peut y avoir des lignes vides
+-- Toutes les autres lignes seront exécutées comme des requêtes
+
+# Suppression des tables si elles existent
+DROP TABLE IF EXISTS nodes
+DROP TABLE IF EXISTS events
+DROP TABLE IF EXISTS qscen
+DROP TABLE IF EXISTS qcult
+DROP TABLE IF EXISTS choices
+DROP TABLE IF EXISTS ias
+
+# Creation des tables
+
+-- ========== Nodes ==========
+
+CREATE TABLE nodes(id integer primary key, ia integer, type_ia text, node_id integer, FOREIGN KEY(ia) REFERENCES ias(id), FOREIGN KEY(node_id) REFERENCES nodes(id))
+
+-- ========== Evenements lies au noeud ==========
+
+CREATE TABLE events(id integer primary key, id_node int, type text, param text, param2 text, ordre int, FOREIGN KEY(id_node) REFERENCES nodes(id))
+
+-- ========== Questions de scenario ==========
+
+CREATE TABLE qscen(id integer primary key, sound text, text text, yes int, no int, FOREIGN KEY(yes) REFERENCES nodes(id), FOREIGN KEY(no) REFERENCES nodes(id))
+
+-- ========== Questions de culture generale ==========
+
+CREATE TABLE qcult(id integer primary key, sound text, text text, points int)
+
+-- ========== Choix des questions de culture generale ==========
+
+CREATE TABLE choices(id integer primary key, id_question, sound text, text text, true int, FOREIGN KEY(id_question) REFERENCES qcult(id))
+
+-- ========== Intelligences artificielles ==========
+
+CREATE TABLE ias(id integer primary key, walk text, walknum int, jump text, jumpnum int, width int, height int, yoffset int, mainsound text, dejavusound text, troptotsound text)
+
+-- CREATE TABLE noeuds(id integer primary key, question integer, mini_jeu integer)
+-- CREATE TABLE questions(id integer primary key, enonce text, fichiervoix text, scenario integer, points integer)
+-- CREATE TABLE choix(id integer primary key, enonce text, fichiervoix text, id_question integer, position integer, id_noeud integer, correct integer, FOREIGN KEY(id_question) REFERENCES questions(id))
+-- INSERT INTO questions(id, scenario, fichiervoix) VALUES(42, 1, 'voix.ogg')
+-- SELECT * FROM questions

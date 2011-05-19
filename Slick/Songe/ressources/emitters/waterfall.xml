@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system additive="false">
+  <emitter imageName="" name="waterfall">
+    <spawnInterval enabled="true" max="100.0" min="10.0"/>
+    <spawnCount enabled="true" max="100.0" min="100.0"/>
+    <initialLife enabled="true" max="1000.0" min="500.0"/>
+    <initialSize enabled="true" max="10.0" min="10.0"/>
+    <xOffset enabled="true" max="100.0" min="-100.0"/>
+    <yOffset enabled="true" max="300.0" min="-400.0"/>
+    <initialDistance enabled="true" max="0.0" min="0.0"/>
+    <speed enabled="true" max="500.0" min="500.0"/>
+    <length enabled="false" max="-1.0" min="-1.0"/>
+    <spread value="0.0"/>
+    <angularOffset value="182.0"/>
+    <growthFactor value="100.0"/>
+    <gravityFactor value="0.0"/>
+    <startAlpha value="101.0"/>
+    <endAlpha value="0.0"/>
+    <color>
+      <step b="1.0" g="1.0" offset="0.0" r="1.0"/>
+      <step b="1.0" g="1.0" offset="0.0" r="1.0"/>
+      <step b="1.0" g="0.2" offset="1.0" r="0.0"/>
+    </color>
+  </emitter>
+  <emitter imageName="" name="mist">
+    <spawnInterval enabled="false" max="100.0" min="100.0"/>
+    <spawnCount enabled="true" max="20.0" min="20.0"/>
+    <initialLife enabled="false" max="1000.0" min="1000.0"/>
+    <initialSize enabled="true" max="20.0" min="20.0"/>
+    <xOffset enabled="true" max="150.0" min="-150.0"/>
+    <yOffset enabled="true" max="215.0" min="215.0"/>
+    <initialDistance enabled="false" max="0.0" min="0.0"/>
+    <speed enabled="true" max="50.0" min="50.0"/>
+    <length enabled="false" max="1000.0" min="1000.0"/>
+    <spread value="360.0"/>
+    <angularOffset value="0.0"/>
+    <growthFactor value="100.0"/>
+    <gravityFactor value="0.0"/>
+    <startAlpha value="255.0"/>
+    <endAlpha value="27.0"/>
+    <color>
+      <step b="1.0" g="1.0" offset="0.0" r="1.0"/>
+      <step b="0.8" g="0.8" offset="1.0" r="0.8"/>
+    </color>
+  </emitter>
+</system>

@@ -1,10 +1,7 @@
 package bddcreate;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.newdawn.slick.util.ResourceLoader;
@@ -17,7 +14,7 @@ public class DBInteractor extends SQLiteDB {
 	private String query;
 	
 	public DBInteractor() {
-		super("data2");
+		super("data");
 
 		//fromFile("scriptBdd.txt");
 		//fromCmdLine();
