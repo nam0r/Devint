@@ -9,6 +9,7 @@ import java.util.Random;
 
 import utils.Conf;
 import actors.PhysicalEntity;
+import actors.StayingIA;
 import actors.WalkingIA;
 import bdd.SQLiteDB;
 
@@ -49,7 +50,7 @@ public class Node {
 		//ia = new HomerIA(100, 100, this);
 		
 		id_ia = Integer.valueOf(node.get("ia"));
-		if(id_ia >= 0) {
+		if(id_ia != -1) {
 			type_ia = node.get("type_ia");
 			
 			HashMap<String,String> infosIA = bdd.selectSingle("SELECT * FROM ias WHERE id=" + id_ia);
@@ -161,6 +162,10 @@ public class Node {
 	private PhysicalEntity createIA(){
 		if(type_ia.equals("WalkingIA")) {
 			return new WalkingIA(Conf.IMG_SPRITES_PATH + walk, walknum, yoffset, flip, 0, 0, 
+					width, height, mass, this);
+		}
+		else if(type_ia.equals("StayingIA")) {
+			return new StayingIA(Conf.IMG_SPRITES_PATH + walk, walknum, yoffset, flip, 0, 0, 
 					width, height, mass, this);
 		}
 		else if(type_ia.equals("JumpingIA")) {
