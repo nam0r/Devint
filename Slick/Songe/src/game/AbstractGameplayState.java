@@ -213,6 +213,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			voix = new t2s.SIVOXDevint();
 			
 			Globals.nodeHasChanged = true;
+			Globals.nextEvent(sbg);
 			
 		}
 		

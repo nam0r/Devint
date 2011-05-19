@@ -19,7 +19,7 @@ public class Node {
 	private int id;
 	private int node_id;
 	
-	private PhysicalEntity ia;
+	private PhysicalEntity ia = null;
 	private String type_ia;
 	private int id_ia;
 	private String walk;
@@ -49,23 +49,25 @@ public class Node {
 		//ia = new HomerIA(100, 100, this);
 		
 		id_ia = Integer.valueOf(node.get("ia"));
-		type_ia = node.get("type_ia");
-		
-		HashMap<String,String> infosIA = bdd.selectSingle("SELECT * FROM ias WHERE id=" + id_ia);
-		walk = infosIA.get("walk");
-		walknum = Integer.valueOf(infosIA.get("walknum"));
-		jump = infosIA.get("jump");
-		jumpnum = Integer.valueOf(infosIA.get("jumpnum"));
-		width = Integer.valueOf(infosIA.get("width"));
-		height = Integer.valueOf(infosIA.get("height"));
-		yoffset = Integer.valueOf(infosIA.get("yoffset"));
-		mainsound = infosIA.get("mainsound");
-		dejavusound = infosIA.get("dejavusound");
-		troptotsound = infosIA.get("troptotsound");
-		flip = true;
-		mass = 5;
-		
-		ia = getIA();
+		if(id_ia >= 0) {
+			type_ia = node.get("type_ia");
+			
+			HashMap<String,String> infosIA = bdd.selectSingle("SELECT * FROM ias WHERE id=" + id_ia);
+			walk = infosIA.get("walk");
+			walknum = Integer.valueOf(infosIA.get("walknum"));
+			jump = infosIA.get("jump");
+			jumpnum = Integer.valueOf(infosIA.get("jumpnum"));
+			width = Integer.valueOf(infosIA.get("width"));
+			height = Integer.valueOf(infosIA.get("height"));
+			yoffset = Integer.valueOf(infosIA.get("yoffset"));
+			mainsound = infosIA.get("mainsound");
+			dejavusound = infosIA.get("dejavusound");
+			troptotsound = infosIA.get("troptotsound");
+			flip = true;
+			mass = 5;
+			
+			ia = createIA();
+		}
 		
 		/* ****** *
 		 * Events *
@@ -152,7 +154,11 @@ public class Node {
 		return this.node_id;
 	}
 	
-	public PhysicalEntity getIA(){
+	public PhysicalEntity getIA() {
+		return ia;
+	}
+	
+	private PhysicalEntity createIA(){
 		if(type_ia.equals("WalkingIA")) {
 			return new WalkingIA(Conf.IMG_SPRITES_PATH + walk, walknum, yoffset, flip, 0, 0, 
 					width, height, mass, this);

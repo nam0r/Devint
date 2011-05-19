@@ -37,4 +37,86 @@
             <troptot></troptot>
         </sounds>
     </ia>
+    <!-- Vieux -->
+    <ia>
+		<id>3</id>
+        <images>
+            <walk>homeranim_big.png</walk>
+            <walknum>8</walknum>
+            <jump>homeranim_big.png</jump>
+            <jumpnum>1</jumpnum>
+        </images>
+        <size>
+            <width>72</width>
+            <height>130</height>
+            <yoffset>4</yoffset>
+        </size>
+        <sounds>
+            <main>mystic_spirit</main>
+            <dejavu>deja_rencontres</dejavu>
+            <troptot>deja_rencontres</troptot>
+        </sounds>
+    </ia>
+    <!-- IA questions -->
+    <ia>
+		<id>4</id>
+        <images>
+            <walk>homeranim_big.png</walk>
+            <walknum>8</walknum>
+            <jump>homeranim_big.png</jump>
+            <jumpnum>1</jumpnum>
+        </images>
+        <size>
+            <width>72</width>
+            <height>130</height>
+            <yoffset>4</yoffset>
+        </size>
+        <sounds>
+            <main>mystic_spirit</main>
+            <dejavu>deja_rencontres</dejavu>
+            <troptot>deja_rencontres</troptot>
+        </sounds>
+    </ia>
+    
+    <!-- Un homme -->
+    <ia>
+		<id>5</id>
+        <images>
+            <walk>homeranim_big.png</walk>
+            <walknum>8</walknum>
+            <jump>homeranim_big.png</jump>
+            <jumpnum>1</jumpnum>
+        </images>
+        <size>
+            <width>72</width>
+            <height>130</height>
+            <yoffset>4</yoffset>
+        </size>
+        <sounds>
+            <main>mystic_spirit</main>
+            <dejavu>deja_rencontres</dejavu>
+            <troptot>deja_rencontres</troptot>
+        </sounds>
+    </ia>
+    
+    <!-- Aurore -->
+    <ia>
+		<id>6</id>
+        <images>
+            <walk>homeranim_big.png</walk>
+            <walknum>8</walknum>
+            <jump>homeranim_big.png</jump>
+            <jumpnum>1</jumpnum>
+        </images>
+        <size>
+            <width>72</width>
+            <height>130</height>
+            <yoffset>4</yoffset>
+        </size>
+        <sounds>
+            <main>mystic_spirit</main>
+            <dejavu>deja_rencontres</dejavu>
+            <troptot>deja_rencontres</troptot>
+        </sounds>
+    </ia>
 </ias>
