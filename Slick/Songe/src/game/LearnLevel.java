@@ -42,6 +42,7 @@ public class LearnLevel extends AbstractGameplayState {
 			throws SlickException {
 		super.update(gc, sbg, delta);
 		//ora.setPosition(Globals.player.getX(), Globals.player.getY()+Globals.player.getHeight()/2);
+		
 	}
 	
 	@Override

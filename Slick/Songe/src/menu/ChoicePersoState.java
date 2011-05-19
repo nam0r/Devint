@@ -60,9 +60,9 @@ public class ChoicePersoState extends ChoiceMenuState {
 					Color.black), new FadeInTransition(Color.black));
 			//we first play a tutorial to learn playing the game
 			else{
-				Globals.dialogNextState = Songe.LEARNGAMEPLAYSTATE;
-				Globals.dialog = new Dialog("learn1", "blue_spirit_emit.xml");
-				sbg.enterState(Songe.DIALOGSTATE, new FadeOutTransition(
+				/*Globals.dialogNextState = Songe.LEARNGAMEPLAYSTATE;
+				Globals.dialog = new Dialog("learn1", "blue_spirit_emit.xml");*/
+				sbg.enterState(Songe.LEARNGAMEPLAYSTATE, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 			}
 		} else if (input.isKeyPressed(Input.KEY_ESCAPE)) {

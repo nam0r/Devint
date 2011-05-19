@@ -7,12 +7,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import sound.AlUtils;
 import sound.Sound2;
+import utils.Conf;
 import utils.Globals;
 
 public class CheckTonScore extends BasicGameState {
 	private int stateID;
 	private Sound2 gagne;
+	private Sound2 perdu;
 
 
 	public CheckTonScore(int stateID) {
@@ -27,14 +30,16 @@ public class CheckTonScore extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		
+		gagne = new Sound2(Conf.getVoice("oui"));
+		perdu = new Sound2(Conf.getVoice("non"));
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
-		if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+		if ((!gagne.playing() && !perdu.playing() && (gagne.playedOnce() || perdu.playedOnce())) 
+			|| input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 			Globals.nextEvent(sbg);
 		}
 	}
@@ -53,6 +58,10 @@ public class CheckTonScore extends BasicGameState {
 	
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
-		
+		AlUtils.resetAlListener();
+		if(Globals.score < 10)
+			perdu.play();
+		else
+			gagne.play();
 	}
 }

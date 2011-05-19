@@ -32,19 +32,5 @@ public class StayingIA extends IA {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-
-		setMoving(true);
-
-		walkingTimer += delta;
-
-		if (walkingTimer > walkingTime) {
-			walkingTimer = 0;
-			way = (way == Way.LEFT) ? Way.RIGHT : Way.LEFT; // On change de sens
-		}
-
-		if (way == Way.LEFT)
-			moveLeft();
-		else
-			moveRight();
 	}
 }

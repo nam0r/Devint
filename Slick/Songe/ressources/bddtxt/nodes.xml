@@ -63,12 +63,12 @@
 	<!-- Noeuds de 1xxxx => noeuds de didacticiel -->
 	<node>
 		<id>10000</id>
-		<ia>4</ia>
+		<ia>-1</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
 				<type>D</type>
-				<param>learn2</param>
+				<param>learn1</param>
 				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
@@ -81,7 +81,7 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>learn3</param>
+				<param>learn2</param>
 				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
@@ -94,7 +94,7 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>learn4</param>
+				<param>learn3</param>
 				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
@@ -107,7 +107,7 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>learn5</param>
+				<param>learn4</param>
 				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
@@ -120,7 +120,7 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>learn6</param>
+				<param>learn5</param>
 				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
@@ -133,11 +133,24 @@
 		<events>
 			<event>
 				<type>D</type>
+				<param>learn6</param>
+				<param2>blue_spirit_emit.xml</param2>
+			</event>
+		</events>
+		<node_id>10006</node_id>
+	</node>
+	<node>
+		<id>10006</id>
+		<ia>4</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+			<event>
+				<type>D</type>
 				<param>learn7</param>
 				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
-		<node_id>1</node_id>
+		<node_id>40000</node_id>
 	</node>
 	
 	<!-- ************************************************************************ -->
