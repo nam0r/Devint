@@ -236,7 +236,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 				map.addEntity(ia);
 			}
 			else {
-				System.err.println("The current node doesn't have an ia.");
+				System.err.println("The current (" + Globals.node.getID() + ") node doesn't have an ia.");
 			}
 			
 			Globals.nodeHasChanged = false;
