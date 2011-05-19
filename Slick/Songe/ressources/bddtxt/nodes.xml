@@ -282,7 +282,7 @@
 				<param2></param2>
 			</event>
 		</events>
-		<node_id></node_id>
+		<node_id>-1</node_id>
 	</node>
 	<node>
 		<id>40005</id>

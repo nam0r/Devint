@@ -82,7 +82,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			case 1: // Timéo
 				return new Alien(30001);
 			case 2: // Tux
-				return new Tux(1);
+				return new Tux(40000);
 			case 3: // Lamasticot
 				return new Lamasticot(1);
 			default: // Default
