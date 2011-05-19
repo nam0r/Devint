@@ -104,11 +104,11 @@
             </choice>
             <choice>
                 <text>Le cochon</text>
-                <sound>Le pingouin</sound>
+                <sound>cochon</sound>
                 <true>0</true>
             </choice>
             <choice>
-                <text>Quatre</text>
+                <text>Le pingouin</text>
                 <sound>pingouin</sound>
                 <true>1</true>
             </choice>
