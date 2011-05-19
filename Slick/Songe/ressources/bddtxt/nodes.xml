@@ -63,7 +63,7 @@
 	<!-- Noeuds de 1xxxx => noeuds de didacticiel -->
 	<node>
 		<id>10000</id>
-		<ia>2</ia>
+		<ia>4</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
@@ -76,7 +76,7 @@
 	</node>
 	<node>
 		<id>10001</id>
-		<ia>2</ia>
+		<ia>4</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
@@ -89,7 +89,7 @@
 	</node>
 	<node>
 		<id>10002</id>
-		<ia>2</ia>
+		<ia>4</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
@@ -102,7 +102,7 @@
 	</node>
 	<node>
 		<id>10003</id>
-		<ia>2</ia>
+		<ia>4</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
@@ -115,7 +115,7 @@
 	</node>
 	<node>
 		<id>10004</id>
-		<ia>2</ia>
+		<ia>4</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
@@ -128,7 +128,7 @@
 	</node>
 	<node>
 		<id>10005</id>
-		<ia>2</ia>
+		<ia>4</ia>
 		<type_ia>Spirit</type_ia>
 		<events>
 			<event>
@@ -219,7 +219,115 @@
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 4xxxx => noeuds de Tux -->
 	
-	
+	<node>
+		<id>40000</id>
+		<ia>-1</ia>
+		<type_ia></type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>40000</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>40001</node_id>
+	</node>
+	<node>
+		<id>40001</id>
+		<ia>5</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>C</type>
+				<param></param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>40002</node_id>
+	</node>
+	<node>
+		<id>40002</id>
+		<ia>5</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>C</type>
+				<param></param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>40003</node_id>
+	</node>
+	<node>
+		<id>40003</id>
+		<ia>7</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>40003</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>40004</node_id>
+	</node>
+	<node>
+		<id>40004</id>
+		<ia>7</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>S</type>
+				<param>40004</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id></node_id>
+	</node>
+	<node>
+		<id>40005</id>
+		<ia>8</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>40005</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>40007</node_id>
+	</node>
+	<node>
+		<id>40006</id>
+		<ia>6</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>40006</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>40007</node_id>
+	</node>
+	<node>
+		<id>40007</id>
+		<ia>3</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>40007</param>
+				<param2>interrogation.png</param2>
+			</event>
+			<event>
+				<type>T</type>
+				<param>11</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>40008</node_id>
+	</node>
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 4xxxx => noeuds de Lamasticot -->
 	

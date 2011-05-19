@@ -218,6 +218,7 @@ public class HoverCave extends BasicGameState {
 				playTheGame = true;
 				sonG.setVolume(600f, 0);
 				sonD.setVolume(600f, 1);
+				
 				//sonG.setPitch(0.8f, 0);
 				//sonD.setPitch(0.8f, 1);
 				enterSound.stop();
@@ -273,6 +274,7 @@ public class HoverCave extends BasicGameState {
 		
 		//Sounds
 		AlUtils.setAlListenerPosition((float)(WALL_RES + dudeSize.width/2), dudeHeight, 0f);
+		
 		if (movingUp)
 			AlUtils.setAlListenerVelocity((float)(WALL_RES + dudeSize.width/2), -20, 0f);
 		else 

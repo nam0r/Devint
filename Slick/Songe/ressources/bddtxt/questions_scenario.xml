@@ -1,10 +1,11 @@
 <questions>
+	<!-- Tux (40000 -> 49999 -->
     <question>
-        <id>1</id>
-        <sound>question_grand_pere</sound>
-        <text>Quel est l'âge de mon grand père ?</text>
-        <yes>1</yes>
-        <no>2</no>
+        <id>40004</id>
+        <sound>question_scen1</sound>
+        <text>As-tu peur du Lamasticot ?</text>
+        <yes>40005</yes>
+        <no>40006</no>
     </question>
     
     
