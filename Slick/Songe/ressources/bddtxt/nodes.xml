@@ -256,7 +256,7 @@
 	<node>
 		<id>40001</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
@@ -269,7 +269,7 @@
 	<node>
 		<id>40002</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
@@ -287,7 +287,7 @@
 			<event>
 				<type>D</type>
 				<param>40003</param>
-				<param2>interrogation.png</param2>
+				<param2>homme.png</param2>
 			</event>
 		</events>
 		<node_id>40004</node_id>
@@ -326,7 +326,7 @@
 			<event>
 				<type>D</type>
 				<param>40006</param>
-				<param2>interrogation.png</param2>
+				<param2>vieux.png</param2>
 			</event>
 		</events>
 		<node_id>40007</node_id>
@@ -398,7 +398,7 @@
 	<node>
 		<id>40010</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
@@ -411,7 +411,7 @@
 	<node>
 		<id>40011</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
@@ -433,7 +433,164 @@
 	</node>
 
 	<!-- ************************************************************************ -->
-	<!-- Noeuds de 4xxxx => noeuds de Lamasticot -->
-	
+	<!-- Noeuds de 5xxxx => noeuds de Lamasticot -->
+	<node>
+		<id>50000</id>
+		<ia>-1</ia>
+		<type_ia></type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50000</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>50001</node_id>
+	</node>
+	<node>
+		<id>50001</id>
+		<ia>5</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>C</type>
+				<param></param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>50002</node_id>
+	</node>
+	<node>
+		<id>50002</id>
+		<ia>1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50002</param>
+				<param2>interrogation.png</param2>
+			</event>
+			<event>
+				<type>T</type>
+				<param>4</param>
+				<param2></param2>
+			</event>
+			<event>
+				<type>D</type>
+				<param>50002_2</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>50003</node_id>
+	</node>
+	<node>
+		<id>50003</id>
+		<ia>2</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50003</param>
+				<param2>interrogation.png</param2>
+				<type>T</type>
+				<param>11</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>50004</node_id>
+	</node>
+	<node>
+		<id>50004</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50004</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>50006</node_id>
+	</node>
+	<node>
+		<id>50005</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50005</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>50006</node_id>
+	</node>
+	<node>
+		<id>50006</id>
+		<ia>7</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50006</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>50007</node_id>
+	</node>
+	<node>
+		<id>50007</id>
+		<ia>0</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50007</param>
+				<param2>interrogation.png</param2>
+			</event>
+			<event>
+				<type>T</type>
+				<param>11</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>50008</node_id>
+	</node>
+	<node>
+		<id>50008</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50008</param>
+				<param2>interrogation.png</param2>
+			</event>
+			<event>
+				<type>T</type>
+				<param>5</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>-1</node_id>
+	</node>
+	<node>
+		<id>50009</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50009</param>
+				<param2>interrogation.png</param2>
+			</event>
+			<event>
+				<type>T</type>
+				<param>5</param>
+				<param2></param2>
+			</event>
+		</events>
+		<node_id>-1</node_id>
+	</node>
 	
 </nodes>
