@@ -76,6 +76,7 @@ public class LearnLevel extends AbstractGameplayState {
 			((Enemy)enemy).stopSound();
 			// reset main player
 			Globals.resetMainPlayer();
+			Globals.node = new Node(Globals.player.getNodeId());
 			sbg.enterState(Songe.MAINLEVEL, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		}
