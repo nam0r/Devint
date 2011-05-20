@@ -8,6 +8,8 @@ import game.MarioIA;
 import game.Spirit;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import net.phys2d.math.ROVector2f;
@@ -26,6 +28,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import bdd.SQLiteDB;
 
 import actors.MainPlayer;
 import actors.PhysicalEntity;
@@ -81,6 +85,9 @@ public class Globals {
 	/** Specifies a special state to go to from the dialog state */
 	public static int dialogNextState = -1;
 
+	public static ArrayList<HashMap<String,String>> questionsNotAsked;
+	
+	public static SQLiteDB bdd = new SQLiteDB("data");
 	/**
 	 * Returns an entity from its ID
 	 * @param entityID the name-ID of the entity to create in the map
@@ -166,6 +173,10 @@ public class Globals {
 	
 	public static void nextEvent(StateBasedGame sbg){
 		Globals.nextEvent(sbg, -1);
+	}
+	
+	public static void initQuestionsNotAsked() {
+		Globals.questionsNotAsked = Globals.bdd.select("SELECT * FROM qcult");
 	}
 	
 }

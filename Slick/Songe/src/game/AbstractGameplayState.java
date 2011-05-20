@@ -199,6 +199,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		if (Globals.returnState != stateID) {
 			//Globals.stateToGoTo.clear();
 			Globals.nodes.clear();
+			Globals.initQuestionsNotAsked();
 			Globals.started = true;
 			
 			createMap();

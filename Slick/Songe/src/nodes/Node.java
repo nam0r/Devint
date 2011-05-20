@@ -8,14 +8,12 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import utils.Conf;
+import utils.Globals;
 import actors.PhysicalEntity;
 import actors.StayingIA;
 import actors.WalkingIA;
-import bdd.SQLiteDB;
 
 public class Node {
-	
-	private SQLiteDB bdd;
 	
 	private int id;
 	private int node_id;
@@ -39,8 +37,7 @@ public class Node {
 	private LinkedList<Event> events;
 	
 	public Node(int id) {
-		bdd = new SQLiteDB("data");
-		HashMap<String,String> node = bdd.selectSingle("SELECT * FROM nodes WHERE id=" + id);
+		HashMap<String,String> node = Globals.bdd.selectSingle("SELECT * FROM nodes WHERE id=" + id);
 		
 		this.id = id;
 		this.node_id = Integer.valueOf(node.get("node_id"));
@@ -53,7 +50,7 @@ public class Node {
 		if(id_ia != -1) {
 			type_ia = node.get("type_ia");
 			
-			HashMap<String,String> infosIA = bdd.selectSingle("SELECT * FROM ias WHERE id=" + id_ia);
+			HashMap<String,String> infosIA = Globals.bdd.selectSingle("SELECT * FROM ias WHERE id=" + id_ia);
 			walk = infosIA.get("walk");
 			walknum = Integer.valueOf(infosIA.get("walknum"));
 			jump = infosIA.get("jump");
@@ -75,7 +72,7 @@ public class Node {
 		 * ****** */
 		this.events = new LinkedList<Event>();
 		
-		ArrayList<HashMap<String,String>> eventsProperties = bdd.select("SELECT * FROM events WHERE id_node=" + id + " ORDER BY ordre");
+		ArrayList<HashMap<String,String>> eventsProperties = Globals.bdd.select("SELECT * FROM events WHERE id_node=" + id + " ORDER BY ordre");
 		
 		for(HashMap<String,String> event : eventsProperties) {
 			String type = event.get("type");
@@ -89,7 +86,7 @@ public class Node {
 			// Scenario
 			else if(type.equals("S")) {
 				int idQuestion = Integer.valueOf(event.get("param"));
-				HashMap<String,String> question = bdd.selectSingle("SELECT * FROM qscen WHERE id=" + idQuestion);
+				HashMap<String,String> question = Globals.bdd.selectSingle("SELECT * FROM qscen WHERE id=" + idQuestion);
 				
 				String sound = question.get("sound");
 				String text = question.get("text");
@@ -100,19 +97,20 @@ public class Node {
 			}
 			// Culture
 			else if(type.equals("C")) {
-				ArrayList<HashMap<String,String>> ids = bdd.select("SELECT id FROM qcult");
 				
+				// Select a random indice in questionsNotAsked
 				Random r = new Random();
-				int indice = r.nextInt(ids.size());
+				int indice = r.nextInt(Globals.questionsNotAsked.size());
 				
-				HashMap<String,String> question = bdd.selectSingle("SELECT * FROM qcult WHERE id=" + ids.get(indice).get("id"));
+				// get the corresponding question
+				HashMap<String,String> question = Globals.questionsNotAsked.get(indice);
 			
 				String sound = question.get("sound");
 				String text = question.get("text");
 				int points = Integer.valueOf(question.get("points"));
 				QuestionCulture theQuestion = new QuestionCulture(text, sound, points);
 				//choices added
-				ArrayList<HashMap<String,String>> choices = bdd.select("SELECT * FROM choices WHERE id_question=" + ids.get(indice).get("id"));
+				ArrayList<HashMap<String,String>> choices = Globals.bdd.select("SELECT * FROM choices WHERE id_question=" + Globals.questionsNotAsked.get(indice).get("id"));
 				for(HashMap<String, String> c : choices){
 					if(Integer.valueOf(c.get("true")) == 0)
 						theQuestion.addChoice(new ChoiceCulture(c.get("text"), c.get("sound"), false));
@@ -120,6 +118,9 @@ public class Node {
 						theQuestion.addChoice(new ChoiceCulture(c.get("text"), c.get("sound"), true));
 				}
 				events.offer(theQuestion);
+				
+				// Finally, remove the question: it has  been asked
+				Globals.questionsNotAsked.remove(indice);
 			}
 			// Transition
 			else if(type.equals("Transition")) {
