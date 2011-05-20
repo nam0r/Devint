@@ -2,6 +2,7 @@ package utils;
 
 import game.Alien;
 import game.AlienIA;
+import game.Aurore;
 import game.Crate;
 import game.Emitter;
 import game.HomerIA;
@@ -188,8 +189,8 @@ public class Globals {
 	 */
 	public static void resetMainPlayer() {
 		if (Globals.hasAlreadyPlayed) {
-			if (Globals.player instanceof Tux)// Aurore
-				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
+			if (Globals.player instanceof Aurore)// Aurore
+				Globals.player = new Aurore(40000);
 			if (Globals.player instanceof Timeo)// Timéo
 				Globals.player = new Timeo(40000);
 			if (Globals.player instanceof Tux)// Tux
@@ -198,8 +199,8 @@ public class Globals {
 				Globals.player = new Lamasticot(40000);
 		}
 		else{
-			if (Globals.player instanceof Tux)// Aurore
-				Globals.player = new Tux(10000, "tux_walk_white.png", "tux_jmp_white.png");
+			if (Globals.player instanceof Aurore)// Aurore
+				Globals.player = new Aurore(10000);
 			if (Globals.player instanceof Timeo)// Timéo
 				Globals.player = new Timeo(10000);
 			if (Globals.player instanceof Tux)// Tux

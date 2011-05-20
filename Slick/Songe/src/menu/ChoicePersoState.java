@@ -1,6 +1,7 @@
 package menu;
 
 import game.Alien;
+import game.Aurore;
 import game.Lamasticot;
 import game.Timeo;
 import game.Tux;
@@ -81,7 +82,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 		if (Globals.hasAlreadyPlayed) {
 			switch (selected) {
 			case 0: // Aurore
-				return new Tux(1);
+				return new Aurore(40000);
 			case 1: // Timéo
 				return new Timeo(40000);
 			case 2: // Tux
@@ -94,7 +95,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 		} else {
 			switch (selected) {
 			case 0: // Aurore
-				return new Tux(1, "tux_walk_white.png", "tux_jmp_white.png");
+				return new Aurore(40000);
 			case 1: // Timéo
 				return new Timeo(40000);
 			case 2: // Tux
