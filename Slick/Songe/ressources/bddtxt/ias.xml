@@ -136,15 +136,15 @@
     <ia>
 		<id>6</id>
         <images>
-            <walk>homeranim_big.png</walk>
-            <walknum>8</walknum>
-            <jump>homeranim_big.png</jump>
+            <walk>vieux_sprite.png</walk>
+            <walknum>1</walknum>
+            <jump>vieux_sprite.png</jump>
             <jumpnum>1</jumpnum>
         </images>
         <size>
-            <width>72</width>
-            <height>130</height>
-            <yoffset>4</yoffset>
+            <width>90</width>
+            <height>107</height>
+            <yoffset>0</yoffset>
         </size>
         <sounds>
             <main>mystic_spirit</main>
@@ -157,15 +157,15 @@
     <ia>
 		<id>7</id>
         <images>
-            <walk>homeranim_big.png</walk>
-            <walknum>8</walknum>
-            <jump>homeranim_big.png</jump>
+            <walk>homme_sprite.png</walk>
+            <walknum>1</walknum>
+            <jump>homme_sprite.png</jump>
             <jumpnum>1</jumpnum>
         </images>
         <size>
-            <width>72</width>
-            <height>130</height>
-            <yoffset>4</yoffset>
+            <width>100</width>
+            <height>144</height>
+            <yoffset>0</yoffset>
         </size>
         <sounds>
             <main>mystic_spirit</main>

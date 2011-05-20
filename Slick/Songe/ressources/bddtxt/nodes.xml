@@ -256,7 +256,7 @@
 	<node>
 		<id>40001</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
@@ -269,7 +269,7 @@
 	<node>
 		<id>40002</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
@@ -287,7 +287,7 @@
 			<event>
 				<type>D</type>
 				<param>40003</param>
-				<param2>interrogation.png</param2>
+				<param2>homme.png</param2>
 			</event>
 		</events>
 		<node_id>40004</node_id>
@@ -326,7 +326,7 @@
 			<event>
 				<type>D</type>
 				<param>40006</param>
-				<param2>interrogation.png</param2>
+				<param2>vieux.png</param2>
 			</event>
 		</events>
 		<node_id>40007</node_id>
@@ -398,7 +398,7 @@
 	<node>
 		<id>40010</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
@@ -411,7 +411,7 @@
 	<node>
 		<id>40011</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
