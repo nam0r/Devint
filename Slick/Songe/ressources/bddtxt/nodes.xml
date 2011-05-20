@@ -287,7 +287,7 @@
 			<event>
 				<type>D</type>
 				<param>40003</param>
-				<param2>interrogation.png</param2>
+				<param2>homme.png</param2>
 			</event>
 		</events>
 		<node_id>40004</node_id>
@@ -326,7 +326,7 @@
 			<event>
 				<type>D</type>
 				<param>40006</param>
-				<param2>interrogation.png</param2>
+				<param2>vieux.png</param2>
 			</event>
 		</events>
 		<node_id>40007</node_id>
