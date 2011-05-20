@@ -80,7 +80,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 		if (Globals.hasAlreadyPlayed) {
 			switch (selected) {
 			case 0: // Aurore
-				return new Aurore(40000);
+				return new Aurore(20000);
 			case 1: // Timéo
 				return new Timeo(40000);
 			case 2: // Tux
@@ -93,7 +93,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 		} else {
 			switch (selected) {
 			case 0: // Aurore
-				return new Aurore(40000);
+				return new Aurore(20000);
 			case 1: // Timéo
 				return new Timeo(40000);
 			case 2: // Tux

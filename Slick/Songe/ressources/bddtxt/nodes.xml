@@ -183,7 +183,7 @@
 	<node>
 		<id>20002</id>
 		<ia>6</ia>
-		<type_ia>WalkingIA</type_ia>
+		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
@@ -207,12 +207,12 @@
 	<node>
 		<id>20004</id>
 		<ia>7</ia>
-		<type_ia>WalkingIA</type_ia>
+		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
 				<param>20004</param>
-				<param>hommme.png</param>
+				<param>homme.png</param>
 			</event>
 		</events>
 		<node_id>20005</node_id>
@@ -225,7 +225,7 @@
 			<event>
 				<type>D</type>
 				<param>50003</param>
-				<param>lamasticot.png</param>
+				<param>lama.png</param>
 			</event>
 		</events>
 		<node_id>20006</node_id>
@@ -238,7 +238,7 @@
 			<event>
 				<type>D</type>
 				<param>20006</param>
-				<param>lamasticot.png</param>
+				<param>lama.png</param>
 			</event>
 		</events>
 		<node_id>20007</node_id>
@@ -246,7 +246,7 @@
 	<node>
 		<id>20007</id>
 		<ia>7</ia>
-		<type_ia>WalkingIA</type_ia>
+		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
@@ -264,7 +264,7 @@
 			</event>
 			<event>
 				<type>T</type>
-				<param>4</param>
+				<param>5</param>
 			</event>
 		</events>
 		<node_id>-1</node_id>
@@ -558,7 +558,7 @@
 			<event>
 				<type>D</type>
 				<param>50001</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 		</events>
 		<node_id>50002</node_id>
@@ -566,12 +566,10 @@
 	<node>
 		<id>50002</id>
 		<ia>5</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>C</type>
-				<param></param>
-				<param></param>
 			</event>
 		</events>
 		<node_id>50003</node_id>
@@ -579,12 +577,12 @@
 	<node>
 		<id>50003</id>
 		<ia>1</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
 				<param>50003</param>
-				<param>interrogation.png</param>
+				<param>aurore.png</param>
 			</event>
 			<event>
 				<type>T</type>
@@ -593,7 +591,7 @@
 			<event>
 				<type>D</type>
 				<param>50003_2</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 		</events>
 		<node_id>50004</node_id>
@@ -601,12 +599,12 @@
 	<node>
 		<id>50004</id>
 		<ia>2</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
 				<param>40007</param>
-				<param>interrogation.png</param>
+				<param>tux.png</param>
 			</event>
 			<event>
 				<type>TS</type>
@@ -625,7 +623,7 @@
 			<event>
 				<type>D</type>
 				<param>40008</param>
-				<param></param>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>50007</node_id>
@@ -651,7 +649,7 @@
 			<event>
 				<type>D</type>
 				<param>50007</param>
-				<param></param>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>50008</node_id>
