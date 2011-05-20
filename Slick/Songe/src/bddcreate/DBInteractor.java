@@ -44,7 +44,7 @@ public class DBInteractor extends SQLiteDB {
 		}*/
 		reader = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(filename)));
 		try {
-			while ((query = reader.readLine()) != null){
+			while ((query = reader.readLine()) != null) {
 				if(query.startsWith("#")) {
 					System.out.println("===>" + query.substring(1));
 				}

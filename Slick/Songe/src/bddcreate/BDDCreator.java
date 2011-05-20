@@ -53,11 +53,14 @@ public class BDDCreator {
 			XMLElementList eventsList = nodesList.get(i).getChildrenByName("events").get(0).getChildrenByName("event");
 			for(int j=0; j<eventsList.size(); j++) {
 				String type = eventsList.get(j).getChildrenByName("type").get(0).getContent();
-				String param = eventsList.get(j).getChildrenByName("param").get(0).getContent();
-				String param2 = eventsList.get(j).getChildrenByName("param2").get(0).getContent();
+				XMLElementList paramList = eventsList.get(j).getChildrenByName("param");
+				String param = (paramList.size() > 0) ? paramList.get(0).getContent() : "";
+				String param2 = (paramList.size() > 1) ? paramList.get(1).getContent() : "";
+				String param3 = (paramList.size() > 2) ? paramList.get(2).getContent() : "";
 				
-				String queryEvent = "INSERT INTO events(id_node, type, param, param2, ordre) " +
-				"VALUES(" + id + ", '" +	escapeQuotes(type) + "', '" + escapeQuotes(param)+ "', '" + escapeQuotes(param2) + "', " + j + ")";
+				String queryEvent = "INSERT INTO events(id_node, type, param, param2, param3, ordre) " +
+				"VALUES(" + id + ", '" +	escapeQuotes(type) + "', '" + escapeQuotes(param) + "', '" 
+				+ escapeQuotes(param2) + "', '" + escapeQuotes(param3) + "', " + j + ")";
 				
 				// Insert the node
 				db.executeQuery(queryEvent);
