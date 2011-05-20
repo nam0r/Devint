@@ -196,7 +196,7 @@ public class Globals {
 	public static void resetMainPlayer() {
 		if (Globals.hasAlreadyPlayed) {
 			if (Globals.player instanceof Aurore)// Aurore
-				Globals.player = new Aurore(40000);
+				Globals.player = new Aurore(20000);
 			if (Globals.player instanceof Timeo)// Timéo
 				Globals.player = new Timeo(40000);
 			if (Globals.player instanceof Tux)// Tux
@@ -206,7 +206,7 @@ public class Globals {
 		}
 		else{
 			if (Globals.player instanceof Aurore)// Aurore
-				Globals.player = new Aurore(40000);
+				Globals.player = new Aurore(20000);
 			if (Globals.player instanceof Timeo)// Timéo
 				Globals.player = new Timeo(40000);
 			if (Globals.player instanceof Tux)// Tux

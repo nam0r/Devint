@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 import utils.Conf;
+import utils.Globals;
 import actors.MainPlayer;
 
 /**
@@ -74,7 +75,8 @@ public class Timeo extends MainPlayer {
 		}
 		
 		//image.drawCentered(getX(), getY()-12);
-		image.draw(getX()-width/2, getY()-height/2, width, height);
+		if(!Globals.invulnerable || Globals.invulnerableTimer%2==1)
+			image.draw(getX()-width/2, getY()-height/2, width, height);
 	}
 
 }
