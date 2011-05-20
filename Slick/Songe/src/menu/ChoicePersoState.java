@@ -1,12 +1,10 @@
 package menu;
 
-import game.Alien;
 import game.Aurore;
 import game.Lamasticot;
 import game.Timeo;
 import game.Tux;
 import main.Songe;
-import nodes.Dialog;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -88,7 +86,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			case 2: // Tux
 				return new Tux(40000);
 			case 3: // Lamasticot
-				return new Lamasticot(40000);
+				return new Lamasticot(50000);
 			default: // Default
 				return new Tux(1);
 			}
@@ -101,7 +99,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			case 2: // Tux
 				return new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
 			case 3: // Lamasticot
-				return new Lamasticot(1);
+				return new Lamasticot(50000);
 			default: // Default
 				return new Tux(1, "tux_walk_white.png", "tux_jmp_white.png");
 			}

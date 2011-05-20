@@ -196,7 +196,7 @@ public class Globals {
 			if (Globals.player instanceof Tux)// Tux
 				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
 			if (Globals.player instanceof Lamasticot)// Lamasticot
-				Globals.player = new Lamasticot(40000);
+				Globals.player = new Lamasticot(50000);
 		}
 		else{
 			if (Globals.player instanceof Aurore)// Aurore

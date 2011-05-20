@@ -154,7 +154,19 @@
 	</node>
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 2xxxx => noeuds d'Aurore -->
-	
+	<node>
+		<id>20000</id>
+		<ia>-1</ia>
+		<type_ia>WalkingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>20000</param>
+				<param2>interrogation.png</param2>
+			</event>
+		</events>
+		<node_id>20001</node_id>
+	</node>
 	
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 3xxxx => noeuds de Timéo -->
