@@ -273,14 +273,28 @@
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 3xxxx => noeuds de Timéo -->
 	<node>
+		<id>30000</id>
+		<ia>-1</ia>
+		<type_ia>WalkingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>30000</param>
+				<param>interrogation.png</param>
+			</event>
+		</events>
+		<node_id>30001</node_id>
+	</node>
+	
+	<node>
 		<id>30001</id>
 		<ia>-1</ia>
 		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param><!-- auroreTimeo1 -->
-				<param>interrogation.png</param>
+				<param>30001</param>
+				<param>aurore.png</param>
 			</event>
 		</events>
 		<node_id>30002</node_id>
@@ -288,12 +302,12 @@
 	
 	<node>
 		<id>30002</id>
-		<ia>3</ia>
+		<ia>-1</ia>
 		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
-				<param>non</param><!-- vieuxTimeo1 -->
+				<param>30002</param>
 				<param>interrogation.png</param>
 			</event>
 		</events>
@@ -302,13 +316,13 @@
 	
 	<node>
 		<id>30003</id>
-		<ia>4</ia>
-		<type_ia>WalkingIA</type_ia>
+		<ia>6</ia>
+		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
-				<type>C</type>
-				<param></param>
-				<param></param>
+				<type>D</type>
+				<param>30003</param>
+				<param>vieux.png</param>
 			</event>
 		</events>
 		<node_id>30004</node_id>
@@ -317,12 +331,10 @@
 	<node>
 		<id>30004</id>
 		<ia>5</ia>
-		<type_ia>WalkingIA</type_ia>
+		<type_ia></type_ia>
 		<events>
 			<event>
-				<type>D</type>
-				<param>non</param><!-- hommeTimeo1 -->
-				<param>interrogation.png</param>
+				<type>C</type>
 			</event>
 		</events>
 		<node_id>30005</node_id>
@@ -330,16 +342,164 @@
 	
 	<node>
 		<id>30005</id>
-		<ia>-1</ia>
-		<type_ia></type_ia>
+		<ia>7</ia>
+		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
-				<param>oui</param><!-- auroreTimeo2 -->
-				<param>interrogation.png</param>
+				<param>30005</param>
+				<param>homme.png</param>
 			</event>
 		</events>
 		<node_id>30006</node_id>
+	</node>
+	
+	<node>
+		<id>30006</id>
+		<ia>1</ia>
+		<type_ia>WalkingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>30006</param>
+				<param>aurore.png</param>
+			</event>
+		</events>
+		<node_id>30007</node_id>
+	</node>
+	
+	<node>
+		<id>30007</id>
+		<ia>5</ia>
+		<type_ia>WalkingIA</type_ia>
+		<events>
+			<event>
+				<type>C</type>
+			</event>
+		</events>
+		<node_id>30008</node_id>
+	</node>
+	
+	<node>
+		<id>30008</id>
+		<ia>7</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>30008</param>
+				<param>homme.png</param>
+			</event>
+		</events>
+		<node_id>30009</node_id>
+	</node>
+	
+	<node>
+		<id>30009</id>
+		<ia>5</ia>
+		<type_ia>WalkingIA</type_ia>
+		<events>
+			<event>
+				<type>C</type>
+			</event>
+		</events>
+		<node_id>30010</node_id>
+	</node>
+	
+	<node>
+		<id>30010</id>
+		<ia>6</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>30010</param>
+				<param>vieux.png</param>
+			</event>
+		</events>
+		<node_id>30011</node_id>
+	</node>
+	
+	<node>
+		<id>30011</id>
+		<ia>5</ia>
+		<type_ia>WalkingIA</type_ia>
+		<events>
+			<event>
+				<type>C</type>
+			</event>
+		</events>
+		<node_id>30012</node_id>
+	</node>
+	
+	<node>
+		<id>30012</id>
+		<ia>3</ia>
+		<type_ia>WalkingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50009</param>
+				<param>lama.png</param>
+			</event>
+			<event>
+				<type>TS</type>
+				<param>11</param>
+				<param>30013</param>
+				<param>30014</param>
+			</event>
+		</events>
+		<node_id>-1</node_id>
+	</node>
+	
+	<node>
+		<id>30013</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>30013</param>
+				<param>lama.png</param>
+			</event>
+		</events>
+		<node_id>30015</node_id>
+	</node>
+	
+	<node>
+		<id>30014</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>30014</param>
+				<param>lama.png</param>
+			</event>
+		</events>
+		<node_id>30015</node_id>
+	</node>
+	
+	<node>
+		<id>30015</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>30015</param>
+				<param>lama.png</param>
+			</event>
+			<event>
+				<type>T</type>
+				<param>4</param>
+			</event>
+			<event>
+				<type>T</type>
+				<param>5</param>
+			</event>
+		</events>
+		<node_id>-1</node_id>
 	</node>
 	
 	<!-- ************************************************************************ -->

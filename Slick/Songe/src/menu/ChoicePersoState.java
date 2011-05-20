@@ -82,7 +82,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			case 0: // Aurore
 				return new Aurore(20000);
 			case 1: // Timéo
-				return new Timeo(40000);
+				return new Timeo(30000);
 			case 2: // Tux
 				return new Tux(40000);
 			case 3: // Lamasticot
@@ -95,7 +95,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			case 0: // Aurore
 				return new Aurore(20000);
 			case 1: // Timéo
-				return new Timeo(40000);
+				return new Timeo(30000);
 			case 2: // Tux
 				return new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
 			case 3: // Lamasticot

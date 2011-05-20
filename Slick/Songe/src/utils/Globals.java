@@ -198,7 +198,7 @@ public class Globals {
 			if (Globals.player instanceof Aurore)// Aurore
 				Globals.player = new Aurore(20000);
 			if (Globals.player instanceof Timeo)// Timéo
-				Globals.player = new Timeo(40000);
+				Globals.player = new Timeo(30000);
 			if (Globals.player instanceof Tux)// Tux
 				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
 			if (Globals.player instanceof Lamasticot)// Lamasticot
@@ -208,7 +208,7 @@ public class Globals {
 			if (Globals.player instanceof Aurore)// Aurore
 				Globals.player = new Aurore(20000);
 			if (Globals.player instanceof Timeo)// Timéo
-				Globals.player = new Timeo(40000);
+				Globals.player = new Timeo(30000);
 			if (Globals.player instanceof Tux)// Tux
 				Globals.player = new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
 			if (Globals.player instanceof Lamasticot)// Lamasticot
