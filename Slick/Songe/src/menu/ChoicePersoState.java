@@ -36,7 +36,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		images = new Image[] { new Image(Conf.IMG_PATH+"interrogation.png"), new Image(Conf.IMG_PATH+"interrogation.png"),
+		images = new Image[] { new Image(Conf.IMG_PATH+"aurore.png"), new Image(Conf.IMG_PATH+"timeo.png"),
 				new Image(Conf.IMG_PATH+"tux.png"), new Image(Conf.IMG_PATH+"lama.png") };
 		initSounds();
 	}

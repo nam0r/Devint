@@ -152,7 +152,6 @@
 		</events>
 		<node_id>-1</node_id>
 	</node>
-	
 	<!-- ************************************************************************ -->
 	<!-- Noeuds de 2xxxx => noeuds d'Aurore -->
 	
@@ -240,7 +239,7 @@
 			<event>
 				<type>D</type>
 				<param>40000</param>
-				<param>interrogation.png</param>
+				<param>tux.png</param>
 			</event>
 		</events>
 		<node_id>40001</node_id>
@@ -305,7 +304,7 @@
 			<event>
 				<type>D</type>
 				<param>40005</param>
-				<param>interrogation.png</param>
+				<param>enfant.png</param>
 			</event>
 		</events>
 		<node_id>40007</node_id>
