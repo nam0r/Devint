@@ -42,10 +42,10 @@ public class CheckTonScore extends BasicGameState {
 		if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 			if(!gagne.playing() && !perdu.playing()) {
 				if(gagne.playedOnce()) {
-					Globals.nextEvent(sbg);
+					Globals.nextEvent(sbg, 40008);
 				}
 				else if(perdu.playedOnce()) {
-					Globals.nextEvent(sbg);
+					Globals.nextEvent(sbg, 40009);
 				}
 			}
 		}

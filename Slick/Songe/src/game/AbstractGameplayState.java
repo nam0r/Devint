@@ -214,7 +214,6 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			voix = new t2s.SIVOXDevint();
 			
 			Globals.nodeHasChanged = true;
-			Globals.nextEvent(sbg);
 			
 		}
 		
@@ -238,6 +237,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			}
 			else {
 				System.err.println("The current node ("+ Globals.node.getID() +") doesn't have an ia.");
+				Globals.nextEvent(sbg);
 			}
 			
 			Globals.nodeHasChanged = false;

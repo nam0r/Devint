@@ -192,12 +192,12 @@
             <choice>
                 <text>à vent</text>
                 <sound>vent</sound>
-                <true>1</true>
+                <true>0</true>
             </choice>
             <choice>
                 <text>à cordes</text>
                 <sound>cordes</sound>
-                <true>0</true>
+                <true>1</true>
             </choice>
             <choice>
                 <text>La guitare est un fruit</text>

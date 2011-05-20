@@ -123,7 +123,7 @@ public class Node {
 				Globals.questionsNotAsked.remove(indice);
 			}
 			// Transition
-			else if(type.equals("Transition")) {
+			else if(type.equals("T")) {
 				int idState = Integer.valueOf(event.get("param"));
 				
 				events.offer(new Transition(idState));
