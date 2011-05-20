@@ -20,7 +20,7 @@ CREATE TABLE nodes(id integer primary key, ia integer, type_ia text, node_id int
 
 -- ========== Evenements lies au noeud ==========
 
-CREATE TABLE events(id integer primary key, id_node int, type text, param text, param2 text, ordre int, FOREIGN KEY(id_node) REFERENCES nodes(id))
+CREATE TABLE events(id integer primary key, id_node int, type text, param text, param2 text, param3 text, ordre int, FOREIGN KEY(id_node) REFERENCES nodes(id))
 
 -- ========== Questions de scenario ==========
 

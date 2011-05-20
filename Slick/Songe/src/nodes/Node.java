@@ -129,6 +129,15 @@ public class Node {
 				events.offer(new Transition(idState));
 			}
 			
+			// Transition speciale
+			else if(type.equals("TS")) {
+				int idState = Integer.valueOf(event.get("param"));
+				int success = Integer.valueOf(event.get("param2"));
+				int failure = Integer.valueOf(event.get("param3"));
+				
+				events.offer(new TransitionSpeciale(idState, success, failure));
+			}
+			
 		}
 	}
 	

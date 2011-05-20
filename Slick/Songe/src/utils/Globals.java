@@ -1,6 +1,5 @@
 package utils;
 
-import game.Alien;
 import game.AlienIA;
 import game.Aurore;
 import game.Crate;
@@ -28,16 +27,16 @@ import nodes.Node;
 import nodes.Question;
 import nodes.QuestionCulture;
 import nodes.QuestionScenario;
+import nodes.TransitionSpeciale;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import bdd.SQLiteDB;
-
 import actors.MainPlayer;
 import actors.PhysicalEntity;
+import bdd.SQLiteDB;
 
 /**
  * Global variables of the whole game.
@@ -58,6 +57,8 @@ public class Globals {
 	public static Question<? extends Choice> question;
 	/** The current dialog */
 	public static Dialog dialog;
+	/** The current special transition (Game) */
+	public static TransitionSpeciale transitionSpeciale;
 	/** Tells whether the current node has changed */
 	public static boolean nodeHasChanged;
 	
@@ -132,20 +133,21 @@ public class Globals {
 	 */
 	public static void nextEvent(StateBasedGame sbg, int idNode){
 		
-		System.out.println("1 === " + Globals.node.getEvents().size());
 		Globals.event = Globals.node.pollEvent();
-		System.out.println("2 === " + Globals.node.getEvents().size());
 		
 		
 		// No more event => we go to the next default node
 		if(Globals.event == null) {
 			if(idNode == -1) {
-				Globals.node = new Node(Globals.node.getNextNodeId());
+				if(Globals.node.getNextNodeId() > 0) {
+					Globals.node = new Node(Globals.node.getNextNodeId());
+					Globals.nodeHasChanged = true;
+				}
 			}
 			else {
 				Globals.node = new Node(idNode);
+				Globals.nodeHasChanged = true;
 			}
-			Globals.nodeHasChanged = true;
 			
 			Globals.goToState(Globals.returnState, sbg);
 		}
@@ -166,6 +168,10 @@ public class Globals {
 				Globals.question = q;
 			}
 			// Transition (nothing to do)
+			else if(Globals.event.getType().equals("TS")) {
+				TransitionSpeciale t = (TransitionSpeciale) Globals.event;
+				Globals.transitionSpeciale = t;
+			}
 			
 			Globals.goToState(Globals.event.getStateID(), sbg);
 		}
@@ -196,17 +202,17 @@ public class Globals {
 			if (Globals.player instanceof Tux)// Tux
 				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
 			if (Globals.player instanceof Lamasticot)// Lamasticot
-				Globals.player = new Lamasticot(40000);
+				Globals.player = new Lamasticot(50000);
 		}
 		else{
 			if (Globals.player instanceof Aurore)// Aurore
-				Globals.player = new Aurore(10000);
+				Globals.player = new Aurore(40000);
 			if (Globals.player instanceof Timeo)// Timéo
-				Globals.player = new Timeo(10000);
+				Globals.player = new Timeo(40000);
 			if (Globals.player instanceof Tux)// Tux
-				Globals.player = new Tux(10000, "tux_walk_white.png", "tux_jmp_white.png");
+				Globals.player = new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
 			if (Globals.player instanceof Lamasticot)// Lamasticot
-				Globals.player = new Lamasticot(10000);
+				Globals.player = new Lamasticot(50000);
 		}
 	}
 	
