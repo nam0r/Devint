@@ -47,15 +47,15 @@
     <ia>
 		<id>2</id>
         <images>
-            <walk>homeranim_big.png</walk>
-            <walknum>8</walknum>
-            <jump>homeranim_big.png</jump>
+            <walk>tux_walk.png</walk>
+            <walknum>7</walknum>
+            <jump>tux_jmp.png</jump>
             <jumpnum>1</jumpnum>
         </images>
         <size>
-            <width>72</width>
-            <height>130</height>
-            <yoffset>4</yoffset>
+            <width>65</width>
+            <height>95</height>
+            <yoffset>0</yoffset>
         </size>
         <sounds>
             <main>mystic_spirit</main>
