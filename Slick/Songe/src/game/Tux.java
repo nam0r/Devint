@@ -24,9 +24,9 @@ public class Tux extends MainPlayer {
 	/** the path to the walking sound */
 	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg";
 	
-	public Tux(int n) {
+	
+	public Tux (int n/*, String skin*/){
 		super(n, Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
-		
 		jump = new SpriteSheet(image,65,95);
 		
 		try {
