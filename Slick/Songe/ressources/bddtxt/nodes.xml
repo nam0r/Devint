@@ -17,17 +17,17 @@
 			<event>
 				<type>D</type>
 				<param>minijeuvaisseauF1</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
 				<type>S</type>
 				<param>1</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>2</node_id>
@@ -40,7 +40,7 @@
 			<event>
 				<type>D</type>
 				<param>minijeuvaisseauF1</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>3</node_id>
@@ -53,7 +53,7 @@
 			<event>
 				<type>D</type>
 				<param>oui</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>3</node_id>
@@ -69,7 +69,7 @@
 			<event>
 				<type>D</type>
 				<param>learn1</param>
-				<param2>blue_spirit_emit.xml</param2>
+				<param>blue_spirit_emit.xml</param>
 			</event>
 		</events>
 		<node_id>10001</node_id>
@@ -82,7 +82,7 @@
 			<event>
 				<type>D</type>
 				<param>learn2</param>
-				<param2>blue_spirit_emit.xml</param2>
+				<param>blue_spirit_emit.xml</param>
 			</event>
 		</events>
 		<node_id>10002</node_id>
@@ -95,7 +95,7 @@
 			<event>
 				<type>D</type>
 				<param>learn3</param>
-				<param2>blue_spirit_emit.xml</param2>
+				<param>blue_spirit_emit.xml</param>
 			</event>
 		</events>
 		<node_id>10003</node_id>
@@ -108,7 +108,7 @@
 			<event>
 				<type>D</type>
 				<param>learn4</param>
-				<param2>blue_spirit_emit.xml</param2>
+				<param>blue_spirit_emit.xml</param>
 			</event>
 		</events>
 		<node_id>10004</node_id>
@@ -121,7 +121,7 @@
 			<event>
 				<type>D</type>
 				<param>learn5</param>
-				<param2>blue_spirit_emit.xml</param2>
+				<param>blue_spirit_emit.xml</param>
 			</event>
 		</events>
 		<node_id>10005</node_id>
@@ -134,7 +134,7 @@
 			<event>
 				<type>D</type>
 				<param>learn6</param>
-				<param2>blue_spirit_emit.xml</param2>
+				<param>blue_spirit_emit.xml</param>
 			</event>
 		</events>
 		<node_id>10006</node_id>
@@ -147,18 +147,10 @@
 			<event>
 				<type>D</type>
 				<param>learn7</param>
-				<param2>blue_spirit_emit.xml</param2>
+				<param>blue_spirit_emit.xml</param>
 			</event>
 		</events>
-		<node_id>10007</node_id>
-	</node>
-		<node>
-		<id>10007</id>
-		<ia>4</ia>
-		<type_ia>Spirit</type_ia>
-		<events>
-		</events>
-		<node_id>10000</node_id>
+		<node_id>-1</node_id>
 	</node>
 	
 	<!-- ************************************************************************ -->
@@ -175,7 +167,7 @@
 			<event>
 				<type>D</type>
 				<param>oui</param><!-- auroreTimeo1 -->
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>30002</node_id>
@@ -189,7 +181,7 @@
 			<event>
 				<type>D</type>
 				<param>non</param><!-- vieuxTimeo1 -->
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>30003</node_id>
@@ -203,7 +195,7 @@
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2></param2>
+				<param></param>
 			</event>
 		</events>
 		<node_id>30004</node_id>
@@ -217,7 +209,7 @@
 			<event>
 				<type>D</type>
 				<param>non</param><!-- hommeTimeo1 -->
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>30005</node_id>
@@ -231,7 +223,7 @@
 			<event>
 				<type>D</type>
 				<param>oui</param><!-- auroreTimeo2 -->
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>30006</node_id>
@@ -248,7 +240,7 @@
 			<event>
 				<type>D</type>
 				<param>40000</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>40001</node_id>
@@ -261,7 +253,7 @@
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2></param2>
+				<param></param>
 			</event>
 		</events>
 		<node_id>40002</node_id>
@@ -274,7 +266,7 @@
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2></param2>
+				<param></param>
 			</event>
 		</events>
 		<node_id>40003</node_id>
@@ -287,7 +279,7 @@
 			<event>
 				<type>D</type>
 				<param>40003</param>
-				<param2>homme.png</param2>
+				<param>homme.png</param>
 			</event>
 		</events>
 		<node_id>40004</node_id>
@@ -300,7 +292,7 @@
 			<event>
 				<type>S</type>
 				<param>40004</param>
-				<param2></param2>
+				<param></param>
 			</event>
 		</events>
 		<node_id>-1</node_id>
@@ -313,7 +305,7 @@
 			<event>
 				<type>D</type>
 				<param>40005</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>40007</node_id>
@@ -326,7 +318,7 @@
 			<event>
 				<type>D</type>
 				<param>40006</param>
-				<param2>vieux.png</param2>
+				<param>vieux.png</param>
 			</event>
 		</events>
 		<node_id>40007</node_id>
@@ -339,12 +331,13 @@
 			<event>
 				<type>D</type>
 				<param>40007</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
-				<type>T</type>
+				<type>TS</type>
 				<param>11</param>
-				<param2></param2>
+				<param>40008</param>
+				<param>40009</param>
 			</event>
 		</events>
 		<node_id>40008</node_id>
@@ -357,17 +350,16 @@
 			<event>
 				<type>D</type>
 				<param>40008</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
 				<type>T</type>
 				<param>4</param>
-				<param2></param2>
 			</event>
 			<event>
 				<type>D</type>
 				<param>40008_2</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>40010</node_id>
@@ -380,17 +372,16 @@
 			<event>
 				<type>D</type>
 				<param>40009</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
 				<type>T</type>
 				<param>4</param>
-				<param2></param2>
 			</event>
 			<event>
 				<type>D</type>
 				<param>40009_2</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>40010</node_id>
@@ -403,7 +394,7 @@
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2></param2>
+				<param></param>
 			</event>
 		</events>
 		<node_id>40011</node_id>
@@ -416,17 +407,16 @@
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2></param2>
+				<param></param>
 			</event>
 			<event>
 				<type>D</type>
 				<param>40011</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
 				<type>T</type>
 				<param>5</param>
-				<param2></param2>
 			</event>
 		</events>
 		<node_id>-1</node_id>
@@ -442,7 +432,7 @@
 			<event>
 				<type>D</type>
 				<param>50000</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>50001</node_id>
@@ -455,7 +445,7 @@
 			<event>
 				<type>D</type>
 				<param>50001</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>50002</node_id>
@@ -468,7 +458,7 @@
 			<event>
 				<type>C</type>
 				<param></param>
-				<param2></param2>
+				<param></param>
 			</event>
 		</events>
 		<node_id>50003</node_id>
@@ -481,17 +471,16 @@
 			<event>
 				<type>D</type>
 				<param>50003</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
 				<type>T</type>
 				<param>4</param>
-				<param2></param2>
 			</event>
 			<event>
 				<type>D</type>
 				<param>50003_2</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>50004</node_id>
@@ -503,13 +492,14 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>50004</param>
-				<param2>interrogation.png</param2>
+				<param>40007</param>
+				<param>interrogation.png</param>
 			</event>
 			<event>
-				<type>T</type>
+				<type>TS</type>
 				<param>11</param>
-				<param2></param2>
+				<param>50006</param>
+				<param>50005</param>
 			</event>
 		</events>
 		<node_id>50005</node_id>
@@ -521,8 +511,8 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>50005</param>
-				<param2></param2>
+				<param>40008</param>
+				<param></param>
 			</event>
 		</events>
 		<node_id>50007</node_id>
@@ -534,57 +524,53 @@
 		<events>
 			<event>
 				<type>D</type>
-				<param>50006</param>
-				<param2></param2>
+				<param>40009</param>
+				<param></param>
 			</event>
 		</events>
 		<node_id>50007</node_id>
 	</node>
 	<node>
 		<id>50007</id>
-		<ia>7</ia>
+		<ia>-1</ia>
 		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
 				<param>50007</param>
-				<param2>interrogation.png</param2>
+				<param></param>
 			</event>
 		</events>
 		<node_id>50008</node_id>
 	</node>
 	<node>
 		<id>50008</id>
-		<ia>0</ia>
+		<ia>7</ia>
 		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
 				<param>50008</param>
-				<param2>interrogation.png</param2>
-			</event>
-			<event>
-				<type>T</type>
-				<param>11</param>
-				<param2></param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>50009</node_id>
 	</node>
 	<node>
 		<id>50009</id>
-		<ia>-1</ia>
+		<ia>0</ia>
 		<type_ia>StayingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
 				<param>50009</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
-				<type>T</type>
-				<param>5</param>
-				<param2></param2>
+				<type>TS</type>
+				<param>11</param>
+				<param>50011</param>
+				<param>50010</param>
 			</event>
 		</events>
 		<node_id>-1</node_id>
@@ -597,12 +583,28 @@
 			<event>
 				<type>D</type>
 				<param>50010</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 			<event>
 				<type>T</type>
 				<param>5</param>
-				<param2></param2>
+			</event>
+		</events>
+		<node_id>-1</node_id>
+	</node>
+	<node>
+		<id>50011</id>
+		<ia>-1</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
+			<event>
+				<type>D</type>
+				<param>50011</param>
+				<param>interrogation.png</param>
+			</event>
+			<event>
+				<type>T</type>
+				<param>5</param>
 			</event>
 		</events>
 		<node_id>-1</node_id>
