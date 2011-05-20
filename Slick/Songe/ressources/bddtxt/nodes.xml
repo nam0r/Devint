@@ -337,7 +337,7 @@
 	<node>
 		<id>40007</id>
 		<ia>3</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
