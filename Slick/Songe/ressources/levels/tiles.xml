@@ -15,10 +15,10 @@
 		<object id="g" type="crate" size="90" mass="28" image="crate3.jpg" />
 		<object id="h" type="crate" size="120" mass="30" image="crate3.jpg" />
 		
-		<object id="A" type="enemy" width="40" height="62" mass="2" image="mariowalk_big.png" spritenum="3" />
-		<object id="B" type="enemy" width="70" height="40" mass="6" image="mariowalk_big.png" spritenum="3" />
-		<object id="C" type="enemy" width="90" height="40" mass="10" image="mariowalk_big.png" spritenum="3" />
-		<object id="D" type="enemy" width="120" height="40" mass="20" image="mariowalk_big.png" spritenum="3" />
+		<object id="A" type="enemy" width="60" height="55" mass="2" image="ennemi.png" spritenum="6" />
+		<object id="B" type="enemy" width="60" height="55" mass="6" image="ennemi.png" spritenum="6" />
+		<object id="C" type="enemy" width="60" height="55" mass="10" image="ennemi.png" spritenum="6" />
+		<object id="D" type="enemy" width="60" height="55" mass="20" image="ennemi.png" spritenum="6" />
 	</objects>
 	<nodes>
 		<node id="N" />

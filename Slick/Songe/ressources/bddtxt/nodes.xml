@@ -150,7 +150,15 @@
 				<param2>blue_spirit_emit.xml</param2>
 			</event>
 		</events>
-		<node_id>40000</node_id>
+		<node_id>10007</node_id>
+	</node>
+		<node>
+		<id>10007</id>
+		<ia>4</ia>
+		<type_ia>Spirit</type_ia>
+		<events>
+		</events>
+		<node_id>10000</node_id>
 	</node>
 	
 	<!-- ************************************************************************ -->

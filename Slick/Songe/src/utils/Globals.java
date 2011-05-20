@@ -8,6 +8,7 @@ import game.HomerIA;
 import game.Lamasticot;
 import game.MarioIA;
 import game.Spirit;
+import game.Timeo;
 import game.Tux;
 
 import java.awt.Dimension;
@@ -182,14 +183,29 @@ public class Globals {
 		Globals.questionsNotAsked = Globals.bdd.select("SELECT * FROM qcult");
 	}
 	
+	/**
+	 *  Resets the player
+	 */
 	public static void resetMainPlayer() {
 		if (Globals.hasAlreadyPlayed) {
 			if (Globals.player instanceof Tux)// Aurore
 				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
+			if (Globals.player instanceof Timeo)// Timéo
+				Globals.player = new Timeo(40000);
+			if (Globals.player instanceof Tux)// Tux
+				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
+			if (Globals.player instanceof Lamasticot)// Lamasticot
+				Globals.player = new Lamasticot(40000);
 		}
 		else{
 			if (Globals.player instanceof Tux)// Aurore
 				Globals.player = new Tux(10000, "tux_walk_white.png", "tux_jmp_white.png");
+			if (Globals.player instanceof Timeo)// Timéo
+				Globals.player = new Timeo(10000);
+			if (Globals.player instanceof Tux)// Tux
+				Globals.player = new Tux(10000, "tux_walk_white.png", "tux_jmp_white.png");
+			if (Globals.player instanceof Lamasticot)// Lamasticot
+				Globals.player = new Lamasticot(10000);
 		}
 	}
 	

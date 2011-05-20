@@ -8,7 +8,7 @@ import bddcreate.BDDCreator;
 public class Main {
 
 	public static void main(String[] args) {
-		new BDDCreator();
+		//new BDDCreator();
 		
 		AppGameContainer app;
 		// initial ratio for 4/3 screens
