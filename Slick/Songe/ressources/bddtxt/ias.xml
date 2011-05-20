@@ -112,7 +112,7 @@
     <ia>
 		<id>5</id>
         <images>
-            <walk>all_big.png</walk>
+            <walk>homeranim_big.png</walk>
             <walknum>8</walknum>
             <jump>homeranim_big.png</jump>
             <jumpnum>1</jumpnum>
