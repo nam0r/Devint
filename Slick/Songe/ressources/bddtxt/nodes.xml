@@ -248,7 +248,7 @@
 			<event>
 				<type>D</type>
 				<param>40000</param>
-				<param2>interrogation.png</param2>
+				<param2>tux.png</param2>
 			</event>
 		</events>
 		<node_id>40001</node_id>
@@ -313,7 +313,7 @@
 			<event>
 				<type>D</type>
 				<param>40005</param>
-				<param2>interrogation.png</param2>
+				<param2>enfant.png</param2>
 			</event>
 		</events>
 		<node_id>40007</node_id>
