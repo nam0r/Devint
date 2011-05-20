@@ -38,10 +38,18 @@ public class CheckTonScore extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
-		if ((!gagne.playing() && !perdu.playing() && (gagne.playedOnce() || perdu.playedOnce())) 
-			|| input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
-			Globals.nextEvent(sbg);
+		
+		if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+			if(!gagne.playing() && !perdu.playing()) {
+				if(gagne.playedOnce()) {
+					Globals.nextEvent(sbg);
+				}
+				else if(perdu.playedOnce()) {
+					Globals.nextEvent(sbg);
+				}
+			}
 		}
+			
 	}
 
 	@Override
