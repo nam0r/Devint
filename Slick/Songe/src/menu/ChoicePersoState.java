@@ -2,6 +2,7 @@ package menu;
 
 import game.Alien;
 import game.Lamasticot;
+import game.Timeo;
 import game.Tux;
 import main.Songe;
 import nodes.Dialog;
@@ -82,7 +83,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			case 0: // Aurore
 				return new Tux(1);
 			case 1: // Timéo
-				return new Alien(30001);
+				return new Timeo(40000);
 			case 2: // Tux
 				return new Tux(40000);
 			case 3: // Lamasticot
@@ -95,7 +96,7 @@ public class ChoicePersoState extends ChoiceMenuState {
 			case 0: // Aurore
 				return new Tux(1, "tux_walk_white.png", "tux_jmp_white.png");
 			case 1: // Timéo
-				return new Alien(30001);
+				return new Timeo(40000);
 			case 2: // Tux
 				return new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
 			case 3: // Lamasticot
