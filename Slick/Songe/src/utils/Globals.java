@@ -1,11 +1,14 @@
 package utils;
 
+import game.Alien;
 import game.AlienIA;
 import game.Crate;
 import game.Emitter;
 import game.HomerIA;
+import game.Lamasticot;
 import game.MarioIA;
 import game.Spirit;
+import game.Tux;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -178,5 +181,12 @@ public class Globals {
 	public static void initQuestionsNotAsked() {
 		Globals.questionsNotAsked = Globals.bdd.select("SELECT * FROM qcult");
 	}
+	/*
+	public static resetMainPlayer(boolean white) {
+		if(Globals.hasAlreadyPlayed){
+		if(Globals.player instanceof Tux)// Aurore
+			Globals.player = new Tux(40000, white);
+	}
+	}*/
 	
 }
