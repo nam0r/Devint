@@ -67,15 +67,15 @@
     <ia>
 		<id>3</id>
         <images>
-            <walk>homeranim_big.png</walk>
-            <walknum>8</walknum>
-            <jump>homeranim_big.png</jump>
-            <jumpnum>1</jumpnum>
+            <walk>lama.png</walk>
+            <walknum>7</walknum>
+            <jump>lama_jump.png</jump>
+            <jumpnum>6</jumpnum>
         </images>
         <size>
-            <width>72</width>
-            <height>130</height>
-            <yoffset>4</yoffset>
+            <width>125</width>
+            <height>92</height>
+            <yoffset>0</yoffset>
         </size>
         <sounds>
             <main>mystic_spirit</main>
