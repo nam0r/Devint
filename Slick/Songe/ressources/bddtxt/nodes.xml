@@ -609,8 +609,8 @@
 			<event>
 				<type>TS</type>
 				<param>11</param>
-				<param>50006</param>
 				<param>50005</param>
+				<param>50006</param>
 			</event>
 		</events>
 		<node_id>50005</node_id>
@@ -623,7 +623,7 @@
 			<event>
 				<type>D</type>
 				<param>40008</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 		</events>
 		<node_id>50007</node_id>
@@ -636,7 +636,7 @@
 			<event>
 				<type>D</type>
 				<param>40009</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 		</events>
 		<node_id>50007</node_id>
@@ -649,7 +649,7 @@
 			<event>
 				<type>D</type>
 				<param>50007</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 		</events>
 		<node_id>50008</node_id>
@@ -662,7 +662,7 @@
 			<event>
 				<type>D</type>
 				<param>50008</param>
-				<param>interrogation.png</param>
+				<param>homme.png</param>
 			</event>
 		</events>
 		<node_id>50009</node_id>
@@ -675,13 +675,13 @@
 			<event>
 				<type>D</type>
 				<param>50009</param>
-				<param>interrogation.png</param>
+				<param>timeo.png</param>
 			</event>
 			<event>
 				<type>TS</type>
 				<param>11</param>
-				<param>50011</param>
 				<param>50010</param>
+				<param>50011</param>
 			</event>
 		</events>
 		<node_id>-1</node_id>
@@ -694,7 +694,7 @@
 			<event>
 				<type>D</type>
 				<param>50010</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 			<event>
 				<type>T</type>
@@ -711,7 +711,7 @@
 			<event>
 				<type>D</type>
 				<param>50011</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 			<event>
 				<type>T</type>
