@@ -162,7 +162,7 @@
 			<event>
 				<type>D</type>
 				<param>20000</param>
-				<param2>interrogation.png</param2>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>20001</node_id>
