@@ -536,7 +536,7 @@
 			<event>
 				<type>D</type>
 				<param>40009</param>
-				<param></param>
+				<param>interrogation.png</param>
 			</event>
 		</events>
 		<node_id>50007</node_id>
