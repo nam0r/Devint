@@ -24,13 +24,16 @@ public class Tux extends MainPlayer {
 	/** the path to the walking sound */
 	private final String SOUND_WALK_PATH = Conf.SND_DEPLACEMENT_PATH + "wooden_stairs2.ogg";
 	
+	public Tux(int n){
+		this(n, "tux_walk.png", "tux_jmp.png");
+	}
 	
-	public Tux (int n/*, String skin*/){
-		super(n, Conf.IMG_SPRITES_PATH+"tux_jmp.png", 100, 650, 5f, 65, 95);
+	public Tux (int n, String walkingSprite, String jumpingSprite){
+		super(n, Conf.IMG_SPRITES_PATH+jumpingSprite, 100, 650, 5f, 65, 95);
 		jump = new SpriteSheet(image,65,95);
 		
 		try {
-			Image im = new Image(Conf.IMG_SPRITES_PATH+"tux_walk.png");
+			Image im = new Image(Conf.IMG_SPRITES_PATH+walkingSprite);
 			walk = new SpriteSheet(im,65,95);
 		} catch (SlickException e) {
 			System.err.println("Image sprites de Tux pas trouvées.");

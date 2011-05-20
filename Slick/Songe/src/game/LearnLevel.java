@@ -49,6 +49,7 @@ public class LearnLevel extends AbstractGameplayState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.enter(gc, sbg);
+		Globals.hasAlreadyPlayed = true;
 		/*map.removeEntity(Globals.player);
 		map.addEntity(ora);
 		ora.getBody().setEnabled(false);
@@ -73,6 +74,8 @@ public class LearnLevel extends AbstractGameplayState {
 						+ (Globals.player.getHeight() / 3)))) {
 			map.removeEntity(enemy);
 			((Enemy)enemy).stopSound();
+			// reset main player
+			Globals.resetMainPlayer();
 			sbg.enterState(Songe.MAINLEVEL, new FadeOutTransition(
 					Color.black), new FadeInTransition(Color.black));
 		}

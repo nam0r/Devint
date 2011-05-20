@@ -73,10 +73,12 @@ public class ChoicePersoState extends ChoiceMenuState {
 	
 	/**
 	 * Create the player object
+	 * 
 	 * @return the player itself
 	 */
 	protected MainPlayer createPlayer() {
-		switch (selected) {
+		if (Globals.hasAlreadyPlayed) {
+			switch (selected) {
 			case 0: // Aurore
 				return new Tux(1);
 			case 1: // Timéo
@@ -87,6 +89,20 @@ public class ChoicePersoState extends ChoiceMenuState {
 				return new Lamasticot(1);
 			default: // Default
 				return new Tux(1);
+			}
+		} else {
+			switch (selected) {
+			case 0: // Aurore
+				return new Tux(1, "tux_walk_white.png", "tux_jmp_white.png");
+			case 1: // Timéo
+				return new Alien(30001);
+			case 2: // Tux
+				return new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
+			case 3: // Lamasticot
+				return new Lamasticot(1);
+			default: // Default
+				return new Tux(1, "tux_walk_white.png", "tux_jmp_white.png");
+			}
 		}
 	}
 

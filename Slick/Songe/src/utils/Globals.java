@@ -181,12 +181,16 @@ public class Globals {
 	public static void initQuestionsNotAsked() {
 		Globals.questionsNotAsked = Globals.bdd.select("SELECT * FROM qcult");
 	}
-	/*
-	public static resetMainPlayer(boolean white) {
-		if(Globals.hasAlreadyPlayed){
-		if(Globals.player instanceof Tux)// Aurore
-			Globals.player = new Tux(40000, white);
+	
+	public static void resetMainPlayer() {
+		if (Globals.hasAlreadyPlayed) {
+			if (Globals.player instanceof Tux)// Aurore
+				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
+		}
+		else{
+			if (Globals.player instanceof Tux)// Aurore
+				Globals.player = new Tux(10000, "tux_walk_white.png", "tux_jmp_white.png");
+		}
 	}
-	}*/
 	
 }
