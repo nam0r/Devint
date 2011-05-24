@@ -66,8 +66,8 @@ public class CheckTonScore extends BasicGameState {
 		gagne = new Sound2(Conf.getVoice("oui"));
 		perdu = new Sound2(Conf.getVoice("non"));
 		try {
-			emit1 = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"kameamea_red.xml");
-			emit2 = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"kameamea_blue.xml");
+			emit1 = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"kameamea_blue.xml");
+			emit2 = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"kameamea_red.xml");
 		} catch (IOException e) {
 			System.err.println("Couldn't load particle "+Conf.EMITTERS_PATH+"kameamea_X.xml");
 		}
@@ -156,9 +156,11 @@ public class CheckTonScore extends BasicGameState {
 		
 		for(int i=0; i<2; i++){
 			((ConfigurableEmitter) emit1.getEmitter(i)).setPosition(gc.getWidth()/6, gc.getHeight()/2);
-			((SimpleValue)((ConfigurableEmitter) emit1.getEmitter(i)).windFactor).setValue(22);
+			((SimpleValue)((ConfigurableEmitter) emit1.getEmitter(i)).windFactor).setValue((16-12/(350/(350-actual)))*scale);
+			((SimpleValue)((ConfigurableEmitter) emit1.getEmitter(i)).growthFactor).setValue((172-50/(350/(350-actual)))*scale);
 			((ConfigurableEmitter) emit2.getEmitter(i)).setPosition(5*gc.getWidth()/6, gc.getHeight()/2);
-			((SimpleValue)((ConfigurableEmitter) emit2.getEmitter(i)).windFactor).setValue(-22);
+			((SimpleValue)((ConfigurableEmitter) emit2.getEmitter(i)).windFactor).setValue(-(16+12/(350/(350-actual)))*scale);
+			((SimpleValue)((ConfigurableEmitter) emit2.getEmitter(i)).growthFactor).setValue((172+50/(350/(350-actual)))*scale);
 		}
 		emit1.render();
 		emit2.render();
