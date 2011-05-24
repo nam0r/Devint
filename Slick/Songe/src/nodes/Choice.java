@@ -1,5 +1,10 @@
 package nodes;
 
+/**
+ * A choice for a question
+ * 
+ * @author Afnarel
+ */
 public abstract class Choice {
 	
 	protected String text = null;

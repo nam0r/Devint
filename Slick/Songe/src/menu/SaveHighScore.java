@@ -29,7 +29,10 @@ import utils.Conf;
 import utils.Globals;
 
 /**
+ * Saving high score state
  * 
+ * @author namor
+ * @author guodman
  */
 public class SaveHighScore extends BasicGameState implements ComponentListener {
 	private int stateID;

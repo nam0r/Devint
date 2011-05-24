@@ -1,7 +1,5 @@
 package actors;
 
-import org.newdawn.slick.SpriteSheet;
-
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
@@ -9,7 +7,10 @@ import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.DynamicShape;
 
 /**
- * Rassemble les proprietes communes a toutes les entites
+ * A physical entity
+ * 
+ * @author namor
+ * @author Afnarel
  */
 public abstract class PhysicalEntity extends AbstractMovingEntity implements PhysicalEntityInterface {
 

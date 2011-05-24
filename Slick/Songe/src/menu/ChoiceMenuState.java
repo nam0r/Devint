@@ -7,6 +7,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * General choice menu
+ * 
+ * @author namor
+ */
 public class ChoiceMenuState extends MenuState {
 
 	/** The menu images */

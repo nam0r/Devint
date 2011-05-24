@@ -12,7 +12,11 @@ import utils.Conf;
 
 
 /**
+ * A basic Actor
  * 
+ * @author namor
+ * @author Afnarel
+ * @author Kevin Glass
  */
 public abstract class Actor extends PhysicalEntity {
 	/** The maximum velocity an actor can jump at - this is used to prevent some odd effects of a penetration based physics engine */

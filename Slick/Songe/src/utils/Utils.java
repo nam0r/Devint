@@ -7,11 +7,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
 
+/**
+ * General Utilities
+ * 
+ * @author Afnarel
+ */
 public class Utils {
 
-
 	/**
-	 * Trace une ligne centree
+	 * Draw a centered line
 	 * 
 	 * @param gfx
 	 * @param str

@@ -7,6 +7,11 @@ import org.newdawn.slick.util.xml.XMLParser;
 
 import utils.Conf;
 
+/**
+ * Creates the SQLite DB from xml files
+ * 
+ * @author Afnarel
+ */
 public class BDDCreator {
 
 	private DBInteractor db;

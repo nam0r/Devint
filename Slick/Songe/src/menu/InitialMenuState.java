@@ -13,7 +13,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Conf;
 import utils.Globals;
- 
+
+/**
+ * The first menu, asks if the player has alredy played the game or not
+ * 
+ * @author namor
+ */
 public class InitialMenuState extends MenuState {
 	
     public InitialMenuState(int stateID) throws SlickException {

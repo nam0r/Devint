@@ -1,10 +1,13 @@
 package main;
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
-import bddcreate.BDDCreator;
-
+/**
+ * The main class that launches the game
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class Main {
 
 	public static void main(String[] args) {

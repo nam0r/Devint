@@ -12,6 +12,8 @@ import utils.Globals;
 
 /**
  * A spirit
+ * 
+ * @author namor
  */
 public class Spirit extends Emitter {
 	/** the node */

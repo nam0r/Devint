@@ -16,8 +16,10 @@ import utils.Globals;
 
 /**
  * Game play state to learn the game
+ * 
+ * @author namor
+ * @author Afnarel
  */
-
 public class LearnLevel extends AbstractGameplayState {
 	
 	public LearnLevel(int id) {

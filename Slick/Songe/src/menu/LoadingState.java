@@ -20,6 +20,11 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import utils.Conf;
 import utils.ExtractFile;
 
+/**
+ * The first state which loads resources
+ * 
+ * @author namor
+ */
 public class LoadingState extends BasicGameState {
 	/** the id of the state */
 	private int stateID;

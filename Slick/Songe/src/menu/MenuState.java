@@ -15,7 +15,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import sound.AlUtils;
 import sound.Sound2;
 import utils.Conf;
- 
+
+/**
+ * A basic menu
+ * 
+ * @author namor
+ */
 public abstract class MenuState extends BasicGameState {
 
 	/** The id of the state for state based game */

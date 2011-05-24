@@ -17,6 +17,9 @@ import game.Enemy;
 /**
  * A loader for a very simple tile based map text format that maps from
  * characters in a text file to tile definitions in an XML file.
+ * 
+ * @author Kevin Glass
+ * @author namor
  */
 public class MapLoader {
 
@@ -55,7 +58,7 @@ public class MapLoader {
 				lines.add(line);
 			}
 		} catch (IOException e) {
-			System.err.println("Erreur lors du chargement de la carte " + ref);
+			System.err.println("Failed to load map: " + ref);
 		}
 		
 		int height = lines.size();

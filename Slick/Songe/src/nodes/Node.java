@@ -13,6 +13,12 @@ import actors.PhysicalEntity;
 import actors.StayingIA;
 import actors.WalkingIA;
 
+/**
+ * A node with all its information
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class Node {
 	
 	private int id;

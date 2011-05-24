@@ -3,10 +3,11 @@ package utils;
 import java.io.File;
 
 /**
- *This class is useful for easy configuration of the game
+ * This class is useful for easy configuration of the game
+ *
+ * @author namor
+ * @author Afnarel
  */
-
-
 public class Conf {
 	
 	// ressources paths

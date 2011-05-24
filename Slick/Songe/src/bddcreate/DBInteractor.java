@@ -8,6 +8,11 @@ import org.newdawn.slick.util.ResourceLoader;
 
 import bdd.SQLiteDB;
 
+/**
+ * Manages the SQLite DB, executes queries
+ * 
+ * @author Afnarel
+ */
 public class DBInteractor extends SQLiteDB {
 	
 	private BufferedReader reader;

@@ -11,6 +11,11 @@ import java.util.HashMap;
 
 import utils.Conf;
 
+/**
+ * Manages an SQLite DB
+ * 
+ * @author Afnarel
+ */
 public class SQLiteDB {
 
 	protected Connection connection;

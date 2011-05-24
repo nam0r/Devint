@@ -1,5 +1,10 @@
 package nodes;
 
+/**
+ * A scenario question
+ * 
+ * @author Afnarel
+ */
 public class QuestionScenario extends Question<ChoiceScenario> {
 
 	public QuestionScenario(String text, String sound, int yes, int no) {

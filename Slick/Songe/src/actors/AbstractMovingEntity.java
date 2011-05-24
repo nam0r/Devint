@@ -1,5 +1,10 @@
 package actors;
 
+/**
+ * A moving entity
+ * 
+ * @author Afnarel
+ */
 public abstract class AbstractMovingEntity extends AbstractEntity {
 	
 	protected float minScale;

@@ -1,5 +1,10 @@
 package nodes;
 
+/**
+ * A special transition for mini-games for ex
+ * 
+ * @author Afnarel
+ */
 public class TransitionSpeciale implements Event {
 	
 	private int stateID;

@@ -4,6 +4,12 @@ import nodes.Node;
 
 import org.newdawn.slick.Graphics;
 
+/**
+ * A walking IA
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class WalkingIA extends IA {
 	
 	/**

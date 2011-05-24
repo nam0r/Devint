@@ -3,7 +3,6 @@ package game;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 import actors.PhysicalEntity;
 
@@ -11,7 +10,7 @@ import actors.PhysicalEntity;
  * A simple crate showing a default physics body being used. This entity
  * doesn't have the "special" rules applied to it that an Actor does.
  * 
- * @author kevin
+ * @author Kevin Glass
  */
 public class Crate extends PhysicalEntity {
 	

@@ -1,5 +1,10 @@
 package nodes;
 
+/**
+ * A culture question
+ * 
+ * @author Afnarel
+ */
 public class QuestionCulture extends Question<ChoiceCulture> {
 
 	private int points;

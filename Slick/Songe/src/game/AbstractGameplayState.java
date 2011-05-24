@@ -32,8 +32,10 @@ import actors.WalkingIA;
 
 /**
  * This class manages the main game
+ * 
+ * @author namor
+ * @author Afnarel
  */
-
 public abstract class AbstractGameplayState extends AbstractGameState {
 	/**
 	 * Useful parameters to consider the background more or less far and

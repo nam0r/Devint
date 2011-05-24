@@ -15,7 +15,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import sound.AlUtils;
 import utils.Conf;
 import utils.Globals;
- 
+
+/**
+ * The main menu
+ * 
+ * @author namor
+ */
 public class MainMenuState extends MenuState {
 	
     public MainMenuState(int stateID) throws SlickException {

@@ -2,7 +2,12 @@ package actors;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-
+/**
+ * An entity
+ * 
+ * @author Afnarel
+ * @author Kevin Glass
+ */
 public abstract class AbstractEntity {
 	
 	/** The path of the main image of the entity */

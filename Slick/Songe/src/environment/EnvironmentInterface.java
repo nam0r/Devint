@@ -6,7 +6,7 @@ import org.newdawn.slick.geom.Rectangle;
 /**
  * An environment in which entities can exist
  * 
- * @author kevin
+ * @author Kevin Glass
  */
 public interface EnvironmentInterface {
 	/**

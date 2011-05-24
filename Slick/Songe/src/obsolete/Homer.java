@@ -14,10 +14,7 @@ import actors.MainPlayer;
  * @author Afnarel
  */
 public class Homer extends MainPlayer {
-	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 8;
-	/** the step rate constant for the step sound */
-	private final float STEPRATE = 35f;
 	
 	public Homer(int n) {
 		super(n, Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126);

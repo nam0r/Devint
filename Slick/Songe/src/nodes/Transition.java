@@ -1,5 +1,10 @@
 package nodes;
 
+/**
+ * A basic transition
+ * 
+ * @author Afnarel
+ */
 public class Transition implements Event {
 	
 	private int stateID;

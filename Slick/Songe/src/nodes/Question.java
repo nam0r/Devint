@@ -6,6 +6,11 @@ import main.Songe;
 
 import utils.Conf;
 
+/**
+ * A generic abstract question
+ * 
+ * @author Afnarel
+ */
 public abstract class Question<T extends Choice> implements Event {
 	
 	protected String text;

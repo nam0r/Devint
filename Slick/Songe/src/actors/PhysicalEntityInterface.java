@@ -6,8 +6,9 @@ import net.phys2d.raw.World;
 import org.newdawn.slick.Graphics;
 
 /**
- * Une entite du monde.
- * Une entite peut avoir un corps physique optionnel.
+ * Physical entity interface
+ * 
+ * @author Afnarel
  */
 public interface PhysicalEntityInterface {
 	/**

@@ -11,7 +11,7 @@ import actors.PhysicalEntity;
  * The common bits of all environments. Holds a physics world, allows addition
  * of entities and their physical representation.
  * 
- * @author kevin
+ * @author Kevin Glass
  */
 public abstract class Environment implements EnvironmentInterface {
 	/** The physical world the environment provides to it's entities */

@@ -20,6 +20,11 @@ import utils.Conf;
 import utils.Globals;
 import actors.MainPlayer;
 
+/**
+ * Player choice menu
+ * 
+ * @author namor
+ */
 public class ChoicePersoState extends ChoiceMenuState {
 
 	public ChoicePersoState(int stateID) {

@@ -8,6 +8,8 @@ import org.newdawn.slick.geom.Shape;
 
 /**
  * Defines the tile's shape
+ * 
+ * @author Kevin Glass
  */
 public class TileShapes {
 	

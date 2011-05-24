@@ -31,7 +31,6 @@ import utils.Globals;
  * Mini-game : battle against another character
  * 
  * @author namor
- *
  */
 public class CheckTonScore extends BasicGameState {
 	/** The state id */

@@ -4,8 +4,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import utils.Globals;
-
+/**
+ * Main game play state
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class MainLevel extends AbstractGameplayState {
 
 	public MainLevel(int id) {

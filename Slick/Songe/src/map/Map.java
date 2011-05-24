@@ -16,6 +16,12 @@ import actors.Actor;
 import actors.PhysicalEntity;
 import environment.TileEnvironment;
 
+/**
+ * The map
+ * 
+ * @author Afnarel
+ * @author Kevin Glass
+ */
 public class Map {
 	
 	private Image background;

@@ -5,6 +5,8 @@ import org.newdawn.slick.geom.Shape;
 
 /**
  * A tile represented by an image and a shape
+ * 
+ * @author Kevin Glass
  */
 public class Tile {
 	private Shape shape;

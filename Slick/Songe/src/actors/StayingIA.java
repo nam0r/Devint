@@ -4,6 +4,12 @@ import nodes.Node;
 
 import org.newdawn.slick.Graphics;
 
+/**
+ * A staying IA
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class StayingIA extends IA {
 	
 	/**

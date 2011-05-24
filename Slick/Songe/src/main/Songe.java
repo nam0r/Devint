@@ -21,7 +21,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import utils.Globals;
 
 
-
+/**
+ * The main Slick game state
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class Songe extends StateBasedGame {
 
 	// Attributes

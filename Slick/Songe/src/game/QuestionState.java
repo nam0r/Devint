@@ -21,7 +21,13 @@ import sound.AlUtils;
 import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
- 
+
+/**
+ * The Question state
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class QuestionState extends MenuState {
 	/** the question */
 	private Question<? extends Choice> question;

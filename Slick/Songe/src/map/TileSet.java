@@ -18,6 +18,10 @@ import actors.PhysicalEntity;
 
 /**
  * Reads an XML file and creates a HashMap associating the character to a tile
+ * 
+ * @author namor
+ * @author Afnarel
+ * @author Kevin Glass
  */
 public class TileSet {
 

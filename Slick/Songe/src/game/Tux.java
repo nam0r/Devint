@@ -12,6 +12,9 @@ import actors.MainPlayer;
 
 /**
  * Tux
+ * 
+ * @author namor
+ * @author Afnarel
  */
 public class Tux extends MainPlayer {
 	/** The Y offset for walking sprite sheet */

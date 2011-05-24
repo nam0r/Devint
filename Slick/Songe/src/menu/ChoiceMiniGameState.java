@@ -14,6 +14,11 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import utils.Conf;
 
+/**
+ * Mini-game choice menu
+ * 
+ * @author namor
+ */
 public class ChoiceMiniGameState extends ChoiceMenuState {
 
 	public ChoiceMiniGameState(int stateID) {

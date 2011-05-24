@@ -19,6 +19,9 @@ import actors.PhysicalEntity;
 
 /**
  * Abstract class that manages the main game
+ * 
+ * @author namor
+ * @author Afnarel
  */
 public abstract class AbstractGameState extends BasicGameState {
 	

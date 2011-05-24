@@ -2,6 +2,11 @@ package nodes;
 
 import main.Songe;
 
+/**
+ * A Dialog
+ * 
+ * @author Afnarel
+ */
 public class Dialog implements Event {
 	
 	private String sound;

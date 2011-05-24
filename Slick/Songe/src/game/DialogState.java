@@ -24,6 +24,12 @@ import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
  
+/**
+ * The Dialog state
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public class DialogState extends BasicGameState {
 	
 	/** The state id */

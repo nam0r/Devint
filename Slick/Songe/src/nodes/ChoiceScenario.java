@@ -1,5 +1,10 @@
 package nodes;
 
+/**
+ * A choice for a scenario question
+ * 
+ * @author Afnarel
+ */
 public class ChoiceScenario extends Choice {
 
 	private int nodeToGoTo;

@@ -1,5 +1,10 @@
 package nodes;
 
+/**
+ * A choice for a culture question
+ * 
+ * @author Afnarel
+ */
 public class ChoiceCulture extends Choice {
 
 	private boolean isAnswer;

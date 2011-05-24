@@ -27,7 +27,7 @@ import utils.Conf;
  * performant polygons for the purpose of the physical world as part of the 
  * initialization.
  * 
- * @author kevin
+ * @author Kevin Glass
  */
 public class TileEnvironment extends Environment {
 	/** The images to draw for the tiles */
