@@ -5,12 +5,15 @@ import org.newdawn.slick.SlickException;
 
 public abstract class AbstractEntity {
 	
+	/** The path of the main image of the entity */
 	protected String path;
+	/** The main image of the entity */
 	protected Image image;
-	
+	/** The scale to drax the image */
 	protected float scale;
-	
+	/** The width of the entity */
 	protected float width;
+	/** The height of the entity */
 	protected float height;
 	
 	/* ************ *
@@ -28,10 +31,6 @@ public abstract class AbstractEntity {
 			System.err.println("Couldn't load image");
 		}
 	}
-	
-	/*public AbstractEntity() {
-		this.scale = 1.0f;
-	}*/
 	
 	/* **************** *
 	 * Public Functions *
@@ -158,6 +157,10 @@ public abstract class AbstractEntity {
 	
 	public float getHeight() {
 		return this.height;
+	}
+	
+	public Image getImage(){
+		return image;
 	}
 	
 	/* ********* *

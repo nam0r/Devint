@@ -11,14 +11,17 @@ import utils.Globals;
 import actors.MainPlayer;
 
 /**
- * Lamasticot
+ * The Lamasticot player
+ * 
+ * @author namor
+ * @author Afnarel
  */
 public class Lamasticot extends MainPlayer {
-	private SpriteSheet walk;
-	private SpriteSheet jump;
-	
+	/** The Y offset for walking sprite sheet */
 	private final int Y_OFFSET_WALK = 0;
+	/** The amount of sheets for the walking sprite sheet */
 	private final int NB_SPRITES_WALK = 7;
+	/** The amount of sheets for the jumping sprite sheet */
 	private final int NB_SPRITES_JUMP = 6;
 	/** jump beginning offset */
 	private int jumpTimer;
@@ -34,14 +37,18 @@ public class Lamasticot extends MainPlayer {
 	private int walkingTimer;
 	private boolean moveUp;*/
 	
-	public Lamasticot(int n) {
-		super(n, Conf.IMG_SPRITES_PATH+"lama_jump.png", 200, 600, 10f, 125, 92);
+	public Lamasticot(int n){
+		this(n, "lama.png", "lama_jump.png");
+	}
+	
+	public Lamasticot(int n, String walkingSprite, String jumpingSprite) {
+		super(n, Conf.IMG_SPRITES_PATH+walkingSprite, 200, 600, 10f, 125, 92);
 		
-		jump = new SpriteSheet(image,125,92);
+		walk = new SpriteSheet(image,125,92);
 		
 		try {
-			Image im = new Image(Conf.IMG_SPRITES_PATH+"lama.png");
-			walk = new SpriteSheet(im,125,92);
+			Image im = new Image(Conf.IMG_SPRITES_PATH+jumpingSprite);
+			jump = new SpriteSheet(im,125,92);
 		} catch (SlickException e) {
 			System.err.println("Image sprites de Tux pas trouvées.");
 		}

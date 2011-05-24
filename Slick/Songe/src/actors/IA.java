@@ -14,6 +14,12 @@ import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
 
+/**
+ * An IA to interact with
+ * 
+ * @author namor
+ * @author Afnarel
+ */
 public abstract class IA extends Actor {
 	/** the walk spritesheet */
 	protected SpriteSheet walk;
@@ -45,7 +51,7 @@ public abstract class IA extends Actor {
 	protected float yoffset;
 	/** Indicates if the sprites have to be flipped */
 	protected boolean flip;
-
+	/** The ia's node */
 	protected Node node;
 	
 	/**
@@ -242,6 +248,12 @@ public abstract class IA extends Actor {
 		this.hasBeenFar = hasBeenFar;
 	}
 	
-	
+	/**
+	 * Returns the walking sprite sheet
+	 * @return walk
+	 */
+	public SpriteSheet getWalkSheet(){
+		return walk;
+	}
 
 }

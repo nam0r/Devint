@@ -93,13 +93,13 @@ public class ChoicePersoState extends ChoiceMenuState {
 		} else {
 			switch (selected) {
 			case 0: // Aurore
-				return new Aurore(20000);
+				return new Aurore(20000, "aurore_walk_white.png", "aurore_jmp_white.png");
 			case 1: // Timéo
-				return new Timeo(30000);
+				return new Timeo(30000, "timeo_walk_white.png", "timeo_jmp_white.png");
 			case 2: // Tux
 				return new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
 			case 3: // Lamasticot
-				return new Lamasticot(50000);
+				return new Lamasticot(50000, "lama_white.png", "lama_jump_white.png");
 			default: // Default
 				return new Tux(1, "tux_walk_white.png", "tux_jmp_white.png");
 			}

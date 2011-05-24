@@ -1,4 +1,4 @@
-package game;
+package obsolete;
 
 import nodes.Node;
 import utils.Conf;

@@ -8,8 +8,10 @@ import org.newdawn.slick.openal.SoundStore;
 
 /**
  * Tools to interact with OpenAl
+ * 
+ * @author namor
+ *
  */
-
 public class AlUtils {
 	
 	private static SoundStore store = SoundStore.get();

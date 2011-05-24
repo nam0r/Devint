@@ -14,10 +14,9 @@ import actors.MainPlayer;
  * Tux
  */
 public class Tux extends MainPlayer {
-	private SpriteSheet walk;
-	private SpriteSheet jump;
-	
+	/** The Y offset for walking sprite sheet */
 	private final int Y_OFFSET_WALK = 0;
+	/** The amount of sheets for the walking sprite sheet */
 	private final int NB_SPRITES_WALK = 7;
 	/** the step rate constant for the step sound */
 	private final float STEPRATE = 35f;
@@ -29,12 +28,12 @@ public class Tux extends MainPlayer {
 	}
 	
 	public Tux (int n, String walkingSprite, String jumpingSprite){
-		super(n, Conf.IMG_SPRITES_PATH+jumpingSprite, 100, 650, 5f, 65, 95);
-		jump = new SpriteSheet(image,65,95);
+		super(n, Conf.IMG_SPRITES_PATH+walkingSprite, 100, 650, 5f, 65, 95);
+		walk = new SpriteSheet(image,65,95);
 		
 		try {
-			Image im = new Image(Conf.IMG_SPRITES_PATH+walkingSprite);
-			walk = new SpriteSheet(im,65,95);
+			Image im = new Image(Conf.IMG_SPRITES_PATH+jumpingSprite);
+			jump = new SpriteSheet(im,65,95);
 		} catch (SlickException e) {
 			System.err.println("Image sprites de Tux pas trouvées.");
 		}
@@ -77,6 +76,7 @@ public class Tux extends MainPlayer {
 		
 		// get the appropriate sprite 
 		Image image = sheet.getSprite(sx,sy);
+		image = image.getFlippedCopy(true, false);
 	
 		// if we're facing the other direction, flip the sprite over
 		if (facingRight()) {

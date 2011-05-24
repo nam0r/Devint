@@ -1,4 +1,4 @@
-package game;
+package obsolete;
 
 import net.phys2d.math.Vector2f;
 import nodes.Node;

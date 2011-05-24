@@ -7,8 +7,10 @@ import main.Songe;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleIO;
 import org.newdawn.slick.particles.ParticleSystem;
@@ -17,6 +19,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import actors.IA;
 
 import sound.AlUtils;
 import sound.Sound2;
@@ -47,10 +51,13 @@ public class CheckTonScore extends BasicGameState {
 	/** The actual amount representing the game situation */
 	public float actual;
 	/** The total amount representing the game situation */
-	public float total;
+	public static final float TOTAL = 700;
 	/** The actual key pressed for the alternative buttons */
 	private String actualKey;
-
+	/** the image to display */
+	private Image image1, image2;
+	/** indicates if the image is set */
+	private boolean imagesAreSet;
 
 	public CheckTonScore(int stateID) {
 		this.stateID = stateID;
@@ -111,12 +118,12 @@ public class CheckTonScore extends BasicGameState {
 		}
 		
 		//we lost
-		if(actual < 0){
+		if(actual <= 0){
 			if(!perdu.playedOnce())
 				perdu.play();
 		}
 		//we won
-		else if(actual > total){
+		else if(actual >= TOTAL){
 			if(!gagne.playedOnce())
 				gagne.play();
 		}
@@ -147,28 +154,42 @@ public class CheckTonScore extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		int x = gc.getWidth() / 2 - (int) ((total * scale) / 2);
+		int x = gc.getWidth() / 2 - (int) ((TOTAL * scale) / 2);
 		int y = 3*gc.getHeight() / 4 - (int) (30 * scale);
+		//the horizontal bar
 		g.fillRect(x, y + 50 * scale, actual * scale, BAR_HEIGHT
 				* scale);
-		g.drawRect(x, y + 50 * scale, total * scale, BAR_HEIGHT
+		g.drawRect(x, y + 50 * scale, TOTAL * scale, BAR_HEIGHT
 				* scale);
-		
+		//the emitters
 		for(int i=0; i<2; i++){
-			((ConfigurableEmitter) emit1.getEmitter(i)).setPosition(gc.getWidth()/6, gc.getHeight()/2);
-			((SimpleValue)((ConfigurableEmitter) emit1.getEmitter(i)).windFactor).setValue((16-12/(350/(350-actual)))*scale);
-			((SimpleValue)((ConfigurableEmitter) emit1.getEmitter(i)).growthFactor).setValue((172-50/(350/(350-actual)))*scale);
-			((ConfigurableEmitter) emit2.getEmitter(i)).setPosition(5*gc.getWidth()/6, gc.getHeight()/2);
-			((SimpleValue)((ConfigurableEmitter) emit2.getEmitter(i)).windFactor).setValue(-(16+12/(350/(350-actual)))*scale);
-			((SimpleValue)((ConfigurableEmitter) emit2.getEmitter(i)).growthFactor).setValue((172+50/(350/(350-actual)))*scale);
+			((ConfigurableEmitter) emit1.getEmitter(i)).setPosition(gc
+					.getWidth() / 6, gc.getHeight() / 2);
+			((SimpleValue) ((ConfigurableEmitter) emit1.getEmitter(i)).windFactor)
+					.setValue((16 - 12 / ((TOTAL / 2) / ((TOTAL / 2) - actual)))
+							* scale);
+			((SimpleValue) ((ConfigurableEmitter) emit1.getEmitter(i)).growthFactor)
+					.setValue((172 - 50 / ((TOTAL / 2) / ((TOTAL / 2) - actual)))
+							* scale);
+			((ConfigurableEmitter) emit2.getEmitter(i)).setPosition(5 * gc
+					.getWidth() / 6, gc.getHeight() / 2);
+			((SimpleValue) ((ConfigurableEmitter) emit2.getEmitter(i)).windFactor)
+					.setValue(-(16 + 12 / ((TOTAL / 2) / ((TOTAL / 2) - actual)))
+							* scale);
+			((SimpleValue) ((ConfigurableEmitter) emit2.getEmitter(i)).growthFactor)
+					.setValue((172 + 50 / ((TOTAL / 2) / ((TOTAL / 2) - actual)))
+							* scale);
 		}
 		emit1.render();
 		emit2.render();
-	}
-
-	@Override
-	public void leave(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
+		
+		// The player and enemy if in the main game
+		if (Globals.returnState != Songe.MAINMENUSTATE && imagesAreSet) {
+			image1.draw(gc.getWidth() / 8 - image1.getWidth() / 2,
+					gc.getHeight() / 2 - image1.getHeight() / 2);
+			image2.draw(7 * gc.getWidth() / 8 - image2.getWidth() / 2, 
+					gc.getHeight() / 2 - image2.getHeight() / 2);
+		}
 	}
 	
 	@Override
@@ -176,8 +197,26 @@ public class CheckTonScore extends BasicGameState {
 	throws SlickException {
 		AlUtils.resetAlListener();
 		leftXOffset = 0;
-		total = 700;
-		actual = 350;
+		actual = TOTAL/2;
 		actualKey = "left";
+		//The player and enemy if in the main game
+		if(Globals.returnState != Songe.MAINMENUSTATE){
+			// the player's image
+			image1 = Globals.player.getWalkSheet().getSprite(0, 0);
+			// the enemy's image
+			if(Globals.node.getIA() instanceof IA)
+				image2 = ((IA)Globals.node.getIA()).getWalkSheet().getSprite(0, 0);
+			else
+				image2 = Globals.node.getIA().getImage();
+			imagesAreSet = true;
+		}
+	}
+	
+	@Override
+	public void leave(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		imagesAreSet = false;
+		gagne.reinitPlayedOnce();
+		perdu.reinitPlayedOnce();
 	}
 }

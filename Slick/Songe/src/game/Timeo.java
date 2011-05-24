@@ -10,22 +10,30 @@ import utils.Globals;
 import actors.MainPlayer;
 
 /**
- * Timeo
+ * The Timéo player
+ * 
+ * @author namor
+ * @author Afnarel
  */
 public class Timeo extends MainPlayer {
-	private SpriteSheet walk;
-	private SpriteSheet jump;
-	
+	/** The Y offset for walking sprite sheet */
 	private final int Y_OFFSET_WALK = 0;
+	/** The amount of sheets for the walking sprite sheet */
 	private final int NB_SPRITES_WALK = 3;
+	/** the step rate constant for the step sound */
+	private final float STEPRATE = 13f;
 	
-	public Timeo(int n) {
-		super(n, Conf.IMG_SPRITES_PATH+"timeo_walk.png", 100, 150, 2f, 40, 62);
+	public Timeo(int n){
+		this(n, "timeo_walk.png", "timeo_jmp.png");
+	}
+	
+	public Timeo(int n, String walkingSprite, String jumpingSprite) {
+		super(n, Conf.IMG_SPRITES_PATH+walkingSprite, 100, 150, 2f, 40, 62);
 		
 		walk = new SpriteSheet(image,40,74);
 		
 		try {
-			Image im = new Image(Conf.IMG_SPRITES_PATH+"timeo_jmp.png");
+			Image im = new Image(Conf.IMG_SPRITES_PATH+jumpingSprite);
 			jump = new SpriteSheet(im,40,74);
 		} catch (SlickException e) {
 			System.err.println("Image timeo pas trouvée.");
@@ -68,6 +76,7 @@ public class Timeo extends MainPlayer {
 		
 		// get the appropriate sprite 
 		Image image = sheet.getSprite(sx,sy);
+		image = image.getFlippedCopy(true, false);
 	
 		// if we're facing the other direction, flip the sprite over
 		if (facingRight()) {
@@ -76,7 +85,12 @@ public class Timeo extends MainPlayer {
 		
 		//image.drawCentered(getX(), getY()-12);
 		if(!Globals.invulnerable || Globals.invulnerableTimer%2==1)
-			image.draw(getX()-width/2, getY()-height/2, width, height);
+			image.draw(getX()-width/2, getY()-height/2, width, height+2);
+	}
+	
+	@Override
+	public float stepRate(){
+		return STEPRATE;
 	}
 
 }

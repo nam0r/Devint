@@ -12,6 +12,12 @@ import utils.Conf;
 import utils.Globals;
 import actors.Actor;
 
+/**
+ * A generic enemy
+ * 
+ * @author namor
+ *
+ */
 public class Enemy extends Actor {
 	/** the walk spritesheet */
 	protected SpriteSheet walk;

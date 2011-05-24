@@ -17,6 +17,9 @@ import actors.PhysicalEntity;
 
 /**
  * An Emitter object
+ * 
+ * @author namor
+ * 
  */
 public class Emitter extends PhysicalEntity {
 	/** The particle system */

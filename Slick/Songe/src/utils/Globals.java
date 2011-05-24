@@ -1,12 +1,9 @@
 package utils;
 
-import game.AlienIA;
 import game.Aurore;
 import game.Crate;
 import game.Emitter;
-import game.HomerIA;
 import game.Lamasticot;
-import game.MarioIA;
 import game.Spirit;
 import game.Timeo;
 import game.Tux;
@@ -29,6 +26,10 @@ import nodes.QuestionCulture;
 import nodes.QuestionScenario;
 import nodes.TransitionSpeciale;
 
+import obsolete.AlienIA;
+import obsolete.HomerIA;
+import obsolete.MarioIA;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -40,8 +41,10 @@ import bdd.SQLiteDB;
 
 /**
  * Global variables of the whole game.
+ * 
+ * @author namor
+ * @author Afnarel
  */
-
 public class Globals {
 	/** The global score */
 	public static int score = 0;
@@ -200,19 +203,19 @@ public class Globals {
 			if (Globals.player instanceof Timeo)// Timéo
 				Globals.player = new Timeo(30000);
 			if (Globals.player instanceof Tux)// Tux
-				Globals.player = new Tux(40000, "tux_walk.png", "tux_jmp.png");
+				Globals.player = new Tux(40000);
 			if (Globals.player instanceof Lamasticot)// Lamasticot
 				Globals.player = new Lamasticot(50000);
 		}
 		else{
 			if (Globals.player instanceof Aurore)// Aurore
-				Globals.player = new Aurore(20000);
+				Globals.player = new Aurore(20000, "aurore_walk_white.png", "aurore_jmp_white.png");
 			if (Globals.player instanceof Timeo)// Timéo
-				Globals.player = new Timeo(30000);
+				Globals.player = new Timeo(30000, "timeo_walk_white.png", "timeo_jmp_white.png");
 			if (Globals.player instanceof Tux)// Tux
 				Globals.player = new Tux(40000, "tux_walk_white.png", "tux_jmp_white.png");
 			if (Globals.player instanceof Lamasticot)// Lamasticot
-				Globals.player = new Lamasticot(50000);
+				Globals.player = new Lamasticot(50000, "lama_white.png", "lama_jump_white.png");
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package game;
+package obsolete;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,14 +8,16 @@ import utils.Conf;
 import actors.MainPlayer;
 
 /**
- * Un exemple de personnage
+ * The Homer player
+ * 
+ * @author namor
+ * @author Afnarel
  */
 public class Homer extends MainPlayer {
-	private SpriteSheet run;
-	private SpriteSheet jump;
-	
 	private final int Y_OFFSET_WALK = 0;
 	private final int NB_SPRITES_WALK = 8;
+	/** the step rate constant for the step sound */
+	private final float STEPRATE = 35f;
 	
 	public Homer(int n) {
 		super(n, Conf.IMG_SPRITES_PATH+"homeranim_big_flashy.png", 100, 150, 8f, 72, 126);
@@ -23,7 +25,7 @@ public class Homer extends MainPlayer {
 		//run = getSpriteSheet(0,36,65);
 		//jump = getSpriteSheet(150,50,50);
 		
-		run = new SpriteSheet(image, 72, 130);
+		walk = new SpriteSheet(image, 72, 130);
 		
 		moveForce = 400;
 		jumpForce = 50000;
@@ -34,7 +36,7 @@ public class Homer extends MainPlayer {
 	public void render(Graphics g) {
 		// work out which animation we're showing based 
 		// on the state of the actor
-		SpriteSheet sheet = run;
+		SpriteSheet sheet = walk;
 		int sx = 0;
 		int sy = 0;
 		
@@ -48,11 +50,11 @@ public class Homer extends MainPlayer {
 			sy = 0;
 		} else*/ if (moving() && onGround()) {
 			//int f = (frame % 6) + 1;
-			sheet = run;
+			sheet = walk;
 			sx = frame % NB_SPRITES_WALK;
 			sy = 0;
  		} else if (onGround()) {
-			sheet = run;
+			sheet = walk;
 			sx = 7;
 			sy = 0;
 		}
@@ -60,7 +62,7 @@ public class Homer extends MainPlayer {
 		// get the appropriate sprite 
 		Image image = sheet.getSprite(sx,sy);
 		image = image.getFlippedCopy(true, false);
-	
+		
 		// if we're facing the other direction, flip the sprite over
 		if (facingRight()) {
 			image = image.getFlippedCopy(true, false);
@@ -68,6 +70,10 @@ public class Homer extends MainPlayer {
 		
 		//image.drawCentered(getX(), getY()-12);
 		image.draw(getX()-width/2, getY()-height/2, width, height+4);
+	}
+	
+	public float stepRate(){
+		return 35;
 	}
 
 }

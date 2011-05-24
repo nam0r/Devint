@@ -1,4 +1,4 @@
-package game;
+package obsolete;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -11,13 +11,11 @@ import actors.MainPlayer;
  * Un exemple de personnage
  */
 public class Alien extends MainPlayer {
-	private SpriteSheet run;
-	private SpriteSheet jump;
 	
 	public Alien(int n) {
 		super(n, Conf.IMG_SPRITES_PATH+"all_big.png", 100, 150, 3f, 48, 72);
 
-		run = getSpriteSheet(0,100,101);
+		walk = getSpriteSheet(0,100,101);
 		jump = getSpriteSheet(301,100,100);
 		
 		moveForce = 200;
@@ -43,11 +41,11 @@ public class Alien extends MainPlayer {
 			sy = 0;
 		} else if (moving() && onGround()) {
 			int f = (frame % 6) + 1;
-			sheet = run;
+			sheet = walk;
 			sx = f % 3;
 			sy = f / 3;
  		} else if (onGround()) {
-			sheet = run;
+			sheet = walk;
 			sx = 0;
 			sy = 0;
 		}
@@ -62,6 +60,10 @@ public class Alien extends MainPlayer {
 		
 		//image.drawCentered(getX(), getY()-12);
 		image.draw(getX()-48, getY()-57, 100, 100);
+	}
+	
+	public float stepRate(){
+		return 35;
 	}
 
 }

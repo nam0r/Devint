@@ -30,7 +30,7 @@ import utils.Globals;
  * Mini-game : spacecraft falling in a cave
  * 
  * @author namor
- *
+ * @author guodman
  */
 public class HoverCave extends BasicGameState {
 	private int stateID;

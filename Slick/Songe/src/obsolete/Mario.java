@@ -1,4 +1,4 @@
-package game;
+package obsolete;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -9,13 +9,15 @@ import utils.Conf;
 import actors.MainPlayer;
 
 /**
- * Mario
+ * The Mario player
+ * 
+ * @author namor
+ * @author Afnarel
  */
 public class Mario extends MainPlayer {
-	private SpriteSheet walk;
-	private SpriteSheet jump;
-	
+	/** The Y offset for walking sprite sheet */
 	private final int Y_OFFSET_WALK = 0;
+	/** The amount of sheets for the walking sprite sheet */
 	private final int NB_SPRITES_WALK = 3;
 	
 	public Mario(int n) {
@@ -75,6 +77,10 @@ public class Mario extends MainPlayer {
 		
 		//image.drawCentered(getX(), getY()-12);
 		image.draw(getX()-width/2, getY()-height/2, width, height);
+	}
+	
+	public float stepRate(){
+		return 35;
 	}
 
 }

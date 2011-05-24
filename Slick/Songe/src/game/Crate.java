@@ -3,6 +3,7 @@ package game;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import actors.PhysicalEntity;
 
@@ -41,4 +42,5 @@ public class Crate extends PhysicalEntity {
 	}
 
 	public void update(int delta) {}
+	
 }

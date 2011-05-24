@@ -10,6 +10,12 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.util.Log;
 
+/**
+ * A class to manage sounds, like Sound class but supporting more functions of
+ * OpenAL of lwjgl
+ * 
+ * @author namor
+ */
 public class Sound2 {
 
 	/** The internal sound effect represent this sound */
