@@ -26,6 +26,12 @@ import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
 
+/**
+ * Mini-game : spacecraft falling in a cave
+ * 
+ * @author namor
+ *
+ */
 public class HoverCave extends BasicGameState {
 	private int stateID;
 	
@@ -200,13 +206,14 @@ public class HoverCave extends BasicGameState {
 					if(Globals.returnState != Songe.MAINMENUSTATE){
 						//The score is set
 						Globals.score += distance/1000;
+						Globals.nextEvent(sbg);
 					}
-						
-					/*
-					game.enterState(Globals.returnState, new FadeOutTransition(Color.black),
+					// if playing from the stand-alone version
+					else{	
+						sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
 							new FadeInTransition(Color.black));
-					*/
-					Globals.nextEvent(sbg);
+					}
+					
 				}
 			}
 		}

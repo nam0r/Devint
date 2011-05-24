@@ -109,15 +109,15 @@ public class LoadingState extends BasicGameState {
 	}
 
 	/**
-	 * Initializes some ressources at the Home path of the user
+	 * Initializes some resources at the Home path of the user
 	 */
 	public void initializeRessources() {
-		// If running through jnlp webstart, we initialize some ressources
+		// If running through jnlp webstart, we initialize some resources
 		if (System.getProperty("javawebstart.version") != null) {
 			// we see if the game has already ever been initialized and if
 			// it needs to unpack special resources and databases
 			File ressources = new File(Conf.HOME, Conf.RESS_PATH);
-			// if ressources doesn't exist, then we initialize all
+			// if resources doesn't exist, then we initialize all
 			if (!ressources.exists() || !ressources.isDirectory()) {
 				if (!Conf.HOME.exists() || !Conf.HOME.isDirectory()) {
 					// we create the main directory

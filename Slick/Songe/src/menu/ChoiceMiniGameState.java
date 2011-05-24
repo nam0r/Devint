@@ -18,8 +18,8 @@ public class ChoiceMiniGameState extends ChoiceMenuState {
 
 	public ChoiceMiniGameState(int stateID) {
 		super(stateID);
-		options = new String[] { "HoverCave"};
-		optionsVoices = new String[] {Conf.getVoice("hovercave")};
+		options = new String[] {"HoverCave", "Battle"};
+		optionsVoices = new String[] {Conf.getVoice("hovercave"), Conf.getVoice("hovercave")};
     	title = "Choisis le minijeu auquel tu veux jouer.";
     	titleVoice = Conf.getVoice("title_choiceminigame");
 	}
@@ -28,7 +28,7 @@ public class ChoiceMiniGameState extends ChoiceMenuState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		images = new Image[] { new Image(Conf.IMG_PATH+"interrogation.png")};
+		images = new Image[] {new Image(Conf.IMG_PATH+"interrogation.png"), new Image(Conf.IMG_PATH+"interrogation.png")};
 		initSounds();
 	}
 
@@ -47,6 +47,10 @@ public class ChoiceMiniGameState extends ChoiceMenuState {
 			switch (selected) {
 			case 0:
 				sbg.enterState(Songe.HOVERCAVESTATE, new FadeOutTransition(
+						Color.black), new FadeInTransition(Color.black));
+				break;
+			case 1:
+				sbg.enterState(Songe.CHECKTONSCORESTATE, new FadeOutTransition(
 						Color.black), new FadeInTransition(Color.black));
 				break;
 			}
