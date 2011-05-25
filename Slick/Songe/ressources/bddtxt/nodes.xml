@@ -238,7 +238,7 @@
 			<event>
 				<type>D</type>
 				<param>20006</param>
-				<param>lama.png</param>
+				<param>aurore.png</param>
 			</event>
 		</events>
 		<node_id>20007</node_id>
@@ -604,7 +604,7 @@
 			<event>
 				<type>D</type>
 				<param>40007</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 			<event>
 				<type>TS</type>
@@ -623,7 +623,7 @@
 			<event>
 				<type>D</type>
 				<param>40008</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 			<event>
 				<type>T</type>
@@ -632,7 +632,7 @@
 			<event>
 				<type>D</type>
 				<param>40008_2</param>
-				<param>interrogation.png</param>
+				<param>tux.png</param>
 			</event>
 		</events>
 		<node_id>40010</node_id>
@@ -645,7 +645,7 @@
 			<event>
 				<type>D</type>
 				<param>40009</param>
-				<param>interrogation.png</param>
+				<param>lama.png</param>
 			</event>
 			<event>
 				<type>T</type>
@@ -654,7 +654,7 @@
 			<event>
 				<type>D</type>
 				<param>40009_2</param>
-				<param>interrogation.png</param>
+				<param>tux.png</param>
 			</event>
 		</events>
 		<node_id>40010</node_id>
@@ -682,10 +682,18 @@
 				<param></param>
 				<param></param>
 			</event>
+		</events>
+		<node_id>40012</node_id>
+	</node>
+	<node>
+		<id>40012</id>
+		<ia>8</ia>
+		<type_ia>StayingIA</type_ia>
+		<events>
 			<event>
 				<type>D</type>
-				<param>40011</param>
-				<param>interrogation.png</param>
+				<param>40012</param>
+				<param>tux.png</param>
 			</event>
 			<event>
 				<type>T</type>
@@ -769,8 +777,8 @@
 			<event>
 				<type>TS</type>
 				<param>11</param>
-				<param>50005</param>
 				<param>50006</param>
+				<param>50005</param>
 			</event>
 		</events>
 		<node_id>50005</node_id>
@@ -830,7 +838,7 @@
 	<node>
 		<id>50009</id>
 		<ia>0</ia>
-		<type_ia>StayingIA</type_ia>
+		<type_ia>WalkingIA</type_ia>
 		<events>
 			<event>
 				<type>D</type>
@@ -840,8 +848,8 @@
 			<event>
 				<type>TS</type>
 				<param>11</param>
-				<param>50010</param>
 				<param>50011</param>
+				<param>50010</param>
 			</event>
 		</events>
 		<node_id>-1</node_id>
