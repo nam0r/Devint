@@ -265,7 +265,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		// If coming in game again, the player will be moved
-		Globals.player.setPosition(Globals.player.getX() + 200, Globals.player.getY() - 100);
+		Globals.player.setPosition(Globals.player.getX() + 120, Globals.player.getY() - 80);
 		AlUtils.stopAllSounds();
 	}
 	

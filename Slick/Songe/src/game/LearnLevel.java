@@ -64,7 +64,7 @@ public class LearnLevel extends AbstractGameplayState {
 			throws SlickException {
 		super.leave(gc, sbg);
 		// we cancel the character displacement
-		Globals.player.setPosition(Globals.player.getX() - 200, Globals.player.getY() + 100);
+		Globals.player.setPosition(Globals.player.getX() - 120, Globals.player.getY() + 80);
 	}
 	
 	@Override
