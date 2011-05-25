@@ -152,14 +152,15 @@ public class SynthetiseurMbrola  {
 		    		proc.exitValue();
 		    		finished=true;
 		    	} catch (IllegalThreadStateException e) {
-		    		//System.out.println("Erreur lors de la préparation du son");
-		    		//e.printStackTrace();
+		    		System.out.println("Erreur lors de la préparation du son");
+		    		e.printStackTrace();
 		    		//OSEF de cette exception
 		    	}
 		    }
 		}
 		catch (Exception e) {
 		    System.out.println("SynthetiseurMbrola: "+mode+" erreur!");
+		    e.printStackTrace();
 		}
     }
 

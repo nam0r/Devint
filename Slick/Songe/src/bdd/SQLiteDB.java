@@ -36,8 +36,14 @@ public class SQLiteDB {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			this.connection = DriverManager
-					.getConnection("jdbc:sqlite:" + Conf.HOME+File.separator+db_name + ".db3"); // jdbc:sqlite:sample.db
+			//if under jnlp
+    		if(System.getProperty("javawebstart.version") != null)
+    			this.connection = DriverManager
+					.getConnection("jdbc:sqlite:" + Conf.HOME+File.separator+db_name + ".db3");
+    		//if under CD Devint
+    		else
+    			this.connection = DriverManager
+					.getConnection("jdbc:sqlite:" + Conf.RESS_PATH+db_name + ".db3");
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (SQLException e) {

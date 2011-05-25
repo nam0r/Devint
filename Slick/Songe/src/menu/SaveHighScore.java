@@ -40,7 +40,6 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	private TextField nameField;
 	/** The name value */
 	private String nameValue = "none";
-
 	/** The font we're going to use to render */
 	private Font font;
 	/** The image */
@@ -57,6 +56,10 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	private int currentScoreID;
 	/** current game */
 	private StateBasedGame game;
+	/** The DB connection */
+	private Connection conn;
+	/** The statement */
+	private Statement stat;
 
 	/**
 	 * Create a new test for font rendering
@@ -158,9 +161,15 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	public boolean isHighScore(int scoreNumber){
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager
+			//if under jnlp
+    		if(System.getProperty("javawebstart.version") != null)
+    			conn = DriverManager
 					.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
-			Statement stat = conn.createStatement();
+    		//if under CD Devint
+    		else
+    			conn = DriverManager
+				.getConnection("jdbc:sqlite:"+Conf.RESS_PATH+Conf.SCORE_DB);
+			stat = conn.createStatement();
 			ResultSet r = stat
 			.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
 			int i=0;
@@ -189,9 +198,15 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	public void updateName(String name) {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager
+			//if under jnlp
+    		if(System.getProperty("javawebstart.version") != null)
+    			conn = DriverManager
 					.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
-			Statement stat = conn.createStatement();
+    		//if under CD Devint
+    		else
+    			conn = DriverManager
+				.getConnection("jdbc:sqlite:"+Conf.RESS_PATH+Conf.SCORE_DB);
+			stat = conn.createStatement();
 			stat.executeUpdate("UPDATE scores SET name='" + name + "', score="
 					+ Globals.score + " WHERE id="
 					+ currentScoreID + ";");
@@ -211,9 +226,15 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 			File f = new File(Conf.HOME+File.separator+Conf.SCORE_DB);
 			boolean newFile = !f.exists();
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager
+			//if under jnlp
+    		if(System.getProperty("javawebstart.version") != null)
+    			conn = DriverManager
 					.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
-			Statement stat = conn.createStatement();
+    		//if under CD Devint
+    		else
+    			conn = DriverManager
+				.getConnection("jdbc:sqlite:"+Conf.RESS_PATH+Conf.SCORE_DB);
+			stat = conn.createStatement();
 			if (newFile) {
 				stat.executeUpdate("CREATE TABLE scores (id integer PRIMARY KEY AUTOINCREMENT, name text, score integer);");
 			}
@@ -240,9 +261,15 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 		if (f.exists()) {
 			try {
 				Class.forName("org.sqlite.JDBC");
-				Connection conn = DriverManager
+				//if under jnlp
+	    		if(System.getProperty("javawebstart.version") != null)
+	    			conn = DriverManager
 						.getConnection("jdbc:sqlite:"+Conf.HOME+File.separator+Conf.SCORE_DB);
-				Statement stat = conn.createStatement();
+	    		//if under CD Devint
+	    		else
+	    			conn = DriverManager
+					.getConnection("jdbc:sqlite:"+Conf.RESS_PATH+Conf.SCORE_DB);
+				stat = conn.createStatement();
 				ResultSet r = stat.executeQuery("SELECT * FROM scores ORDER BY score DESC LIMIT 10;");
 				x += 30;
 				y += 20;

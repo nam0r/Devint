@@ -1,2 +1,2 @@
-javac -cp .;../../VocalyzeSIVOX/bin/SI_VOX.jar -d ../bin devintAPI/*.java jeu/*.java 
+javac -cp .;../../VocalyzeSIVOX/bin/SI_VOX.jar;../ressources/lib/slick.jar;../ressources/lib/lwjgl.jar;../ressources/lib/jogg-0.0.7.jar;../ressources/lib/jorbis-0.0.15.jar;../ressources/lib/sqlitejdbc-v056.jar;../ressources/lib/phys2d-060408.jar -d ../bin actors/*.java bdd/*.java bddcreate/*.java environment/*.java game/*.java main/*.java map/*.java menu/*.java minigame/*.java nodes/*.java sound/*.java utils/*.java
 pause

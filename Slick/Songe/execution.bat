@@ -1,0 +1,1 @@
+java -cp .;../../VocalyzeSIVOX/bin/SI_VOX.jar;../ressources/lib/slick.jar;../ressources/lib/lwjgl.jar;../ressources/lib/jogg-0.0.7.jar;../ressources/lib/jorbis-0.0.15.jar;../ressources/lib/sqlitejdbc-v056.jar;../ressources/lib/phys2d-060408.jar -Djava.library.path=../ressources/lib/natives/win main.Main

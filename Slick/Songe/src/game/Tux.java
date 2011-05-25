@@ -73,7 +73,7 @@ public class Tux extends MainPlayer {
 			sy = Y_OFFSET_WALK;
  		} else if (onGround() || waiting()) {
 			sheet = walk;
-			sx = 0;
+			sx = NB_SPRITES_WALK-1;
 			sy = Y_OFFSET_WALK;
 		}
 		
