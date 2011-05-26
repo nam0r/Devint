@@ -59,6 +59,8 @@ public class CheckTonScore extends BasicGameState {
 	private Sound2 enterSound;
 	/** Indicates if we begin the game */
 	private boolean playTheGame;
+	
+	private boolean finished;
 
 	public CheckTonScore(int stateID) {
 		this.stateID = stateID;
@@ -92,7 +94,7 @@ public class CheckTonScore extends BasicGameState {
 			throws SlickException {
 		Input input = gc.getInput();
 		
-		if(input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+		if(finished) {
 			if(!gagne.playing() && !perdu.playing()) {
 				if(gagne.playedOnce()) {
 					// if we are in main game
@@ -125,11 +127,13 @@ public class CheckTonScore extends BasicGameState {
 			if(actual <= 0){
 				if(!perdu.playedOnce())
 					perdu.play();
+				finished = true;
 			}
 			//we won
 			else if(actual >= TOTAL){
 				if(!gagne.playedOnce())
 					gagne.play();
+				finished = true;
 			}
 			//we are playing
 			else{
@@ -211,6 +215,7 @@ public class CheckTonScore extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
+		finished = false;
 		AlUtils.resetAlListener();
 		gc.getInput().clearKeyPressedRecord();
 		leftXOffset = 0;

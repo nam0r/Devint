@@ -20,17 +20,6 @@ public class SQLiteDB {
 
 	protected Connection connection;
 	protected Statement statement;
-
-	/*
-    this.statement.executeUpdate("CREATE TABLE " + table + tables.get(table) + ";");
-    this.statement.executeUpdate("DROP TABLE IF EXISTS " + table + ";");
-    this.statement.executeUpdate("DELETE FROM " + table + ";");
-    this.statement.executeUpdate("INSERT INTO scores_joueurs(discipline, resultat, num_joueur) VALUES(" + 
-                    "'" + s.getCompetence().toString() + "'" + "," +
-                    "'" + s.getScore() + "'" + "," +
-                    playerID
-                    + ");");
-    */
 	
 	public SQLiteDB(String db_name) {
 
@@ -39,11 +28,11 @@ public class SQLiteDB {
 			//if under jnlp
     		if(System.getProperty("javawebstart.version") != null)
     			this.connection = DriverManager
-					.getConnection("jdbc:sqlite:" + Conf.HOME+File.separator+db_name + ".db3");
+					.getConnection("jdbc:sqlite:" + Conf.HOME+File.separator+db_name);
     		//if under CD Devint
     		else
     			this.connection = DriverManager
-					.getConnection("jdbc:sqlite:" + Conf.RESS_PATH+db_name + ".db3");
+					.getConnection("jdbc:sqlite:" + Conf.RESS_PATH+db_name);
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (SQLException e) {

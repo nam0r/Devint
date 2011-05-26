@@ -87,6 +87,8 @@ public class Songe extends StateBasedGame {
 		this.addState(new CheckTonScore(CHECKTONSCORESTATE));
 		
 		this.enterState(LOADINGSTATE);
+		//Globals.score = 30;
+		//this.enterState(SAVEHIGHSCORE);
 	}
 	
 

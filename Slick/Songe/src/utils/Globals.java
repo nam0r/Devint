@@ -85,6 +85,8 @@ public class Globals {
 	public static boolean started;
 	/** The actual Event */
 	public static Event event;
+	
+	public static boolean score_submitted = false;
 
 	/**
 	 * Indicates if the player has already played the game and therefore doesn't
@@ -96,7 +98,7 @@ public class Globals {
 
 	public static ArrayList<HashMap<String,String>> questionsNotAsked;
 	
-	public static SQLiteDB bdd = new SQLiteDB("data");
+	public static SQLiteDB bdd = new SQLiteDB(Conf.SCENARIO_DB);
 	/**
 	 * Returns an entity from its ID
 	 * @param entityID the name-ID of the entity to create in the map
