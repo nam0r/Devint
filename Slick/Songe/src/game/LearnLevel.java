@@ -64,7 +64,7 @@ public class LearnLevel extends AbstractGameplayState {
 			throws SlickException {
 		super.leave(gc, sbg);
 		// we cancel the character displacement
-		Globals.player.setPosition(Globals.player.getX() - 120, Globals.player.getY() + 80);
+		Globals.player.setPosition(Globals.player.getX() - 200, Globals.player.getY() + 120);
 	}
 	
 	@Override
@@ -75,6 +75,7 @@ public class LearnLevel extends AbstractGameplayState {
 				&& (event.getPoint().getY() > (Globals.player.getY()
 						+ (Globals.player.getHeight() / 3)))) {
 			map.removeEntity(enemy);
+			killedEnemySound.play();
 			((Enemy)enemy).stopSound();
 			// reset main player
 			Globals.resetMainPlayer();
@@ -84,6 +85,7 @@ public class LearnLevel extends AbstractGameplayState {
 		}
 		//if the enemy is not killed, the player is hurt
 		else{
+			Globals.player.getPainSound().play(1f, 0.4f);
 			Globals.invulnerable = true;
 		}
 	}

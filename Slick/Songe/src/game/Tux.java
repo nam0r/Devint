@@ -5,7 +5,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.loading.LoadingList;
 
+import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
 import actors.MainPlayer;
@@ -31,7 +33,7 @@ public class Tux extends MainPlayer {
 	}
 	
 	public Tux (int n, String walkingSprite, String jumpingSprite){
-		super(n, Conf.IMG_SPRITES_PATH+walkingSprite, 100, 650, 5f, 65, 95);
+		super(n, Conf.IMG_SPRITES_PATH+walkingSprite, 100, 500, 5f, 65, 95);
 		walk = new SpriteSheet(image,65,95);
 		
 		try {
@@ -46,6 +48,14 @@ public class Tux extends MainPlayer {
 		MAX_JUMP_VEL = 105;
 		body.setMaxVelocity(40, 105);
 		jumpTime = 200;
+		
+		LoadingList.setDeferredLoading(false);
+		try {
+			painSound = new Sound2(Conf.SND_PERSOS_PATH+"douleur_homme.ogg");
+		} catch (SlickException e) {
+			System.err.println("Sound "+ Conf.SND_PERSOS_PATH+"douleur_homme.ogg" +" not found");
+		}
+		LoadingList.setDeferredLoading(true);
 	}
 
 	public void render(Graphics g) {

@@ -4,7 +4,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.loading.LoadingList;
 
+import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
 import actors.MainPlayer;
@@ -28,7 +30,7 @@ public class Aurore extends MainPlayer {
 	}
 	
 	public Aurore(int n, String walkingSprite, String jumpingSprite) {
-		super(n, Conf.IMG_SPRITES_PATH+walkingSprite, 100, 150, 2f, 40, 62);
+		super(n, Conf.IMG_SPRITES_PATH+walkingSprite, 100, 450, 2f, 40, 62);
 		
 		walk = new SpriteSheet(image,40,74);
 		
@@ -43,6 +45,14 @@ public class Aurore extends MainPlayer {
 		jumpForce = 40000;
 		MAX_JUMP_VEL = 120;
 		body.setMaxVelocity(40, 120);
+		
+		LoadingList.setDeferredLoading(false);
+		try {
+			painSound = new Sound2(Conf.SND_PERSOS_PATH+"douleur_femme.ogg");
+		} catch (SlickException e) {
+			System.err.println("Sound "+ Conf.SND_PERSOS_PATH+"douleur_homme.ogg" +" not found");
+		}
+		LoadingList.setDeferredLoading(true);
 	}
 
 	public void render(Graphics g) {

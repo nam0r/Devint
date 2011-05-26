@@ -61,7 +61,7 @@ public class Enemy extends Actor {
 		if(Globals.started)
 			LoadingList.setDeferredLoading(false);
 		try {
-			sound = new Sound2(Conf.SND_PERSOS_PATH + "nuit.ogg");
+			sound = new Sound2(Conf.SND_PERSOS_PATH + "madgiggle.ogg");
 		} catch (SlickException e) {
 			System.out.println("le son de alreadyvisited n'" +
 					"a pas pu être trouvé.");
@@ -85,7 +85,7 @@ public class Enemy extends Actor {
 		sound.loop(1.0f, 1.0f, 1000000f, 0f, 0f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_ROLLOFF_FACTOR, 2.45f);
 		AL10.alSourcef(sound.getIndex(), AL10.AL_REFERENCE_DISTANCE, 35f);
-		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 250f);
+		AL10.alSourcef(sound.getIndex(), AL10.AL_GAIN, 320f);
 	}
 	
 	/**
@@ -125,15 +125,15 @@ public class Enemy extends Actor {
 		}
 
 		image.draw(getX() - width / 2, getY() - height / 2, width, height);
-		permanentSound();
+		//permanentSound();
 	}
 	
 	/**
 	 * Sets the position and the speed of the sound source of the IA
 	 */
-	public void permanentSound(){
-		sound.setSourcePosition(getX() - getWidth() / 2, getY() - getHeight() / 2, 0f);
-		sound.setSourceVelocity(getVelX(), getVelY(), 0f);
+	public void permanentSound(int i){
+		sound.setSourcePosition(getX() - getWidth() / 2, getY() - getHeight() / 2, 0f, i);
+		sound.setSourceVelocity(getVelX(), getVelY(), 0f, i);
 	}
 
 	@Override

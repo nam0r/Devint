@@ -90,6 +90,8 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 
 	/** Indicates if things to do once have been done */
 	protected boolean onceOnEnter;
+	/** The sound of the enemy when killed */
+	protected Sound2 killedEnemySound;
 	
 	public AbstractGameplayState(int id, String imagePath, String levelPath, float backpar, float backpar2) {
 		super(id, Conf.IMG_TEXTURES_PATH + imagePath, Conf.LEVELS_PATH
@@ -112,6 +114,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		soundJump = new Sound2(Conf.SND_BIP_PATH + "bip6.ogg");
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH + "saut.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH + "bump.ogg");
+		killedEnemySound = new Sound2(Conf.SND_PERSOS_PATH+"hurt_light2.ogg");
 		
 		font = new AngelCodeFont(Conf.FONTS_PATH + "hiero.fnt", Conf.FONTS_PATH
 				+ "hiero.png");
@@ -160,6 +163,12 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		soundGround();
 		soundJump();
 		
+		//we execute permanentSound method for all the enemy
+		for (int i = 0; i < map.getWorld().getBodies().size(); i++) {
+			if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
+				((Enemy) map.getEntityByBody(map.getWorld().getBodies().get(i))).permanentSound(i);
+			}
+		}
 	}
 	
 	@Override
@@ -257,6 +266,9 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			else if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Enemy) {
 				((Enemy) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
 			}
+			else if (map.getEntityByBody(map.getWorld().getBodies().get(i)) instanceof Spirit) {
+				((Spirit) map.getEntityByBody(map.getWorld().getBodies().get(i))).enter();
+			}
 		}
 	}
 
@@ -265,7 +277,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			throws SlickException {
 		super.leave(gc, sb);
 		// If coming in game again, the player will be moved
-		Globals.player.setPosition(Globals.player.getX() + 120, Globals.player.getY() - 80);
+		Globals.player.setPosition(Globals.player.getX() + 200, Globals.player.getY() - 120);
 		AlUtils.stopAllSounds();
 	}
 	
@@ -520,6 +532,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		entity.onCollision(sbg);
 		//spirit type objects disappear when touched
 		if(entity.getType().equals("spirit")){
+			((Spirit)entity).stopSound();
 			map.removeEntity(entity);
 		}
 	}
@@ -536,6 +549,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 				&& (event.getPoint().getX() > (other.getX()
 						- (other.getWidth()) - 1))*/) {
 			map.removeEntity(enemy);
+			killedEnemySound.play();
 			((Enemy)enemy).stopSound();
 			Globals.score++;
 		}
@@ -543,6 +557,8 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		else{
 			if(Globals.score > 0)
 				Globals.score--;
+			//pain sound
+			Globals.player.getPainSound().play(1f, 0.4f);
 			Globals.invulnerable = true;
 		}
 	}
