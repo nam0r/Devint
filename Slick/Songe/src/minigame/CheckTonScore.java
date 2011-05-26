@@ -212,6 +212,7 @@ public class CheckTonScore extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg)
 	throws SlickException {
 		AlUtils.resetAlListener();
+		gc.getInput().clearKeyPressedRecord();
 		leftXOffset = 0;
 		actual = TOTAL/2;
 		actualKey = "left";

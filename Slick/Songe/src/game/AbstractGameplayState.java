@@ -558,7 +558,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			if(Globals.score > 0)
 				Globals.score--;
 			//pain sound
-			Globals.player.getPainSound().play(1f, 0.4f);
+			Globals.player.getPainSound().play(1f, 0.6f);
 			Globals.invulnerable = true;
 		}
 	}
