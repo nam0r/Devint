@@ -30,6 +30,7 @@ import bdd.SQLiteDB;
  * Saving high score state
  * 
  * @author namor
+ * @author Afnarel
  * @author guodman
  */
 public class SaveHighScore extends BasicGameState implements ComponentListener {
