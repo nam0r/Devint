@@ -53,6 +53,8 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 	private int currentScoreID;
 	/** current game */
 	private StateBasedGame game;
+	/** indicates if connection has already been set */
+	private boolean submitted; 
 
 	private String db_path;
 	private SQLiteDB conn;
@@ -81,24 +83,29 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 		currentName = "";
 		nameField = new TextField(container, container.getDefaultFont(), 200,
 				120, 400, 30, this);
-
-		// if under jnlp
-		if (System.getProperty("javawebstart.version") != null)
-			db_path = Conf.HOME + File.separator + Conf.SCORE_DB;
-		// if under CD Devint
-		else
-			db_path = Conf.RESS_PATH + Conf.SCORE_DB;
-
-		conn = new SQLiteDB(db_path);
-
-		conn.executeQuery("CREATE TABLE IF NOT EXISTS scores (id integer PRIMARY KEY AUTOINCREMENT, name text, score integer);");
-	}
+		submitted = false;
+		}
 
 	/**
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer,
 	 *      org.newdawn.slick.Graphics)
 	 */
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) {
+		
+		if (!submitted) {
+			submitted = true;
+			// if under jnlp
+			if (System.getProperty("javawebstart.version") != null)
+				db_path = Conf.SCORE_DB;
+			// if under CD Devint
+			else
+				db_path = Conf.SCORE_DB;
+
+			conn = new SQLiteDB(db_path);
+
+			conn.executeQuery("CREATE TABLE IF NOT EXISTS scores (id integer PRIMARY KEY AUTOINCREMENT, name text, score integer);");
+		}
+		
 		image.draw(0, 0, gc.getWidth(), gc.getHeight());
 
 		if(Globals.score != 0) {
@@ -113,8 +120,8 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 		// else{
 		// font.drawString(200, 32, "Votre score : " + Globals.score);
 		// }
-		
-		displayScores(gc, g);
+		if(submitted)
+			displayScores(gc, g);
 			
 	}
 
@@ -132,7 +139,7 @@ public class SaveHighScore extends BasicGameState implements ComponentListener {
 			sbg.enterState(Songe.MAINMENUSTATE);
 		}
 	}
-
+	
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {

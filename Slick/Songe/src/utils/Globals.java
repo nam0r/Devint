@@ -98,7 +98,7 @@ public class Globals {
 
 	public static ArrayList<HashMap<String,String>> questionsNotAsked;
 	
-	public static SQLiteDB bdd = new SQLiteDB(Conf.SCENARIO_DB);
+	public static SQLiteDB bdd;
 	/**
 	 * Returns an entity from its ID
 	 * @param entityID the name-ID of the entity to create in the map

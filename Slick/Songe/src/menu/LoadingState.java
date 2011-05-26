@@ -17,8 +17,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import bdd.SQLiteDB;
+
 import utils.Conf;
 import utils.ExtractFile;
+import utils.Globals;
 
 /**
  * The first state which loads resources
@@ -108,6 +111,7 @@ public class LoadingState extends BasicGameState {
 		// done
 		if (!contextLoaded) {
 			initializeRessources();
+			Globals.bdd = new SQLiteDB(Conf.SCENARIO_DB);
 			contextLoaded = true;
 		}
 
