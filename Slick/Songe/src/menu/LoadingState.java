@@ -184,7 +184,7 @@ public class LoadingState extends BasicGameState {
 			}
 		}
 		// If not running in jnlp but normally
-		else {
+		/*else {
 			// if game home directory already exists, then the database
 			// files
 			// also already exist
@@ -200,7 +200,7 @@ public class LoadingState extends BasicGameState {
 				ExtractFile.extractFileFromJAR(Conf.HOME.getAbsolutePath(),
 						path + Conf.RESS_PATH, Conf.SCENARIO_DB);
 			}
-		}
+		}*/
 	}
 
 	@Override
