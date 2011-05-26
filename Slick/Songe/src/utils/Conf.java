@@ -30,7 +30,7 @@ public class Conf {
 	/** The game path (for database and so) */
 	public static final File HOME = new File(new File(System.getProperty("user.home")), "Songe");
 	/** The name of the scenario database file */
-	public static final String SCENARIO_DB = "data2.db3";
+	public static final String SCENARIO_DB = "data.db3";
 	/** The name of the score database file */
 	public static final String SCORE_DB = "scores.db";
 	

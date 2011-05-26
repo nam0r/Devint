@@ -199,22 +199,19 @@ public class HoverCave extends BasicGameState {
 			else{
 				sonD.stop(1);
 				sonG.stop();
-				
-				if (input.isKeyPressed(Input.KEY_ENTER) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 					
-					// if we are in main game
-					if(Globals.returnState != Songe.MAINMENUSTATE){
-						//The score is set
-						Globals.score += distance/1000;
-						Globals.nextEvent(sbg);
-					}
-					// if playing from the stand-alone version
-					else{	
-						sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
-							new FadeInTransition(Color.black));
-					}
-					
+				// if we are in main game
+				if(Globals.returnState != Songe.MAINMENUSTATE){
+					//The score is set
+					Globals.score += distance/1000;
+					Globals.nextEvent(sbg);
 				}
+				// if playing from the stand-alone version
+				else{	
+					sbg.enterState(Globals.returnState, new FadeOutTransition(Color.black),
+						new FadeInTransition(Color.black));
+				}
+					
 			}
 		}
 		//if not yet started to play

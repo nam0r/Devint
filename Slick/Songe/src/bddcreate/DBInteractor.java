@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 
 import org.newdawn.slick.util.ResourceLoader;
 
+import utils.Conf;
+
 import bdd.SQLiteDB;
 
 /**
@@ -19,7 +21,7 @@ public class DBInteractor extends SQLiteDB {
 	private String query;
 	
 	public DBInteractor() {
-		super("data");
+		super(Conf.SCENARIO_DB);
 
 		//fromFile("scriptBdd.txt");
 		//fromCmdLine();

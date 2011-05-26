@@ -205,6 +205,8 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			throws SlickException {
 		currentState = States.IN_GAME;
 		
+		Globals.score_submitted = false;
+		
 		// If the "main" previous state was not the game state, then it's
 		// probably the menu state
 		if (Globals.returnState != stateID) {
