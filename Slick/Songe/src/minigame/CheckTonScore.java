@@ -10,7 +10,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleIO;
 import org.newdawn.slick.particles.ParticleSystem;
@@ -20,12 +19,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import actors.IA;
-
 import sound.AlUtils;
 import sound.Sound2;
 import utils.Conf;
 import utils.Globals;
+import actors.IA;
 
 /**
  * Mini-game : battle against another character
@@ -57,6 +55,10 @@ public class CheckTonScore extends BasicGameState {
 	private Image image1, image2;
 	/** indicates if the image is set */
 	private boolean imagesAreSet;
+	/** The explanation sound when entering to this state */
+	private Sound2 enterSound;
+	/** Indicates if we begin the game */
+	private boolean playTheGame;
 
 	public CheckTonScore(int stateID) {
 		this.stateID = stateID;
@@ -69,8 +71,9 @@ public class CheckTonScore extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		scale = (float) (gc.getWidth()) / 1024f;
-		gagne = new Sound2(Conf.getVoice("oui"));
-		perdu = new Sound2(Conf.getVoice("non"));
+		gagne = new Sound2(Conf.getVoice("minijeubattleWin"));
+		perdu = new Sound2(Conf.getVoice("minijeubattleLose"));
+		enterSound = new Sound2(Conf.getVoice("minijeubattleF1"));
 		try {
 			emit1 = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"kameamea_blue.xml");
 			emit2 = ParticleIO.loadConfiguredSystem(Conf.EMITTERS_PATH+"kameamea_red.xml");
@@ -81,6 +84,7 @@ public class CheckTonScore extends BasicGameState {
 			((ConfigurableEmitter) emit1.getEmitter(i)).setPosition(gc.getWidth()/6, gc.getHeight()/2);
 			((ConfigurableEmitter) emit2.getEmitter(i)).setPosition(5*gc.getWidth()/6, gc.getHeight()/2);
 		}
+		playTheGame = false;
 	}
 
 	@Override
@@ -115,37 +119,50 @@ public class CheckTonScore extends BasicGameState {
 				}
 			}
 		}
-		
-		//we lost
-		if(actual <= 0){
-			if(!perdu.playedOnce())
-				perdu.play();
-		}
-		//we won
-		else if(actual >= TOTAL){
-			if(!gagne.playedOnce())
-				gagne.play();
-		}
-		//we are playing
-		else{
-			emit1.update(delta);
-			emit2.update(delta);
-			leftXOffset += delta;
-			//the actual goes down continually
-			actual -= (float)delta/20;
-			
-			//the alternative buttons
-			if(input.isKeyPressed(Input.KEY_LEFT)) {
-				if(actualKey.equals("right")){
-					actual += delta;
-				}
-				actualKey = "left";
+		//If the beginning explanation is finished
+		if(playTheGame){
+			//we lost
+			if(actual <= 0){
+				if(!perdu.playedOnce())
+					perdu.play();
 			}
-			else if(input.isKeyPressed(Input.KEY_RIGHT)) {
-				if(actualKey.equals("left")){
-					actual += delta;
+			//we won
+			else if(actual >= TOTAL){
+				if(!gagne.playedOnce())
+					gagne.play();
+			}
+			//we are playing
+			else{
+				emit1.update(delta);
+				emit2.update(delta);
+				leftXOffset += delta;
+				//the actual goes down continually
+				actual -= (float)delta/20;
+				
+				//the alternative buttons
+				if(input.isKeyPressed(Input.KEY_LEFT)) {
+					if(actualKey.equals("right")){
+						actual += delta;
+					}
+					actualKey = "left";
 				}
-				actualKey = "right";
+				else if(input.isKeyPressed(Input.KEY_RIGHT)) {
+					if(actualKey.equals("left")){
+						actual += delta;
+					}
+					actualKey = "right";
+				}
+			}
+		}
+		//if not playing yet
+		else{
+			if(input.isKeyPressed(Input.KEY_RIGHT) || input.isKeyPressed(Input.KEY_LEFT)){
+				playTheGame = true;
+				enterSound.stop();
+			}
+			else if(input.isKeyPressed(Input.KEY_F1)){
+				enterSound.stop();
+				enterSound.play();
 			}
 		}
 	}
@@ -209,12 +226,15 @@ public class CheckTonScore extends BasicGameState {
 				image2 = Globals.node.getIA().getImage();
 			imagesAreSet = true;
 		}
+		//We play the beginning explanation sound
+		enterSound.play();
 	}
 	
 	@Override
 	public void leave(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		imagesAreSet = false;
+		playTheGame = false;
 		gagne.reinitPlayedOnce();
 		perdu.reinitPlayedOnce();
 	}

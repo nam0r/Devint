@@ -31,7 +31,12 @@ jeuf2all: "Tu dois retrouver un autre Tux, qui te ressemble. Si tu veux de l'aid
 f2tuxtemporaire: "Tu incarnes Tux, un manchot libre. Tu dois retrouver un autre Tux, qui te ressemble. Si tu veux de l'aide pour jouer, appuie sur F1."
 jeuf3: "Ton score est maintenant de"
 
-minijeuvaisseauF1:"Ceci est un mini-jeu : tu manipules un vaisseau qui tombe vers le bas. Le vaisseau ne doit pas toucher le sol : appuie sur HAUT pour le remonter. Le vaisseau ne doit pas toucher le plafond : n'appuie pas sur HAUT si le plafond est trop près du vaisseau. Pour commencer à jouer, appuie sur HAUT. Pour répéter cette aide, appuie sur F1."
+minijeuvaisseauF1:"Ceci est un mini-jeu : tu manipules un vaisseau qui tombe vers le bas. Tu dois faire en sorte que le vaisseau ne touche pas le sol, pour cela il faudra appuyer sur la flèche HAUT pour le remonter. Le vaisseau ne doit pas non plus toucher le plafond, il suffit pour cela de ne pas appuyer sur la flèche haut, et il va redescendre. Pour commencer à jouer, appuie sur flèche HAUT. Pour répéter cette aide, appuie sur F1."
+
+minijeubattleF1:"Tu es défié dans un mini-jeu. Pour battre ton adversaire il faut que ton énergie l'emporte sur son énergie, tu vas devoir appuyer le plus rapidement possible alternativement sur les touches gauche et droite du pavé directionnel. Pour commencer appuye sur la flèche gauche ou droite."
+
+minijeubattleWin:"Tu as gagné le duel !"
+minijeubattleLose:"Tu as perdu le duel !"
 
 finminijeu:"Tu as terminé le mini-jeu. Tu as fait un score de :"
 

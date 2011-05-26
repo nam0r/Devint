@@ -149,7 +149,7 @@ public class HoverCave extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		sonG = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
 		sonD = new Sound2(Conf.SND_BIP_PATH+"bip5.ogg");
-		enterSound = new Sound2(Conf.SND_VOIX_PATH+"minijeuvaisseauF1.ogg");
+		enterSound = new Sound2(Conf.getVoice("minijeuvaisseauF1"));
 		this.container = container;
 		dudeSize = new Dimension(20, 30);
 		reset();
@@ -229,6 +229,10 @@ public class HoverCave extends BasicGameState {
 				//sonG.setPitch(0.8f, 0);
 				//sonD.setPitch(0.8f, 1);
 				enterSound.stop();
+			}
+			else if(input.isKeyPressed(Input.KEY_F1)){
+				enterSound.stop();
+				enterSound.play();
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
