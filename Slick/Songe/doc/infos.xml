@@ -1,0 +1,37 @@
+<infos>
+    <year>2011</year>
+    <gamecategories>
+		<gamecategory>Songe</gamecategory>
+    </gamecategories>
+    <shortdescription> <![CDATA[Jeu de plate-forme et d'aventure en 2D.]]> </shortdescription>
+    <public>MV</public>
+    <age>tout âge</age>
+    <title><![CDATA[Songe]]></title>
+    <authors>
+		<author><![CDATA[Roman Mkrtchian]]></author>
+		<author><![CDATA[François Chapuis]]></author>
+		<author><![CDATA[Guy Champollion]]></author>
+    </authors>
+    <notes>
+		<note> <![CDATA[le dossier Songe doit &ecirc;tre au m&ecirc;me niveau que le dossier VocalyzeSIVOX]]></note>
+	</notes>
+    <gameplay> <![CDATA[<ul>
+  <li>Echap permet de quitter la plupart des &eacute;tapes de jeu, ou de revenir en arri&egrave;re, puis de quitter le jeu lui-m&ecirc;me.</li>
+  <li>Les fl&egrave;ches directionnelles permettent de balayer les menus en boucle et de se d&eacute;placer pendant les phases de jeu.</li>
+  <li>Enter valide les choix, ou permet de passer certains &eacute;v&egrave;nements.</li>
+  <li>F1 donne le but du jeu et les commandes clavier utilisables et leur effet, il permet aussi de r&eacute;p&eacute;ter l'aide pendant un mini-jeu.</li>
+  <li>F2 r&eacute;p&egrave;te le dernier dialogue avec un personnage.</li>
+  <li>F3 &eacute;nonce &agrave; haute voix le score total actuel du joueur.</li>
+  <li>Espace, Ctrl et la fl&egrave;che directionnelle haut permettent de sauter pendant la phase de jeu principale.</li>
+</ul>]]></gameplay>
+    <gamerules><![CDATA[<p>Le but du jeu est de d&eacute;couvrir les aventures des 4 personnages, et secondairement de faire le plus grand score possible &agrave; la fin pour figurer dans le classement.</p>
+<p>Pour commencer &agrave; jouer, il faut choisir un personnage &agrave; incarner parmi les 4 proposés :
+<ul>
+    <li>Aurore</li>
+    <li>Tim&eacute;o</li>
+    <li>Tux</li>
+    <li>Lamasticot</li>
+</ul>
+</p>
+<p>Pour ceux qui n'ont jamais jou&eacute;, un niveau didacticiel est propos&eacute; pour apprendre &agrave; jouer, puis l'aventure du personnage commence. Il faut alors avancer dans le jeu et aller parler aux personnages, r&eacute;pondre aux questions pos&eacute;es et relever les d&eacute;fis.</p>]]></gamerules>
+</infos>

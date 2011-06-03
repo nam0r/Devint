@@ -165,6 +165,13 @@ public abstract class MenuState extends BasicGameState {
 			AlUtils.stopAllSounds();
 			optionsSounds[selected].play();
 		}
+		if (input.isKeyPressed(Input.KEY_F1)) {
+			AlUtils.stopAllSounds();
+			titleSound.play();
+			for(int i=0; i<options.length; i++){
+	    		optionsSounds[i].reinitPlayedOnce();
+	    	}
+		}
 		//If the title is finished, we play 1 time the 1st option
 		if(!titleSound.playing() && !optionsSounds[selected].playedOnce() && !chosen){
 			optionsSounds[selected].play();

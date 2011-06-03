@@ -150,17 +150,23 @@ public class LoadingState extends BasicGameState {
 				// we extract the databases and the Mbrola resources in the game
 				// path, these are temporary jars
 				ExtractFile.extractFileFromJAR(Conf.HOME.getAbsolutePath(),
-						jarPath, "db.jar");
+						jarPath, "db-scores.jar");
+				ExtractFile.extractFileFromJAR(Conf.HOME.getAbsolutePath(),
+						jarPath, "db-scenario.jar");
 				ExtractFile.extractFileFromJAR(Conf.HOME.getAbsolutePath(),
 						jarPath, "Mbrola.jar");
 				// we extract the 2 previous created jars
 				ExtractFile.unzip(Conf.HOME.getPath(), Conf.HOME.getPath()
 						+ File.separator + "Mbrola.jar");
 				ExtractFile.unzip(Conf.HOME.getPath(), Conf.HOME.getPath()
-						+ File.separator + "db.jar");
+						+ File.separator + "db-scores.jar");
+				ExtractFile.unzip(Conf.HOME.getPath(), Conf.HOME.getPath()
+						+ File.separator + "db-scenario.jar");
 				// we delete unnecessary files
 				ExtractFile.deleteFile(Conf.HOME.getPath() + File.separator
-						+ "db.jar");
+						+ "db-scores.jar");
+				ExtractFile.deleteFile(Conf.HOME.getPath() + File.separator
+						+ "db-scenario.jar");
 				ExtractFile.deleteFile(Conf.HOME.getPath() + File.separator
 						+ "Mbrola.jar");
 				ExtractFile.deleteFile(Conf.HOME.getPath() + File.separator
@@ -181,6 +187,33 @@ public class LoadingState extends BasicGameState {
 						e.printStackTrace();
 					}
 				}
+			}
+			//in all cases, we re-extract the scenario DB
+			else{
+				// the exact location of the actual jar file
+				String jarPath = getClass().getProtectionDomain()
+						.getCodeSource().getLocation().toString().replaceAll(
+								"%20", " ");
+				// the path without the jar filename at the end
+				if (jarPath.substring(0,
+						jarPath.lastIndexOf(File.separator) + 1).equals(""))
+					jarPath = jarPath
+							.substring(0, jarPath.lastIndexOf("/") + 1);
+				else
+					jarPath = jarPath.substring(0, jarPath
+							.lastIndexOf(File.separator) + 1);
+
+				// we extract the scenario DB
+				ExtractFile.extractFileFromJAR(Conf.HOME.getAbsolutePath(),
+						jarPath, "db-scenario.jar");
+				// we extract the previous created jar
+				ExtractFile.unzip(Conf.HOME.getPath(), Conf.HOME.getPath()
+						+ File.separator + "db-scenario.jar");
+				// we delete unnecessary files
+				ExtractFile.deleteFile(Conf.HOME.getPath() + File.separator
+						+ "db-scenario.jar");
+				ExtractFile.deleteFile(Conf.HOME.getPath() + File.separator
+						+ "META-INF");
 			}
 		}
 		// If not running in jnlp but normally

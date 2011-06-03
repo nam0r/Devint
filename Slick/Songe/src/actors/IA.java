@@ -147,16 +147,16 @@ public abstract class IA extends Actor {
 	 */
 	public void permanentSound(){
 		alreadyVisitedSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+				Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 		notYetSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+				Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 		
 		sound.setSourcePosition(getX() - getWidth() / 2, getY() - getHeight() / 2, 0f);
 		sound.setSourceVelocity(getVelX(), getVelY(), 0f);
 		
 		if(soundDialog != null && soundDialog.playing()) {
 			soundDialog.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-					Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+					Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 		}
 	}
 
@@ -183,7 +183,7 @@ public abstract class IA extends Actor {
 			if(hasBeenFar()){
 				alreadyVisitedSound.play();
 				alreadyVisitedSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-						Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+						Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 				setHasBeenFar(false);
 			}
 			return;
@@ -199,13 +199,13 @@ public abstract class IA extends Actor {
 			if(hasBeenFar()){
 				notYetSound.play();
 				notYetSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-						Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+						Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 				/*
 				alreadyVisited.stop();
 				alreadyVisited.play();
 				alreadyVisited
 						.setSourcePosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-								Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+								Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 				*/
 				setHasBeenFar(false);
 			}

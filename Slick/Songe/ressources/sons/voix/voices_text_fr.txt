@@ -22,7 +22,7 @@ descriptionaurore: "Aurore est une fille agile. Elle peut sauter haut, mais elle
 descriptiontimeo: "Timéo est un garçon fort. Il peut facilement pousser des objets, mais il saute moins haut."
 descriptiontux: "Tux est un manchot libre. Il est assez bon pour pousser des objets et pour sauter."
 
-jeuf1: "Tu te déplaces avec les touches GAUCHE et DROITE. Pour sauter, appuie sur HAUT ou sur CONTROLE. Si tu touches un personnage, celui-ci te posera une question ou te fera jouer à un mini-jeu. Si tu as oublié ce que tu dois faire, appuie sur F2. Pour connaitre ton score, appuie sur F3."
+jeuf1: "Tu dois aller à la rencontre des personnages. Utilise les touches directionnelles pour te déplacer et controle pour sauter. F2 pour rejouer le dernier dialogue et F3 pour entendre ton score actuel."
 f2aurore: "Tu incarnes Aurore, une fille agile."
 f2timeo: "Tu incarnes Timéo, un garçon fort."
 f2tux: "Tu incarnes Tux, un manchot libre."

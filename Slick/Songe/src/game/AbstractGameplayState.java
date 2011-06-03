@@ -67,6 +67,8 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 	protected Sound2 soundWalk;
 	/** The sound when bumping */
 	protected Sound2 soundBump;
+	/** The main help sound */
+	protected Sound2 helpSound;
 	/**
 	 * Indicates if the bump sound has been played since the last move and so
 	 * should or not be replayed in the current frame
@@ -115,6 +117,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		soundJump2 = new Sound2(Conf.SND_DEPLACEMENT_PATH + "saut.ogg");
 		soundBump = new Sound2(Conf.SND_DEPLACEMENT_PATH + "bump.ogg");
 		killedEnemySound = new Sound2(Conf.SND_PERSOS_PATH+"hurt_light2.ogg");
+		helpSound = new Sound2(Conf.getVoice("jeuf1"));
 		
 		font = new AngelCodeFont(Conf.FONTS_PATH + "hiero.fnt", Conf.FONTS_PATH
 				+ "hiero.png");
@@ -148,7 +151,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		}*/
 		// We put the openAl listener's position and velocity
 		AlUtils.setAlListenerPosition(Globals.player.getX() - Globals.player.getWidth() / 2,
-				Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+				Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 		AlUtils.setAlListenerVelocity(Globals.player.getVelX() * 5, -Globals.player.getVelY(),
 				0.0f);
 		// sound.setSourceVelocity(10f, 0f, 0f, soundIndex);
@@ -169,6 +172,9 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 				((Enemy) map.getEntityByBody(map.getWorld().getBodies().get(i))).permanentSound(i);
 			}
 		}
+		//the help sound if executed
+		helpSound.setSourcePosition(Globals.player.getX() - Globals.player.getWidth()
+				/ 2, Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 	}
 	
 	@Override
@@ -323,11 +329,11 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			// if the sound is still playing we let it play
 			if (!soundJump.playing()) {
 				soundJump.loop(1f, 0.5f, Globals.player.getX() - Globals.player.getWidth() / 2,
-						Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+						Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 				soundJumpPlaying = true;
 			} else {
 				soundJump.setSourcePosition(Globals.player.getX() - Globals.player.getWidth()
-						/ 2, Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+						/ 2, Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 			}
 			// We modulate the sound pitch depending on the y speed of movement
 			// of the character
@@ -379,13 +385,13 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			// If the sound should be replayed, it will
 			if (!bumpWallPlayed) {
 				soundBump.playAt(1.5f, 5f, Globals.player.getX() - Globals.player.getWidth()
-						/ 2 + decal, Globals.player.getVelY() - Globals.player.getHeight() / 2,
+						/ 2 + decal, Globals.player.getY() - Globals.player.getHeight() / 2,
 						0.0f);
 				bumpWallPlayed = true;
 				bumpWallX = Globals.player.getX();
 			} else {
 				soundBump.setSourcePosition(Globals.player.getX() - Globals.player.getWidth()
-						/ 2 + decal, Globals.player.getVelY() - Globals.player.getHeight() / 2,
+						/ 2 + decal, Globals.player.getY() - Globals.player.getHeight() / 2,
 						0.0f);
 			}
 		}
@@ -394,7 +400,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 			// If the sound should be replayed, it will
 			if (!bumpTopPlayed) {
 				soundBump.playAt(1.5f, 1f, Globals.player.getX() - Globals.player.getWidth()
-						/ 2, Globals.player.getVelY() - Globals.player.getHeight() / 2, 0.0f);
+						/ 2, Globals.player.getY() - Globals.player.getHeight() / 2, 0.0f);
 				bumpTopPlayed = true;
 				bumpTopX = Globals.player.getX();
 				bumpTopY = Globals.player.getY();
@@ -432,12 +438,8 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		if (input.isKeyPressed(Input.KEY_P)) {
 			currentState = States.PAUSE;
 		}
-		if (input.isKeyPressed(Input.KEY_F3)) {
-			voix.stop();
-			voix.playShortText("Vous avez "+Globals.score+" points.");
-		}
 
-		if (input.isKeyPressed(Input.KEY_F4)) {
+		/*if (input.isKeyPressed(Input.KEY_F4)) {
 			map.addEntity(new WalkingIA(Conf.IMG_SPRITES_PATH+"mariowalk_big.png", 3, 0, false, 100, 100, 40, 62, 12,new Node(1)));
 		}
 		if (input.isKeyPressed(Input.KEY_F5)) {
@@ -449,7 +451,7 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 					enemy.getBody().addExcludedBody(map.getWorld().getBodies().get(i));
 				}
 			}
-		}
+		}*/
 		// determines if the character moves
 		Globals.player.setMoving(false);
 		if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_RIGHT)) {
@@ -457,9 +459,17 @@ public abstract class AbstractGameplayState extends AbstractGameState {
 		}
 		if (input.isKeyPressed(Input.KEY_F1)) {
 			// jouer un son : l'aide
+			// TODO
+			helpSound.play();
 		}
 		if (input.isKeyPressed(Input.KEY_F2)) {
-			// jouer un son : « tu es un tux qui doit trouver le lamasticot »
+			Globals.dialogNextState = Globals.returnState;
+			sbg.enterState(Songe.DIALOGSTATE, new FadeOutTransition(
+					Color.black), new FadeInTransition(Color.black));
+		}
+		if (input.isKeyPressed(Input.KEY_F3)) {
+			voix.stop();
+			voix.playShortText("Vous avez "+Globals.score+" points.");
 		}
 	}
 

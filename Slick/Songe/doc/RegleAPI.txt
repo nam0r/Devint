@@ -6,7 +6,7 @@ Vous devez suivre les conventions de raccourci et de commandes clavier suivantes
    * pour se déplacer dans les choix : flèches directionnelles, haut et bas, au besoin droite et gauche
    * pour valider un choix : touche Entrée
    * pour terminer, ou pour revenir au menu d'accueil, touche  Echap
-   * pour obtenir de l'aide, la touche F1, 
+   * pour obtenir de l'aide, la touche F1, qui doit répéter le but du jeu au moins à l'accueil.
    * après, vous pouvez utiliser d'autres touches, selon les besoins spécifiques de votre jeu, pensez à utiliser au besoin :
        *  la touche Espace, par exemple pour récapituler ou répéter les informations courantes
        *  la touche Ctrl, par exemple pour offrir un joker
